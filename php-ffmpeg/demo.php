@@ -1,4 +1,14 @@
 <?php
+/**
+ * php 调用ffmpeg获取视频信息
+ * Date:    2016-12-26
+ * Author:  fdipzone
+ * Version: 1.0
+ *
+ * Func
+ * getVideoInfo
+ */
+
 // 定义ffmpeg路径及命令常量
 define('FFMPEG_CMD', '/usr/local/bin/ffmpeg -i "%s" 2>&1');
 
