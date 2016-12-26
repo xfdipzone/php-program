@@ -56,7 +56,7 @@ function getVideoInfo($file){
     }
 
     $ret['size'] = filesize($file); // 视频文件大小
-    $video_info = iconv('gbk','utf8', $video_info);
+    
     return array($ret, $video_info);
 
 }
