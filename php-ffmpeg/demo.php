@@ -51,10 +51,12 @@ function getVideoInfo($file){
         $ret['asamplerate'] = $matches[2]; // 音频采样频率
     }
 
+    // 计算实际播放时间
     if(isset($ret['seconds']) && isset($ret['start'])){
         $ret['play_time'] = $ret['seconds'] + $ret['start']; // 实际播放时间
     }
 
+    // 获取视频文件大小
     $ret['size'] = filesize($file); // 视频文件大小
     
     return array($ret, $video_info);
