@@ -7,4 +7,7 @@ php 调用imagemagick实现老照片效果
 3.将步骤1和步骤2的结果使用overlay的方式compose<br><br>
 
 ###原图与生成的老照片效果对比
-![原图与生成的老照片效果对比](https://github.com/xfdipzone/Mosacis/blob/master/vs.jpg)
+原图<br>
+![原图](https://github.com/xfdipzone/Small-Program/blob/master/php-oldphoto/source.jpg)
+老照片<br>
+![老照片](https://github.com/xfdipzone/Small-Program/blob/master/php-oldphoto/dest.jpg)
