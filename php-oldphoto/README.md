@@ -9,5 +9,7 @@ php 调用imagemagick实现老照片效果
 ###原图与生成的老照片效果对比
 原图<br>
 ![原图](https://github.com/xfdipzone/Small-Program/blob/master/php-oldphoto/source.jpg)
+<br>
 老照片<br>
 ![老照片](https://github.com/xfdipzone/Small-Program/blob/master/php-oldphoto/dest.jpg)
+<br>
