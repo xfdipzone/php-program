@@ -4,6 +4,9 @@
  * Date:    2016-12-31
  * Author:  fdipzone
  * Ver:     1.0
+ *
+ * Func
+ * createOldPhoto 将原图处理为老照片效果
  */
 
 /**

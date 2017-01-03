@@ -6,7 +6,7 @@
  * Version: 1.0
  *
  * Func
- * getVideoInfo
+ * getVideoInfo 获取视频信息
  */
 
 // 定义ffmpeg路径及命令常量
