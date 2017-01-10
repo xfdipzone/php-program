@@ -3,7 +3,7 @@
  * php 计算多个集合的笛卡尔积
  * Date:    2017-01-10
  * Author:  fdipzone
- * Version: 1.0
+ * Ver:     1.0
  *
  * Func
  * CartesianProduct 计算多个集合的笛卡尔积

@@ -3,7 +3,7 @@
  * php 调用ffmpeg获取视频信息
  * Date:    2016-12-26
  * Author:  fdipzone
- * Version: 1.0
+ * Ver:     1.0
  *
  * Func
  * getVideoInfo 获取视频信息
