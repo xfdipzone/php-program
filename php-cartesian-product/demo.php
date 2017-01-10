@@ -1,6 +1,6 @@
 <?php
 /**
- * php 实现计算多个集合的笛卡尔积
+ * php 计算多个集合的笛卡尔积
  * Date:    2017-01-10
  * Author:  fdipzone
  * Version: 1.0

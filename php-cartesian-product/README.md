@@ -1,5 +1,5 @@
 # php-cartesian-product
-php 实现计算多个集合的笛卡尔积
+php 计算多个集合的笛卡尔积
 
 ##笛卡尔积
 笛卡尔积是指在数学中，两个集合X和Y的笛卡尔积(Cartesian product)，又称直积，表示为X*Y，第一个对象是X的成员而第二个对象是Y的所有可能有序对的其中一个成员。<br><br>
