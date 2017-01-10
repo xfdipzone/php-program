@@ -10,3 +10,7 @@ php 调用ffmpeg获取视频信息
 * [php-oldphoto](https://github.com/xfdipzone/Small-Program/tree/master/php-oldphoto)<br>
 php 调用imagemagick实现老照片效果
 <br>
+<br>
+* [php-cartesian-product](https://github.com/xfdipzone/Small-Program/tree/master/php-cartesian-product)<br>
+php 实现计算多个集合的笛卡尔积
+<br>
