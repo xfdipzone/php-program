@@ -1,13 +1,15 @@
 # php-ffmpeg
 php 调用ffmpeg获取视频信息
 
-##介绍
+## 介绍
 ffmpeg是一套可以用来记录、转换数字音频、视频，并能将其转化为流的开源计算机程序，包含了libavcodec，保证高可移值性和编解码质量。
 
 本程序使用php调用ffmpeg获取视频信息，调用ffmpeg首先需要服务器上安装了ffmpeg，安装方法很简单，可自行搜索。
 <br>
 <br>
-##执行结果
+
+## 执行结果
+
 ```txt
 Array
 (
