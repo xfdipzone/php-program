@@ -19,4 +19,6 @@ php 计算多个集合的笛卡尔积
 php 文件与16进制相互转换
 <br>
 
-
+* [php-shorturl](https://github.com/xfdipzone/Small-Program/tree/master/php-shorturl)<br>
+php 调用新浪API生成短链接
+<br>
