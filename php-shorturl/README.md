@@ -3,7 +3,7 @@ php 调用新浪API生成短链接
 
 ## 新浪生成短链接API介绍
 
-新浪提供了长链接转为短链接的API，可以把长链接转为 <font color="#FF0000">t.cn/xxx</font> 这种格式的短链接。<br><br>
+新浪提供了长链接转为短链接的API，可以把长链接转为 **t.cn/xxx**</font> 这种格式的短链接。<br><br>
 
 ### API：
 http://api.t.sina.com.cn/short_url/shorten.json (返回结果是JSON格式)<br>
