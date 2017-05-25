@@ -7,7 +7,7 @@
  *
  * Func
  * public static setClass       设置反射类
- * public static getBase        读取类基本信息 
+ * public static getBase        读取类基本信息
  * public static getInterfaces  读取类接口
  * public static getProperties  读取类属性
  * public static getMethods     读取类方法
