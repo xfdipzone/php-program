@@ -22,3 +22,7 @@ php 文件与16进制相互转换
 * [php-shorturl](https://github.com/xfdipzone/Small-Program/tree/master/php-shorturl)<br>
 php 调用新浪API生成短链接
 <br>
+
+* [php-reflection](https://github.com/xfdipzone/Small-Program/tree/master/php-reflection)<br>
+php 利用反射API获取类信息
+<br>

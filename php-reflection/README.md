@@ -46,7 +46,7 @@ foreach($interfaces as $interface){
     echo $interface->getName();
 }
 ```
-
+<br>
 ## 演示
 
 ```php
