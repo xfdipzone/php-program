@@ -7,6 +7,6 @@ Ref::setClass('Vip');
 Ref::getBase();
 Ref::getProperties();
 Ref::getMethods();
-Ref::getInterfaces();
+Ref::getInterfaces(); 
 echo '</pre>';
 ?>

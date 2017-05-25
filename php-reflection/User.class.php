@@ -71,5 +71,4 @@ class Vip extends User{
     }
 
 }
-
 ?>
