@@ -26,3 +26,7 @@ php 调用新浪API生成短链接
 * [php-reflection](https://github.com/xfdipzone/Small-Program/tree/master/php-reflection)<br>
 php 利用反射API获取类信息
 <br>
+
+* [php-unisort](https://github.com/xfdipzone/Small-Program/tree/master/php-unisort)<br>
+php 文件内容去重及排序
+<br>
