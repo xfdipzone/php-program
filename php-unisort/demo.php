@@ -50,6 +50,19 @@ ini_set('memory_limit', '256m');
 $source = 'user_id.txt';
 $dest = 'php_sort_user_id.txt';
 
+// 写入1000000个数字，每行一个数字
+$num = 1000000;
+$tmp = '';
+
+for($i=0; $i<$num; $i++){
+    $tmp .= mt_rand(0,999999).PHP_EOL;
+    if($i>0 && $i%1000==0 || $i==$num-1){
+        file_put_contents($source, $tmp, FILE_APPEND);
+        $tmp = '';
+    }
+}
+
+// 执行去重及排序
 fileUniSort($source, $dest);
 
 ?>
