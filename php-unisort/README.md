@@ -1,9 +1,10 @@
 # php-unisort
-php 文件内容去重及排序
+php 文件内容去重及排序<br>
 
 ## php 实现去重及排序
 
 ```php
+<?php
 // 设置可使用内存为256m，可根据数据量进行设置
 ini_set('memory_limit', '256m');
 
@@ -11,6 +12,7 @@ $source = 'user_id.txt';
 $dest = 'php_sort_user_id.txt';
 
 fileUniSort($source, $dest);
+?>
 ```
 
 查看去重及排序后的文件
@@ -32,21 +34,21 @@ head php_sort_user_id.txt
 12
 ...
 ```
-
+<br>
 ## linux sort命令实现去重及排序
 
 linux sort命令用于文本文件按行排序
 
-###格式：
+### 格式：
 sort [OPTION]... [FILE]...<br>
 
-###参数说明：
+### 参数说明：
 -u 去重<br>
 -n 数字排序类型<br>
 -r 降序<br>
--o 输出文件的路径<br>
+-o 输出文件的路径<br><br>
 
-###使用sort执行去重及排序
+### 使用sort执行去重及排序
 
 ```txt
 sort -uno linux_sort_user_id.txt user_id.txt
