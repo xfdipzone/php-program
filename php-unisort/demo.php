@@ -1,5 +1,16 @@
 <?php
 /**
+ * php 文件内容去重及排序
+ * Date:    2017-06-15
+ * Author:  fdipzone
+ * Ver:     1.0
+ *
+ * Func
+ * fileUniSort 文件内容去重及排序
+ * filter      过滤空行
+ */
+
+/**
  * 文件内容去重及排序
  * @param String $source    源文件
  * @param String $dest      目标文件
