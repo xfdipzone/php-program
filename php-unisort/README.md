@@ -1,5 +1,5 @@
 # php-unisort
-php 文件内容去重及排序<br>
+php 文件内容去重及排序<br><br>
 
 ## php 实现去重及排序
 
@@ -35,18 +35,19 @@ head php_sort_user_id.txt
 ...
 ```
 <br>
+
 ## linux sort命令实现去重及排序
 
 linux sort命令用于文本文件按行排序
 
 ### 格式：
-sort [OPTION]... [FILE]...<br>
+**sort [OPTION]... [FILE]...**
 
 ### 参数说明：
--u 去重<br>
--n 数字排序类型<br>
--r 降序<br>
--o 输出文件的路径<br><br>
+**-u** 去重<br>
+**-n** 数字排序类型<br>
+**-r** 降序<br>
+**-o** 输出文件的路径<br><br>
 
 ### 使用sort执行去重及排序
 
