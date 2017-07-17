@@ -30,3 +30,7 @@ php 利用反射API获取类信息
 * [php-unisort](https://github.com/xfdipzone/Small-Program/tree/master/php-unisort)<br>
 php 文件内容去重及排序
 <br>
+
+* [php-batch-download](https://github.com/xfdipzone/Small-Program/tree/master/php-batch-download)<br>
+php 利用curl实现多进程下载文件
+<br>
