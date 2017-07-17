@@ -9,22 +9,22 @@ php 利用curl实现多进程下载文件<br><br>
 
 ## 主要方法：
 
-**<font color="#FF0000">curl_multi_init</font>**<br>
+**curl_multi_init**<br>
 返回一个新cURL批处理句柄<br><br>
 
-**<font color="#FF0000">curl_multi_add_handle</font>**<br>
+**curl_multi_add_handle**<br>
 向curl批处理会话中添加单独的curl句柄<br><br>
 
-**<font color="#FF0000">curl_multi_exec</font>**<br>
+**curl_multi_exec**<br>
 运行当前 cURL 句柄的子连接<br><br>
 
-**<font color="#FF0000">curl_multi_getcontent</font>**<br>
+**curl_multi_getcontent**<br>
 如果设置了CURLOPT_RETURNTRANSFER，则返回获取的输出的文本流<br><br>
 
-**<font color="#FF0000">curl_multi_remove_handle</font>**<br>
+**curl_multi_remove_handle**<br>
 移除curl批处理句柄资源中的某个句柄资源<br><br>
 
-**<font color="#FF0000">curl_multi_close</font>**<br>
+**curl_multi_close**<br>
 关闭一组cURL句柄<br><br>
 
 ## 演示
@@ -52,7 +52,7 @@ echo 'download num:'.$handle_num.PHP_EOL;
 
 <br>
 
-**执行后日志输出**<br><br>
+**执行后日志输出**<br>
 
 ```txt
 [2017-07-16 18:04:21] url:http://www.example.com/p1.jpg file:/home/fdipzone/photo/p1.jpg status:1
