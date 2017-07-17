@@ -51,7 +51,8 @@ echo 'download num:'.$handle_num.PHP_EOL;
 ```
 
 <br>
-**执行后日志输出**<br>
+
+**执行后日志输出**<br><br>
 
 ```txt
 [2017-07-16 18:04:21] url:http://www.example.com/p1.jpg file:/home/fdipzone/photo/p1.jpg status:1
