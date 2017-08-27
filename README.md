@@ -34,3 +34,8 @@ php 文件内容去重及排序
 * [php-batch-download](https://github.com/xfdipzone/Small-Program/tree/master/php-batch-download)<br>
 php 利用curl实现多进程下载文件
 <br>
+
+* [php-log](https://github.com/xfdipzone/Small-Program/tree/master/php-log)<br>
+php 日志类
+<br>
+
