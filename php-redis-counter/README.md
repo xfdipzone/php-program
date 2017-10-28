@@ -57,4 +57,4 @@ echo $oRedisCounter->get($key).PHP_EOL; // 0
 
 ## 测试并发
 
-关于测试并发可以参考博客 [http://blog.csdn.net/fdipzone/article/details/78376411](http://blog.csdn.net/fdipzone/article/details/78376411)
+关于测试并发可以参考博客 [http://blog.csdn.net/fdipzone/article/details/78376411#t1](http://blog.csdn.net/fdipzone/article/details/78376411#t1)
