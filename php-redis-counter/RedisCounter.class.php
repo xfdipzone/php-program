@@ -77,5 +77,4 @@ class RedisCounter{ // class start
 
 
 } // class end
-
 ?>
