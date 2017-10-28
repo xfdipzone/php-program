@@ -39,3 +39,7 @@ php 利用curl实现多进程下载文件
 php 日志类
 <br>
 
+* [php-redis-counter](https://github.com/xfdipzone/Small-Program/tree/master/php-redis-counter)<br>
+php 基于redis计数器类
+<br>
+
