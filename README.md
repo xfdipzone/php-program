@@ -43,3 +43,6 @@ php 日志类
 php 基于redis计数器类
 <br>
 
+* [php-trafficshaper](https://github.com/xfdipzone/Small-Program/tree/master/php-trafficshaper)<br>
+php 基于redis使用令牌桶算法实现流量控制
+<br>
