@@ -13,38 +13,38 @@ PHP实现创建二维码类，支持设置尺寸，加入LOGO，圆角，透明�
 4.logo可圆角<br>
 5.logo可设透明度<br>
 6.logo图片及输出图片类型支持png,jpg,gif格式<br>
-7.可设置输出图片质量
+7.可设置输出图片质量<br>
 
 ### 设定参数说明：
 
-ecc<br>
+**ecc** <br>
 二维码质量 L-smallest, M, Q, H-best<br>
 
-size<br>
+**size** <br>
 二维码尺寸 1-50<br>
 
-dest_file<br>
+**dest_file** <br>
 生成的二维码图片路径<br>
 
-quality<br>
+**quality** <br>
 生成的图片质量<br>
 
-logo<br>
+**logo** <br>
 logo路径，为空表示不加入logo<br>
 
-logo_size<br>
+**logo_size** <br>
 logo尺寸，null表示按二维码尺寸比例自动计算<br>
 
-logo_outline_size<br>
+**logo_outline_size** <br>
 logo描边尺寸，null表示按logo尺寸按比例自动计算<br>
 
-logo_outline_color<br>
+**logo_outline_color** <br>
 logo描边颜色<br>
 
-logo_opacity<br>
+**logo_opacity** <br>
 logo不透明度 0-100<br>
 
-logo_radius<br>
+**logo_radius** <br>
 logo圆角角度 0-30<br>
 
 ## 演示
