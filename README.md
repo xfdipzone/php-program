@@ -46,3 +46,7 @@ php 基于redis计数器类
 * [php-trafficshaper](https://github.com/xfdipzone/Small-Program/tree/master/php-trafficshaper)<br>
 php 基于redis使用令牌桶算法实现流量控制
 <br>
+
+* [php-qrcode](https://github.com/xfdipzone/Small-Program/tree/master/php-qrcode)<br>
+php 创建二维码类
+<br>
