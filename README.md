@@ -50,3 +50,7 @@ php 基于redis使用令牌桶算法实现流量控制
 * [php-qrcode](https://github.com/xfdipzone/Small-Program/tree/master/php-qrcode)<br>
 php 创建二维码类
 <br>
+
+* [php-requestid](https://github.com/xfdipzone/Small-Program/tree/master/php-requestid)<br>
+php 生成唯一RequestID类
+<br>
