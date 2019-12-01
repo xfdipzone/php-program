@@ -5,7 +5,7 @@
  * Author:  fdipzone
  * Version: 1.0
  *
- * Descripton:
+ * Description:
  * php基于Redis实现自增计数，主要使用redis的incr方法，并发执行时保证计数自增唯一。
  *
  * Func:

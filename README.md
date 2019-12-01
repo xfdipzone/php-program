@@ -54,3 +54,7 @@ php 创建二维码类
 13. [php-requestid](https://github.com/xfdipzone/Small-Program/tree/master/php-requestid)<br>
 php 生成唯一RequestID类
 <br>
+
+14. [php-redis-bucket](https://github.com/xfdipzone/Small-Program/tree/master/php-redis-bucket)<br>
+php 基于redis实现bucket类
+<br>
