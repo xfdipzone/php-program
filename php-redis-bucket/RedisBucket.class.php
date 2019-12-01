@@ -9,25 +9,25 @@
  * php基于Redis实现Bucket类，使用Redis的List存储类型（先入先出）作为容器存放数据。类中使用了共享锁及Redis事务，保证并发执行的唯一性。
  *
  * Func:
- * public init 初始化
- * public push
- * public pop
- * public set_max_size
- * public get_max_size
- * public get_used_size
- * public set_lock_timeout
- * public set_timeout
- * public set_retry_time
+ * public init              初始化
+ * public push              压入数据
+ * public pop               弹出数据
+ * public set_max_size      设置最大容量
+ * public get_max_size      获取最大容量
+ * public get_used_size     获取已用容量
+ * public set_lock_timeout  设置锁过期时间（毫秒）
+ * public set_timeout       设置执行超时时间（毫秒）
+ * public set_retry_time    设置重试间隔时间（毫秒）
  */
 class RedisBucket{ // class start
     
-    // 错误代码（传入参数不合法）
+    // 错误码（传入参数不合法）
     const REQUEST_PARAM_INVALID = 1;
     
-    // 错误代码（没有数据可以弹出）
+    // 错误码（没有数据可以弹出）
     const NO_DATA_TO_POP = 2;
     
-    // 错误代码（超时）
+    // 错误码（超时）
     const TIMEOUT = 99;
     
     // Redis config
@@ -428,7 +428,7 @@ class RedisBucket{ // class start
     /**
      * 设置锁过期时间（毫秒）
      *
-     * @param  Float   $lock_timeout 锁过期时间（毫秒）
+     * @param  Int     $lock_timeout 锁过期时间（毫秒）
      * @return Boolean
      */
     public function set_lock_timeout($lock_timeout){
@@ -465,7 +465,7 @@ class RedisBucket{ // class start
      * 设置重试间隔时间（毫秒）
      *
      * @param  Int     $time 重试间隔时间（毫秒）
-     * @return boolean
+     * @return Boolean
      */
     public function set_retry_time($time){
         
@@ -501,7 +501,7 @@ class RedisBucket{ // class start
      * 检查已使用容量是否足够弹出
      *
      * @param  Int $num
-     * @return boolean
+     * @return Boolean
      */
     private function check_stock($num){
         
@@ -519,7 +519,7 @@ class RedisBucket{ // class start
     /**
      * 获取锁
      *
-     * @return boolean
+     * @return Boolean
      */
     private function lock(){
         $is_lock = $this->_conn->setnx($this->_bucket_lock, $this->get_milli_timestamp()+$this->_bucket_lock_timeout);
@@ -543,7 +543,7 @@ class RedisBucket{ // class start
     /**
      * 释放锁
      *
-     * @return boolean
+     * @return Boolean
      */
     private function unlock(){
         return $this->_conn->del($this->_bucket_lock);
