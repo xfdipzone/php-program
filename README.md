@@ -60,6 +60,6 @@ php 生成唯一RequestID类
 
 php 基于redis实现bucket类
 
-**15. [php-mosacis](https://github.com/xfdipzone/Small-Program/tree/master/php-mosacis)**
+**15. [php-mosaics](https://github.com/xfdipzone/Small-Program/tree/master/php-mosaics)**
 
 php 图片局部打马赛克

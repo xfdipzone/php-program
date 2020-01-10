@@ -1,4 +1,4 @@
-# php-mosacis
+# php-mosaics
 
 php 图片局部打马赛克
 
@@ -23,4 +23,4 @@ echo '<img src="'.$dest.'">';
 
 ### 效果如下图
 
-![原图与打马赛克后图片比较](https://github.com/xfdipzone/Small-Program/blob/master/php-mosacis/vs.jpg)
+![原图与打马赛克后图片比较](https://github.com/xfdipzone/Small-Program/blob/master/php-mosaics/vs.jpg)
