@@ -1,5 +1,6 @@
 # php-redis-bucket
-php 基于redis实现bucket类<br><br>
+
+php 基于redis实现bucket类
 
 ## 1. 介绍
 
@@ -397,7 +398,7 @@ var_dump(assert($oRedisBucket->get_max_size()==1));
 ?>
 ```
 
-**输出**
+输出
 
 ```text
 Array
@@ -498,4 +499,3 @@ Array
 bool(true)
 bool(true)
 ```
-

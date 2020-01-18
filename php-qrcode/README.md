@@ -1,51 +1,48 @@
 # php-qrcode
-PHP创建二维码类<br><br>
+
+PHP创建二维码类
 
 ## 介绍
 
-PHP实现创建二维码类，支持设置尺寸，加入LOGO，描边，圆角，透明度等处理。<br>
+PHP实现创建二维码类，支持设置尺寸，加入LOGO，描边，圆角，透明度等处理。
 
-### 实现功能如下：
+### 实现功能
 
-1.创建二维码<br>
-2.加入logo到二维码中<br>
-3.logo可描边<br>
-4.logo可圆角<br>
-5.logo可设透明度<br>
-6.logo图片及输出图片类型支持png,jpg,gif格式<br>
-7.可设置输出图片质量<br>
+1.创建二维码
 
-### 设定参数说明：
+2.加入logo到二维码中
 
-**ecc** <br>
-二维码质量 L-smallest, M, Q, H-best<br>
+3.logo可描边
 
-**size** <br>
-二维码尺寸 1-50<br>
+4.logo可圆角
 
-**dest_file** <br>
-生成的二维码图片路径<br>
+5.logo可设透明度
 
-**quality** <br>
-生成的图片质量<br>
+6.logo图片及输出图片类型支持png,jpg,gif格式
 
-**logo** <br>
-logo路径，为空表示不加入logo<br>
+7.可设置输出图片质量
 
-**logo_size** <br>
-logo尺寸，null表示按二维码尺寸比例自动计算<br>
+### 设定参数说明
 
-**logo_outline_size** <br>
-logo描边尺寸，null表示按logo尺寸按比例自动计算<br>
+`ecc` 二维码质量 L-smallest, M, Q, H-best
 
-**logo_outline_color** <br>
-logo描边颜色<br>
+`size` 二维码尺寸 1-50
 
-**logo_opacity** <br>
-logo不透明度 0-100<br>
+`dest_file` 生成的二维码图片路径
 
-**logo_radius** <br>
-logo圆角角度 0-30<br>
+`quality` 生成的图片质量
+
+`logo` logo路径，为空表示不加入logo
+
+`logo_size` logo尺寸，null表示按二维码尺寸比例自动计算
+
+`logo_outline_size` logo描边尺寸，null表示按logo尺寸按比例自动计算
+
+`logo_outline_color` logo描边颜色
+
+`logo_opacity` logo不透明度 0-100
+
+`logo_radius` logo圆角角度 0-30
 
 ## 演示
 
