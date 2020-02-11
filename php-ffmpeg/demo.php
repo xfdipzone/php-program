@@ -66,4 +66,5 @@ function getVideoInfo($file){
 // 输出视频信息
 $video_info = getVideoInfo('myvideo.avi');
 print_r($video_info[0]);
+
 ?>
