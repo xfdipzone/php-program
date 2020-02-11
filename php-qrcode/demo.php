@@ -28,4 +28,5 @@ $qrcode = $oPHPQRCode->generate($data);
 
 // 显示二维码
 echo '<img src="'.$qrcode.'?t='.time().'">';
+
 ?>

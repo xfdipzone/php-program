@@ -82,4 +82,5 @@ print_r($result);
 // 查看已使用容量及最大容量
 var_dump(assert($oRedisBucket->get_used_size()==1));
 var_dump(assert($oRedisBucket->get_max_size()==1));
+
 ?>

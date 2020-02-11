@@ -5,4 +5,5 @@ require 'RequestID.class.php';
 for($i=0; $i<10; $i++){
     echo RequestID::generate().PHP_EOL;
 }
+
 ?>
