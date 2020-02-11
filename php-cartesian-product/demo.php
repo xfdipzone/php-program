@@ -20,19 +20,20 @@ function CartesianProduct($sets){
     $result = array();
 
     // 循环遍历集合数据
-    for($i=0,$count=count($sets); $i<$count-1; $i++){
+    for($i=0,$count=count($sets); $i<$count; $i++){
         
-        // 初始化
+        // 初始化，第一个集合，不用做笛卡尔积
         if($i==0){
             $result = $sets[$i];
+            continue;
         }
 
         // 保存临时数据
         $tmp = array();
 
-        // 结果与下一个集合计算笛卡尔积
+        // 结果与当前集合计算笛卡尔积
         foreach($result as $res){
-            foreach($sets[$i+1] as $set){
+            foreach($sets[$i] as $set){
                 $tmp[] = $res.$set;
             }
         }
