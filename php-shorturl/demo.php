@@ -76,4 +76,5 @@ $url_long = array(
 
 $data = getSinaShortUrl($source, $url_long);
 print_r($data);
+
 ?>
