@@ -11,7 +11,7 @@ interface IUser{
 }
 
 /** 用户类 */
-class User implements IUser{
+class User implements IUser{ // class start
 
     /** 
       * 用户数据
@@ -42,10 +42,10 @@ class User implements IUser{
         }
     }
 
-}
+} // class end
 
 /** VIP用户类 */
-class Vip extends User{
+class Vip extends User{ // class start
 
     /**
      * 读取vip用户数据
@@ -70,5 +70,5 @@ class Vip extends User{
         return $data;
     }
 
-}
+} // class end
 ?>

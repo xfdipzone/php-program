@@ -12,7 +12,7 @@
  * public static getProperties  读取类属性
  * public static getMethods     读取类方法
  */
-class Ref{
+class Ref{ // class start
 
     private static $refclass = null;
 
@@ -99,5 +99,5 @@ class Ref{
         return isset($doc[1])? trim(str_replace('*','',$doc[1])) : '';
     }
 
-}
+} // class end
 ?>

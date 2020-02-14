@@ -1,13 +1,14 @@
 # php-reflection
+
 php 利用反射API获取类信息
 
 ## PHP反射API介绍
 
-PHP具有完整的反射API，可以对类、接口、函数、方法和扩展进行反向工程。反射API并提供方法取出函数、类和方法中的文档注释。<br>
+PHP具有完整的反射API，可以对类、接口、函数、方法和扩展进行反向工程。反射API并提供方法取出函数、类和方法中的文档注释。
 
-PHP反射API文档地址：http://php.net/manual/zh/class.reflectionclass.php<br>
+PHP反射API文档地址：<http://php.net/manual/zh/class.reflectionclass.php>
 
-<br>
+---
 
 ## 使用ReflectionClass获取类的属性，接口，方法等信息
 
@@ -49,7 +50,7 @@ foreach($interfaces as $interface){
 }
 ```
 
-<br>
+---
 
 ## 演示
 
