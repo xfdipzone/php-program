@@ -15,4 +15,5 @@ $obj = new BatchDownLoad($download_config, 2, 10);
 $handle_num = $obj->download();
 
 echo 'download num:'.$handle_num.PHP_EOL;
+
 ?>

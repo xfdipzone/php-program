@@ -10,7 +10,7 @@
  * public  process  多进程下载
  * private to_log   将执行结果写入日志文件
  */
-class BatchDownLoad {
+class BatchDownLoad { // class start
 
     // 下载文件设置
     private $download_config = array();
@@ -169,4 +169,5 @@ class BatchDownLoad {
         file_put_contents($this->logfile, $tmp_log, FILE_APPEND);
     }
 
-}
+} // class end
+?>
