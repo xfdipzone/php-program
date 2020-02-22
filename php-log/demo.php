@@ -48,4 +48,5 @@ $logger3 = LOG::get_logger('notexists');
 $logger3->info('Test Add Not Exists Info Log');
 $logger3->warn('Test Add Not Exists Warn Log');
 $logger3->error('Test Add Not Exists Error Log');
+
 ?>

@@ -22,7 +22,7 @@
  * private create_log_path   创建日志目录
  * private get_log_file      获取日志文件名称
  */
-class LOG {
+class LOG { // class start
 
     // 日志根目录
     private $_log_path = '.';
@@ -175,6 +175,5 @@ class LOG {
     
     }
 
-}
-
+} // class end
 ?>
