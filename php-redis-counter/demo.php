@@ -24,4 +24,5 @@ echo $oRedisCounter->incr($key).PHP_EOL; // 1
 echo $oRedisCounter->incr($key, 10).PHP_EOL; // 11
 echo $oRedisCounter->reset($key).PHP_EOL; // 1
 echo $oRedisCounter->get($key).PHP_EOL; // 0 
+
 ?>

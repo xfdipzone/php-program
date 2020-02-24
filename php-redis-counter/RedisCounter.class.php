@@ -75,6 +75,5 @@ class RedisCounter{ // class start
         return $redis;
     }
 
-
 } // class end
 ?>
