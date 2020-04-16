@@ -39,3 +39,5 @@ php开发的程序，类库，小工具，不定期更新。
 - [php 基于redis实现bucket类](https://github.com/xfdipzone/Small-Program/tree/master/php-redis-bucket) (php-redis-bucket)
 
 - [php 图片局部打马赛克](https://github.com/xfdipzone/Small-Program/tree/master/php-mosaics) (php-mosaics)
+
+- [php Html实体编号与非ASCII字符串相互转换类](https://github.com/xfdipzone/Small-Program/tree/master/php-mosaics) (php-htmlentitie)
