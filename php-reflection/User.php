@@ -3,10 +3,10 @@
 interface IUser{
 
     // 新增用户
-    public function add($data);
+    public function add(array $data):int;
 
     // 读取用户数据
-    public function get($id);
+    public function get(int $id):array;
 
 }
 
@@ -23,7 +23,7 @@ class User implements IUser{ // class start
      * @param  Array $data 用户数据
      * @return Int
      */
-    public function add($data){
+    public function add(array $data):int{
         $this->user[] = $data;
         $keys = array_keys($this->user);
         return end($keys);
@@ -34,7 +34,7 @@ class User implements IUser{ // class start
      * @param  Int    $id 用户id
      * @return Array
      */
-    public function get($id){
+    public function get(int $id):array{
         if(isset($this->user[$id])){
             return $this->user[$id];
         }else{
@@ -52,7 +52,7 @@ class Vip extends User{ // class start
      * @param  Int    $id 用户id
      * @return Array
      */
-    public function getvip($id){
+    public function getVip(int $id):array{
         $data = $this->get($id);
         if($data){
             return $this->format($data);
@@ -65,7 +65,7 @@ class Vip extends User{ // class start
      * @param  Array $data 用户数据
      * @return Array
      */
-    private function format($data){
+    private function format(array $data):array{
         $data['is_vip'] = 1;
         return $data;
     }

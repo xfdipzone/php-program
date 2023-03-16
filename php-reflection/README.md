@@ -15,7 +15,7 @@ PHP反射API文档地址：<http://php.net/manual/zh/class.reflectionclass.php>
 ### 1.获取类基本信息
 
 ```php
-$ref = new ReflectionClass($classname);
+$ref = new ReflectionClass($class_name);
 echo $ref->getName();
 echo $ref->getFileName();
 ```
@@ -23,7 +23,7 @@ echo $ref->getFileName();
 ### 2.获取类属性信息
 
 ```php
-$ref = new ReflectionClass($classname);
+$ref = new ReflectionClass($class_name);
 $properties = $ref->getProperties();
 foreach($properties as $property){
     echo $property->getName();
@@ -33,7 +33,7 @@ foreach($properties as $property){
 ### 3.获取类方法信息
 
 ```php
-$ref = new ReflectionClass($classname);
+$ref = new ReflectionClass($class_name);
 $methods = $ref->getMethods();
 foreach($methods as $method){
     echo $method->getName();
@@ -43,7 +43,7 @@ foreach($methods as $method){
 ### 4.获取类接口信息
 
 ```php
-$ref = new ReflectionClass($classname);
+$ref = new ReflectionClass($class_name);
 $interfaces = $ref->getInterfaces();
 foreach($interfaces as $interface){
     echo $interface->getName();
@@ -56,57 +56,83 @@ foreach($interfaces as $interface){
 
 ```php
 <?php
-require 'Ref.class.php';
-require 'User.class.php';
+require 'Ref.php';
+require 'User.php';
 
-echo '<pre>';
 Ref::setClass('Vip');
-Ref::getBase();
-Ref::getProperties();
-Ref::getMethods();
-Ref::getInterfaces();
-echo '</pre>';
+
+$base_info = Ref::getBase();
+$properties = Ref::getProperties();
+$methods = Ref::getMethods();
+$interfaces = Ref::getInterfaces();
+
+$class_info = array(
+    'base_info' => $base_info,
+    'properties' => $properties,
+    'methods' => $methods,
+    'interfaces' => $interfaces,
+);
+
+echo json_encode($class_info, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 ?>
 ```
 
 输出：
 
-```txt
-BASE INFO
-class name: Vip
-class path: /home/fdipzone/ref
-class filename: User.class.php
-
-PROPERTIES INFO
-property name: user
-property modifier: protected
-property comments: 用户数据
-
-METHODS INFO
-method name: getvip
-method modifier: public
-method params num: 1
-param name:id
-method comments: 读取vip用户数据
-
-method name: format
-method modifier: private
-method params num: 1
-param name:data
-method comments: 修饰数据
-
-method name: add
-method modifier: public
-method params num: 1
-param name:data
-method comments: 新增用户
-
-method name: get
-method modifier: public
-method params num: 1
-param name:id
-method comments: 读取用户数据
-
-INTERFACES INFO
-interface name: IUser
+```json
+{
+    "base_info": {
+        "className": "Vip",
+        "classPath": "\/home\/fdipzone\/php-reflection",
+        "classFileName": "User.php"
+    },
+    "properties": [
+        {
+            "propertyName": "user",
+            "propertyModifier": "protected",
+            "propertyComments": "用户数据"
+        }
+    ],
+    "methods": [
+        {
+            "methodName": "getVip",
+            "methodModifier": "public",
+            "methodParamsNum": 1,
+            "methodParams": [
+                "id"
+            ],
+            "methodComments": "读取vip用户数据"
+        },
+        {
+            "methodName": "format",
+            "methodModifier": "private",
+            "methodParamsNum": 1,
+            "methodParams": [
+                "data"
+            ],
+            "methodComments": "修饰数据"
+        },
+        {
+            "methodName": "add",
+            "methodModifier": "public",
+            "methodParamsNum": 1,
+            "methodParams": [
+                "data"
+            ],
+            "methodComments": "新增用户"
+        },
+        {
+            "methodName": "get",
+            "methodModifier": "public",
+            "methodParamsNum": 1,
+            "methodParams": [
+                "id"
+            ],
+            "methodComments": "读取用户数据"
+        }
+    ],
+    "interfaces": [
+        "IUser"
+    ]
+}
 ```
