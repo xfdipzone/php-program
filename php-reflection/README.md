@@ -55,7 +55,6 @@ foreach($interfaces as $interface){
 ## 演示
 
 ```php
-<?php
 require 'Ref.php';
 require 'User.php';
 
@@ -74,7 +73,6 @@ $class_info = array(
 );
 
 echo json_encode($class_info, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
-?>
 ```
 
 输出：

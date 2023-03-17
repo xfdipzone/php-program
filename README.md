@@ -34,7 +34,7 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 创建二维码类](https://github.com/xfdipzone/Small-Program/tree/master/php-qrcode) (php-qrcode)
 
-- [php 生成唯一RequestID类](https://github.com/xfdipzone/Small-Program/tree/master/php-requestid) (php-requestid)
+- [php 唯一RequestID生成类](https://github.com/xfdipzone/Small-Program/tree/master/php-requestid) (php-requestid)
 
 - [php 基于redis实现bucket类](https://github.com/xfdipzone/Small-Program/tree/master/php-redis-bucket) (php-redis-bucket)
 

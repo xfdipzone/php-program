@@ -1,9 +1,8 @@
 <?php
-require 'RequestID.class.php';
+require 'RequestIdGenerator.php';
 
 // 生成10个请求id
 for($i=0; $i<10; $i++){
-    echo RequestID::generate().PHP_EOL;
+    echo RequestIdGenerator::generate().PHP_EOL;
 }
-
 ?>

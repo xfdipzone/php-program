@@ -1,10 +1,10 @@
 # php-requestid
 
-PHP生成唯一RequestID类
+PHP 唯一RequestID生成类
 
 ## 介绍
 
-PHP生成唯一RequestID类，使用`session_create_id()`与`uniqid()`方法，保证唯一性。
+PHP 唯一RequestID生成类，使用 `session_create_id()` 与 `uniqid()` 方法，保证唯一性。
 
 ### 使用场景
 
@@ -21,14 +21,12 @@ PHP生成唯一RequestID类，使用`session_create_id()`与`uniqid()`方法，�
 ## 演示
 
 ```php
-<?php
-require 'RequestID.class.php';
+require 'RequestIdGenerator.php';
 
 // 生成10个请求id
 for($i=0; $i<10; $i++){
-    echo RequestID::generate().PHP_EOL;
+    echo RequestIdGenerator::generate().PHP_EOL;
 }
-?>
 ```
 
 输出：
