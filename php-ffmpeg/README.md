@@ -8,9 +8,23 @@ ffmpeg是一套可以用来记录、转换数字音频、视频，并能将其�
 
 本程序使用php调用ffmpeg获取视频信息，调用ffmpeg首先需要服务器上安装了ffmpeg，安装方法很简单，可自行搜索。
 
+需要安装 `ffmpeg`
+
 ---
 
-## 执行结果
+## 演示
+
+```php
+require 'VideoInformation.php';
+
+// 输出视频信息
+$ffmpeg_file = '/usr/local/bin/ffmpeg';
+$videoInformation = new VideoInformation($ffmpeg_file);
+$video_info = $videoInformation->getInfo('myvideo.avi');
+print_r($video_info['base_info']);
+```
+
+输出：
 
 ```txt
 Array
