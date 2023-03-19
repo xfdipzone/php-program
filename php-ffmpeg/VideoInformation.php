@@ -1,6 +1,6 @@
 <?php
 /**
- * php 基于ffmpeg实现获取视频信息类
+ * php 调用ffmpeg实现获取视频信息类
  *
  * @author fdipzone
  * @DateTime 2023-03-18 21:53:34
