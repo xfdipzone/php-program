@@ -20,15 +20,18 @@ php 计算多个集合的笛卡尔积
 
 ## 演示
 
-集合如下：
-
 ```php
+require 'CartesianProduct.php';
+
+// 定义集合
 $sets = array(
     array('白色','黑色','红色'),
     array('透气','防滑'),
     array('37码','38码','39码'),
     array('男款','女款')
 );
+
+$result = CartesianProduct::cal($sets);
 ```
 
 输出：
