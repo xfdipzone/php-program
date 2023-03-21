@@ -11,27 +11,14 @@ php 文件与16进制相互转换
 ## 演示
 
 ```php
-$file = 'test.doc';
+require 'HexFileConverter.php';
 
-// 文件转16进制
-$hexstr = fileToHex($file);
-echo '文件转16进制<br>';
-echo $hexstr.'<br><br>';
+$file = 'doc.txt';
 
-// 16进制转文件
-$newfile = 'new.doc';
-hexToFile($hexstr, $newfile);
+// 文件转16进制串
+$hex_str = HexFileConverter::fileToHex($file);
 
-echo '16进制转文件<br>';
-var_dump(file_exists($newfile));
-```
-
-输出：
-
-```txt
-文件转16进制
-efbbbf3130e4b8aae4bfafe58da7e69291e28094e280943235e4b8aae4bbb0e58da7e8b5b7...
-
-16进制转文件
-boolean true
+// 16进制串转文件
+$new_file = 'new_doc.txt';
+HexFileConverter::hexToFile($hex_str, $new_file);
 ```
