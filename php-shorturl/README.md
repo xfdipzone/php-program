@@ -34,7 +34,7 @@ url_long  需要转换的长链接，需要URLencoded，最多不超过20个。
 
 ```php
 // AppKey
-$api_key = '您申请的AppKey';
+$app_key = '您申请的AppKey';
 
 // 长链接
 $urls = array(
@@ -45,7 +45,7 @@ $urls = array(
 
 // 生成短链接
 $config = array(
-    'api_key' => $api_key
+    'app_key' => $app_key
 );
 $generator = ShortUrlGenerator\Generator::make(ShortUrlGenerator\Type::SINA, $config);
 $result = $generator->generate($urls);

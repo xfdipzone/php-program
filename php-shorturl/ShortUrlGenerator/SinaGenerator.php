@@ -18,11 +18,11 @@ class SinaGenerator implements IGenerator{
     private $API = 'http://api.t.sina.com.cn/short_url/shorten.json';
 
     /**
-     * 新浪API Key
+     * 新浪App Key
      *
      * @var string
      */
-    private $API_KEY = '';
+    private $APP_KEY = '';
 
     /**
      * 初始化
@@ -34,10 +34,10 @@ class SinaGenerator implements IGenerator{
      * @return void
      */
     public function __construct(array $config){
-        if(isset($config['api_key'])){
-            $this->API_KEY = $config['api_key'];
+        if(isset($config['app_key'])){
+            $this->APP_KEY = $config['app_key'];
         }else{
-            throw new \Exception('api key is empty');
+            throw new \Exception('app key is empty');
         }
     }
 
@@ -64,7 +64,7 @@ class SinaGenerator implements IGenerator{
         $url_param = implode('', $url_param);
 
         // 请求url
-        $request_url = sprintf($this->API.'?source=%s%s', $this->API_KEY, $url_param);
+        $request_url = sprintf($this->API.'?source=%s%s', $this->APP_KEY, $url_param);
 
         $result = array();
 
