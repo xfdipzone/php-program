@@ -26,7 +26,7 @@ url_long  需要转换的长链接，需要URLencoded，最多不超过20个。
 
 2.点击立即接入，创建新应用，随便填写应用名称，点击创建。
 
-3.创建成功后，AppKey就是source参数的值，可以用于请求创建短链接。
+3.创建成功后且审核通过后，AppKey就是source参数的值，可以用于请求创建短链接。
 
 ---
 
@@ -34,39 +34,27 @@ url_long  需要转换的长链接，需要URLencoded，最多不超过20个。
 
 ```php
 // AppKey
-$source = '您申请的AppKey';
+$api_key = '您申请的AppKey';
 
-// 单个链接转换
-$url_long = 'http://blog.csdn.net/fdipzone';
-
-$data = getSinaShortUrl($source, $url_long);
-print_r($data);
-
-// 多个链接转换
-$url_long = array(
+// 链接转换
+$urls = array(
     'http://blog.csdn.net/fdipzone/article/details/46390573',
     'http://blog.csdn.net/fdipzone/article/details/12180523',
     'http://blog.csdn.net/fdipzone/article/details/9316385'
 );
 
-$data = getSinaShortUrl($source, $url_long);
-print_r($data);
+$config = array(
+    'api_key' => $api_key
+);
+$generator = ShortUrlGenerator\Generator::make(ShortUrlGenerator\Type::SINA, $config);
+$result = $generator->generate($urls);
+
+print_r($result);
 ```
 
 输出：
 
 ```txt
-Array
-(
-    [0] => Array
-        (
-            [url_short] => http://t.cn/RyVmU5i
-            [url_long] => http://blog.csdn.net/fdipzone
-            [type] => 0
-        )
-
-)
-
 Array
 (
     [0] => Array
