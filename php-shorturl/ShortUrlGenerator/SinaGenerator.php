@@ -61,7 +61,7 @@ class SinaGenerator implements IGenerator{
             return '&url_long='.urlencode($value);
         }, $urls);
 
-        $url_param = implode('', $url_param); 
+        $url_param = implode('', $url_param);
 
         // 请求url
         $request_url = sprintf($this->API.'?source=%s%s', $this->API_KEY, $url_param);
