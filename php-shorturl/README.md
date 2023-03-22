@@ -36,13 +36,14 @@ url_long  需要转换的长链接，需要URLencoded，最多不超过20个。
 // AppKey
 $api_key = '您申请的AppKey';
 
-// 链接转换
+// 长链接
 $urls = array(
-    'http://blog.csdn.net/fdipzone/article/details/46390573',
-    'http://blog.csdn.net/fdipzone/article/details/12180523',
-    'http://blog.csdn.net/fdipzone/article/details/9316385'
+    'https://blog.csdn.net/fdipzone/article/details/46390573',
+    'https://blog.csdn.net/fdipzone/article/details/12180523',
+    'https://blog.csdn.net/fdipzone/article/details/9316385'
 );
 
+// 生成短链接
 $config = array(
     'api_key' => $api_key
 );

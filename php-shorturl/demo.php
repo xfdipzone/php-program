@@ -4,13 +4,14 @@ require 'autoload.php';
 // AppKey
 $api_key = '您申请的AppKey';
 
-// 链接转换
+// 长链接
 $urls = array(
     'https://blog.csdn.net/fdipzone/article/details/46390573',
     'https://blog.csdn.net/fdipzone/article/details/12180523',
     'https://blog.csdn.net/fdipzone/article/details/9316385'
 );
 
+// 生成短链接
 $config = array(
     'api_key' => $api_key
 );
