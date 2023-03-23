@@ -8,9 +8,9 @@ php 调用新浪API生成短链接
 
 ### API
 
-<http://api.t.sina.com.cn/short_url/shorten.json> (返回结果是JSON格式)
+<https://api.t.sina.com.cn/short_url/shorten.json> (返回结果是JSON格式)
 
-<http://api.t.sina.com.cn/short_url/shorten.xml> （返回结果是XML格式）
+<https://api.t.sina.com.cn/short_url/shorten.xml> （返回结果是XML格式）
 
 ### 请求参数
 
@@ -27,6 +27,17 @@ url_long  需要转换的长链接，需要URLencoded，最多不超过20个。
 2.点击立即接入，创建新应用，随便填写应用名称，点击创建。
 
 3.创建成功且审核通过后，AppKey就是source参数的值，可以用于请求创建短链接。
+
+如未审核通过，则会有以下错误提示
+
+```txt
+Array
+(
+    [request] => /short_url/shorten.json
+    [error_code] => 403
+    [error] => 40358:applications over the unaudited use restrictions!
+)
+```
 
 ---
 

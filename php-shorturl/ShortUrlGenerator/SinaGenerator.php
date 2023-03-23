@@ -15,7 +15,7 @@ class SinaGenerator implements IGenerator{
      *
      * @var string
      */
-    private $API = 'http://api.t.sina.com.cn/short_url/shorten.json';
+    private $API = 'https://api.t.sina.com.cn/short_url/shorten.json';
 
     /**
      * 新浪App Key
@@ -23,6 +23,13 @@ class SinaGenerator implements IGenerator{
      * @var string
      */
     private $APP_KEY = '';
+
+    /**
+     * 请求超时时间（秒）
+     *
+     * @var int
+     */
+    private $TIMEOUT = 5;
 
     /**
      * 初始化
@@ -71,10 +78,13 @@ class SinaGenerator implements IGenerator{
         // 执行请求
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); // 从证书中检查SSL加密算法是否存在
         curl_setopt($ch, CURLOPT_URL, $request_url);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $this->TIMEOUT);
         $data = curl_exec($ch);
-        if($error=curl_errno($ch)){
-            throw new \Exception($error);
+        if(curl_errno($ch)){
+            throw new \Exception(curl_error($ch));
         }
         curl_close($ch);
 
