@@ -25,7 +25,9 @@ class Unique implements \FileContentOrganization\IHandler{
         $rows = explode(PHP_EOL, $data);
 
         // 过滤空行
-        $rows = array_filter($rows, [$this, 'blankLine']);
+        $rows = array_filter($rows, function($row){
+            return trim($row)!=='';
+        });
 
         // 去重
         $rows = array_flip($rows);
@@ -34,19 +36,6 @@ class Unique implements \FileContentOrganization\IHandler{
         // 数组按换行符合拼为字符串
         return implode(PHP_EOL, $rows);
 
-    }
-
-    /**
-     * 判断是否空行
-     *
-     * @author fdipzone
-     * @DateTime 2023-03-24 21:19:53
-     *
-     * @param string $str 字符串
-     * @return boolean
-     */
-    private function blankLine(string $str):bool{
-        return (!$str && $str!=='0')? false : true;
     }
 
 }

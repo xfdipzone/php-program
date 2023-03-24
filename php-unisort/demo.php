@@ -2,8 +2,8 @@
 require 'autoload.php';
 
 // 源文件及目标文件
-$source = 'user_id.txt';
-$dest = 'php_sort_user_id.txt';
+$source = '/tmp/user_id.txt';
+$dest = '/tmp/php_sort_user_id.txt';
 
 // 写入10000个数字，每行一个数字
 $num = 10000;
