@@ -2,30 +2,57 @@
 
 php 文件内容去重及排序
 
-## php 实现去重及排序
+## 介绍
+
+php 实现文件内容去重及排序，针对每行内容为一个整体的处理，使用到职责链模式。
+
+可以设置需要的处理器对文件内容进行处理。
+
+`\FileContentOrganization\Organizer`
+
+程序入口，用于设置处理器对象，及调用处理器执行，生成处理后的文件。
+
+`\FileContentOrganization\Type`
+
+定义支持的处理器类型，及类型对应的实现类。
+
+`\FileContentOrganization\IHandler`
+
+文件内容处理器类接口，定义文件内容处理器类需要实现的功能。
+
+`\FileContentOrganization\Factory`
+
+文件内容处理器工厂类，用于创建不同类型的处理器类对象。
+
+`\FileContentOrganization\Handler\Unique`
+
+文件内容去重处理器类
+
+`\FileContentOrganization\IHandler\Sort`
+
+文件内容排序处理器类
+
+---
+
+## 演示
 
 ```php
-<?php
-// 设置可使用内存为256m，可根据数据量进行设置
-ini_set('memory_limit', '256m');
-
+// 源文件及目标文件
 $source = 'user_id.txt';
 $dest = 'php_sort_user_id.txt';
 
-// 写入1000000个数字，每行一个数字
-$num = 1000000;
-$tmp = '';
+// 创建处理器对象
+$unique_handler = \FileContentOrganization\Factory::make(\FileContentOrganization\Type::UNIQUE);
 
-for($i=0; $i<$num; $i++){
-    $tmp .= mt_rand(0,999999).PHP_EOL;
-    if($i>0 && $i%1000==0 || $i==$num-1){
-        file_put_contents($source, $tmp, FILE_APPEND);
-        $tmp = '';
-    }
-}
+$sort_handler = \FileContentOrganization\Factory::make(\FileContentOrganization\Type::SORT);
+$sort_handler->setOrder('desc'); // 设置降序
+$sort_handler->setSortFlag(SORT_NUMERIC); // 设置按数字类型排序
 
-// 执行去重及排序
-fileUniSort($source, $dest);
+// 创建文件内容整理对象
+$organizer = new \FileContentOrganization\Organizer($source, $dest);
+$organizer->addHandler($unique_handler);
+$organizer->addHandler($sort_handler);
+$organizer->handle();
 ?>
 ```
 
@@ -33,19 +60,19 @@ fileUniSort($source, $dest);
 
 ```txt
 wc -l php_sort_user_id.txt
-  632042 php_sort_user_id.txt
+     999 php_sort_user_id.txt
 
 head php_sort_user_id.txt
-0
-1
-2
-3
-5
-7
-8
-9
-11
-12
+999
+998
+997
+996
+995
+994
+993
+992
+991
+990
 ...
 ```
 
@@ -85,7 +112,7 @@ sort -uno linux_sort_user_id.txt user_id.txt
 
 ```txt
 wc -l linux_sort_user_id.txt
-  632042 linux_sort_user_id.txt
+     999 linux_sort_user_id.txt
 
 head linux_sort_user_id.txt
 0
