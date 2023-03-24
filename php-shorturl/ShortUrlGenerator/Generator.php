@@ -22,10 +22,27 @@ class Generator{
      */
     public static function make(string $type, array $config):IGenerator{
         try{
-            $class = Type::getGeneratorClass($type);
+            $class = self::getGeneratorClass($type);
             return new $class($config);
         }catch(\Throwable $e){
             throw new \Exception($e->getMessage());
+        }
+    }
+
+    /**
+     * 根据类型获取短链接生成器类
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-22 21:51:07
+     *
+     * @param string $type 生成器类型
+     * @return string
+     */
+    private static function getGeneratorClass(string $type):string{
+        if(isset(TYPE::$lookup[$type])){
+            return TYPE::$lookup[$type];
+        }else{
+            throw new \Exception(sprintf('%s type generator not exists', $type));
         }
     }
 
