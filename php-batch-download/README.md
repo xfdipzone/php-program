@@ -39,10 +39,13 @@ php 利用curl实现多进程下载文件
 ## 演示
 
 ```php
-<?php
-require 'BatchDownLoad.class.php';
+require 'BatchDownLoad.php';
 
 $base_path = dirname(__FILE__).'/photo';
+
+if(!is_dir($base_path)){
+    mkdir($base_path, 0777, true);
+}
 
 $download_config = array(
     array('http://www.example.com/p1.jpg', $base_path.'/p1.jpg'),
@@ -56,7 +59,6 @@ $obj = new BatchDownLoad($download_config, 2, 10);
 $handle_num = $obj->download();
 
 echo 'download num:'.$handle_num.PHP_EOL;
-?>
 ```
 
 执行后日志输出
