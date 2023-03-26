@@ -1,5 +1,5 @@
 <?php
-require 'LOG.class.php';
+require 'LOG.php';
 
 define('LOG_PATH', dirname(__FILE__).'/logs');
 

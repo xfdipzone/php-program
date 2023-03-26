@@ -4,7 +4,9 @@ php 日志类
 
 ## 介绍
 
-使用php开发的日志处理类，本类可自定义多种日志配置，根据标签对应配置。代码中方便调用此类进行日志记录操作。提供完整代码及演示例子，方便大家学习使用。
+使用php开发的日志处理类，本类可自定义多种日志配置，根据标签对应配置。代码中方便调用此类进行日志记录操作。
+
+提供完整代码及演示例子，方便大家学习使用。
 
 ---
 
@@ -25,8 +27,7 @@ php 日志类
 ## 演示
 
 ```php
-<?php
-require 'LOG.class.php';
+require 'LOG.php';
 
 define('LOG_PATH', dirname(__FILE__).'/logs');
 
@@ -75,7 +76,6 @@ $logger3 = LOG::get_logger('notexists');
 $logger3->info('Test Add Not Exists Info Log');
 $logger3->warn('Test Add Not Exists Warn Log');
 $logger3->error('Test Add Not Exists Error Log');
-?>
 ```
 
 查看日志文件内容
