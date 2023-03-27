@@ -1,5 +1,5 @@
 <?php
-Require 'RedisCounter.class.php';
+Require 'RedisCounter.php';
 
 // redis连接设定
 $config = array(
@@ -16,13 +16,12 @@ $config = array(
 $oRedisCounter = new RedisCounter($config);
 
 // 定义保存计数的健值
-$key = 'mycounter';
+$key = 'my-counter';
 
 // 执行自增计数，获取当前计数，重置计数
 echo $oRedisCounter->get($key).PHP_EOL; // 0
 echo $oRedisCounter->incr($key).PHP_EOL; // 1
 echo $oRedisCounter->incr($key, 10).PHP_EOL; // 11
 echo $oRedisCounter->reset($key).PHP_EOL; // 1
-echo $oRedisCounter->get($key).PHP_EOL; // 0 
-
+echo $oRedisCounter->get($key).PHP_EOL; // 0
 ?>
