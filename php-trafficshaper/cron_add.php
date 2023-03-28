@@ -2,7 +2,7 @@
 /**
  * 定时任务加入令牌
  */
-require 'TrafficShaper.class.php';
+require 'TrafficShaper.php';
 
 // redis连接设定
 $config = array(
@@ -16,7 +16,7 @@ $config = array(
 );
 
 // 令牌桶容器
-$queue = 'mycontainer';
+$queue = 'my-container';
 
 // 最大令牌数
 $max = 10;
@@ -38,5 +38,4 @@ for($i=0; $i<$exec_num; $i++){
     echo '['.date('Y-m-d H:i:s').'] add token num:'.$add_num.PHP_EOL;
     sleep($time_step);
 }
-
 ?>

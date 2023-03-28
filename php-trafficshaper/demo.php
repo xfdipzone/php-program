@@ -2,7 +2,7 @@
 /**
  * 演示令牌加入与消耗
  */
-require 'TrafficShaper.class.php';
+require 'TrafficShaper.php';
 
 // redis连接设定
 $config = array(
@@ -16,7 +16,7 @@ $config = array(
 );
 
 // 令牌桶容器
-$queue = 'mycontainer';
+$queue = 'my-container';
 
 // 最大令牌数
 $max = 5;
@@ -41,5 +41,4 @@ var_dump($add_num);
 for($i=0; $i<6; $i++){
     var_dump($oTrafficShaper->get());
 }
-
 ?>

@@ -2,7 +2,7 @@
 /**
  * 模拟用户访问消耗令牌，每段时间间隔消耗若干令牌
  */
-require 'TrafficShaper.class.php';
+require 'TrafficShaper.php';
 
 // redis连接设定
 $config = array(
@@ -16,7 +16,7 @@ $config = array(
 );
 
 // 令牌桶容器
-$queue = 'mycontainer';
+$queue = 'my-container';
 
 // 最大令牌数
 $max = 10;
@@ -42,5 +42,4 @@ while(true){
     }
     sleep($time_step);
 }
-
 ?>
