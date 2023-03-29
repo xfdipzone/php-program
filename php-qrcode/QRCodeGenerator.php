@@ -2,10 +2,10 @@
 require_once dirname(__FILE__)."/qrcode/qrlib.php";
 
 /**
- * PHP创建二维码类
- * Date:    2018-03-18
- * Author:  fdipzone
- * Version: 1.0
+ * php 二维码生成器
+ *
+ * @author fdipzone
+ * @DateTime 2023-03-29 19:58:17
  *
  * Description:
  * PHP实现创建二维码类，支持设置尺寸，加入LOGO，圆角，透明度，等处理。
@@ -22,14 +22,18 @@ require_once dirname(__FILE__)."/qrcode/qrlib.php";
  * private hex2rgb              hex颜色转rgb颜色
  * private get_file_ext         获取图片类型
  */
-class PHPQRCode{ // class start
+class QRCodeGenerator{
 
-    /** 默认设定 */
+    /**
+     *  默认设定
+     *
+     * @var array
+     */
     private $_config = array(
         'ecc' => 'H',                       // 二维码质量 L-smallest, M, Q, H-best
         'size' => 15,                       // 二维码尺寸 1-50
-        'dest_file' => 'qrcode.png',        // 创建的二维码路径
-        'quality' => 100,                    // 图片质量
+        'dest_file' => 'qr_code.png',        // 创建的二维码路径
+        'quality' => 100,                   // 图片质量
         'logo' => '',                       // logo路径，为空表示没有logo
         'logo_size' => null,                // logo尺寸，null表示按二维码尺寸比例自动计算
         'logo_outline_size' => null,        // logo描边尺寸，null表示按logo尺寸按比例自动计算
@@ -40,9 +44,14 @@ class PHPQRCode{ // class start
 
     /**
      * 设定配置
-     * @param  Array   $config 配置内容
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-29 21:12:25
+     *
+     * @param array $config 配置内容
+     * @return void
      */
-    public function set_config($config){
+    public function set_config(array $config):void{
 
         // 允许设定的配置
         $config_keys = array_keys($this->_config);
@@ -58,10 +67,14 @@ class PHPQRCode{ // class start
 
     /**
      * 创建二维码
-     * @param  String $data 二维码内容
-     * @return String
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-29 21:13:06
+     *
+     * @param string $data 二维码内容
+     * @return string 二维码图片
      */
-    public function generate($data){
+    public function generate(string $data):string{
 
         // 创建临时二维码图片
         $tmp_qrcode_file = $this->create_qrcode($data);
@@ -80,10 +93,14 @@ class PHPQRCode{ // class start
 
     /**
      * 创建临时二维码图片
-     * @param  String $data 二维码内容
-     * @return String
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-29 21:13:54
+     *
+     * @param string $data 二维码内容
+     * @return string 二维码图片
      */
-    private function create_qrcode($data){
+    private function create_qrcode(string $data):string{
 
         // 临时二维码图片
         $tmp_qrcode_file = dirname(__FILE__).'/tmp_qrcode_'.time().mt_rand(100,999).'.png';
@@ -98,9 +115,14 @@ class PHPQRCode{ // class start
 
     /**
      * 合拼临时二维码图片与logo图片
-     * @param String $tmp_qrcode_file 临时二维码图片
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-29 21:15:05
+     *
+     * @param string $tmp_qrcode_file 临时二维码图片
+     * @return void
      */
-    private function add_logo($tmp_qrcode_file){
+    private function add_logo(string $tmp_qrcode_file):void{
 
         // 创建目标文件夹
         $this->create_dirs(dirname($this->_config['dest_file']));
@@ -125,7 +147,8 @@ class PHPQRCode{ // class start
                 case 1: $logo_img = imagecreatefromgif($this->_config['logo']); break;  
                 case 2: $logo_img = imagecreatefromjpeg($this->_config['logo']); break;  
                 case 3: $logo_img = imagecreatefrompng($this->_config['logo']); break;  
-                default: return '';  
+                default: 
+                    throw new \Exception('logo type not supported'); 
             }
 
             // 设定logo图片合拼尺寸，没有设定则按比例自动计算
@@ -179,10 +202,14 @@ class PHPQRCode{ // class start
 
     /**
      * 对图片对象进行描边
-     * @param  Obj   $img 图片对象
-     * @return Array
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-29 21:18:52
+     *
+     * @param GdImage $img 图片对象
+     * @return array
      */
-    private function image_outline($img){
+    private function image_outline($img):array{
 
         // 获取图片宽高
         $img_w = imagesx($img);
@@ -213,8 +240,12 @@ class PHPQRCode{ // class start
 
     /**
      * 对图片对象进行圆角处理
-     * @param  Obj $img 图片对象
-     * @return Obj
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-29 21:19:37
+     *
+     * @param GdImage $img 图片对象
+     * @return GdImage
      */
     private function image_fillet($img){
 
@@ -283,11 +314,24 @@ class PHPQRCode{ // class start
 
     }
 
-    // 合拼图片并保留各自透明度
-    private function imagecopymerge_alpha($dest_img, $src_img, $pos_x, $pos_y, $src_x, $src_y, $src_w, $src_h, $opacity){
-
-        $w = imagesx($src_img);
-        $h = imagesy($src_img);
+    /**
+     * 合拼图片并保留各自透明度
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-29 21:21:26
+     *
+     * @param GdImage $dest_img 二维码图片对象
+     * @param GdImage $src_img  logo图片对象
+     * @param int $pos_x   logo图片在画布的x坐标
+     * @param int $pos_y   logo图片在画布的y坐标
+     * @param int $src_x   logo图片的x坐标(从logo图x点开始截取)
+     * @param int $src_y   logo图片的y坐标(从logo图y点开始截取)
+     * @param int $src_w   logo图片宽度
+     * @param int $src_h   logo图片高度
+     * @param int $opacity logo透明度
+     * @return GdImage
+     */
+    private function imagecopymerge_alpha($dest_img, $src_img, int $pos_x, int $pos_y, int $src_x, int $src_y, int $src_w, int $src_h, int $opacity){
 
         $tmp_img = imagecreatetruecolor($src_w, $src_h);
 
@@ -301,24 +345,33 @@ class PHPQRCode{ // class start
 
     /**
      * 创建目录
-     * @param  String  $path
-     * @return Boolean
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-29 21:26:25
+     *
+     * @param string $path 目录
+     * @return boolean
      */
-    private function create_dirs($path){
+    private function create_dirs(string $path):bool{
 
         if(!is_dir($path)){
-            return mkdir($path, 0777, true);
+            return mkdir($path, 0777, true)? true : false;
         }
 
         return true;
 
     }
 
-    /** hex颜色转rgb颜色
-     *  @param  String $color hex颜色
-     *  @return Array
+    /**
+     * hex颜色转rgb颜色
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-29 21:26:59
+     *
+     * @param string $hexcolor hex颜色
+     * @return array
      */
-    private function hex2rgb($hexcolor){
+    private function hex2rgb(string $hexcolor):array{
         $color = str_replace('#', '', $hexcolor);
         if (strlen($color) > 3) {
             $rgb = array(
@@ -339,11 +392,16 @@ class PHPQRCode{ // class start
         return $rgb;
     }
 
-    /** 获取图片类型 
-     * @param  String $file 图片路径 
-     * @return int 
-     */  
-    private function get_file_ext($file){
+    /**
+     * 获取图片类型
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-29 21:27:25
+     *
+     * @param string $file 图片路径
+     * @return int
+     */
+    private function get_file_ext(string $file):int{
         $filename = basename($file);
         list($name, $ext)= explode('.', $filename);
 
@@ -365,5 +423,5 @@ class PHPQRCode{ // class start
         return $ext_type;
     }
 
-} // class end
+}
 ?>

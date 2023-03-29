@@ -53,13 +53,12 @@ PHP实现创建二维码类，支持设置尺寸，加入LOGO，描边，圆角�
 ## 演示
 
 ```php
-<?php
-require 'PHPQRCode.class.php';
+require 'QRCodeGenerator.php';
 
 $config = array(
         'ecc' => 'H',    // L-smallest, M, Q, H-best
         'size' => 12,    // 1-50
-        'dest_file' => 'qrcode.png',
+        'dest_file' => 'qr_code.png',
         'quality' => 90,
         'logo' => 'logo.jpg',
         'logo_size' => 100,
@@ -73,19 +72,18 @@ $config = array(
 $data = 'http://weibo.com/fdipzone';
 
 // 创建二维码类
-$oPHPQRCode = new PHPQRCode();
+$generator = new QRCodeGenerator();
 
 // 设定配置
-$oPHPQRCode->set_config($config);
+$generator->set_config($config);
 
 // 创建二维码
-$qrcode = $oPHPQRCode->generate($data);
+$qr_code = $generator->generate($data);
 
 // 显示二维码
-echo '<img src="'.$qrcode.'?t='.time().'">';
-?>
+echo '<img src="'.$qr_code.'?t='.time().'">';
 ```
 
 生成的二维码图片：
 
-![二维码](https://github.com/xfdipzone/Small-Program/blob/master/php-qrcode/qrcode.png)
+![二维码](https://github.com/xfdipzone/Small-Program/blob/master/php-qrcode/qr_code.png)
