@@ -32,7 +32,7 @@ class QRCodeGenerator{
     private $_config = array(
         'ecc' => 'H',                       // 二维码质量 L-smallest, M, Q, H-best
         'size' => 15,                       // 二维码尺寸 1-50
-        'dest_file' => 'qr_code.png',        // 创建的二维码路径
+        'dest_file' => 'qr_code.png',       // 创建的二维码路径
         'quality' => 100,                   // 图片质量
         'logo' => '',                       // logo路径，为空表示没有logo
         'logo_size' => null,                // logo尺寸，null表示按二维码尺寸比例自动计算
@@ -147,8 +147,8 @@ class QRCodeGenerator{
                 case 1: $logo_img = imagecreatefromgif($this->_config['logo']); break;  
                 case 2: $logo_img = imagecreatefromjpeg($this->_config['logo']); break;  
                 case 3: $logo_img = imagecreatefrompng($this->_config['logo']); break;  
-                default: 
-                    throw new \Exception('logo type not supported'); 
+                default:
+                    throw new \Exception('logo type not supported');
             }
 
             // 设定logo图片合拼尺寸，没有设定则按比例自动计算
