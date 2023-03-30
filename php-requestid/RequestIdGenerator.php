@@ -1,9 +1,9 @@
 <?php
 /**
- * PHP 唯一RequestID生成器类
- * Date:    2018-04-10
- * Author:  fdipzone
- * Version: 1.0
+ * php 唯一RequestID生成器类
+ *
+ * @author fdipzone
+ * @DateTime 2023-03-30 14:15:39
  *
  * Description:
  * PHP实现唯一RequestID生成类，使用session_create_id()与uniqid()方法实现，保证唯一性。
@@ -12,10 +12,14 @@
  * public  generate 生成唯一请求id
  * private format   格式化请求id
  */
-class RequestIdGenerator{ // class start
+class RequestIdGenerator{
 
     /**
      * 生成唯一请求id
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-30 14:16:12
+     *
      * @return string
      */
     public static function generate():string{
@@ -33,8 +37,12 @@ class RequestIdGenerator{ // class start
 
     /**
      * 格式化请求id
-     * @param  string $request_id 请求id
-     * @param  string  $format     格式
+     *
+     * @author fdipzone
+     * @DateTime 2023-03-30 16:41:36
+     *
+     * @param string $request_id 请求id
+     * @param string $format     格式（将长度为32的字符串拆分为多段字符串）
      * @return string
      */
     private static function format(string $request_id, string $format='8,4,4,4,12'):string{
@@ -61,5 +69,5 @@ class RequestIdGenerator{ // class start
 
     }
 
-} // class end
+}
 ?>
