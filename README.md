@@ -36,7 +36,7 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 唯一RequestID生成类](https://github.com/xfdipzone/Small-Program/tree/master/php-requestid) (php-requestid)
 
-- [php 基于redis实现bucket类](https://github.com/xfdipzone/Small-Program/tree/master/php-redis-bucket) (php-redis-bucket)
+- [php bucket类](https://github.com/xfdipzone/Small-Program/tree/master/php-bucket) (php-bucket)
 
 - [php 图片局部打马赛克](https://github.com/xfdipzone/Small-Program/tree/master/php-mosaics) (php-mosaics)
 

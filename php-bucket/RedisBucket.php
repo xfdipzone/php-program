@@ -1,9 +1,9 @@
 <?php
 /**
- * PHP基于Redis实现Bucket类
- * Date:    2019-12-01
- * Author:  fdipzone
- * Version: 1.0
+ * php 基于Redis实现Bucket类
+ *
+ * @author fdipzone
+ * @DateTime 2023-04-01 19:28:12
  *
  * Description
  * php基于Redis实现Bucket类，使用Redis的List存储类型（先入先出）作为容器存放数据。使用了共享锁及Redis事务，保证并发执行的唯一性。
@@ -19,7 +19,7 @@
  * public set_timeout       设置执行超时时间（毫秒）
  * public set_retry_time    设置重试间隔时间（毫秒）
  */
-class RedisBucket{ // class start
+class RedisBucket{
     
     // 错误码（传入参数不合法）
     const REQUEST_PARAM_INVALID = 1;
@@ -581,18 +581,18 @@ class RedisBucket{ // class start
      */
     private function connect(){
         try{
-            $redis = new Redis();
+            $redis = new \Redis();
             $redis->connect($this->_config['host'],$this->_config['port'],$this->_config['timeout'],$this->_config['reserved'],$this->_config['retry_interval']);
             if(empty($this->_config['auth'])){
                 $redis->auth($this->_config['auth']);
             }
             $redis->select($this->_config['index']);
-        }catch(RedisException $e){
+        }catch(\Throwable $e){
             throw new Exception($e->getMessage());
             return false;
         }
         return $redis;
     }
     
-} // class end
+}
 ?>

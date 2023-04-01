@@ -1,10 +1,10 @@
-# php-redis-bucket
+# php-bucket
 
-php 基于redis实现bucket类
+php 实现bucket类
 
 ## 1. 介绍
 
-php基于Redis实现Bucket类，Redis的 `List` 类型适合做先入先出的容器逻辑。因此，基于Redis List来创建`Bucket`类。使用了共享锁及Redis事务，保证并发执行的唯一性。
+php基于Redis实现Bucket类，Redis的 `List` 类型适合做先入先出的容器逻辑。因此，基于Redis List来创建 `Bucket` 类。使用了共享锁及Redis事务，保证并发执行的唯一性。
 
 ---
 
@@ -18,19 +18,19 @@ php基于Redis实现Bucket类，Redis的 `List` 类型适合做先入先出的�
 
 ### 2.2 压入数据
 
-![压入数据](https://github.com/xfdipzone/Small-Program/blob/master/php-redis-bucket/push.png)
+![压入数据](https://github.com/xfdipzone/Small-Program/blob/master/php-bucket/push.png)
 
 ---
 
 ### 2.3 弹出数据
 
-![弹出数据](https://github.com/xfdipzone/Small-Program/blob/master/php-redis-bucket/pop.png)
+![弹出数据](https://github.com/xfdipzone/Small-Program/blob/master/php-bucket/pop.png)
 
 ---
 
 ### 2.4 调整容器最大容量
 
-![调整最大容量](https://github.com/xfdipzone/Small-Program/blob/master/php-redis-bucket/setmax.png)
+![调整最大容量](https://github.com/xfdipzone/Small-Program/blob/master/php-bucket/setmax.png)
 
 ---
 
@@ -65,7 +65,7 @@ $config = array(
     'retry_interval' => 100,
 );
 
-$bucket = 'mybucket';
+$bucket = 'my-bucket';
 
 $oRedisBucket = new RedisBucket($config, $bucket);
 ```
@@ -315,7 +315,7 @@ bool(true)
 
 ```php
 <?php
-Require 'RedisBucket.class.php';
+Require 'RedisBucket.php';
 
 // redis连接设定
 $config = array(

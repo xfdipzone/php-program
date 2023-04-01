@@ -16,7 +16,7 @@ interface IGenerator{
      * @author fdipzone
      * @DateTime 2023-03-22 22:03:22
      *
-     * @param array $config
+     * @param array $config 生成器配置
      * @return void
      */
     public function __construct(array $config);

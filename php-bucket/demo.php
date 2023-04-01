@@ -1,5 +1,5 @@
 <?php
-Require 'RedisBucket.class.php';
+Require 'RedisBucket.php';
 
 // redis连接设定
 $config = array(
@@ -13,7 +13,7 @@ $config = array(
 );
 
 // 定义bucket名称
-$bucket = 'mybucket';
+$bucket = 'my-bucket';
 
 // 创建bucket对象
 $oRedisBucket = new RedisBucket($config, $bucket);
