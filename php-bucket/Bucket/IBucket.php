@@ -27,9 +27,9 @@ interface IBucket{
      * @author fdipzone
      * @DateTime 2023-04-01 19:33:49
      *
-     * @return boolean
+     * @return void
      */
-    public function init():bool;
+    public function init():void;
 
     /**
      * Undocumented function

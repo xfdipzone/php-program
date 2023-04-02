@@ -101,7 +101,6 @@ class RedisCounter{
             $redis->select($this->_config['index']);
         }catch(\Throwable $e){
             throw new \Exception($e->getMessage());
-            return false;
         }
         return $redis;
     }
