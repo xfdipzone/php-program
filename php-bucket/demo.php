@@ -1,5 +1,5 @@
 <?php
-Require 'RedisBucket.php';
+require 'autoload.php';
 
 // redis连接设定
 $config = array(
@@ -15,72 +15,76 @@ $config = array(
 // 定义bucket名称
 $bucket = 'my-bucket';
 
-// 创建bucket对象
-$oRedisBucket = new RedisBucket($config, $bucket);
+// 创建bucket配置对象
+$redisBucketConfig = new \Bucket\RedisBucketConfig;
+$redisBucketConfig->setConfig($config);
+$redisBucketConfig->setName($bucket);
+
+// 创建bucket组件对象
+$redisBucket = \Bucket\BucketFactory::make(\Bucket\Type::REDIS, $redisBucketConfig);
 
 // 初始化
-$oRedisBucket->init();
+$redisBucket->init();
 
 // 设置最大容量
-$oRedisBucket->set_max_size(3);
+$redisBucket->setMaxSize(3);
 
 // 设置锁超时时间
-$oRedisBucket->set_lock_timeout(300);
+$redisBucket->setLockTimeout(300);
 
 // 设置执行超时时间
-$oRedisBucket->set_timeout(2000);
+$redisBucket->setTimeout(2000);
 
 // 设置重试间隔时间
-$oRedisBucket->set_retry_time(10);
+$redisBucket->setRetryTime(10);
 
 // 压入3条数据
-$result = $oRedisBucket->push('a');
-print_r($result);
+$response = $redisBucket->push('a');
+print_r($response);
 
-$result = $oRedisBucket->push('b');
-print_r($result);
+$response = $redisBucket->push('b');
+print_r($response);
 
-$result = $oRedisBucket->push('c');
-print_r($result);
+$response = $redisBucket->push('c');
+print_r($response);
 
 // 查看已使用容量及最大容量
-var_dump(assert($oRedisBucket->get_used_size()==3));
-var_dump(assert($oRedisBucket->get_max_size()==3));
+var_dump(assert($redisBucket->usedSize()==3));
+var_dump(assert($redisBucket->maxSize()==3));
 
 // 压入1条数据，不强制弹出，容器已满
-$result = $oRedisBucket->push('d');
-print_r($result);
+$response = $redisBucket->push('d');
+print_r($response);
 
 // 压入1条数据，强制弹出
-$result = $oRedisBucket->push('d', 1);
-print_r($result);
+$response = $redisBucket->push('d', 1);
+print_r($response);
 
 // 设置最大容量为5，比已用容量大，不用弹出数据
-$result = $oRedisBucket->set_max_size(5);
-print_r($result);
+$response = $redisBucket->setMaxSize(5);
+print_r($response);
 
 // 压入2条数据
-$oRedisBucket->push('e');
-$oRedisBucket->push('f');
+$redisBucket->push('e');
+$redisBucket->push('f');
 
 // 查看已使用容量及最大容量
-var_dump(assert($oRedisBucket->get_used_size()==5));
-var_dump(assert($oRedisBucket->get_max_size()==5));
+var_dump(assert($redisBucket->usedSize()==5));
+var_dump(assert($redisBucket->maxSize()==5));
 
 // 弹出3条数据
-$result = $oRedisBucket->pop(3);
-print_r($result);
+$response = $redisBucket->pop(3);
+print_r($response);
 
 // 查看已使用容量及最大容量
-var_dump(assert($oRedisBucket->get_used_size()==2));
-var_dump(assert($oRedisBucket->get_max_size()==5));
+var_dump(assert($redisBucket->usedSize()==2));
+var_dump(assert($redisBucket->maxSize()==5));
 
 // 设置最大容量为1，比已用容量小，弹出数据
-$result = $oRedisBucket->set_max_size(1);
-print_r($result);
+$response = $redisBucket->setMaxSize(1);
+print_r($response);
 
 // 查看已使用容量及最大容量
-var_dump(assert($oRedisBucket->get_used_size()==1));
-var_dump(assert($oRedisBucket->get_max_size()==1));
-
+var_dump(assert($redisBucket->usedSize()==1));
+var_dump(assert($redisBucket->maxSize()==1));
 ?>

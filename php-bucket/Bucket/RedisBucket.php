@@ -96,22 +96,21 @@ class RedisBucket implements IBucket
     private $_retry_time = 25;
 
     /**
-     *  构造方法，检查参数是否正确
+     * 构造方法，检查参数是否正确
      *
      * @author fdipzone
-     * @DateTime 2023-04-02 19:15:58
+     * @DateTime 2023-04-03 23:56:49
      *
-     * @param array $config redis连接设定
-     * @param string $bucket bucket名称
+     * @param IBucketConfig $config Redis Bucket组件配置
      */
-    public function __construct(array $config, string $bucket)
+    public function __construct(IBucketConfig $config)
     {
-        $this->_config = $config;
+        $this->_config = $config->config();
         $this->_conn = $this->connect();
-        $this->_bucket = $bucket;
-        $this->_bucket_max_size = $bucket . ':max';
-        $this->_bucket_used_size = $bucket . ':used';
-        $this->_bucket_lock = $bucket . ':lock';
+        $this->_bucket = $config->name();
+        $this->_bucket_max_size = $this->_bucket . ':max';
+        $this->_bucket_used_size = $this->_bucket . ':used';
+        $this->_bucket_lock = $this->_bucket . ':lock';
 
         // 检查连接
         if (!method_exists($this->_conn, 'ping')) {
@@ -123,7 +122,7 @@ class RedisBucket implements IBucket
         }
 
         // 检查bucket
-        if (!is_string($bucket) || $bucket == '') {
+        if (!is_string($this->_bucket) || $this->_bucket == '') {
             throw new \Exception('bucket error or empty');
         }
     }

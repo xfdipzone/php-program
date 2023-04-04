@@ -41,15 +41,14 @@ php基于Redis实现Bucket类，Redis的 `List` 类型适合做先入先出的�
 构造函数
 
 ```php
-public function __construct($config, $bucket)
+public function __construct(IBucketConfig $config)
 ```
 
 参数说明
 
 参数 | 说明
 --|--
-config | redis连接设置
-bucket | bucket名称（唯一）
+config | Redis Bucket组件配置
 
 调用例子
 
@@ -65,9 +64,16 @@ $config = array(
     'retry_interval' => 100,
 );
 
+// 定义bucket名称
 $bucket = 'my-bucket';
 
-$oRedisBucket = new RedisBucket($config, $bucket);
+// 创建bucket配置对象
+$redisBucketConfig = new \Bucket\RedisBucketConfig;
+$redisBucketConfig->setConfig($config);
+$redisBucketConfig->setName($bucket);
+
+// 创建bucket组件对象
+$redisBucket = \Bucket\BucketFactory::make(\Bucket\Type::REDIS, $redisBucketConfig);
 ```
 
 ---
@@ -77,7 +83,7 @@ $oRedisBucket = new RedisBucket($config, $bucket);
 方法
 
 ```php
-public function init()
+public function init(): void
 ```
 
 将队列清空，最大容量，已用容量为0
@@ -89,7 +95,7 @@ public function init()
 方法
 
 ```php
-public function push($data, $is_force_pop=0)
+public function push(string $data, int $is_force_pop = 0): Response
 ```
 
 请求参数
@@ -102,10 +108,10 @@ is_force_pop | 是否强制弹出数据（已满的情况），默认不弹出
 返回格式
 
 ```php
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
             [used_size] => 1
             [force_pop_data] => Array
@@ -120,10 +126,10 @@ Array
 返回格式`（强制弹出）`
 
 ```php
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
             [used_size] => 3
             [force_pop_data] => Array
@@ -143,7 +149,7 @@ Array
 方法
 
 ```php
-public function pop($num=1)
+public function pop(int $num = 1): Response
 ```
 
 请求参数
@@ -155,10 +161,10 @@ num | 弹出数据数量
 返回格式
 
 ```php
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
             [0] => b
             [1] => c
@@ -175,7 +181,7 @@ Array
 方法
 
 ```php
-public function set_max_size($size)
+public function setMaxSize(int $size): Response
 ```
 
 请求参数
@@ -187,10 +193,10 @@ size | 最大容量
 返回格式
 
 ```php
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
         )
 
@@ -200,10 +206,10 @@ Array
 返回格式`（强制弹出）`
 
 ```php
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
             [0] => e
         )
@@ -218,7 +224,7 @@ Array
 方法
 
 ```php
-public function get_max_size()
+public function maxSize(): int
 ```
 
 返回格式
@@ -234,7 +240,7 @@ public function get_max_size()
 方法
 
 ```php
-public function get_used_size()
+public function usedSize(): int
 ```
 
 返回格式
@@ -250,7 +256,7 @@ public function get_used_size()
 方法
 
 ```php
-public function set_lock_timeout($lock_timeout)
+public function setLockTimeout(int $lock_timeout): void
 ```
 
 请求参数
@@ -272,7 +278,7 @@ bool(true)
 方法
 
 ```php
-public function set_timeout($timeout)
+public function setTimeout(int $timeout): void
 ```
 
 请求参数
@@ -294,7 +300,7 @@ bool(true)
 方法
 
 ```php
-public function set_retry_time($time)
+public function setRetryTime(int $time): void
 ```
 
 请求参数
@@ -314,8 +320,7 @@ bool(true)
 ## 4. 演示及测试
 
 ```php
-<?php
-Require 'RedisBucket.php';
+require 'autoload.php';
 
 // redis连接设定
 $config = array(
@@ -328,83 +333,90 @@ $config = array(
     'retry_interval' => 100,
 );
 
-// 创建bucket对象
-$oRedisBucket = new RedisBucket($config, 'bucket');
+// 定义bucket名称
+$bucket = 'my-bucket';
+
+// 创建bucket配置对象
+$redisBucketConfig = new \Bucket\RedisBucketConfig;
+$redisBucketConfig->setConfig($config);
+$redisBucketConfig->setName($bucket);
+
+// 创建bucket组件对象
+$redisBucket = \Bucket\BucketFactory::make(\Bucket\Type::REDIS, $redisBucketConfig);
 
 // 初始化
-$oRedisBucket->init();
+$redisBucket->init();
 
 // 设置最大容量
-$oRedisBucket->set_max_size(3);
+$redisBucket->setMaxSize(3);
 
 // 设置锁超时时间
-$oRedisBucket->set_lock_timeout(300);
+$redisBucket->setLockTimeout(300);
 
 // 设置执行超时时间
-$oRedisBucket->set_timeout(2000);
+$redisBucket->setTimeout(2000);
 
 // 设置重试间隔时间
-$oRedisBucket->set_retry_time(10);
+$redisBucket->setRetryTime(10);
 
 // 压入3条数据
-$result = $oRedisBucket->push('a');
-print_r($result);
+$response = $redisBucket->push('a');
+print_r($response);
 
-$result = $oRedisBucket->push('b');
-print_r($result);
+$response = $redisBucket->push('b');
+print_r($response);
 
-$result = $oRedisBucket->push('c');
-print_r($result);
+$response = $redisBucket->push('c');
+print_r($response);
 
 // 查看已使用容量及最大容量
-var_dump(assert($oRedisBucket->get_used_size()==3));
-var_dump(assert($oRedisBucket->get_max_size()==3));
+var_dump(assert($redisBucket->usedSize()==3));
+var_dump(assert($redisBucket->maxSize()==3));
 
 // 压入1条数据，不强制弹出，容器已满
-$result = $oRedisBucket->push('d');
-print_r($result);
+$response = $redisBucket->push('d');
+print_r($response);
 
 // 压入1条数据，强制弹出
-$result = $oRedisBucket->push('d', 1);
-print_r($result);
+$response = $redisBucket->push('d', 1);
+print_r($response);
 
 // 设置最大容量为5，比已用容量大，不用弹出数据
-$result = $oRedisBucket->set_max_size(5);
-print_r($result);
+$response = $redisBucket->setMaxSize(5);
+print_r($response);
 
 // 压入2条数据
-$oRedisBucket->push('e');
-$oRedisBucket->push('f');
+$redisBucket->push('e');
+$redisBucket->push('f');
 
 // 查看已使用容量及最大容量
-var_dump(assert($oRedisBucket->get_used_size()==5));
-var_dump(assert($oRedisBucket->get_max_size()==5));
+var_dump(assert($redisBucket->usedSize()==5));
+var_dump(assert($redisBucket->maxSize()==5));
 
 // 弹出3条数据
-$result = $oRedisBucket->pop(3);
-print_r($result);
+$response = $redisBucket->pop(3);
+print_r($response);
 
 // 查看已使用容量及最大容量
-var_dump(assert($oRedisBucket->get_used_size()==2));
-var_dump(assert($oRedisBucket->get_max_size()==5));
+var_dump(assert($redisBucket->usedSize()==2));
+var_dump(assert($redisBucket->maxSize()==5));
 
 // 设置最大容量为1，比已用容量小，弹出数据
-$result = $oRedisBucket->set_max_size(1);
-print_r($result);
+$response = $redisBucket->setMaxSize(1);
+print_r($response);
 
 // 查看已使用容量及最大容量
-var_dump(assert($oRedisBucket->get_used_size()==1));
-var_dump(assert($oRedisBucket->get_max_size()==1));
-?>
+var_dump(assert($redisBucket->usedSize()==1));
+var_dump(assert($redisBucket->maxSize()==1));
 ```
 
 输出
 
 ```text
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
             [used_size] => 1
             [force_pop_data] => Array
@@ -414,10 +426,10 @@ Array
         )
 
 )
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
             [used_size] => 2
             [force_pop_data] => Array
@@ -427,10 +439,10 @@ Array
         )
 
 )
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
             [used_size] => 3
             [force_pop_data] => Array
@@ -442,18 +454,18 @@ Array
 )
 bool(true)
 bool(true)
-Array
+Bucket\Response Object
 (
-    [error] => 1
-    [data] => Array
+    [error:Bucket\Response:private] => 1
+    [data:Bucket\Response:private] => Array
         (
         )
 
 )
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
             [used_size] => 3
             [force_pop_data] => Array
@@ -464,20 +476,20 @@ Array
         )
 
 )
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
         )
 
 )
 bool(true)
 bool(true)
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
             [0] => b
             [1] => c
@@ -487,10 +499,10 @@ Array
 )
 bool(true)
 bool(true)
-Array
+Bucket\Response Object
 (
-    [error] => 0
-    [data] => Array
+    [error:Bucket\Response:private] => 0
+    [data:Bucket\Response:private] => Array
         (
             [0] => e
         )

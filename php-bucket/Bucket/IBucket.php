@@ -16,10 +16,9 @@ interface IBucket{
      * @author fdipzone
      * @DateTime 2023-04-01 19:23:07
      *
-     * @param array $config bucket类配置
-     * @param string $bucket bucket名称
+     * @param IBucketConfig $config bucket组件配置
      */
-    public function __construct(array $config, string $bucket);
+    public function __construct(IBucketConfig $config);
 
     /**
      * 初始化bucket数据，重置数据为0，清空bucket数据

@@ -17,10 +17,10 @@ class BucketFactory{
      * @DateTime 2023-04-01 19:21:32
      *
      * @param string $type bucket类型
-     * @param array $config bucket类初始化配置
+     * @param IBucketConfig $config bucket组件配置
      * @return IBucket
      */
-    public static function make(string $type, array $config):IBucket{
+    public static function make(string $type, IBucketConfig $config):IBucket{
         try{
             $class = self::getBucketClass($type);
             return new $class($config);
