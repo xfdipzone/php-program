@@ -9,7 +9,7 @@
  * 原理：
  * 对图片中选定区域的每一像素，增加若干宽度及高度，生成矩型。而每一像素的矩型重叠在一起，就形成了马赛克效果。
  * 本方法使用GD库的imagecolorat获取像素颜色，使用imagefilledrectangle画矩型。
- * 
+ *
  * Func
  * create 将原图局部打马赛克，生成效果图
  * validateConfig 检查配置
