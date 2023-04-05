@@ -183,6 +183,8 @@ class QRCodeGenerator{
                 case 1: imagegif($dest_img, $this->_config['dest_file'], $this->_config['quality']); break;
                 case 2: imagejpeg($dest_img, $this->_config['dest_file'], $this->_config['quality']); break;
                 case 3: imagepng($dest_img, $this->_config['dest_file'], (int)(($this->_config['quality']-1)/10)); break;
+                default:
+                    throw new \Exception('dest type not supported');
             } 
 
         // 不需要加入logo
@@ -195,6 +197,8 @@ class QRCodeGenerator{
                 case 1: imagegif($dest_img, $this->_config['dest_file'], $this->_config['quality']); break;
                 case 2: imagejpeg($dest_img, $this->_config['dest_file'], $this->_config['quality']); break;
                 case 3: imagepng($dest_img, $this->_config['dest_file'], (int)(($this->_config['quality']-1)/10)); break;
+                default:
+                    throw new \Exception('dest type not supported');
             }
         }
 
