@@ -28,7 +28,7 @@ HTML实体符号被用作实现保留字符（reserved characters）或者表达
 
 ```PHP
 $str = '<p>破晓领域</p>';
-echo HtmlEntitie::encode($str);
+echo HtmlEntityConverter::encode($str);
 ```
 
 输出:
@@ -41,7 +41,7 @@ HTML实体编号转为字符串
 
 ```PHP
 $str = '<p>&#30772;&#26195;&#39046;&#22495;</p>';
-echo HtmlEntitie::decode($str);
+echo HtmlEntityConverter::decode($str);
 ```
 
 输出：
