@@ -7,7 +7,7 @@ namespace Bucket;
  * @author fdipzone
  * @DateTime 2023-04-01 19:28:12
  *
- * Description
+ * Description:
  * php基于Redis实现Bucket类，使用Redis的List存储类型（先入先出）作为容器存放数据。使用了共享锁及Redis事务，保证并发执行的唯一性。
  *
  * Func:

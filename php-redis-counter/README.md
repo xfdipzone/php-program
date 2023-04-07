@@ -23,7 +23,7 @@ php基于Redis实现自增计数，主要使用redis的incr方法，并发执行
 ## 演示
 
 ```php
-Require 'RedisCounter.php';
+require 'RedisCounter.php';
 
 // redis连接设定
 $config = array(

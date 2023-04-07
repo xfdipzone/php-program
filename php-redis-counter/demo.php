@@ -1,5 +1,5 @@
 <?php
-Require 'RedisCounter.php';
+require 'RedisCounter.php';
 
 // redis连接设定
 $config = array(
