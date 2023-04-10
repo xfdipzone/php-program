@@ -8,7 +8,7 @@
  * @param string $class
  * @return void
  */
-function class_autoloader($class):void{
+function class_auto_loader($class):void{
     $class = trim($class, '\\');
     $class_file = '';
 
@@ -22,4 +22,4 @@ function class_autoloader($class):void{
         include_once $class_file;
     }
 }
-spl_autoload_register('class_autoloader', true, true);
+spl_autoload_register('class_auto_loader', true, true);
