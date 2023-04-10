@@ -43,3 +43,5 @@ php开发的程序，类库，小工具，不定期更新。
 - [php Html实体编号与非ASCII字符串相互转换类](https://github.com/xfdipzone/Small-Program/tree/master/php-htmlentitie) (php-htmlentitie)
 
 - [php 高亮输出数据类](https://github.com/xfdipzone/Small-Program/tree/master/php-cli-highlight) (php-cli-highlight)
+
+- [php 缩略图生成类](https://github.com/xfdipzone/Small-Program/tree/master/php-thumbnail) (php-thumbnail)
