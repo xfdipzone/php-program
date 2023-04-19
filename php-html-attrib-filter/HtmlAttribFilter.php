@@ -2,7 +2,7 @@
 /**
  * php html标记属性过滤器
  *
- * @author terry
+ * @author fdipzone
  * @DateTime 2023-04-19 21:34:44
  *
  * Description:
@@ -56,7 +56,7 @@ class HtmlAttribFilter{
     /**
      * 处理HTML,过滤不保留的属性
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2023-04-19 21:38:41
      *
      * @param string $str
@@ -83,7 +83,7 @@ class HtmlAttribFilter{
     /**
      * 设置允许的属性
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2023-04-19 21:43:23
      *
      * @param array $param 允许的属性
@@ -99,7 +99,7 @@ class HtmlAttribFilter{
     /**
      * 设置特例标记属性
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2023-04-19 21:46:15
      *
      * @param array $param 特例标记属性
@@ -115,7 +115,7 @@ class HtmlAttribFilter{
     /**
      * 设置忽略的标记
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2023-04-19 21:47:46
      *
      * @param array $param 忽略的标记
@@ -131,7 +131,7 @@ class HtmlAttribFilter{
     /**
      * 遍历需要处理的元素
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2023-04-19 21:48:28
      *
      * @return array
@@ -160,7 +160,7 @@ class HtmlAttribFilter{
     /**
      * 搜索需要处理的属性
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2023-04-19 21:49:02
      *
      * @param array $nodes 需要处理的元素
@@ -188,7 +188,7 @@ class HtmlAttribFilter{
     /**
      * 移除属性
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2023-04-19 21:54:02
      *
      * @param array $nodes 需要处理的元素
@@ -213,7 +213,7 @@ class HtmlAttribFilter{
     /**
      * 判断是否特例
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2023-04-19 21:56:04
      *
      * @param string $element_name   元素名称
@@ -232,7 +232,7 @@ class HtmlAttribFilter{
     /**
      * 根据设置重新创建标记属性
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2023-04-19 22:04:23
      *
      * @param string $name  属性名称
@@ -246,7 +246,7 @@ class HtmlAttribFilter{
     /**
      * 特殊字符转义
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2023-04-19 22:01:00
      *
      * @param string $str
