@@ -17,12 +17,13 @@ class Factory{
      * @DateTime 2023-04-10 21:42:24
      *
      * @param string $type   缩略图组件类型
+     * @param Config $config 缩略图配置
      * @return IThumbnail
      */
-    public static function make(string $type):IThumbnail{
+    public static function make(string $type, Config $config):IThumbnail{
         try{
             $class = self::getThumbnailClass($type);
-            return new $class;
+            return new $class($config);
         }catch(\Throwable $e){
             throw new \Exception($e->getMessage());
         }

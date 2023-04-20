@@ -2,13 +2,20 @@
 namespace Thumbnail;
 
 /**
- * 缩略图组件接口
+ * 使用ImageMagick实现缩略图生成
  *
  * @author fdipzone
- * @DateTime 2023-04-10 21:49:16
+ * @DateTime 2023-04-20 16:01:41
  *
  */
-interface IThumbnail{
+class ImageMagick implements IThumbnail{
+
+    /**
+     * 缩略图配置
+     *
+     * @var Config
+     */
+    private $config;
 
     /**
      * 初始化
@@ -18,7 +25,9 @@ interface IThumbnail{
      *
      * @param Config $config 缩略图配置
      */
-    public function __construct(Config $config);
+    public function __construct(Config $config){
+        $this->config = $config;
+    }
 
     /**
      * 创建缩略图
@@ -30,6 +39,9 @@ interface IThumbnail{
      * @param string $thumb  缩略图文件
      * @return Response
      */
-    public function create(string $source, string $thumb):Response;
+    public function create(string $source, string $thumb):Response{
+        $response = new Response;
+        return $response;
+    }
 
 }

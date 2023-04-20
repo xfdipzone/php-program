@@ -13,12 +13,12 @@ class Type{
     // 基于imagemagick
     const IMAGEMAGICK = 'imagemagick';
 
-    // 基于gd库
+    // 基于GD库
     const GD = 'gd';
 
     // 类型与实现类对应关系
     public static $lookup = [
-        self::IMAGEMAGICK => 'Thumbnail\\Imagemagick',
+        self::IMAGEMAGICK => 'Thumbnail\\ImageMagick',
         self::GD => 'Thumbnail\\GD'
     ];
 
