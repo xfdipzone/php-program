@@ -5,7 +5,8 @@ require 'autoload.php';
 $source = dirname(__FILE__).'/source.jpg';
 
 // 缩略图配置
-$config = new \Thumbnail\Config;
+$config = new \Thumbnail\Config(100, 100);
+$config->setThumbAdapterType(\Thumbnail\Config\ThumbAdapterType::FIT);
 
 // 缩略图处理类(ImageMagick)
 $imagemagick_handler = \Thumbnail\Factory::make(\Thumbnail\Type::IMAGEMAGICK, $config);
