@@ -43,7 +43,7 @@ class Factory{
         if(isset(TYPE::$lookup[$type])){
             return TYPE::$lookup[$type];
         }else{
-            throw new \Exception(sprintf('%s type handler class not exists', $type));
+            throw new \Exception(sprintf('%s type handler not exists', $type));
         }
     }
 
