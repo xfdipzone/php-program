@@ -26,6 +26,12 @@ class ImageMagick implements IThumbnail{
      * @param Config $config 缩略图配置
      */
     public function __construct(Config $config){
+
+        // 检查ImageMagick是否已安装
+        if(!ImageUtil::checkImageHandlerInstalled(Type::IMAGEMAGICK)){
+            throw new \Exception('ImageMagick not installed');
+        }
+
         $this->config = $config;
     }
 
