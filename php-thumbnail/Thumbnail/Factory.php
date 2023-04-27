@@ -16,7 +16,7 @@ class Factory{
      * @author fdipzone
      * @DateTime 2023-04-10 21:42:24
      *
-     * @param string $type   缩略图组件类型
+     * @param string $type   缩略图组件类型，在 Type 中定义
      * @param Config $config 缩略图配置
      * @return IThumbnail
      */
