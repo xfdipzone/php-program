@@ -104,7 +104,7 @@ class Config{
      * @author fdipzone
      * @DateTime 2023-04-21 23:10:34
      *
-     * @param string $type 缩略图适配类型 在 Config\ThumbAdapterType 中定义
+     * @param string $thumb_adapter_type 缩略图适配类型 在 Config\ThumbAdapterType 中定义
      * @return void
      */
     public function setThumbAdapterType(string $thumb_adapter_type):void{

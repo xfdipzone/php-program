@@ -192,6 +192,123 @@ class ImageUtil{
     }
 
     /**
+     * 计算缩略图尺寸
+     *
+     * @author fdipzone
+     * @DateTime 2023-05-12 21:58:00
+     *
+     * @param string $source 源图片文件
+     * @param string $thumb_adapter_type 缩略图适配类型 在 Config\ThumbAdapterType 中定义
+     * @param int $width 区域宽度
+     * @param int $height 区域高度
+     * @return array thumb_width,thumb_height
+     */
+    public static function thumbSize(string $source, string $thumb_adapter_type, int $width, int $height):array{
+        // 获取原图尺寸
+        list($o_width, $o_height) = getimagesize($source);
+
+        // 检查缩略图适配类型
+        if(!Config\ThumbAdapterType::valid($thumb_adapter_type)){
+            throw new \Exception('thumb adapter type error');
+        }
+
+        // 计算缩略图尺寸
+        switch($thumb_adapter_type){
+            // fit
+            case Config\ThumbAdapterType::FIT:
+                $thumb_width = $width;
+                $thumb_height = (int)($thumb_width*$o_height/$o_width);
+                if($thumb_height>$height){
+                    $thumb_height = $height;
+                    $thumb_width = (int)($thumb_height*$o_width/$o_height);
+                }
+                break;
+
+            // crop
+            case Config\ThumbAdapterType::CROP:
+                $thumb_width = $width;
+                $thumb_height = (int)($thumb_width*$o_height/$o_width);
+                if($thumb_height<$height){
+                    $thumb_height = $height;
+                    $thumb_width = (int)($thumb_height*$o_width/$o_height);
+                }
+                break;
+        }
+
+        return array($thumb_width, $thumb_height);
+    }
+
+    /**
+     * 计算裁剪偏移量
+     *
+     * @author fdipzone
+     * @DateTime 2023-05-12 22:19:53
+     *
+     * @param string $crop_position 裁剪位置 在 Config\CropPosition 中定义
+     * @param int $p_width 图片宽度
+     * @param int $p_height 图片高度
+     * @param int $width 区域宽度
+     * @param int $height 区域高度
+     * @return array offset_w offset_h
+     */
+    public static function cropOffset(string $crop_position, int $p_width, int $p_height, int $width, int $height):array{
+        // 检查裁剪位置
+        if(!Config\CropPosition::valid($crop_position)){
+            throw new \Exception('crop position error');
+        }
+
+        // 计算裁剪偏移量
+        switch($crop_position){
+            case Config\CropPosition::TL:
+                $offset_w = 0;
+                $offset_h = 0;
+                break;
+
+            case Config\CropPosition::TM:
+                $offset_w = (int)(($p_width-$width)/2);
+                $offset_h = 0;
+                break;
+
+            case Config\CropPosition::TR:
+                $offset_w = (int)($p_width-$width);
+                $offset_h = 0;
+                break;
+
+            case Config\CropPosition::ML:
+                $offset_w = 0;
+                $offset_h = (int)(($p_height-$height)/2);
+                break;
+
+            case Config\CropPosition::MM:
+                $offset_w = (int)(($p_width-$width)/2);
+                $offset_h = (int)(($p_height-$height)/2);
+                break;
+
+            case Config\CropPosition::MR:
+                $offset_w = (int)($p_width-$width);
+                $offset_h = (int)(($p_height-$height)/2);
+                break;
+
+            case Config\CropPosition::BL:
+                $offset_w = 0;
+                $offset_h = (int)($p_height-$height);
+                break;
+
+            case Config\CropPosition::BM:
+                $offset_w = (int)(($p_width-$width)/2);
+                $offset_h = (int)($p_height-$height);
+                break;
+
+            case Config\CropPosition::BR:
+                $offset_w = (int)($p_width-$width);
+                $offset_h = (int)($p_height-$height);
+                break;
+        }
+
+        return array($offset_w, $offset_h);
+    }
+
+    /**
      * 记录调试日志
      *
      * @author fdipzone
