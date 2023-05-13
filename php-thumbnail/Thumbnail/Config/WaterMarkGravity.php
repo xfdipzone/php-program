@@ -43,11 +43,11 @@ class WaterMarkGravity{
      * @author fdipzone
      * @DateTime 2023-04-20 22:03:52
      *
-     * @param string $gravity 水印摆放位置
+     * @param string $watermark_gravity 水印摆放位置
      * @return boolean
      */
-    public static function valid(string $gravity):bool{
-        switch($gravity){
+    public static function valid(string $watermark_gravity):bool{
+        switch($watermark_gravity){
             case self::NORTHWEST:
             case self::NORTH:
             case self::NORTHEAST:

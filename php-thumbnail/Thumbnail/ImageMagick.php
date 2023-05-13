@@ -18,6 +18,20 @@ class ImageMagick implements IThumbnail{
     private $config;
 
     /**
+     * 源图片文件
+     *
+     * @var string
+     */
+    private $source = '';
+
+    /**
+     * 缩略图文件
+     *
+     * @var string
+     */
+    private $thumb = '';
+
+    /**
      * 初始化
      *
      * @author fdipzone
@@ -28,7 +42,7 @@ class ImageMagick implements IThumbnail{
     public function __construct(Config $config){
 
         // 检查ImageMagick是否已安装
-        if(!ImageUtil::checkImageHandlerInstalled(Type::IMAGEMAGICK)){
+        if(!\Thumbnail\Utils\ImageUtil::checkImageHandlerInstalled(Type::IMAGEMAGICK)){
             throw new \Exception('ImageMagick not installed');
         }
 

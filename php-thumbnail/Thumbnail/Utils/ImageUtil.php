@@ -1,5 +1,5 @@
 <?php
-namespace Thumbnail;
+namespace Thumbnail\Utils;
 
 /**
  * 创建缩略图相关通用方法集合
@@ -36,16 +36,16 @@ class ImageUtil{
      * @author fdipzone
      * @DateTime 2023-04-23 16:12:51
      *
-     * @param string $image_handler_type 图片处理器类型 在 Type 中定义
+     * @param string $image_handler_type 图片处理器类型 在 \Thumbnail\Type 中定义
      * @return boolean
      */
     public static function checkImageHandlerInstalled(string $image_handler_type):bool{
         switch($image_handler_type){
-            case Type::IMAGEMAGICK:
+            case \Thumbnail\Type::IMAGEMAGICK:
                 // 检查是否已安装ImageMagick
                 return strstr(shell_exec('convert -version'),'Version: ImageMagick')!=''? true : false;
                 break;
-            case Type::GD:
+            case \Thumbnail\Type::GD:
                 // 检查是否已安装GD库
                 return function_exists('gd_info')? true : false;
                 break;
@@ -192,123 +192,6 @@ class ImageUtil{
     }
 
     /**
-     * 计算缩略图尺寸
-     *
-     * @author fdipzone
-     * @DateTime 2023-05-12 21:58:00
-     *
-     * @param string $source 源图片文件
-     * @param string $thumb_adapter_type 缩略图适配类型 在 Config\ThumbAdapterType 中定义
-     * @param int $width 区域宽度
-     * @param int $height 区域高度
-     * @return array thumb_width,thumb_height
-     */
-    public static function thumbSize(string $source, string $thumb_adapter_type, int $width, int $height):array{
-        // 获取原图尺寸
-        list($o_width, $o_height) = getimagesize($source);
-
-        // 检查缩略图适配类型
-        if(!Config\ThumbAdapterType::valid($thumb_adapter_type)){
-            throw new \Exception('thumb adapter type error');
-        }
-
-        // 计算缩略图尺寸
-        switch($thumb_adapter_type){
-            // fit
-            case Config\ThumbAdapterType::FIT:
-                $thumb_width = $width;
-                $thumb_height = (int)($thumb_width*$o_height/$o_width);
-                if($thumb_height>$height){
-                    $thumb_height = $height;
-                    $thumb_width = (int)($thumb_height*$o_width/$o_height);
-                }
-                break;
-
-            // crop
-            case Config\ThumbAdapterType::CROP:
-                $thumb_width = $width;
-                $thumb_height = (int)($thumb_width*$o_height/$o_width);
-                if($thumb_height<$height){
-                    $thumb_height = $height;
-                    $thumb_width = (int)($thumb_height*$o_width/$o_height);
-                }
-                break;
-        }
-
-        return array($thumb_width, $thumb_height);
-    }
-
-    /**
-     * 计算裁剪偏移量
-     *
-     * @author fdipzone
-     * @DateTime 2023-05-12 22:19:53
-     *
-     * @param string $crop_position 裁剪位置 在 Config\CropPosition 中定义
-     * @param int $p_width 图片宽度
-     * @param int $p_height 图片高度
-     * @param int $width 区域宽度
-     * @param int $height 区域高度
-     * @return array offset_w offset_h
-     */
-    public static function cropOffset(string $crop_position, int $p_width, int $p_height, int $width, int $height):array{
-        // 检查裁剪位置
-        if(!Config\CropPosition::valid($crop_position)){
-            throw new \Exception('crop position error');
-        }
-
-        // 计算裁剪偏移量
-        switch($crop_position){
-            case Config\CropPosition::TL:
-                $offset_w = 0;
-                $offset_h = 0;
-                break;
-
-            case Config\CropPosition::TM:
-                $offset_w = (int)(($p_width-$width)/2);
-                $offset_h = 0;
-                break;
-
-            case Config\CropPosition::TR:
-                $offset_w = (int)($p_width-$width);
-                $offset_h = 0;
-                break;
-
-            case Config\CropPosition::ML:
-                $offset_w = 0;
-                $offset_h = (int)(($p_height-$height)/2);
-                break;
-
-            case Config\CropPosition::MM:
-                $offset_w = (int)(($p_width-$width)/2);
-                $offset_h = (int)(($p_height-$height)/2);
-                break;
-
-            case Config\CropPosition::MR:
-                $offset_w = (int)($p_width-$width);
-                $offset_h = (int)(($p_height-$height)/2);
-                break;
-
-            case Config\CropPosition::BL:
-                $offset_w = 0;
-                $offset_h = (int)($p_height-$height);
-                break;
-
-            case Config\CropPosition::BM:
-                $offset_w = (int)(($p_width-$width)/2);
-                $offset_h = (int)($p_height-$height);
-                break;
-
-            case Config\CropPosition::BR:
-                $offset_w = (int)($p_width-$width);
-                $offset_h = (int)($p_height-$height);
-                break;
-        }
-
-        return array($offset_w, $offset_h);
-    }
-
-    /**
      * 记录调试日志
      *
      * @author fdipzone
@@ -319,6 +202,12 @@ class ImageUtil{
      * @return void
      */
     public static function debug(string $log_file, string $msg):void{
+        // 默认日志文件
+        if($log_file==''){
+            $log_file = '/tmp/image-thumbnail.log';
+        }
+
+        // 日志内容
         $log_content = '['.date('Y-m-d H:i:s').'] '.$msg.PHP_EOL;
         file_put_contents($log_file, $log_content, FILE_APPEND);
     }

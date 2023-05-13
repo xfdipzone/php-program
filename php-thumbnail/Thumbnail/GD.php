@@ -18,6 +18,20 @@ class GD implements IThumbnail{
     private $config;
 
     /**
+     * 源图片文件
+     *
+     * @var string
+     */
+    private $source = '';
+
+    /**
+     * 缩略图文件
+     *
+     * @var string
+     */
+    private $thumb = '';
+
+    /**
      * 初始化
      *
      * @author fdipzone
@@ -28,7 +42,7 @@ class GD implements IThumbnail{
     public function __construct(Config $config){
 
         // 检查GD库是否已安装
-        if(!ImageUtil::checkImageHandlerInstalled(Type::GD)){
+        if(!\Thumbnail\Utils\ImageUtil::checkImageHandlerInstalled(Type::GD)){
             throw new \Exception('GD Lib not installed');
         }
 
