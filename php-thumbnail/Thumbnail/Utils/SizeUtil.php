@@ -9,7 +9,7 @@ namespace Thumbnail\Utils;
  *
  */
 class SizeUtil{
-    
+
     /**
      * 计算缩略图尺寸
      *
