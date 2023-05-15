@@ -103,6 +103,7 @@ class ImageMagick implements IThumbnail{
         $response->setThumb($this->thumb);
         $response->setConfig($this->config);
         return $response;
+
     }
 
     /**
