@@ -195,4 +195,65 @@ class SizeUtil{
         return array($position_x, $position_y);
     }
 
+    /**
+     * 解析定位偏移，获取x,y偏移
+     *
+     * 定位偏移格式 /^[+-]\d+[+-]\d+$/
+     * 例如 +10+10, -10-10, +10-10, -10+10
+     *
+     * 摆放位置不同，偏移方向不同
+     * 例如
+     * 摆放位置为 SOUTHEAST，则+10+10表示 x向左偏移10，y向上偏移10
+     * 摆放位置为 NORTHWEST，则+10+10表示 x向右偏移10，y向下偏移10
+     *
+     * @author fdipzone
+     * @DateTime 2023-05-16 10:55:18
+     *
+     * @param string $watermark_gravity 水印摆放位置 在 \Thumbnail\Config\WaterMarkGravity 中定义
+     * @param string $geometry 定位偏移
+     * @return array $position_offset_x, $position_offset_y
+     */
+    public static function parseGeometry(string $watermark_gravity, string $geometry):array{
+        // 检查水印摆放位置
+        if(!\Thumbnail\Config\WaterMarkGravity::valid($watermark_gravity)){
+            throw new \Exception('watermark gravity error');
+        }
+
+        $pattern = '/^([+-]\d+)([+-]\d+)$/';
+        preg_match($pattern, $geometry, $matches);
+        if($matches){
+            $position_offset_x = (int)$matches[1];
+            $position_offset_y = (int)$matches[2];
+        }else{
+            $position_offset_x = 0;
+            $position_offset_y = 0;
+        }
+
+        // 根据摆放位置计算真正偏移（摆放位置不同，偏移方向不同）
+        switch($watermark_gravity){
+            case \Thumbnail\Config\WaterMarkGravity::NORTHEAST:
+                $position_offset_x = -1*$position_offset_x; // x转向
+                break;
+
+            case \Thumbnail\Config\WaterMarkGravity::EAST:
+                $position_offset_x = -1*$position_offset_x; // x转向
+                break;
+
+            case \Thumbnail\Config\WaterMarkGravity::SOUTHWEST:
+                $position_offset_y = -1*$position_offset_y; // y转向
+                break;
+
+            case \Thumbnail\Config\WaterMarkGravity::SOUTH:
+                $position_offset_y = -1*$position_offset_y; // y转向
+                break;
+
+            case \Thumbnail\Config\WaterMarkGravity::SOUTHEAST:
+                $position_offset_x = -1*$position_offset_x; // x转向
+                $position_offset_y = -1*$position_offset_y; // y转向
+                break;
+        }
+
+        return array($position_offset_x, $position_offset_y);
+    }
+
 }

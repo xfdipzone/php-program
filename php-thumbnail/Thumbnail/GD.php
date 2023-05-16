@@ -218,6 +218,12 @@ class GD implements IThumbnail{
         // 计算水印图片摆放坐标
         list($position_x, $position_y) = \Thumbnail\Utils\SizeUtil::watermarkPosition($this->config->watermarkGravity(), $p_width, $p_height, $watermark_width, $watermark_height);
 
+        // 获取水印图片定位偏移
+        list($position_offset_x, $position_offset_y) = \Thumbnail\Utils\SizeUtil::parseGeometry($this->config->watermarkGravity(), $this->config->watermarkGeometry());
+
+        $position_x += $position_offset_x;
+        $position_y += $position_offset_y;
+
         imagealphablending($thumb_img, true);
         imagecopy($thumb_img, $watermark_img, $position_x, $position_y, 0, 0, $watermark_width, $watermark_width);
 

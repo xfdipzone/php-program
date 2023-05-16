@@ -20,6 +20,9 @@ $imagemagick_handler = \Thumbnail\Factory::make(\Thumbnail\Type::IMAGEMAGICK, $c
 $thumb = dirname(__FILE__).'/pic/imagemagick_fit_thumb.jpg';
 $response = $imagemagick_handler->create($source, $thumb);
 echo 'success='.$response->success().PHP_EOL;
+if(!$response->success()){
+    echo 'error='.$response->errMsg().PHP_EOL;
+}
 echo $response->thumb().PHP_EOL.PHP_EOL;
 
 // 缩略图处理类(GD库)
@@ -27,6 +30,9 @@ $gd_handler = \Thumbnail\Factory::make(\Thumbnail\Type::GD, $config);
 $thumb = dirname(__FILE__).'/pic/gd_fit_thumb.jpg';
 $response = $gd_handler->create($source, $thumb);
 echo 'success='.$response->success().PHP_EOL;
+if(!$response->success()){
+    echo 'error='.$response->errMsg().PHP_EOL;
+}
 echo $response->thumb().PHP_EOL.PHP_EOL;
 
 // 缩略图配置(crop)
@@ -44,6 +50,9 @@ $imagemagick_handler = \Thumbnail\Factory::make(\Thumbnail\Type::IMAGEMAGICK, $c
 $thumb = dirname(__FILE__).'/pic/imagemagick_crop_thumb.jpg';
 $response = $imagemagick_handler->create($source, $thumb);
 echo 'success='.$response->success().PHP_EOL;
+if(!$response->success()){
+    echo 'error='.$response->errMsg().PHP_EOL;
+}
 echo $response->thumb().PHP_EOL.PHP_EOL;
 
 // 缩略图处理类(GD库)
@@ -51,4 +60,7 @@ $gd_handler = \Thumbnail\Factory::make(\Thumbnail\Type::GD, $config);
 $thumb = dirname(__FILE__).'/pic/gd_crop_thumb.jpg';
 $response = $gd_handler->create($source, $thumb);
 echo 'success='.$response->success().PHP_EOL;
+if(!$response->success()){
+    echo 'error='.$response->errMsg().PHP_EOL;
+}
 echo $response->thumb().PHP_EOL.PHP_EOL;

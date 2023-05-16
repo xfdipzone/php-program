@@ -39,7 +39,7 @@ class Config{
     private $watermark_gravity = Config\WaterMarkGravity::SOUTHEAST;
 
     /**
-     * 水印定位偏移，横坐标、纵坐标(GD库不支持)
+     * 水印定位偏移，横坐标、纵坐标
      *
      * @var string
      */
@@ -220,6 +220,10 @@ class Config{
      * @return void
      */
     public function setWatermarkGeometry(string $watermark_geometry):void{
+        $pattern = '/^[+-]\d+[+-]\d+$/';
+        if(!preg_match($pattern, $watermark_geometry)){
+            throw new \Exception('watermark geometry error');
+        }
         $this->watermark_geometry = $watermark_geometry;
     }
 
