@@ -171,11 +171,58 @@ class GD implements IThumbnail{
      * @return boolean
      */
     private function crop():bool{
-        return true;
+        // 获取生成的图片尺寸
+        $source_info = getimagesize($this->source);
+        $o_width = $source_info[0];
+        $o_height = $source_info[1];
+
+        list($thumb_width, $thumb_height) = \Thumbnail\Utils\SizeUtil::thumbSize(
+            $this->config->thumbAdapterType(),
+            $o_width, $o_height,
+            $this->config->width(),
+            $this->config->height()
+        );
+
+        // 获取截图的偏移量
+        list($offset_w, $offset_h) = \Thumbnail\Utils\SizeUtil::cropOffset($this->config->cropPosition(), $thumb_width, $thumb_height, $this->config->width(), $this->config->height());
+
+        // 原图image对象
+        $source_img = \Thumbnail\Utils\ImageUtil::imageCreateFromFile($this->source);
+
+        // 按比例缩略/拉伸图片
+        $tmp_img = imagecreatetruecolor($thumb_width, $thumb_height);
+        imagecopyresampled($tmp_img, $source_img, 0, 0, 0, 0, $thumb_width, $thumb_height, $o_width, $o_height);
+
+        // 裁剪图片
+        $thumb_img = imagecreatetruecolor($this->config->width(), $this->config->height());
+        imagecopyresampled($thumb_img, $tmp_img, 0, 0, $offset_w, $offset_h, $this->config->width(), $this->config->height(), $this->config->width(), $this->config->height());
+
+        // 图片对象生成图片文件
+        \Thumbnail\Utils\ImageUtil::imageFile($thumb_img, $this->thumb, $this->config->quality());
+
+        // 清理临时image对象
+        if(isset($source_img)){
+            imagedestroy($source_img);
+        }
+
+        if(isset($tmp_img)){
+            imagedestroy($tmp_img);
+        }
+
+        if(isset($thumb_img)){
+            imagedestroy($thumb_img);
+        }
+
+        // 添加水印
+        $this->addWatermark($this->thumb);
+
+        return is_file($this->thumb)? true : false;
     }
 
     /**
      * 添加图片水印
+     * GD库不支持透明度水印,如果必须使用透明水印,请将水印图片做成有透明度
+     *
      * 如出现 libpng warning: iCCP: known incorrect sRGB profile 警告
      * 对PNG水印图片执行以下命令即可解决
      * convert $file -strip $file
