@@ -18,19 +18,19 @@ php基于Redis实现Bucket类，Redis的 `List` 类型适合做先入先出的�
 
 ### 2.2 压入数据
 
-![压入数据](https://github.com/xfdipzone/Small-Program/blob/master/php-bucket/push.png)
+![压入数据](https://github.com/xfdipzone/php-program/blob/master/php-bucket/push.png)
 
 ---
 
 ### 2.3 弹出数据
 
-![弹出数据](https://github.com/xfdipzone/Small-Program/blob/master/php-bucket/pop.png)
+![弹出数据](https://github.com/xfdipzone/php-program/blob/master/php-bucket/pop.png)
 
 ---
 
 ### 2.4 调整容器最大容量
 
-![调整最大容量](https://github.com/xfdipzone/Small-Program/blob/master/php-bucket/setmax.png)
+![调整最大容量](https://github.com/xfdipzone/php-program/blob/master/php-bucket/setmax.png)
 
 ---
 

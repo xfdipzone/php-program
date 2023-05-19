@@ -33,8 +33,8 @@ $is_create = OldPhotoEffect::create($source, $dest);
 
 原图
 
-![原图](https://github.com/xfdipzone/Small-Program/blob/master/php-oldphoto/source.jpg)
+![原图](https://github.com/xfdipzone/php-program/blob/master/php-oldphoto/source.jpg)
 
 老照片效果图
 
-![老照片效果图](https://github.com/xfdipzone/Small-Program/blob/master/php-oldphoto/dest.jpg)
+![老照片效果图](https://github.com/xfdipzone/php-program/blob/master/php-oldphoto/dest.jpg)

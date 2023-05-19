@@ -86,4 +86,4 @@ echo '<img src="'.$qr_code.'?t='.time().'">';
 
 生成的二维码图片：
 
-![二维码](https://github.com/xfdipzone/Small-Program/blob/master/php-qrcode/qr_code.png)
+![二维码](https://github.com/xfdipzone/php-program/blob/master/php-qrcode/qr_code.png)
