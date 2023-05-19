@@ -221,7 +221,7 @@ class GD implements IThumbnail{
 
     /**
      * 添加图片水印
-     * GD库不支持透明度水印,如果必须使用透明水印,请将水印图片做成有透明度
+     * GD库不支持透明度水印，如果必须使用透明水印，请将水印图片做成有透明度
      *
      * 如出现 libpng warning: iCCP: known incorrect sRGB profile 警告
      * 对PNG水印图片执行以下命令即可解决

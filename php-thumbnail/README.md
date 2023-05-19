@@ -1,4 +1,48 @@
-<?php
+# php-thumbnail
+
+php 缩略图生成类
+
+## 介绍
+
+使用php开发的缩略图生成类，基于 `ImageMagick` 与 `GD` 库两种方式实现，用于创建图片缩略图。
+
+支持图片自适应缩略/拉伸，裁剪，添加水印等处理。
+
+--
+
+## 功能
+
+主要功能如下：
+
+- 支持 `ImageMagick` 与 `GD` 库处理（检查系统是否有安装指定的组件）
+
+- 按比例缩略/拉伸图片(fit)
+
+- 按区域大小裁剪图片(crop)
+
+  - 设置裁剪方向（例如：顶部左侧位置，底部右侧位置等）
+
+- 添加水印
+
+  - 设置水印位置（例如：NorthWest，West, SouthEast等）
+
+  - 设置水印偏移
+
+  - 设置水印透明度（GD库不支持）
+
+    GD库不支持透明度水印，如果必须使用透明水印，请将水印图片做成有透明度
+
+- 设置图片质量（10-100）
+
+- 支持的图片格式 `gif`, `jpg`, `jpeg`, `png`
+
+- `CMYK` 模式转 `RGB` 模式
+
+--
+
+## 演示
+
+```php
 require 'autoload.php';
 
 // 源图片文件
@@ -66,3 +110,4 @@ if(!$response->success()){
     echo 'error='.$response->errMsg().PHP_EOL;
 }
 echo $response->thumb().PHP_EOL.PHP_EOL;
+```
