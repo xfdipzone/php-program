@@ -32,6 +32,8 @@ php 缩略图生成类
 
     GD库不支持透明度水印，如果必须使用透明水印，请将水印图片做成有透明度
 
+- 设置填充背景颜色
+
 - 设置图片质量（10-100）
 
 - 支持的图片格式 `gif`, `jpg`, `jpeg`, `png`
@@ -51,6 +53,9 @@ $source = dirname(__FILE__).'/pic/source.jpg';
 // 水印图片
 $watermark = dirname(__FILE__).'/pic/watermark.png';
 
+// 日志文件
+$log_file = '/tmp/image-thumbnail.log';
+
 // 缩略图配置(fit)
 $config = new \Thumbnail\Config(500, 380);
 $config->setThumbAdapterType(\Thumbnail\Config\ThumbAdapterType::FIT);
@@ -60,6 +65,7 @@ $config->setWatermark($watermark);
 $config->setWatermarkGravity(\Thumbnail\Config\WaterMarkGravity::NORTHEAST);
 $config->setWatermarkGeometry('+5+35');
 $config->setWatermarkOpacity(25);
+$config->setLogFile($log_file);
 
 // 缩略图处理类(ImageMagick)
 $imagemagick_handler = \Thumbnail\Factory::make(\Thumbnail\Type::IMAGEMAGICK, $config);
@@ -90,6 +96,7 @@ $config->setWatermark($watermark);
 $config->setWatermarkGravity(\Thumbnail\Config\WaterMarkGravity::NORTHEAST);
 $config->setWatermarkGeometry('+5+5');
 $config->setWatermarkOpacity(35);
+$config->setLogFile($log_file);
 
 // 缩略图处理类(ImageMagick)
 $imagemagick_handler = \Thumbnail\Factory::make(\Thumbnail\Type::IMAGEMAGICK, $config);

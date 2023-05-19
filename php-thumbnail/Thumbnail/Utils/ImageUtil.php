@@ -202,13 +202,18 @@ class ImageUtil{
      * @return void
      */
     public static function debug(string $log_file, string $msg):void{
-        // 默认日志文件
+        // 判断是否需要记录日志
         if($log_file==''){
-            $log_file = '/tmp/image-thumbnail.log';
+            return ;
         }
+
+        // 创建日志文件目录
+        self::createDirs($log_file);
 
         // 日志内容
         $log_content = '['.date('Y-m-d H:i:s').'] '.$msg.PHP_EOL;
+
+        // 记录日志
         file_put_contents($log_file, $log_content, FILE_APPEND);
     }
 

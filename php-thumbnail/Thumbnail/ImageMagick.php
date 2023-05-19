@@ -130,7 +130,7 @@ class ImageMagick implements IThumbnail{
         $cmd = sprintf("convert -resize '%sx%s' '%s' %s -quality %s %s '%s'", $this->config->width(), $this->config->height(), $this->source, $bgcolor, $this->config->quality(), $colorspace, $this->thumb);
 
         // 记录执行的命令
-        \Thumbnail\Utils\ImageUtil::debug('', $cmd);
+        \Thumbnail\Utils\ImageUtil::debug($this->config->logFile(), $cmd);
 
         // 执行命令
         exec($cmd);
@@ -172,7 +172,7 @@ class ImageMagick implements IThumbnail{
         $cmd = sprintf("convert -resize '%sx%s' '%s' -quality %s %s -crop %sx%s+%s+%s +repage '%s'", $thumb_width, $thumb_height, $this->source, $this->config->quality(), $colorspace, $this->config->width(), $this->config->height(), $offset_w, $offset_h, $this->thumb);
 
         // 记录执行的命令
-        \Thumbnail\Utils\ImageUtil::debug('', $cmd);
+        \Thumbnail\Utils\ImageUtil::debug($this->config->logFile(), $cmd);
 
         // 执行命令
         exec($cmd);
@@ -221,7 +221,7 @@ class ImageMagick implements IThumbnail{
         $cmd = sprintf("composite -gravity %s -geometry %s -dissolve %s '%s' %s %s", $this->config->watermarkGravity(), $this->config->watermarkGeometry(), $this->config->watermarkOpacity(), $this->config->watermark(), $image, $image);
 
         // 记录执行的命令
-        \Thumbnail\Utils\ImageUtil::debug('', $cmd);
+        \Thumbnail\Utils\ImageUtil::debug($this->config->logFile(), $cmd);
 
         // 执行命令
         exec($cmd);

@@ -82,6 +82,13 @@ class Config{
     private $height = -1;
 
     /**
+     * 日志文件
+     *
+     * @var string
+     */
+    private $log_file = '';
+
+    /**
      * 初始化
      *
      * @author fdipzone
@@ -342,6 +349,34 @@ class Config{
      */
     public function height():int{
         return $this->height;
+    }
+
+    /**
+     * 设置日志文件
+     *
+     * @author fdipzone
+     * @DateTime 2023-05-19 12:33:16
+     *
+     * @param string $log_file 日志文件
+     * @return void
+     */
+    public function setLogFile(string $log_file):void{
+        if(empty($log_file)){
+            throw new \Exception('log file is empty');
+        }
+        $this->log_file = $log_file;
+    }
+
+    /**
+     * 获取日志文件
+     *
+     * @author fdipzone
+     * @DateTime 2023-05-19 12:34:03
+     *
+     * @return string
+     */
+    public function logFile():string{
+        return $this->log_file;
     }
 
 }
