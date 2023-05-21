@@ -10,12 +10,16 @@ namespace Captcha\Storage;
  */
 class Type{
 
-    // session
-    const SESSION = 'session';
+    // Session
+    const SESSION = 'Session';
+
+    // Redis
+    const REDIS = 'Redis';
 
     // 类型与实现类对应关系
     public static $lookup = array(
-        self::SESSION => 'Captcha\\Storage\\Session'
+        self::SESSION => 'Captcha\\Storage\\SessionStorage',
+        self::REDIS => 'Captcha\\Storage\\RedisStorage',
     );
 
 }

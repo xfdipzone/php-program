@@ -17,11 +17,11 @@ class Factory{
      * @author fdipzone
      * @DateTime 2023-05-20 23:41:27
      *
-     * @param string $type
-     * @param IConfig $config captcha存储类配置
+     * @param string $type captcha存储类型 在 \Captcha\Storage\Type 中定义
+     * @param IStorageConfig $config captcha存储类配置
      * * @return IStorage
      */
-    public static function make(string $type, IConfig $config):IStorage{
+    public static function make(string $type, IStorageConfig $config):IStorage{
         try{
             $class = self::getStorageClass($type);
             return new $class($config);
@@ -36,14 +36,14 @@ class Factory{
      * @author fdipzone
      * @DateTime 2023-05-20 23:39:07
      *
-     * @param string $type captcha存储类型
+     * @param string $type captcha存储类型 在 \Captcha\Storage\Type 中定义
      * @return string
      */
     private static function getStorageClass(string $type):string{
         if(isset(Type::$lookup[$type])){
             return Type::$lookup[$type];
         }else{
-            throw new \Exception(sprintf('%s type captcha not exists', $type));
+            throw new \Exception(sprintf('%s type captcha storage not exists', $type));
         }
     }
 
