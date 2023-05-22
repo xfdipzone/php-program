@@ -3,7 +3,7 @@ require 'RedisCounter.php';
 
 // redis连接设定
 $config = array(
-    'host' => 'localhost',
+    'host' => 'redis',
     'port' => 6379,
     'index' => 0,
     'auth' => '',
