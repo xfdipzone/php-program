@@ -47,3 +47,5 @@ php开发的程序，类库，小工具，不定期更新。
 - [php 缩略图生成类](https://github.com/xfdipzone/php-program/tree/master/php-thumbnail) (php-thumbnail)
 
 - [php html标记属性过滤器](https://github.com/xfdipzone/php-program/tree/master/php-html-attrib-filter) (php-html-attrib-filter)
+
+- [php Captcha验证码类](https://github.com/xfdipzone/php-program/tree/master/php-captcha) (php-captcha)

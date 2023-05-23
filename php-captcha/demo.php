@@ -162,6 +162,6 @@ class TestCaptcha{
 $action = isset($_GET['action'])? $_GET['action'] : 'create';
 $storage_type = isset($_GET['storage_type'])? $_GET['storage_type'] : \Captcha\Storage\Type::SESSION;
 
-$key = 'register';
+$key = 'uuid_key';
 $captcha_test = new TestCaptcha($action, $storage_type);
 $captcha_test->run($key);
