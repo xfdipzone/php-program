@@ -27,7 +27,7 @@ Captcha 是 "Completely Automated Public Turing test to tell Computers and Human
   - 设置字体尺寸
 
   - 设置字体
-  
+
   - 设置干扰点数量
 
   - 设置干扰线数量
