@@ -121,7 +121,7 @@ class SessionStorage implements IStorage{
      */
     private function dataDisassembly(string $storage_data){
         try{
-            $storage_data_arr = json_decode($storage_data);
+            $storage_data_arr = json_decode($storage_data, true);
             return $storage_data_arr;
         }catch(\Throwable $e){
             throw new \Exception($e->getMessage());

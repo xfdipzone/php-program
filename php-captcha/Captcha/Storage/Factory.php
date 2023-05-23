@@ -17,9 +17,9 @@ class Factory{
      * @author fdipzone
      * @DateTime 2023-05-20 23:41:27
      *
-     * @param string $type captcha存储类型 在 \Captcha\Storage\Type 中定义
-     * @param IStorageConfig $config captcha存储类配置
-     * * @return IStorage
+     * @param string $type Captcha存储类型 在 \Captcha\Storage\Type 中定义
+     * @param IStorageConfig $config Captcha存储类配置
+     * @return IStorage
      */
     public static function make(string $type, IStorageConfig $config):IStorage{
         try{
@@ -36,7 +36,7 @@ class Factory{
      * @author fdipzone
      * @DateTime 2023-05-20 23:39:07
      *
-     * @param string $type captcha存储类型 在 \Captcha\Storage\Type 中定义
+     * @param string $type Captcha存储类型 在 \Captcha\Storage\Type 中定义
      * @return string
      */
     private static function getStorageClass(string $type):string{
