@@ -1,7 +1,7 @@
 <?php
 /**
  * php实现的导出csv抽象类
- * 根据数据集合的总记录数与设置的每批次记录数，计算总批次，循环导出所有批次数据
+ * 根据数据集合的总记录数与设置的每批次导出数量，计算总批次，循环导出所有批次数据
  *
  * 支持两种导出方式
  * - 导出到本地csv文件
@@ -11,7 +11,7 @@
  * exportTotal      需要导出的总记录数
  * exportFieldsName 导出数据的字段名称集合(title)
  * exportData       指定范围（批次）的记录
- * 
+ *
  * @author fdipzone
  * @DateTime 2023-05-27 21:20:43
  *
@@ -121,7 +121,8 @@ abstract class AbstractExportCsv
      *
      * @return string
      */
-    public function delimiter():string{
+    public function delimiter():string
+    {
         return $this->delimiter;
     }
 
@@ -132,7 +133,7 @@ abstract class AbstractExportCsv
      * @DateTime 2023-05-27 21:33:43
      *
      * @param string $export_name 导出的文件名称，用于浏览器下载时设置附件文件名称
-     * @param int $pagesize 每批次记录数
+     * @param int $pagesize 每批次导出数量
      * @return void
      */
     final public function exportToStream(string $export_name, int $pagesize):void
@@ -146,8 +147,8 @@ abstract class AbstractExportCsv
      * @author fdipzone
      * @DateTime 2023-05-27 21:36:11
      *
-     * @param string $export_file csv文件名称
-     * @param int $pagesize 每批次记录数
+     * @param string $export_file csv文件路径
+     * @param int $pagesize 每批次导出数量
      * @return void
      */
     final public function exportToFile(string $export_file, int $pagesize):void
