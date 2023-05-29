@@ -47,4 +47,36 @@ class ExportStream implements IExportCsv
     {
 
     }
+
+    /**
+     * 设置导出字节流header
+     *
+     * @author fdipzone
+     * @DateTime 2023-05-29 22:19:16
+     *
+     * @return void
+     */
+    private function setHeader():void
+    {
+        header('content-type:application/x-msexcel');
+
+        // 根据不同浏览器设置header
+        $user_agent = isset($_SERVER['HTTP_USER_AGENT'])? $_SERVER['HTTP_USER_AGENT'] : '';
+
+        if(preg_match("/MSIE/", $user_agent))
+        {
+            header('content-disposition:attachment; filename="'.rawurlencode($this->config->exportName()).'"');
+        }
+        elseif(preg_match("/Firefox/", $user_agent))
+        {
+            header("content-disposition:attachment; filename*=\"utf8''".$this->config->exportName().'"');
+        }
+        else
+        {
+            header('content-disposition:attachment; filename="'.$this->config->exportName().'"');
+        }
+
+        ob_end_flush();
+        ob_implicit_flush(true);
+    }
 }
