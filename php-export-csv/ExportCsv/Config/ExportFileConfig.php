@@ -8,28 +8,21 @@ namespace ExportCsv\Config;
  * @DateTime 2023-05-28 18:34:13
  *
  */
-class ExportFileConfig implements IExportCsvConfig
+class ExportFileConfig extends AbstractExportCsv implements IExportCsvConfig
 {
     /**
      * 组件配置类型
      *
      * @var string
      */
-    private $type = \ExportCsv\Type::FILE;
-
+    protected $type = \ExportCsv\Type::FILE;
+    
     /**
      * csv文件路径
      *
      * @var string
      */
     private $export_file;
-
-    /**
-     * 每批次导出数量
-     *
-     * @var int
-     */
-    private $pagesize;
 
     /**
      * 初始化
@@ -57,19 +50,6 @@ class ExportFileConfig implements IExportCsvConfig
     }
 
     /**
-     * 获取组件配置类型
-     *
-     * @author fdipzone
-     * @DateTime 2023-05-28 18:36:20
-     *
-     * @return string
-     */
-    public function type():string
-    {
-        return $this->type;
-    }
-
-    /**
      * 获取csv文件路径
      *
      * @author fdipzone
@@ -80,18 +60,5 @@ class ExportFileConfig implements IExportCsvConfig
     public function exportFile():string
     {
         return $this->export_file;
-    }
-
-    /**
-     * 获取每批次导出数量
-     *
-     * @author fdipzone
-     * @DateTime 2023-05-28 19:46:19
-     *
-     * @return int
-     */
-    public function pagesize():int
-    {
-        return $this->pagesize;
     }
 }

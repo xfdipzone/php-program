@@ -19,4 +19,24 @@ interface IExportCsvConfig
      * @return string
      */
     public function type():string;
+
+    /**
+     * 获取分隔符
+     *
+     * @author fdipzone
+     * @DateTime 2023-05-31 23:25:44
+     *
+     * @return string
+     */
+    public function separator():string;
+
+    /**
+     * 设置定界符
+     *
+     * @author fdipzone
+     * @DateTime 2023-05-31 23:25:47
+     *
+     * @return string
+     */
+    public function delimiter():string;
 }
