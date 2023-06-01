@@ -41,9 +41,10 @@ class ExportFile implements IExportCsv
      * @author fdipzone
      * @DateTime 2023-05-28 23:02:38
      *
+     * @param \ExportCsv\IExportSource $source 数据源对象
      * @return void
      */
-    public function export():void
+    public function export(\ExportCsv\IExportSource $source):void
     {
 
     }

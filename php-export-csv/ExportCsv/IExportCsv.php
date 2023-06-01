@@ -24,10 +24,11 @@ interface IExportCsv
     /**
      * 执行导出
      *
-     * @author fdipzone
-     * @DateTime 2023-05-28 18:20:06
+     * @author terry
+     * @DateTime 2023-06-01 23:29:42
      *
+     * @param \ExportCsv\IExportSource $source 数据源对象
      * @return void
      */
-    public function export():void;
+    public function export(\ExportCsv\IExportSource $source):void;
 }

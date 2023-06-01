@@ -18,9 +18,9 @@ class Factory
      * @DateTime 2023-05-28 18:27:04
      *
      * @param \ExportCsv\Config\IExportCsvConfig $config 组件配置对象
-     * @return IExportCsv
+     * @return \ExportCsv\IExportCsv
      */
-    public static function make(\ExportCsv\Config\IExportCsvConfig $config):IExportCsv
+    public static function make(\ExportCsv\Config\IExportCsvConfig $config):\ExportCsv\IExportCsv
     {
         try
         {
@@ -45,9 +45,9 @@ class Factory
      */
     public static function getExportClass(string $type):string
     {
-        if(isset(Type::$map[$type]))
+        if(isset(\ExportCsv\Type::$map[$type]))
         {
-            return Type::$map[$type];
+            return \ExportCsv\Type::$map[$type];
         }
         else
         {
