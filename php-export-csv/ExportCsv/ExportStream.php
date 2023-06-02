@@ -49,8 +49,13 @@ class ExportStream implements IExportCsv
         // 获取总记录数
         $total = $source->total();
 
+        if(!$total)
+        {
+            return ;
+        }
+
         // 计算导出总批次
-        $page_count = $total>0? (int)(($total-1)/$this->config->pagesize()) : 0;
+        $page_count = (int)(($total-1)/$this->config->pagesize())+1;
 
         // 设置导出header
         $this->setHeader();

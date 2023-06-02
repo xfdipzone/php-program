@@ -46,6 +46,62 @@ class ExportFile implements IExportCsv
      */
     public function export(\ExportCsv\IExportSource $source):void
     {
+        // 获取总记录数
+        $total = $source->total();
 
+        if(!$total)
+        {
+            return ;
+        }
+
+        // 计算导出总批次
+        $page_count = (int)(($total-1)/$this->config->pagesize())+1;
+
+        // 创建导出目录
+        $this->createExportFolder($this->config->exportFile());
+
+        $export_data = '';
+
+        // 导出字段名
+        $fields = $source->fields();
+        $export_data .= \ExportCsv\ExportFormatter::format($fields, $this->config->separator(), $this->config->delimiter());
+
+        // 循环导出
+        for($i=0; $i<$page_count; $i++)
+        {
+            // 获取每页数据
+            $offset = $i*$this->config->pagesize();
+            $page_data = $source->data($offset, $this->config->pagesize());
+
+            // 转为csv格式
+            if($page_data)
+            {
+                foreach($page_data as $row)
+                {
+                    $export_data .= \ExportCsv\ExportFormatter::format($row, $this->config->separator(), $this->config->delimiter());
+                }
+            }
+
+            file_put_contents($this->config->exportFile(), $export_data, true);
+        }
+    }
+
+    /**
+     * 创建导出目录
+     *
+     * @author fdipzone
+     * @DateTime 2023-06-03 00:03:48
+     *
+     * @param string $file 导出文件路径
+     * @return boolean
+     */
+    private function createExportFolder(string $file):bool
+    {
+        if(!is_dir(dirname($file)))
+        {
+            return mkdir(dirname($file), 0777, true);
+        }
+
+        return true;
     }
 }
