@@ -46,6 +46,39 @@ class ExportStream implements IExportCsv
      */
     public function export(\ExportCsv\IExportSource $source):void
     {
+        // 获取总记录数
+        $total = $source->total();
+
+        // 计算导出总批次
+        $page_count = $total>0? (int)(($total-1)/$this->config->pagesize()) : 0;
+
+        // 设置导出header
+        $this->setHeader();
+
+        $export_data = '';
+
+        // 导出字段名
+        $fields = $source->fields();
+        $export_data .= \ExportCsv\ExportFormatter::format($fields, $this->config->separator(), $this->config->delimiter());
+
+        // 循环导出
+        for($i=0; $i<$page_count; $i++)
+        {
+            // 获取每页数据
+            $offset = $i*$this->config->pagesize();
+            $page_data = $source->data($offset, $this->config->pagesize());
+
+            // 转为csv格式
+            if($page_data)
+            {
+                foreach($page_data as $row)
+                {
+                    $export_data .= \ExportCsv\ExportFormatter::format($row, $this->config->separator(), $this->config->delimiter());
+                }
+            }
+
+            echo $export_data;
+        }
 
     }
 

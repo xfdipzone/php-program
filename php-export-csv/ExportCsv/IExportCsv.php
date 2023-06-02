@@ -10,7 +10,6 @@ namespace ExportCsv;
  */
 interface IExportCsv
 {
-
     /**
      * 初始化
      *
@@ -24,7 +23,7 @@ interface IExportCsv
     /**
      * 执行导出
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2023-06-01 23:29:42
      *
      * @param \ExportCsv\IExportSource $source 数据源对象
