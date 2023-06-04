@@ -21,6 +21,16 @@ interface IExportCsvConfig
     public function type():string;
 
     /**
+     * 获取每批次导出数量
+     *
+     * @author fdipzone
+     * @DateTime 2023-06-05 00:13:49
+     *
+     * @return int
+     */
+    public function pagesize():int;
+
+    /**
      * 获取分隔符
      *
      * @author fdipzone
