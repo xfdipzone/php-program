@@ -60,15 +60,16 @@ class ExportStream implements IExportCsv
         // 设置导出header
         $this->setHeader();
 
-        $export_data = '';
-
         // 导出字段名
         $fields = $source->fields();
-        $export_data .= \ExportCsv\ExportFormatter::format($fields, $this->config->separator(), $this->config->delimiter());
+        $title_data = \ExportCsv\ExportFormatter::format($fields, $this->config->separator(), $this->config->delimiter());
+        echo $title_data;
 
         // 循环导出
         for($i=0; $i<$page_count; $i++)
         {
+            $export_data = '';
+
             // 获取每页数据
             $offset = $i*$this->config->pagesize();
             $page_data = $source->data($offset, $this->config->pagesize());
@@ -84,7 +85,6 @@ class ExportStream implements IExportCsv
 
             echo $export_data;
         }
-
     }
 
     /**
@@ -97,6 +97,7 @@ class ExportStream implements IExportCsv
      */
     private function setHeader():void
     {
+        ob_start();
         header('content-type:application/x-msexcel');
 
         // 根据不同浏览器设置header

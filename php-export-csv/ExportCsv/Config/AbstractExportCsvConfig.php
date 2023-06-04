@@ -8,7 +8,7 @@ namespace ExportCsv\Config;
  * @DateTime 2023-05-31 23:28:44
  *
  */
-abstract class AbstractExportCsv
+abstract class AbstractExportCsvConfig
 {
     /**
      * 组件配置类型

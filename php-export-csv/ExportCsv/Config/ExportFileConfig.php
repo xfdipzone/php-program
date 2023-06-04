@@ -8,7 +8,7 @@ namespace ExportCsv\Config;
  * @DateTime 2023-05-28 18:34:13
  *
  */
-class ExportFileConfig extends \ExportCsv\Config\AbstractExportCsv implements \ExportCsv\Config\IExportCsvConfig
+class ExportFileConfig extends \ExportCsv\Config\AbstractExportCsvConfig implements \ExportCsv\Config\IExportCsvConfig
 {
     /**
      * 组件配置类型

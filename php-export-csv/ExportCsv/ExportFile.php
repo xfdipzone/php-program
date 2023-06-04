@@ -64,11 +64,14 @@ class ExportFile implements IExportCsv
 
         // 导出字段名
         $fields = $source->fields();
-        $export_data .= \ExportCsv\ExportFormatter::format($fields, $this->config->separator(), $this->config->delimiter());
+        $title_data = \ExportCsv\ExportFormatter::format($fields, $this->config->separator(), $this->config->delimiter());
+        file_put_contents($this->config->exportFile(), $title_data, FILE_APPEND);
 
         // 循环导出
         for($i=0; $i<$page_count; $i++)
         {
+            $export_data = '';
+
             // 获取每页数据
             $offset = $i*$this->config->pagesize();
             $page_data = $source->data($offset, $this->config->pagesize());
@@ -82,7 +85,7 @@ class ExportFile implements IExportCsv
                 }
             }
 
-            file_put_contents($this->config->exportFile(), $export_data, true);
+            file_put_contents($this->config->exportFile(), $export_data, FILE_APPEND);
         }
     }
 
