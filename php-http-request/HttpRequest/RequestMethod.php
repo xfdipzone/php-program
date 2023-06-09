@@ -10,10 +10,13 @@ namespace HttpRequest;
  */
 class RequestMethod
 {
+    // GET 方式请求
     const GET = 'get';
 
+    // POST 方式请求
     const POST = 'post';
 
+    // 二进制流方式请求
     const MULTIPART = 'multipart';
 
     /**

@@ -43,6 +43,12 @@ class Actuator
      */
     public function send(\HttpRequest\RequestSet $request_set, string $request_method):\HttpRequest\Response
     {
+        // 验证请求方式
+        if(!\HttpRequest\RequestMethod::valid($request_method))
+        {
+            throw new \Exception('request method error');
+        }
+
         // 创建连接器对象，创建http连接
         $connector = new \HttpRequest\Connector;
         $fp = $connector->connect($this->config->host(), $this->config->port(), $this->config->timeout());

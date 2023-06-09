@@ -28,5 +28,4 @@ class Type
         self::FORM_DATA => 'HttpRequest\\FormData',
         self::FILE_DATA => 'HttpRequest\\FileData',
     ];
-
 }
