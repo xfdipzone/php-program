@@ -59,7 +59,7 @@ class HtmlAttribFilter{
      * @author fdipzone
      * @DateTime 2023-04-19 21:38:41
      *
-     * @param string $str
+     * @param string $str html字符串
      * @return string
      */
     public function strip(string $str):string{
@@ -249,7 +249,7 @@ class HtmlAttribFilter{
      * @author fdipzone
      * @DateTime 2023-04-19 22:01:00
      *
-     * @param string $str
+     * @param string $str 字符串
      * @return string
      */
     private function protect(string $str):string{

@@ -54,7 +54,7 @@ class SinaGenerator implements IGenerator{
      * @author fdipzone
      * @DateTime 2023-03-22 22:02:16
      *
-     * @param array $urls
+     * @param array $urls 链接集合
      * @return array
      */
     public function generate(array $urls):array{

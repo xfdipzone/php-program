@@ -124,7 +124,7 @@ class MosaicsEffect{
      * @author fdipzone
      * @DateTime 2023-04-05 22:16:30
      *
-     * @param string $file
+     * @param string $file 图片文件
      * @return int
      */
     private static function fileExt(string $file):int{

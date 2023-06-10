@@ -21,7 +21,7 @@ class VideoInformation{
      * @author fdipzone
      * @DateTime 2023-03-18 21:55:07
      *
-     * @param string $ffmpeg_file
+     * @param string $ffmpeg_file ffmpeg执行文件路径
      */
     public function __construct(string $ffmpeg_file){
         if(!file_exists($ffmpeg_file)){

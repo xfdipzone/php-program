@@ -14,7 +14,7 @@ class CartesianProduct{
      * @author fdipzone
      * @DateTime 2023-03-20 19:37:52
      *
-     * @param array $sets
+     * @param array $sets 需要参与计算笛卡尔积的集合
      * @return array
      */
     public static function cal(array $sets):array{

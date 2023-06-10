@@ -131,7 +131,7 @@ class Ref{
      * @author fdipzone
      * @DateTime 2023-03-30 16:59:05
      *
-     * @param ReflectionMethod|ReflectionProperty|Reflector $o
+     * @param ReflectionMethod|ReflectionProperty|Reflector $o 反射类对象
      * @return string
      */
     private static function getModifier($o):string{

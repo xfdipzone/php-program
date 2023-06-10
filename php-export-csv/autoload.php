@@ -5,7 +5,7 @@
  * @author fdipzone
  * @DateTime 2023-03-22 22:31:25
  *
- * @param string $class
+ * @param string $class 类名称
  * @return void
  */
 function class_auto_loader($class):void
