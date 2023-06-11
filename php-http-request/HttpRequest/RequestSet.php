@@ -13,14 +13,14 @@ class RequestSet
     /**
      * 保存 \HttpRequest\Type::FORM_DATA 类型的请求对象集合
      *
-     * @var array [] \HttpRequest\FormData
+     * @var array(\HttpRequest\FormData)
      */
     private $form_data_set = [];
 
     /**
      * 保存 \HttpRequest\Type::FILE_DATA 类型的请求对象集合
      *
-     * @var array [] \HttpRequest\FileData
+     * @var array(\HttpRequest\FileData)
      */
     private $file_data_set = [];
 
@@ -73,5 +73,51 @@ class RequestSet
     public function fileDataSet():array
     {
         return $this->file_data_set;
+    }
+
+    /**
+     * 将form-data请求对象集合数据转为数组格式
+     *
+     * @author fdipzone
+     * @DateTime 2023-06-11 22:44:54
+     *
+     * @return array
+     */
+    public function convertFormDataSet():array
+    {
+        $result = [];
+
+        // 合并form-data对象数据
+        foreach($this->form_data_set as $form_data_request)
+        {
+            $result = array_merge($result, $form_data_request->data());
+        }
+
+        return $result;
+    }
+
+    /**
+     * 将file-data请求对象集合数据转为数组格式
+     *
+     * @author fdipzone
+     * @DateTime 2023-06-11 22:46:43
+     *
+     * @return array
+     */
+    public function convertFileDataSet():array
+    {
+        $result = [];
+
+        // 合并file-data对象数据
+        foreach($this->file_data_set as $file_data_request)
+        {
+            $tmp = array(
+                'upload_field_name' => $file_data_request->uploadFieldName(),
+                'file' => $file_data_request->file(),
+            );
+            $result = array_push($result, $tmp);
+        }
+
+        return $result;
     }
 }
