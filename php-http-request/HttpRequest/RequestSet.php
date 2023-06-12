@@ -113,7 +113,8 @@ class RequestSet
         {
             $tmp = array(
                 'upload_field_name' => $file_data_request->uploadFieldName(),
-                'file' => $file_data_request->file(),
+                'file_path' => $file_data_request->file(),
+                'file_name' => basename($file_data_request->file())
             );
             $result = array_push($result, $tmp);
         }
