@@ -37,11 +37,12 @@ class Actuator
      * @author fdipzone
      * @DateTime 2023-06-08 23:16:12
      *
+     * @param string $url 请求的路径
      * @param \HttpRequest\RequestSet $request_set 请求对象集合
      * @param string $method 请求方式，在 \HttpRequest\RequestMethod 中定义
      * @return \HttpRequest\Response
      */
-    public function send(\HttpRequest\RequestSet $request_set, string $request_method):\HttpRequest\Response
+    public function send(string $url, \HttpRequest\RequestSet $request_set, string $request_method):\HttpRequest\Response
     {
         try
         {
@@ -55,8 +56,11 @@ class Actuator
             $connector = new \HttpRequest\Connector;
             $fp = $connector->connect($this->config->host(), $this->config->port(), $this->config->timeout());
 
+            // 生成http请求数据
+            $http_request_data = \HttpRequest\RequestFactory::generate($this->config->host(), $url, $request_set, $request_method);
+
             // 执行请求
-            $response = \HttpRequest\RequestFactory::request($fp, $request_set, $request_method);
+            $response = new \HttpRequest\Response;
 
             // 断开连接
             $connector->disconnect();

@@ -2,7 +2,7 @@
 namespace HttpRequest;
 
 /**
- * 请求工厂类，用于根据请求方式执行请求
+ * 请求工厂类，用于根据请求方式生成请求数据
  *
  * @author fdipzone
  * @DateTime 2023-06-12 22:36:48
@@ -11,22 +11,23 @@ namespace HttpRequest;
 class RequestFactory
 {
     /**
-     * 根据请求方式执行请求
+     * 根据请求方式生成请求数据
      *
      * @author fdipzone
      * @DateTime 2023-06-12 22:44:44
      *
-     * @param resource $fp http连接
+     * @param string $host 请求的host/ip地址
+     * @param string $url 请求的路径
      * @param \HttpRequest\RequestSet $request_set 请求对象集合
      * @param string $request_method 请求方式
-     * @return \HttpRequest\Response
+     * @return string
      */
-    public static function request($fp, \HttpRequest\RequestSet $request_set, string $request_method):\HttpRequest\Response
+    public static function generate(string $host, string $url, \HttpRequest\RequestSet $request_set, string $request_method):string
     {
         try
         {
             $handle_func = self::handleFunc($request_method);
-            return self::$handle_func($fp, $request_set);
+            return self::$handle_func($host, $url, $request_set);
         }
         catch(\Throwable $e)
         {
@@ -35,7 +36,7 @@ class RequestFactory
     }
 
     /**
-     * 根据请求方式获取请求处理方法
+     * 根据请求方式获取请求数据生成方法
      *
      * @author fdipzone
      * @DateTime 2023-06-12 22:38:04
@@ -59,50 +60,67 @@ class RequestFactory
     }
 
     /**
-     * 以 GET 方式执行请求
+     * 生成以 GET 方式的请求数据
+     * 此方式只能生成form-data，不生成file-data的请求数据
      *
      * @author fdipzone
      * @DateTime 2023-06-12 22:24:54
      *
-     * @param resource $fp http连接
+     * @param string $host 请求的host/ip地址
+     * @param string $url 请求的路径
      * @param \HttpRequest\RequestSet $request_set 请求对象集合
-     * @return \HttpRequest\Response
+     * @return string
      */
-    private static function sendGet($fp, \HttpRequest\RequestSet $request_set):\HttpRequest\Response
+    private static function sendGet(string $host, string $url, \HttpRequest\RequestSet $request_set):string
     {
-        $response = new \HttpRequest\Response;
-        return $response;
+        // 整理请求数据
+        $form_data = $request_set->convertFormDataSet();
+
+        // 检查是否空数据
+        if(!$form_data)
+        {
+            throw new \Exception('send data is empty');
+        }
+
+        // 生成GET方式http请求数据
+        $url_with_params = $url.'?'.http_build_query($form_data);
+
+        $out = "GET ".$url_with_params." http/1.1\r\n";
+        $out .= "host: ".$host."\r\n";
+        $out .= "connection: close\r\n\r\n";
+
+        return $out;
     }
 
     /**
-     * 以 POST 方式执行请求
+     * 生成以 POST 方式的请求数据
      *
      * @author fdipzone
      * @DateTime 2023-06-12 22:29:26
      *
-     * @param resource $fp http连接
+     * @param string $host 请求的host/ip地址
+     * @param string $url 请求的路径
      * @param \HttpRequest\RequestSet $request_set 请求对象集合
-     * @return \HttpRequest\Response
+     * @return string
      */
-    private static function sendPost($fp, \HttpRequest\RequestSet $request_set):\HttpRequest\Response
+    private static function sendPost(string $host, string $url, \HttpRequest\RequestSet $request_set):string
     {
-        $response = new \HttpRequest\Response;
-        return $response;
+        return '';
     }
 
     /**
-     * 以二进制流方式执行请求
+     * 生成以二进制流方式的请求数据
      *
      * @author fdipzone
      * @DateTime 2023-06-12 22:29:05
      *
-     * @param resource $fp http连接
+     * @param string $host 请求的host/ip地址
+     * @param string $url 请求的路径
      * @param \HttpRequest\RequestSet $request_set 请求对象集合
-     * @return \HttpRequest\Response
+     * @return string
      */
-    private static function sendMultiPart($fp, \HttpRequest\RequestSet $request_set):\HttpRequest\Response
+    private static function sendMultiPart(string $host, string $url, \HttpRequest\RequestSet $request_set):string
     {
-        $response = new \HttpRequest\Response;
-        return $response;
+        return '';
     }
 }

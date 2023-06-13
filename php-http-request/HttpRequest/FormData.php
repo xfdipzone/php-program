@@ -31,7 +31,7 @@ class FormData implements \HttpRequest\IRequestData
      * @author fdipzone
      * @DateTime 2023-06-11 22:18:26
      *
-     * @param array $data
+     * @param array $data 请求的数据
      */
     public function __construct(array $data)
     {

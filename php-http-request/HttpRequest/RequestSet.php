@@ -30,7 +30,7 @@ class RequestSet
      * @author fdipzone
      * @DateTime 2023-06-10 23:15:10
      *
-     * @param \HttpRequest\IRequestData $request_data
+     * @param \HttpRequest\IRequestData $request_data 请求对象
      * @return void
      */
     public function add(\HttpRequest\IRequestData $request_data):void
