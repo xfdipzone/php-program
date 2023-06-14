@@ -60,7 +60,7 @@ class Actuator
             $http_request_data = \HttpRequest\RequestFactory::generate($this->config->host(), $url, $request_set, $request_method);
 
             // 执行请求
-            $response = new \HttpRequest\Response;
+            $response = $this->httpRequest($fp, $http_request_data);
 
             // 断开连接
             $connector->disconnect();
@@ -71,5 +71,46 @@ class Actuator
         {
             throw new \Exception($e->getMessage());
         }
+    }
+
+    /**
+     * 执行http请求，返回执行结果
+     *
+     * @author fdipzone
+     * @DateTime 2023-06-14 23:19:27
+     *
+     * @param resource $fp http连接
+     * @param string $http_request_data http请求数据
+     * @return \HttpRequest\Response
+     */
+    private function httpRequest($fp, string $http_request_data):\HttpRequest\Response
+    {
+        try
+        {
+            $http_response = '';
+
+            fputs($fp, $http_request_data);
+
+            while($row=fread($fp, 4096))
+            {
+                $http_response .= $row;
+            }
+
+            // 删除http连接相关数据，只获取返回内容
+            $pos = strpos($http_response, "\r\n\r\n");
+            $http_response = substr($http_response, $pos+4);
+
+            $response = new \HttpRequest\Response;
+            $response->success(true);
+            $response->data($http_response);
+        }
+        catch(\Throwable $e)
+        {
+            $response = new \HttpRequest\Response;
+            $response->success(false);
+            $response->errMsg($e->getMessage());
+        }
+
+        return $response;
     }
 }
