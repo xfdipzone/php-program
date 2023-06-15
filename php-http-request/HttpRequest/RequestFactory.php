@@ -105,7 +105,41 @@ class RequestFactory
      */
     private static function sendPost(string $host, string $url, \HttpRequest\RequestSet $request_set):string
     {
-        return '';
+        // 整理请求数据
+        $form_data = $request_set->convertFormDataSet();
+        $file_data = $request_set->convertFileDataSet();
+
+        // 检查是否空数据
+        if(!$form_data && !$file_data)
+        {
+            throw new \Exception('send data is empty');
+        }
+
+        $send_data = $form_data? $form_data : array();
+
+        // file data
+        if($file_data)
+        {
+            foreach($file_data as $file)
+            {
+                if(file_exists($file['file_path']))
+                {
+                    $send_data[$file['upload_field_name']] = file_get_contents($file['file_path']);
+                }
+            }
+        }
+
+        // 生成POST方式http请求数据
+        $post_data = http_build_query($send_data);
+
+        $out = "POST ".$url." http/1.1\r\n";
+        $out .= "host: ".$host."\r\n";
+        $out .= "content-type: application/x-www-form-urlencoded\r\n";
+        $out .= "content-length: ".strlen($post_data)."\r\n";
+        $out .= "connection: close\r\n\r\n";
+        $out .= $post_data;
+
+        return $out;
     }
 
     /**
