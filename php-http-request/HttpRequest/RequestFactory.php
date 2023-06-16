@@ -155,6 +155,69 @@ class RequestFactory
      */
     private static function sendMultiPart(string $host, string $url, \HttpRequest\RequestSet $request_set):string
     {
-        return '';
+        // 整理请求数据
+        $form_data = $request_set->convertFormDataSet();
+        $file_data = $request_set->convertFileDataSet();
+
+        // 检查是否空数据
+        if(!$form_data && !$file_data)
+        {
+            throw new \Exception('send data is empty');
+        }
+
+        // 设置分割标识
+        srand((double)microtime()*1000000);
+        $boundary = '---------------------------'.substr(md5(rand(0,32000)),0,10);
+
+        $stream_data = '--'.$boundary."\r\n";
+
+        // 生成form data stream
+        $form_data_stream = '';
+
+        foreach($form_data as $key=>$val)
+        {
+            $form_data_stream .= "content-disposition: form-data; name=\"".$key."\"\r\n";
+            $form_data_stream .= "content-type: text/plain\r\n\r\n";
+            if(is_array($val))
+            {
+                $form_data_stream .= json_encode($val)."\r\n"; // 数组使用json encode后方便处理
+            }
+            else
+            {
+                $form_data_stream .= rawurlencode($val)."\r\n";
+            }
+            $form_data_stream .= '--'.$boundary."\r\n";
+        }
+
+        // 生成file data stream
+        $file_data_stream = '';
+
+        foreach($file_data as $val)
+        {
+            if(file_exists($val['path']))
+            {
+                $file_data_stream .= "content-disposition: form-data; name=\"".$val['upload_field_name']."\"; filename=\"".$val['file_name']."\"\r\n";
+                $file_data_stream .= "content-type: ".mime_content_type($val['file_path'])."\r\n\r\n";
+                $file_data_stream .= implode('', file($val['file_path']))."\r\n";
+                $file_data_stream .= '--'.$boundary."\r\n";
+            }
+        }
+
+        if(!$form_data_stream && !$file_data_stream)
+        {
+            throw new \Exception('stream data is empty');
+        }
+
+        // 生成二进制方式http请求数据
+        $stream_data .= $form_data_stream.$file_data_stream."--\r\n\r\n";
+
+        $out = "POST ".$url." http/1.1\r\n";
+        $out .= "host: ".$host."\r\n";
+        $out .= "content-type: multipart/form-data; boundary=".$boundary."\r\n";
+        $out .= "content-length: ".strlen($stream_data)."\r\n";
+        $out .= "connection: close\r\n\r\n";
+        $out .= $stream_data;
+
+        return $out;
     }
 }
