@@ -14,7 +14,7 @@ class Actuator
     /**
      * 请求连接配置
      *
-     * @var \HttpRequest\Config
+     * @var \HttpRequest\Connect\Config
      */
     private $config;
 
@@ -24,9 +24,9 @@ class Actuator
      * @author fdipzone
      * @DateTime 2023-06-07 22:57:26
      *
-     * @param \HttpRequest\Config $config 请求连接配置
+     * @param \HttpRequest\Connect\Config $config 请求连接配置
      */
-    public function __construct(\HttpRequest\Config $config)
+    public function __construct(\HttpRequest\Connect\Config $config)
     {
         $this->config = $config;
     }
@@ -53,7 +53,7 @@ class Actuator
             }
 
             // 创建连接器对象，创建http连接
-            $connector = new \HttpRequest\Connector;
+            $connector = new \HttpRequest\Connect\Connector;
             $fp = $connector->connect($this->config->host(), $this->config->port(), $this->config->timeout());
 
             // 生成http请求数据

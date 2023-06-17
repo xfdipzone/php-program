@@ -1,8 +1,8 @@
 <?php
-namespace HttpRequest;
+namespace HttpRequest\Connect;
 
 /**
- * HttpRequest 配置类
+ * HttpRequest 连接配置类
  *
  * @author fdipzone
  * @DateTime 2023-06-07 22:34:55

@@ -11,16 +11,16 @@ namespace HttpRequest;
 class RequestSet
 {
     /**
-     * 保存 \HttpRequest\Type::FORM_DATA 类型的请求对象集合
+     * 保存 \HttpRequest\RequestDataType::FORM_DATA 类型的请求对象集合
      *
-     * @var array(\HttpRequest\FormData)
+     * @var array(\HttpRequest\RequestData\FormData)
      */
     private $form_data_set = [];
 
     /**
-     * 保存 \HttpRequest\Type::FILE_DATA 类型的请求对象集合
+     * 保存 \HttpRequest\RequestDataType::FILE_DATA 类型的请求对象集合
      *
-     * @var array(\HttpRequest\FileData)
+     * @var array(\HttpRequest\RequestData\FileData)
      */
     private $file_data_set = [];
 
@@ -35,11 +35,11 @@ class RequestSet
      */
     public function add(\HttpRequest\IRequestData $request_data):void
     {
-        if($request_data->type()==\HttpRequest\Type::FORM_DATA)
+        if($request_data->type()==\HttpRequest\RequestDataType::FORM_DATA)
         {
             array_push($this->form_data_set, $request_data);
         }
-        elseif($request_data->type()==\HttpRequest\Type::FILE_DATA)
+        elseif($request_data->type()==\HttpRequest\RequestDataType::FILE_DATA)
         {
             array_push($this->file_data_set, $request_data);
         }
@@ -50,7 +50,7 @@ class RequestSet
     }
 
     /**
-     * 获取  \HttpRequest\Type::FORM_DATA 类型的请求对象集合
+     * 获取  \HttpRequest\RequestDataType::FORM_DATA 类型的请求对象集合
      *
      * @author fdipzone
      * @DateTime 2023-06-10 23:39:47
@@ -63,7 +63,7 @@ class RequestSet
     }
 
     /**
-     * 获取  \HttpRequest\Type::FILE_DATA 类型的请求对象集合
+     * 获取  \HttpRequest\RequestDataType::FILE_DATA 类型的请求对象集合
      *
      * @author fdipzone
      * @DateTime 2023-06-10 23:40:11

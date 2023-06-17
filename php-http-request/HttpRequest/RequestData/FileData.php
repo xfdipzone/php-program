@@ -1,5 +1,5 @@
 <?php
-namespace HttpRequest;
+namespace HttpRequest\RequestData;
 
 /**
  * 文件数据
@@ -11,11 +11,11 @@ namespace HttpRequest;
 class FileData implements \HttpRequest\IRequestData
 {
     /**
-     * 数据类型，在 \HttpRequest\Type 中定义
+     * 数据类型，在 \HttpRequest\RequestDataType 中定义
      *
      * @var string
      */
-    private $type = \HttpRequest\Type::FILE_DATA;
+    private $type = \HttpRequest\RequestDataType::FILE_DATA;
 
     /**
      * 上传的字段名称

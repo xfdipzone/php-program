@@ -1,5 +1,5 @@
 <?php
-namespace HttpRequest;
+namespace HttpRequest\Connect;
 
 /**
  * HttpRequest连接器，用于创建与断开http连接

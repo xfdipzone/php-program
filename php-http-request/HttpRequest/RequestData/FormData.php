@@ -1,5 +1,5 @@
 <?php
-namespace HttpRequest;
+namespace HttpRequest\RequestData;
 
 /**
  * form-data格式数据
@@ -11,11 +11,11 @@ namespace HttpRequest;
 class FormData implements \HttpRequest\IRequestData
 {
     /**
-     * 数据类型，在 \HttpRequest\Type 中定义
+     * 数据类型，在 \HttpRequest\RequestDataType 中定义
      *
      * @var string
      */
-    private $type = \HttpRequest\Type::FORM_DATA;
+    private $type = \HttpRequest\RequestDataType::FORM_DATA;
 
     /**
      * 请求的数据 key=>value 格式

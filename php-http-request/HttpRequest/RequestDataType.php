@@ -8,7 +8,7 @@ namespace HttpRequest;
  * @DateTime 2023-06-08 23:02:36
  *
  */
-class Type
+class RequestDataType
 {
     // form-data
     const FORM_DATA = 'form_data';
@@ -25,7 +25,7 @@ class Type
      *
      */
     public static $map = [
-        self::FORM_DATA => 'HttpRequest\\FormData',
-        self::FILE_DATA => 'HttpRequest\\FileData',
+        self::FORM_DATA => 'HttpRequest\\RequestData\FormData',
+        self::FILE_DATA => 'HttpRequest\\RequestData\FileData',
     ];
 }
