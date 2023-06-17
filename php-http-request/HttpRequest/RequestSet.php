@@ -116,7 +116,7 @@ class RequestSet
                 'file_path' => $file_data_request->file(),
                 'file_name' => basename($file_data_request->file())
             );
-            $result = array_push($result, $tmp);
+            array_push($result, $tmp);
         }
 
         return $result;

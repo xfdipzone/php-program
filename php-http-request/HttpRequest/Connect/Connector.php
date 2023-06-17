@@ -30,7 +30,7 @@ class Connector
      */
     public function connect(string $host, int $port, int $timeout)
     {
-        $err_no = '';
+        $err_no = 0;
         $err_msg = '';
 
         try
@@ -42,7 +42,7 @@ class Connector
                 // 创建连接失败
                 if($err_no)
                 {
-                    throw new \Exception('err_no:', $err_no.' err_msg:'.$err_msg);
+                    throw new \Exception('err_no:'.$err_no.' err_msg:'.$err_msg);
                 }
             }
         }

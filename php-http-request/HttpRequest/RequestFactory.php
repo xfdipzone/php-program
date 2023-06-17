@@ -85,7 +85,7 @@ class RequestFactory
         // 生成GET方式http请求数据
         $url_with_params = $url.'?'.http_build_query($form_data);
 
-        $out = "GET ".$url_with_params." http/1.1\r\n";
+        $out = "GET ".$url_with_params." HTTP/1.1\r\n";
         $out .= "host: ".$host."\r\n";
         $out .= "connection: close\r\n\r\n";
 
@@ -132,7 +132,7 @@ class RequestFactory
         // 生成POST方式http请求数据
         $post_data = http_build_query($send_data);
 
-        $out = "POST ".$url." http/1.1\r\n";
+        $out = "POST ".$url." HTTP/1.1\r\n";
         $out .= "host: ".$host."\r\n";
         $out .= "content-type: application/x-www-form-urlencoded\r\n";
         $out .= "content-length: ".strlen($post_data)."\r\n";
@@ -194,7 +194,7 @@ class RequestFactory
 
         foreach($file_data as $val)
         {
-            if(file_exists($val['path']))
+            if(file_exists($val['file_path']))
             {
                 $file_data_stream .= "content-disposition: form-data; name=\"".$val['upload_field_name']."\"; filename=\"".$val['file_name']."\"\r\n";
                 $file_data_stream .= "content-type: ".mime_content_type($val['file_path'])."\r\n\r\n";
@@ -211,7 +211,7 @@ class RequestFactory
         // 生成二进制方式http请求数据
         $stream_data .= $form_data_stream.$file_data_stream."--\r\n\r\n";
 
-        $out = "POST ".$url." http/1.1\r\n";
+        $out = "POST ".$url." HTTP/1.1\r\n";
         $out .= "host: ".$host."\r\n";
         $out .= "content-type: multipart/form-data; boundary=".$boundary."\r\n";
         $out .= "content-length: ".strlen($stream_data)."\r\n";

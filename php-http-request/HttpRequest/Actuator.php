@@ -96,21 +96,50 @@ class Actuator
                 $http_response .= $row;
             }
 
-            // 删除http连接相关数据，只获取返回内容
-            $pos = strpos($http_response, "\r\n\r\n");
-            $http_response = substr($http_response, $pos+4);
+            // 获取http body
+            $http_body = $this->httpBody($http_response);
 
             $response = new \HttpRequest\Response;
-            $response->success(true);
-            $response->data($http_response);
+            $response->setSuccess(true);
+            $response->setData($http_body);
         }
         catch(\Throwable $e)
         {
             $response = new \HttpRequest\Response;
-            $response->success(false);
-            $response->errMsg($e->getMessage());
+            $response->setSuccess(false);
+            $response->setErrMsg($e->getMessage());
         }
 
         return $response;
+    }
+
+    /**
+     * 获取http响应体内容
+     *
+     * @author fdipzone
+     * @DateTime 2023-06-17 17:52:30
+     *
+     * @param string $http_response http返回数据
+     * @return string
+     */
+    private function httpBody(string $http_response):string
+    {
+        // 获取加密类型
+        $http_transfer_type = \HttpRequest\Utils\HttpTransfer::type($http_response);
+
+        // 获取http body
+        $http_body = $http_response;
+
+        // 删除http连接相关数据，只获取返回body内容
+        $pos = strpos($http_response, "\r\n\r\n");
+        if($pos)
+        {
+            $http_body = substr($http_body, $pos+4);
+        }
+
+        // 解密
+        $http_body = \HttpRequest\Utils\HttpTransfer::decode($http_body, $http_transfer_type);
+
+        return $http_body;
     }
 }
