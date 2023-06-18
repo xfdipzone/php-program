@@ -130,7 +130,7 @@ class Actuator
         // 获取http body
         $http_body = $http_response;
 
-        // 删除http连接相关数据，只获取返回body内容
+        // 删除http header相关数据，只返回body内容
         $pos = strpos($http_response, "\r\n\r\n");
         if($pos)
         {
