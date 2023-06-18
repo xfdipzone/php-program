@@ -56,4 +56,4 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 导出csv类](https://github.com/xfdipzone/php-program/tree/master/php-export-csv) (php-export-csv)
 
-- [php Http Request类](https://github.com/xfdipzone/php-program/tree/master/php-http-request) (php-http-request)
+- [php HttpRequest请求类](https://github.com/xfdipzone/php-program/tree/master/php-http-request) (php-http-request)

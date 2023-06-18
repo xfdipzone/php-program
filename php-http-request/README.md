@@ -1,18 +1,24 @@
 # php-http-request
 
-php Http Request
+php HttpRequest请求类
 
 ## 介绍
 
 php HttpRequest请求类，基于 `fsockopen()` 实现，支持 `GET`, `POST`, `Multipart/form-data` 方式请求。
 
-**fsockopen** 使用说明 [https://www.php.net/manual/en/function.fsockopen.php](https://www.php.net/manual/en/function.fsockopen.php)
+**fsockopen** 使用说明 [https://www.php.net/manual/zh/function.fsockopen.php](https://www.php.net/manual/zh/function.fsockopen.php)
 
 ---
 
 ## 功能
 
-支持 GET, POST(application/x-www-form-urlencoded), POST(multipart/form-data) 请求方式
+支持三种请求方式
+
+- GET
+
+- POST(application/x-www-form-urlencoded)
+
+- POST(multipart/form-data)
 
 支持 http transfer decode (chunked)
 
