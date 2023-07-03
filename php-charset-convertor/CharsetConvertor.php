@@ -21,61 +21,39 @@ class CharsetConvertor
     const UTF16BE = 'utf16-be';
 
     /**
-     * 输入数据的字符集编码
-     *
-     * @var string
-     * @author fdipzone
-     */
-    private $in_charset = '';
-
-    /**
-     * 输出数据的字符集编码
-     *
-     * @var string
-     */
-    private $out_charset = '';
-
-    /**
-     * 初始化，传入输入数据的字符集编码与输出数据的字符集编码
-     *
-     * @author fdipzone
-     * @DateTime 2023-06-30 23:23:15
-     *
-     * @param string $in_charset 输入数据的字符集编码
-     * @param string $out_charset 输出数据的字符集编码
-     */
-    public function __construct(string $in_charset, string $out_charset)
-    {
-        if(!$this->validCharset($in_charset))
-        {
-            throw new \Exception('in charset type not supported');
-        }
-
-        if(!$this->validCharset($out_charset))
-        {
-            throw new \Exception('out charset type not supported');
-        }
-
-        $this->in_charset = $in_charset;
-        $this->out_charset = $out_charset;
-    }
-
-    /**
-     * 执行转换
+     * 执行转换(根据输入字符集编码与输出字符集编码)
      *
      * @author fdipzone
      * @DateTime 2023-07-01 23:14:19
      *
      * @param string $str 要转换的数据
+     * @param string $in_charset 输入数据的字符集编码
+     * @param string $out_charset 输出数据的字符集编码
      * @return string
      */
-    public function convert(string $str):string
+     public static function convert(string $str, string $in_charset, string $out_charset):string
     {
-        // 将数据先转为utf8编码
-        $utf8_str = $this->convertToUtf8($str, $this->in_charset);
+        // 参数验证
+        if(!self::validCharset($str))
+        {
+            throw new \Exception('str is empty');
+        }
 
-        // 再将数据从utf8编码转为目标编码
-        $converted_str = $this->convertFromUtf8($utf8_str, $this->out_charset);
+        if(!self::validCharset($in_charset))
+        {
+            throw new \Exception('in charset type not supported');
+        }
+
+        if(!self::validCharset($out_charset))
+        {
+            throw new \Exception('out charset type not supported');
+        }
+
+        // 将数据先转为utf8编码，如输入数据已经是utf8则不需要转换
+        $utf8_str = self::convertToUtf8($str, $in_charset);
+
+        // 再将数据从utf8编码转为目标编码，如输出数据已经是utf8则不需要转换
+        $converted_str = self::convertFromUtf8($utf8_str, $out_charset);
 
         return $converted_str;
     }
@@ -89,7 +67,7 @@ class CharsetConvertor
      * @param string $charset
      * @return boolean
      */
-    private function validCharset(string $charset):bool
+    private static function validCharset(string $charset):bool
     {
         switch($charset)
         {
@@ -114,7 +92,7 @@ class CharsetConvertor
      * @param string $charset 数据字符集编码
      * @return string
      */
-    private function convertToUtf8(string $str, string $charset):string
+    private static function convertToUtf8(string $str, string $charset):string
     {
         return '';
     }
@@ -129,7 +107,7 @@ class CharsetConvertor
      * @param string $charset 指定要转换的字符集编码
      * @return string
      */
-    private function convertFromUtf8(string $utf8_str, string $charset):string
+    private static function convertFromUtf8(string $utf8_str, string $charset):string
     {
         return '';
     }
