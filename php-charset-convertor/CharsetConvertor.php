@@ -59,12 +59,12 @@ class CharsetConvertor
     }
 
     /**
-     * 判断字符集编码
+     * 判断字符集编码是否支持
      *
      * @author fdipzone
      * @DateTime 2023-07-01 23:07:03
      *
-     * @param string $charset
+     * @param string $charset 字符集编码
      * @return boolean
      */
     private static function validCharset(string $charset):bool
@@ -94,7 +94,29 @@ class CharsetConvertor
      */
     private static function convertToUtf8(string $str, string $charset):string
     {
-        return '';
+        switch($charset)
+        {
+            case self::ANSI:
+                $utf8_str = iconv('GBK', 'UTF-8//IGNORE', $str);
+                break;
+
+            case self::UTF8BOM:
+                $utf8_str = substr($str, 3);
+                break;
+
+            case self::UTF16:
+                $utf8_str = iconv('UTF-16le', 'UTF-8//IGNORE', substr($str, 2));
+                break;
+
+            case self::UTF16BE:
+                $utf8_str = iconv('UTF-16be', 'UTF-8//IGNORE', substr($str, 2));
+                break;
+
+            default:
+                $utf8_str = $str;
+        }
+
+        return $utf8_str;
     }
 
     /**
@@ -109,6 +131,28 @@ class CharsetConvertor
      */
     private static function convertFromUtf8(string $utf8_str, string $charset):string
     {
-        return '';
+        switch($charset)
+        {
+            case self::ANSI:
+                $converted_str = iconv('UTF-8', 'GBK//IGNORE', $utf8_str);
+                break;
+
+            case self::UTF8BOM:
+                $converted_str = "\xef\xbb\xbf".$utf8_str;
+                break;
+
+            case self::UTF16:
+                $converted_str = "\xff\xfe".iconv('UTF-8', 'UTF-16le//IGNORE', $utf8_str);
+                break;
+
+            case self::UTF16BE:
+                $converted_str = "\xfe\xff".iconv('UTF-8', 'UTF-16be//IGNORE', $utf8_str);
+                break;
+
+            default:
+                $converted_str = $utf8_str;
+        }
+
+        return $converted_str;
     }
 }
