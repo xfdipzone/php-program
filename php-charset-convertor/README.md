@@ -10,7 +10,7 @@ php 字符编码转化类，实现数据转换为指定的编码
 
 ## 功能
 
-支持ANSI、UTF-16、UTF-16 Big Endian、UTF-8、UTF-8+Bom编码的数据互相转换
+支持 `ANSI`、`UTF-16`、`UTF-16 Big Endian`、`UTF-8`、`UTF-8+Bom` 编码的数据互相转换
 
 ---
 
