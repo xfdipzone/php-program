@@ -34,7 +34,7 @@ class CharsetConvertor
      public static function convert(string $str, string $in_charset, string $out_charset):string
     {
         // 参数验证
-        if(!self::validCharset($str))
+        if(empty($str))
         {
             throw new \Exception('str is empty');
         }
