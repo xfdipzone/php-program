@@ -59,3 +59,5 @@ php开发的程序，类库，小工具，不定期更新。
 - [php HttpRequest请求类](https://github.com/xfdipzone/php-program/tree/master/php-http-request) (php-http-request)
 
 - [php 数据字符集编码转换类](https://github.com/xfdipzone/php-program/tree/master/php-charset-convertor) (php-charset-convertor)
+
+- [php 根据自增id创建唯一编号类](https://github.com/xfdipzone/php-program/tree/master/php-idcode) (php-idcode)
