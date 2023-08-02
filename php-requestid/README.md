@@ -22,6 +22,8 @@ PHP 唯一RequestID生成类，使用 `session_create_id()` 与 `uniqid()` 方�
 
 如果访问过程没有输出，或输出错误，我们可以根据 `RequestID` 找到A,B,C对应的日志，检查是哪个服务出现问题。
 
+---
+
 ## 演示
 
 ```php
