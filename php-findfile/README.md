@@ -1,4 +1,24 @@
-<?php
+# php-findfile
+
+PHP 遍历文件夹处理类
+
+## 介绍
+
+php 实现的文件夹遍历类，可以设置遍历的文件夹深度，并对遍历出的文件执行自定义处理。
+
+---
+
+## 功能
+
+**AbstractFindFile** 抽象类，用于遍历文件夹文件
+
+**UnsetUtf8Bom** 继承 `AbstractFindFile` 的子类，用于实现将遍历的文件执行去除 `utf8+Bom` 头处理
+
+---
+
+## 演示
+
+```php
 require 'AbstractFindFile.php';
 require 'UnsetUtf8Bom.php';
 require 'TestUtil.php';
@@ -28,3 +48,4 @@ $oUnsetUtf8Bom->find($test_folder);
 $response = $oUnsetUtf8Bom->response();
 
 print_r($oUnsetUtf8Bom->response());
+```

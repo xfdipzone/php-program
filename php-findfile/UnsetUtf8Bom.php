@@ -1,6 +1,7 @@
 <?php
 /**
  * 遍历文件夹及子文件夹文件，清除utf8+bom头（0xEF 0xBB 0xBF）
+ * 继承 AbstractFindFile 执行遍历文件夹处理
  *
  * @author fdipzone
  * @DateTime 2023-08-01 16:47:12
@@ -9,7 +10,7 @@
 class UnsetUtf8Bom extends AbstractFindFile
 {
     /**
-     * 设置要处理的文件类型
+     * 设置要处理的文件类型（文件后缀）
      *
      * @var array
      */
@@ -28,7 +29,7 @@ class UnsetUtf8Bom extends AbstractFindFile
      * @author fdipzone
      * @DateTime 2023-08-01 16:56:51
      *
-     * @param array $file_type
+     * @param array $file_type 文件类型列表（文件后缀）
      */
     public function __construct(array $file_type=[])
     {
@@ -63,7 +64,7 @@ class UnsetUtf8Bom extends AbstractFindFile
      */
     protected function process(string $file):void
     {
-        // 检查文件类型及是否包含utf8+Bom
+        // 检查文件类型是否需要处理及是否包含utf8+Bom
         if($this->checkFileExtension($file) && $this->checkUtf8Bom($file))
         {
             // 清除文件的utf8+Bom
@@ -131,7 +132,7 @@ class UnsetUtf8Bom extends AbstractFindFile
             // 写入文件
             fwrite($fp, $content);
 
-            // 在当前位置截断
+            // 在当前位置截断，移除截断位置之后的内容
             ftruncate($fp, ftell($fp));
 
             // 关闭文件

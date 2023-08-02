@@ -1,7 +1,8 @@
 <?php
 /**
- * php 遍历文件夹文件类
- * 可以指定遍历的文件夹深度，并对遍历出的文件执行自定义处理
+ * php 遍历文件夹处理类
+ * 可以设置遍历的文件夹深度，并对遍历出的文件执行自定义处理
+ * 处理逻辑由继承的子类实现
  *
  * @author fdipzone
  * @DateTime 2023-08-01 16:12:19
@@ -18,6 +19,7 @@ abstract class AbstractFindFile
 
     /**
      * 抽象方法，用于对遍历的文件进行处理
+     * 由继承的子类实现
      *
      * @author fdipzone
      * @DateTime 2023-08-01 16:29:12
@@ -71,7 +73,7 @@ abstract class AbstractFindFile
      * @param int $depth 当前遍历深度
      * @return void
      */
-    protected function traversing(string $path, int $depth=1):void
+    private function traversing(string $path, int $depth=1):void
     {
         if($handle = opendir($path))
         {
@@ -84,7 +86,7 @@ abstract class AbstractFindFile
                     // folder
                     if(is_dir($cur_file))
                     {
-                        // 不限搜索深度或未到最大搜索深度，继续递归遍历
+                        // 不限搜索深度或未到最大搜索深度，继续递归遍历（递归）
                         if($this->max_depth==0 || $depth<$this->max_depth)
                         {
                             $this->traversing($cur_file, $depth+1);
