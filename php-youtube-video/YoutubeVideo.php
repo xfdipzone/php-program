@@ -5,7 +5,7 @@
  * 仅用于归档代码
  *
  * @author fdipzone
- * @DateTime 2015-08-08 14:18:10
+ * @DateTime 2015-01-08 14:18:10
  *
  */
 class YoutubeVideo
@@ -21,7 +21,7 @@ class YoutubeVideo
      * 初始化，设置 Youtube user name
      *
      * @author fdipzone
-     * @DateTime 2015-08-08 14:20:06
+     * @DateTime 2015-01-08 14:20:06
      *
      * @param string $user Youtube user name（注意大小写）
      */
@@ -39,7 +39,7 @@ class YoutubeVideo
      * 获取 Youtube user 所有视频信息
      *
      * @author fdipzone
-     * @DateTime 2015-08-08 14:33:13
+     * @DateTime 2015-01-08 14:33:13
      *
      * @return array
      */
@@ -64,7 +64,7 @@ class YoutubeVideo
      * 获取 Youtube user 所有视频的总数量
      *
      * @author fdipzone
-     * @DateTime 2015-08-08 14:34:03
+     * @DateTime 2015-01-08 14:34:03
      *
      * @return int
      */
@@ -79,7 +79,7 @@ class YoutubeVideo
      * 根据视频的序号，获取视频的信息
      *
      * @author fdipzone
-     * @DateTime 2015-08-08 14:35:57
+     * @DateTime 2015-01-08 14:35:57
      *
      * @param int $index Youtube user 视频的序号
      * @return array
@@ -118,7 +118,7 @@ class YoutubeVideo
      * 需要在视频文字信息中通过正则获取视频的简介
      *
      * @author fdipzone
-     * @DateTime 2015-08-08 14:38:38
+     * @DateTime 2015-01-08 14:38:38
      *
      * @param string $content 视频信息
      * @return string
@@ -133,7 +133,7 @@ class YoutubeVideo
      * unicode 转中文
      *
      * @author fdipzone
-     * @DateTime 2015-08-08 14:24:48
+     * @DateTime 2015-01-08 14:24:48
      *
      * @param string $str unicode 字符串
      * @return string
