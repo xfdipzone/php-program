@@ -2,7 +2,7 @@
 namespace Captcha;
 
 /**
- * Captcha 验证码类
+ * TextCaptcha 文本型验证码类
  * 用于生成验证码图片及验证操作
  *
  * Captcha 是 "Completely Automated Public Turing test to tell Computers and Humans Apart" 缩写
@@ -13,7 +13,7 @@ namespace Captcha;
  * @DateTime 2023-05-20 23:24:42
  *
  */
-class Captcha{
+class TextCaptcha{
 
     /**
      * 根据配置生成Captcha验证码图片流
@@ -23,10 +23,10 @@ class Captcha{
      *
      * @param string $key 唯一标识
      * @param int $length 验证码字符串长度
-     * @param \Captcha\Config $config Captcha配置
+     * @param \Captcha\TextCaptchaConfig $config Captcha配置
      * @return void
      */
-    public static function create(string $key, int $length, \Captcha\Config $config):void{
+    public static function create(string $key, int $length, \Captcha\TextCaptchaConfig $config):void{
         try{
             // 创建验证码
             $validate_code = self::randomString($length);
@@ -111,10 +111,10 @@ class Captcha{
      * @DateTime 2023-05-22 17:16:24
      *
      * @param string $validate_code 验证码
-     * @param \Captcha\Config $config Captcha配置
+     * @param \Captcha\TextCaptchaConfig $config Captcha配置
      * @return void
      */
-    private static function responseImage(string $validate_code, \Captcha\Config $config):void{
+    private static function responseImage(string $validate_code, \Captcha\TextCaptchaConfig $config):void{
         header('Content-type: image/PNG');
 
         $length = strlen($validate_code);

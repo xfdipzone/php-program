@@ -3,26 +3,26 @@
  * 测试session storage captcha
  *
  * 创建图片
- * demo.php?action=create&storage_type=session
+ * text_captcha_demo.php?action=create&storage_type=session
  *
  * 验证
- * demo.php?action=validate&storage_type=session&validate_code=xxx
+ * text_captcha_demo.php?action=validate&storage_type=session&validate_code=xxx
  *
  *
  * 测试redis storage captcha
  *
  * 创建图片
- * demo.php?action=create&storage_type=redis
+ * text_captcha_demo.php?action=create&storage_type=redis
  *
  * 验证
- * demo.php?action=validate&storage_type=redis&validate_code=xxx
+ * text_captcha_demo.php?action=validate&storage_type=redis&validate_code=xxx
  */
 require 'autoload.php';
 
 /**
- * 测试Captcha生成与验证
+ * 测试TextCaptcha生成与验证
  */
-class TestCaptcha{
+class TestTextCaptcha{
 
     /**
      * 操作类型
@@ -132,13 +132,13 @@ class TestCaptcha{
      * @return void
      */
     private function create(string $key, \Captcha\Storage\IStorage $storage):void{
-        $captcha_config = new \Captcha\Config($key, $storage);
+        $captcha_config = new \Captcha\TextCaptchaConfig($key, $storage);
         $captcha_config->setFontSize(24);
         $captcha_config->setPointNum(150);
         $captcha_config->setLineNum(15);
 
         // 输出验证码图片
-        \Captcha\Captcha::create($key, 6, $captcha_config);
+        \Captcha\TextCaptcha::create($key, 6, $captcha_config);
     }
 
     /**
@@ -151,7 +151,7 @@ class TestCaptcha{
      */
     private function validate(string $key, string $validate_code, \Captcha\Storage\IStorage $storage):void{
         // 执行验证
-        $ret = \Captcha\Captcha::validate($key, $validate_code, $storage);
+        $ret = \Captcha\TextCaptcha::validate($key, $validate_code, $storage);
 
         var_dump($ret);
     }
@@ -163,5 +163,5 @@ $action = isset($_GET['action'])? $_GET['action'] : 'create';
 $storage_type = isset($_GET['storage_type'])? $_GET['storage_type'] : \Captcha\Storage\Type::SESSION;
 
 $key = 'uuid_key';
-$captcha_test = new TestCaptcha($action, $storage_type);
+$captcha_test = new TestTextCaptcha($action, $storage_type);
 $captcha_test->run($key);

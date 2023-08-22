@@ -12,13 +12,15 @@ Captcha 是 "Completely Automated Public Turing test to tell Computers and Human
 
 通过验证码向请求的发起方提出问题，能正确回答的即是人类，反之则为机器。
 
-验证码图片效果图：
+文本型验证码图片效果图：
 
-![验证码图片效果图](https://github.com/xfdipzone/php-program/blob/master/php-captcha/captcha.png)
+![验证码图片效果图](https://github.com/xfdipzone/php-program/blob/master/php-captcha/text_captcha.png)
 
 ---
 
-## 功能
+## 文本型验证码
+
+### 功能
 
 主要功能如下：
 
@@ -48,7 +50,7 @@ Captcha 是 "Completely Automated Public Turing test to tell Computers and Human
 
 ---
 
-## 演示
+### 演示
 
 创建验证码图片
 
@@ -66,13 +68,13 @@ $session_storage = \Captcha\Storage\Factory::make(\Captcha\Storage\Type::SESSION
 
 $key = 'register:'.session_id();
 
-$captcha_config = new \Captcha\Config($key, $session_storage);
+$captcha_config = new \Captcha\TextCaptchaConfig($key, $session_storage);
 $captcha_config->setFontSize(24);
 $captcha_config->setPointNum(150);
 $captcha_config->setLineNum(15);
 
 // 输出验证码图片
-\Captcha\Captcha::create($key, 6, $captcha_config);
+\Captcha\TextCaptcha::create($key, 6, $captcha_config);
 ```
 
 验证
@@ -95,7 +97,7 @@ $key = 'register:'.session_id();
 $validate_code = isset($_GET['validate_code'])? $_GET['validate_code'] : '';
 
 // 执行验证
-$ret = \Captcha\Captcha::validate($key, $validate_code, $session_storage);
+$ret = \Captcha\TextCaptcha::validate($key, $validate_code, $session_storage);
 
 var_dump($ret);
 ```

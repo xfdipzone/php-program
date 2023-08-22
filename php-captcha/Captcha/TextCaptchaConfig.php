@@ -2,13 +2,13 @@
 namespace Captcha;
 
 /**
- * Captcha配置类
+ * TextCaptcha配置类
  *
  * @author fdipzone
  * @DateTime 2023-05-21 18:17:39
  *
  */
-class Config{
+class TextCaptchaConfig{
 
     /**
      * 唯一标识，用于定位生成的验证码
