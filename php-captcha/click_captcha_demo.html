@@ -1,0 +1,46 @@
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title> Click Captcha Demo </title>
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+        // click captcha
+        $('#captcha_img').click(function(e){
+            var x = e.pageX - $(this).offset().left;
+            var y = e.pageY - $(this).offset().top;
+            $('#captcha').val(x+','+y);
+        })
+
+        // refresh
+        $('#refresh').click(function(e){
+          $('#captcha_img').attr('src', 'click_captcha_demo.php?action=create&storage_type=session&t=' + Math.random());
+        })
+
+        // submit
+        $('#btn').click(function(e){
+          if($.trim($('#captcha').val())==''){
+            alert('Please click captcha!');
+            return false;
+          }
+
+          // request validate
+          $.get("click_captcha_demo.php?action=validate&storage_type=session&validate_code="+$.trim($('#captcha').val()))
+            .done(function(data){
+              alert(data);
+            }
+          );
+        })
+    })
+  </script>
+ </head>
+
+ <body>
+    <form onsubmit="return false">
+      <p>Captcha: Please click full circle</p>
+      <p><img id="captcha_img" src="click_captcha_demo.php?action=create&storage_type=session" style="cursor:pointer"></p>
+      <p><input type="submit" id="btn" value="submit"> <input type="button" id="refresh" value="refresh"></p>
+      <input type="hidden" name="captcha" id="captcha">
+    </form>
+ </body>
+</html>
