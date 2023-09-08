@@ -65,3 +65,5 @@ php开发的程序，类库，小工具，不定期更新。
 - [php 遍历文件夹处理类](https://github.com/xfdipzone/php-program/tree/master/php-findfile) (php-findfile)
 
 - [php 获取Youtube视频信息类](https://github.com/xfdipzone/php-program/tree/master/php-youtube-video) (php-youtube-video)
+
+- [php 文件断点续传下载类](https://github.com/xfdipzone/php-program/tree/master/php-file-downloader) (php-file-downloader)
