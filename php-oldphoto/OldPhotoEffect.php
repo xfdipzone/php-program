@@ -1,6 +1,7 @@
 <?php
 /**
  * php调用imagemagick实现老照片效果
+ * 依赖 ImageMagick
  *
  * @author fdipzone
  * @DateTime 2023-03-19 11:30:23
@@ -23,6 +24,11 @@ class OldPhotoEffect{
         // 判断原图是否存在
         if(!file_exists($source)){
             throw new \Exception('source file not exists');
+        }
+
+        // 检查是否已安装ImageMagick
+        if(strstr(shell_exec('convert -version'),'Version: ImageMagick')==''){
+            throw new \Exception('ImageMagick not installed');
         }
 
         // 命令行
