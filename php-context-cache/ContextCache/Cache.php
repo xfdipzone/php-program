@@ -24,10 +24,10 @@ class Cache
      * @author fdipzone
      * @DateTime 2024-02-21 21:50:25
      *
-     * @param string $type 缓存组件类型 在 \ContextCache\Type 中定义
+     * @param string $type 缓存组件类型 在 \ContextCache\Type 中定义，默认为本地缓存组件类型
      * @return \ContextCache\IContextCache
      */
-    public static function getInstance(string $type):\ContextCache\IContextCache
+    public static function getInstance(string $type = \ContextCache\Type::LOCAL):\ContextCache\IContextCache
     {
         try
         {

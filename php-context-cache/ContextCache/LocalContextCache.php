@@ -3,8 +3,8 @@ namespace ContextCache;
 
 /**
  * 定义基于本地 HashMap 实现的上下文缓存组件
- * 使用本地 HashMap 保存数据
- * 不支持跨服务设置与获取数据，只支持在同一个请求中设置与获取数据
+ * 使用本地 HashMap 存储数据
+ * 不支持跨服务设置与获取数据，只支持在本地同一个请求中设置与获取数据
  *
  * @author fdipzone
  * @DateTime 2024-02-21 19:35:55

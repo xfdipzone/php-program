@@ -32,7 +32,7 @@ class ThirdPartyClient
     public function getInfo():array
     {
         // 读取上下文缓存
-        $context_cache = \ContextCache\Cache::getInstance(\ContextCache\Type::LOCAL);
+        $context_cache = \ContextCache\Cache::getInstance();
         $cache_key = 'third-party-info';
         $info = $context_cache->get($cache_key);
 
@@ -63,7 +63,7 @@ for($i=0; $i<5; $i++)
     sleep(1);
 }
 
-$context_cache = \ContextCache\Cache::getInstance(\ContextCache\Type::LOCAL);
+$context_cache = \ContextCache\Cache::getInstance();
 
 // 移除 third-party-info 缓存
 $context_cache->remove('third-party-info');
