@@ -20,7 +20,7 @@ interface IContextCache
      * @param mixed $data 数据
      * @return boolean
      */
-    public function Put(string $key, $data):bool;
+    public function put(string $key, $data):bool;
 
     /**
      * 获取缓存数据
@@ -32,7 +32,7 @@ interface IContextCache
      * @param string $key 缓存标识
      * @return mixed
      */
-    public function Get(string $key);
+    public function get(string $key);
 
     /**
      * 移除缓存数据
@@ -43,7 +43,7 @@ interface IContextCache
      * @param string $key 缓存标识
      * @return boolean
      */
-    public function Remove(string $key):bool;
+    public function remove(string $key):bool;
 
     /**
      * 清空所有缓存数据
@@ -53,5 +53,5 @@ interface IContextCache
      *
      * @return void
      */
-    public function Clear():void;
+    public function clear():void;
 }
