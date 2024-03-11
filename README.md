@@ -69,3 +69,5 @@ php开发的程序，类库，小工具，不定期更新。
 - [php 文件断点续传下载类](https://github.com/xfdipzone/php-program/tree/master/php-file-downloader) (php-file-downloader)
 
 - [php 上下文缓存类](https://github.com/xfdipzone/php-program/tree/master/php-context-cache) (php-context-cache)
+
+- [php 计量监控类](https://github.com/xfdipzone/php-program/tree/master/php-metric) (php-metric)
