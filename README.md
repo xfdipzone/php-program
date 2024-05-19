@@ -71,3 +71,7 @@ php开发的程序，类库，小工具，不定期更新。
 - [php 上下文缓存类](https://github.com/xfdipzone/php-program/tree/master/php-context-cache) (php-context-cache)
 
 - [php 计量监控类](https://github.com/xfdipzone/php-program/tree/master/php-metric) (php-metric)
+
+- [php 退避算法类](https://github.com/xfdipzone/php-program/tree/master/php-backoff) (php-backoff)
+
+---
