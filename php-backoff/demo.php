@@ -6,9 +6,11 @@ $start_retry_interval = 5;
 $factor = 2;
 $max_retry_interval = 300;
 $max_retry_times = 8;
+$random_factor = 3;
 
 // 指数退避算法
 $exponential_backoff = new \Backoff\ExponentialBackoff($start_retry_interval, $max_retry_interval, $factor, $max_retry_times);
+$exponential_backoff->setRandomFactor($random_factor);
 
 for($i=0; $i<9; $i++)
 {

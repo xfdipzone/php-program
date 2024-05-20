@@ -40,6 +40,14 @@ class ExponentialBackoff implements \Backoff\IBackoff
     private $max_retry_times;
 
     /**
+     * 随机因子
+     * 增加随机等待时间上限（秒）
+     *
+     * @var int
+     */
+    private $random_factor = 0;
+
+    /**
      * 初始化，设置配置参数
      *
      * @author fdipzone
@@ -76,6 +84,43 @@ class ExponentialBackoff implements \Backoff\IBackoff
     }
 
     /**
+     * 设置随机因子
+     *
+     * @author fdipzone
+     * @DateTime 2024-05-19 21:06:10
+     *
+     * @param int $random_factor 随机因子
+     * @return void
+     */
+    public function setRandomFactor(int $random_factor):void
+    {
+        if($random_factor<1)
+        {
+            throw new \Exception('random factor must be greater than 0');
+        }
+
+        $this->random_factor = $random_factor;
+    }
+
+    /**
+     * 根据随机因子计算随机附加时间间隔
+     *
+     * @author fdipzone
+     * @DateTime 2024-05-19 21:10:34
+     *
+     * @return int
+     */
+    private function randomInterval():int
+    {
+        if($this->random_factor>0)
+        {
+            return mt_rand(0, $this->random_factor);
+        }
+
+        return 0;
+    }
+
+    /**
      * 退避算法计算，获取计算结果
      * 计算结果包括是否可以重试及重试等待时间间隔
      *
@@ -105,6 +150,9 @@ class ExponentialBackoff implements \Backoff\IBackoff
         {
             $retry_interval = $this->max_retry_interval;
         }
+
+        // 增加随机因子
+        $retry_interval = $retry_interval + $this->randomInterval();
 
         $response = new \Backoff\Response(true, $retry_interval);
         return $response;
