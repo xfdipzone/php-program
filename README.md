@@ -75,3 +75,7 @@ php开发的程序，类库，小工具，不定期更新。
 - [php 退避算法类](https://github.com/xfdipzone/php-program/tree/master/php-backoff) (php-backoff)
 
 ---
+
+### 31 ~ 40
+
+- [php 还原 print_r 打印数据为原始数组](https://github.com/xfdipzone/php-program/tree/master/php-restore-print) (php-restore-print)
