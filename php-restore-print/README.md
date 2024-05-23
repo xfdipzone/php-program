@@ -25,7 +25,6 @@ php 原生没有方法可以把 print_r() 方法打印后的数据还原为原�
 ## 演示
 
 ```php
-<?php
 require 'RestorePrint.php';
 
 $print_r_data = <<<TXT
