@@ -89,7 +89,7 @@ class Queue
         {
             return new \DEQue\Response(\DEQue\ErrCode::FULL);
         }
-    
+
         // 检查类型是否支持头部入队
         if($this->type==\DEQue\Type::FRONT_ONLY_OUT)
         {
@@ -131,11 +131,11 @@ class Queue
         {
             return new \DEQue\Response(\DEQue\ErrCode::FULL);
         }
-    
+
         // 检查类型是否支持尾部入队
-        if($this->type==\DEQue\Type::FRONT_ONLY_OUT)
+        if($this->type==\DEQue\Type::REAR_ONLY_OUT)
         {
-            return new \DEQue\Response(\DEQue\ErrCode::FRONT_ENQUEUE_RESTRICTED);
+            return new \DEQue\Response(\DEQue\ErrCode::REAR_ENQUEUE_RESTRICTED);
         }
 
         // 插入元素
