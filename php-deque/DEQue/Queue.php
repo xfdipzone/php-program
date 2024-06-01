@@ -99,6 +99,12 @@ class Queue
         // 插入元素
         array_unshift($this->queue, $item);
 
+        // 更新头部插入的元素数量
+        if($this->type==\DEQue\Type::SAME_IN_OUT)
+        {
+            $this->incrFrontNum(1);
+        }
+
         return new \DEQue\Response(0);
     }
 
@@ -112,7 +118,28 @@ class Queue
      */
     public function popFront():\DEQue\Response
     {
-        return new \DEQue\Response(0);
+        // 检查队列是否为空
+        if($this->isEmpty())
+        {
+            return new \DEQue\Response(\DEQue\ErrCode::EMPTY);
+        }
+
+        // 检查类型是否支持头部出队
+        if($this->type==\DEQue\Type::FRONT_ONLY_IN)
+        {
+            return new \DEQue\Response(\DEQue\ErrCode::FRONT_DEQUEUE_RESTRICTED);
+        }
+
+        // 从头部获取元素
+        $item = array_shift($this->queue);
+
+        // 更新头部插入的元素数量
+        if($this->type==\DEQue\Type::SAME_IN_OUT)
+        {
+            $this->incrFrontNum(-1);
+        }
+
+        return new \DEQue\Response(0, $item);
     }
 
     /**
@@ -141,6 +168,12 @@ class Queue
         // 插入元素
         array_push($this->queue, $item);
 
+        // 更新尾部插入的元素数量
+        if($this->type==\DEQue\Type::SAME_IN_OUT)
+        {
+            $this->incrRearNum(1);
+        }
+
         return new \DEQue\Response(0);
     }
 
@@ -154,7 +187,28 @@ class Queue
      */
     public function popRear():\DEQue\Response
     {
-        return new \DEQue\Response(0);
+        // 检查队列是否为空
+        if($this->isEmpty())
+        {
+            return new \DEQue\Response(\DEQue\ErrCode::EMPTY);
+        }
+
+        // 检查类型是否支持尾部出队
+        if($this->type==\DEQue\Type::REAR_ONLY_IN)
+        {
+            return new \DEQue\Response(\DEQue\ErrCode::REAR_DEQUEUE_RESTRICTED);
+        }
+
+        // 从尾部获取元素
+        $item = array_pop($this->queue);
+
+        // 更新尾部插入的元素数量
+        if($this->type==\DEQue\Type::SAME_IN_OUT)
+        {
+            $this->incrRearNum(-1);
+        }
+
+        return new \DEQue\Response(0, $item);
     }
 
     /**
@@ -167,7 +221,7 @@ class Queue
      */
     private function isFull():bool
     {
-        if($this->maxLength==0 || $this->maxLength>count($this->queue))
+        if($this->maxLength==0 || $this->maxLength>$this->length())
         {
             return false;
         }
@@ -175,4 +229,64 @@ class Queue
         return true;
     }
 
+    /**
+     * 判断队列是否为空
+     *
+     * @author fdipzone
+     * @DateTime 2024-06-01 22:20:56
+     *
+     * @return boolean
+     */
+    private function isEmpty():bool
+    {
+        if($this->length()==0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 获取队列长度
+     *
+     * @author fdipzone
+     * @DateTime 2024-06-01 22:18:14
+     *
+     * @return int
+     */
+    private function length():int
+    {
+        return count($this->queue);
+    }
+
+    /**
+     * 更新头部插入的元素数量
+     * 正为自增，负为自减
+     *
+     * @author fdipzone
+     * @DateTime 2024-06-01 22:03:21
+     *
+     * @param int $num 自增的数量
+     * @return void
+     */
+    private function incrFrontNum(int $num):void
+    {
+        $this->frontNum = $this->frontNum + $num;
+    }
+
+    /**
+     * 更新尾部插入的元素数量
+     * 正为自增，负为自减
+     *
+     * @author fdipzone
+     * @DateTime 2024-06-01 22:03:24
+     *
+     * @param int $num 自增的数量
+     * @return void
+     */
+    private function incrRearNum(int $num):void
+    {
+        $this->rearNum = $this->rearNum + $num;
+    }
 }
