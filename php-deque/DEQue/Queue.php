@@ -130,6 +130,12 @@ class Queue
             return new \DEQue\Response(\DEQue\ErrCode::FRONT_DEQUEUE_RESTRICTED);
         }
 
+        // 检查出队与入队是否同一端
+        if($this->type==\DEQue\Type::SAME_IN_OUT && $this->frontNum==0)
+        {
+            return new \DEQue\Response(\DEQue\ErrCode::DIFFERENT_ENDPOINT);
+        }
+
         // 从头部获取元素
         $item = array_shift($this->queue);
 
@@ -197,6 +203,12 @@ class Queue
         if($this->type==\DEQue\Type::REAR_ONLY_IN)
         {
             return new \DEQue\Response(\DEQue\ErrCode::REAR_DEQUEUE_RESTRICTED);
+        }
+
+        // 检查出队与入队是否同一端
+        if($this->type==\DEQue\Type::SAME_IN_OUT && $this->rearNum==0)
+        {
+            return new \DEQue\Response(\DEQue\ErrCode::DIFFERENT_ENDPOINT);
         }
 
         // 从尾部获取元素
