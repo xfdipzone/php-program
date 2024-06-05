@@ -31,6 +31,9 @@ class ErrCode
     // 错误：出队端与入队端不一致
     const DIFFERENT_ENDPOINT = 7;
 
+    // 错误：加锁超时
+    const TRYLOCK_TIMEOUT = 8;
+
     // 错误码与错误信息对应关系
     private static $map = [
         self::FULL => '队列已满',
@@ -40,6 +43,7 @@ class ErrCode
         self::REAR_ENQUEUE_RESTRICTED => '尾部入队受限',
         self::REAR_DEQUEUE_RESTRICTED => '尾部出队受限',
         self::DIFFERENT_ENDPOINT => '出队端与入队端不一致',
+        self::TRYLOCK_TIMEOUT => '加锁超时',
     ];
 
     /**

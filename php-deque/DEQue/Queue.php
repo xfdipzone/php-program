@@ -12,6 +12,13 @@ namespace DEQue;
 class Queue
 {
     /**
+     * 并发锁
+     *
+     * @var \SyncMutex
+     */
+    private $mutex;
+
+    /**
      * 队列容器，使用数组存储
      *
      * @var array
@@ -47,16 +54,30 @@ class Queue
     private $rearNum = 0;
 
     /**
+     * 加锁超时时间(ms)
+     *
+     * @var int
+     */
+    private $lock_timeout = 100;
+
+    /**
      * 初始化
      *
      * @author fdipzone
      * @DateTime 2024-05-31 10:23:17
      *
+     * @param string $name 队列名称
      * @param int $type 队列类型
      * @param int $maxLength 队列长度，默认不限制
      */
-    public function __construct(int $type, int $maxLength=0)
+    public function __construct(string $name, int $type, int $maxLength=0)
     {
+        // 检查队列名称
+        if(empty($name))
+        {
+            throw new \Exception('queue name is empty');
+        }
+
         // 检查队列类型
         if(!\DEQue\Type::check($type))
         {
@@ -71,6 +92,9 @@ class Queue
 
         $this->type = $type;
         $this->maxLength = $maxLength;
+
+        // 创建并发锁
+        $this->mutex = new \SyncMutex($name);
     }
 
     /**
@@ -84,28 +108,42 @@ class Queue
      */
     public function pushFront(\DEQue\Item $item):\DEQue\Response
     {
-        // 检查队列是否已满
-        if($this->isFull())
+        // 加锁
+        if(!$this->mutex->lock($this->lock_timeout))
         {
-            return new \DEQue\Response(\DEQue\ErrCode::FULL);
+            return new \DEQue\Response(\DEQue\ErrCode::TRYLOCK_TIMEOUT);
         }
 
-        // 检查类型是否支持头部入队
-        if($this->type==\DEQue\Type::FRONT_ONLY_OUT)
+        try
         {
-            return new \DEQue\Response(\DEQue\ErrCode::FRONT_ENQUEUE_RESTRICTED);
+            // 检查队列是否已满
+            if($this->isFull())
+            {
+                return new \DEQue\Response(\DEQue\ErrCode::FULL);
+            }
+
+            // 检查类型是否支持头部入队
+            if($this->type==\DEQue\Type::FRONT_ONLY_OUT)
+            {
+                return new \DEQue\Response(\DEQue\ErrCode::FRONT_ENQUEUE_RESTRICTED);
+            }
+
+            // 插入元素
+            array_unshift($this->queue, $item);
+
+            // 更新头部插入的元素数量
+            if($this->type==\DEQue\Type::SAME_IN_OUT)
+            {
+                $this->incrFrontNum(1);
+            }
+
+            return new \DEQue\Response(0);
         }
-
-        // 插入元素
-        array_unshift($this->queue, $item);
-
-        // 更新头部插入的元素数量
-        if($this->type==\DEQue\Type::SAME_IN_OUT)
+        finally
         {
-            $this->incrFrontNum(1);
+            // 解锁
+            $this->mutex->unlock();
         }
-
-        return new \DEQue\Response(0);
     }
 
     /**
@@ -118,34 +156,48 @@ class Queue
      */
     public function popFront():\DEQue\Response
     {
+        // 加锁
+        if(!$this->mutex->lock($this->lock_timeout))
+        {
+            return new \DEQue\Response(\DEQue\ErrCode::TRYLOCK_TIMEOUT);
+        }
+
         // 检查队列是否为空
         if($this->isEmpty())
         {
             return new \DEQue\Response(\DEQue\ErrCode::EMPTY);
         }
 
-        // 检查类型是否支持头部出队
-        if($this->type==\DEQue\Type::FRONT_ONLY_IN)
+        try
         {
-            return new \DEQue\Response(\DEQue\ErrCode::FRONT_DEQUEUE_RESTRICTED);
-        }
+            // 检查类型是否支持头部出队
+            if($this->type==\DEQue\Type::FRONT_ONLY_IN)
+            {
+                return new \DEQue\Response(\DEQue\ErrCode::FRONT_DEQUEUE_RESTRICTED);
+            }
 
-        // 检查出队与入队是否同一端
-        if($this->type==\DEQue\Type::SAME_IN_OUT && $this->frontNum==0)
+            // 检查出队与入队是否同一端
+            if($this->type==\DEQue\Type::SAME_IN_OUT && $this->frontNum==0)
+            {
+                return new \DEQue\Response(\DEQue\ErrCode::DIFFERENT_ENDPOINT);
+            }
+
+            // 从头部获取元素
+            $item = array_shift($this->queue);
+
+            // 更新头部插入的元素数量
+            if($this->type==\DEQue\Type::SAME_IN_OUT)
+            {
+                $this->incrFrontNum(-1);
+            }
+
+            return new \DEQue\Response(0, $item);
+        }
+        finally
         {
-            return new \DEQue\Response(\DEQue\ErrCode::DIFFERENT_ENDPOINT);
+            // 解锁
+            $this->mutex->unlock();
         }
-
-        // 从头部获取元素
-        $item = array_shift($this->queue);
-
-        // 更新头部插入的元素数量
-        if($this->type==\DEQue\Type::SAME_IN_OUT)
-        {
-            $this->incrFrontNum(-1);
-        }
-
-        return new \DEQue\Response(0, $item);
     }
 
     /**
@@ -159,28 +211,42 @@ class Queue
      */
     public function pushRear(\DEQue\Item $item):\DEQue\Response
     {
-        // 检查队列是否已满
-        if($this->isFull())
+        // 加锁
+        if(!$this->mutex->lock($this->lock_timeout))
         {
-            return new \DEQue\Response(\DEQue\ErrCode::FULL);
+            return new \DEQue\Response(\DEQue\ErrCode::TRYLOCK_TIMEOUT);
         }
 
-        // 检查类型是否支持尾部入队
-        if($this->type==\DEQue\Type::REAR_ONLY_OUT)
+        try
         {
-            return new \DEQue\Response(\DEQue\ErrCode::REAR_ENQUEUE_RESTRICTED);
+            // 检查队列是否已满
+            if($this->isFull())
+            {
+                return new \DEQue\Response(\DEQue\ErrCode::FULL);
+            }
+
+            // 检查类型是否支持尾部入队
+            if($this->type==\DEQue\Type::REAR_ONLY_OUT)
+            {
+                return new \DEQue\Response(\DEQue\ErrCode::REAR_ENQUEUE_RESTRICTED);
+            }
+
+            // 插入元素
+            array_push($this->queue, $item);
+
+            // 更新尾部插入的元素数量
+            if($this->type==\DEQue\Type::SAME_IN_OUT)
+            {
+                $this->incrRearNum(1);
+            }
+
+            return new \DEQue\Response(0);
         }
-
-        // 插入元素
-        array_push($this->queue, $item);
-
-        // 更新尾部插入的元素数量
-        if($this->type==\DEQue\Type::SAME_IN_OUT)
+        finally
         {
-            $this->incrRearNum(1);
+            // 解锁
+            $this->mutex->unlock();
         }
-
-        return new \DEQue\Response(0);
     }
 
     /**
@@ -193,34 +259,48 @@ class Queue
      */
     public function popRear():\DEQue\Response
     {
-        // 检查队列是否为空
-        if($this->isEmpty())
+        // 加锁
+        if(!$this->mutex->lock($this->lock_timeout))
         {
-            return new \DEQue\Response(\DEQue\ErrCode::EMPTY);
+            return new \DEQue\Response(\DEQue\ErrCode::TRYLOCK_TIMEOUT);
         }
 
-        // 检查类型是否支持尾部出队
-        if($this->type==\DEQue\Type::REAR_ONLY_IN)
+        try
         {
-            return new \DEQue\Response(\DEQue\ErrCode::REAR_DEQUEUE_RESTRICTED);
-        }
+            // 检查队列是否为空
+            if($this->isEmpty())
+            {
+                return new \DEQue\Response(\DEQue\ErrCode::EMPTY);
+            }
 
-        // 检查出队与入队是否同一端
-        if($this->type==\DEQue\Type::SAME_IN_OUT && $this->rearNum==0)
+            // 检查类型是否支持尾部出队
+            if($this->type==\DEQue\Type::REAR_ONLY_IN)
+            {
+                return new \DEQue\Response(\DEQue\ErrCode::REAR_DEQUEUE_RESTRICTED);
+            }
+
+            // 检查出队与入队是否同一端
+            if($this->type==\DEQue\Type::SAME_IN_OUT && $this->rearNum==0)
+            {
+                return new \DEQue\Response(\DEQue\ErrCode::DIFFERENT_ENDPOINT);
+            }
+
+            // 从尾部获取元素
+            $item = array_pop($this->queue);
+
+            // 更新尾部插入的元素数量
+            if($this->type==\DEQue\Type::SAME_IN_OUT)
+            {
+                $this->incrRearNum(-1);
+            }
+
+            return new \DEQue\Response(0, $item);
+        }
+        finally
         {
-            return new \DEQue\Response(\DEQue\ErrCode::DIFFERENT_ENDPOINT);
+            // 解锁
+            $this->mutex->unlock();
         }
-
-        // 从尾部获取元素
-        $item = array_pop($this->queue);
-
-        // 更新尾部插入的元素数量
-        if($this->type==\DEQue\Type::SAME_IN_OUT)
-        {
-            $this->incrRearNum(-1);
-        }
-
-        return new \DEQue\Response(0, $item);
     }
 
     /**

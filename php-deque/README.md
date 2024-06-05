@@ -8,13 +8,35 @@ php 实现的双向队列（double-ended queue）
 
 基于数组存储，支持限定队列长度，入队受限，出队受限，及入队与出队必须同端几种设置
 
+使用 `SyncMutex` 实现并发安全
+
+[https://www.php.net/manual/zh/class.syncmutex.php](<https://www.php.net/manual/zh/class.syncmutex.php>)
+
+---
+
+## 扩展依赖
+
+**SyncMutex** 需要安装 `sync` 扩展
+
+检查是否已安装 `sync` 扩展
+
+```shell
+php -m | grep sync
+```
+
+安装 `sync` 扩展
+
+```shell
+pecl install sync
+```
+
 ---
 
 ## 功能
 
 支持以下队列类型
 
-- 头部与尾部都能入队与出队
+- 头部与尾部都能入队与出队，没有限制
 
 - 限制头部只能入队不能出队，尾部可入队出队
 
@@ -33,8 +55,8 @@ php 实现的双向队列（double-ended queue）
 ```php
 require 'autoload.php';
 
-// 没有限制
-$de_queue = new \DEQue\Queue(\DEQue\Type::UNRESTRICTED, 10);
+// 入队出队不限制
+$de_queue = new \DEQue\Queue('double_queue', \DEQue\Type::UNRESTRICTED, 10);
 $de_queue->pushFront(new \DEQue\Item('a'));
 $de_queue->pushRear(new \DEQue\Item('b'));
 $de_queue->pushFront(new \DEQue\Item('c'));
