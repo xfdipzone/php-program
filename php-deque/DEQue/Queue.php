@@ -162,14 +162,14 @@ class Queue
             return new \DEQue\Response(\DEQue\ErrCode::TRYLOCK_TIMEOUT);
         }
 
-        // 检查队列是否为空
-        if($this->isEmpty())
-        {
-            return new \DEQue\Response(\DEQue\ErrCode::EMPTY);
-        }
-
         try
         {
+            // 检查队列是否为空
+            if($this->isEmpty())
+            {
+                return new \DEQue\Response(\DEQue\ErrCode::EMPTY);
+            }
+
             // 检查类型是否支持头部出队
             if($this->type==\DEQue\Type::FRONT_ONLY_IN)
             {

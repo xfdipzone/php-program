@@ -80,4 +80,4 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 还原 print_r 打印数据为原始数组](https://github.com/xfdipzone/php-program/tree/master/php-restore-print) (php-restore-print)
 
-- [php 双向队列](https://github.com/xfdipzone/php-program/tree/master/php-deque) (php-deque)
+- [php 双向队列类](https://github.com/xfdipzone/php-program/tree/master/php-deque) (php-deque)
