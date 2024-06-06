@@ -56,7 +56,7 @@ pecl install sync
 require 'autoload.php';
 
 // 入队出队不限制
-$de_queue = new \DEQue\Queue('double_queue', \DEQue\Type::UNRESTRICTED, 10);
+$de_queue = \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, 10);
 $de_queue->pushFront(new \DEQue\Item('a'));
 $de_queue->pushRear(new \DEQue\Item('b'));
 $de_queue->pushFront(new \DEQue\Item('c'));

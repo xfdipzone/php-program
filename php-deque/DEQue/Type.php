@@ -26,7 +26,7 @@ class Type
     const REAR_ONLY_OUT = 5;
 
     // 队列类型：头部尾部均可入队出队，限制元素只能在入队端出队
-    const SAME_IN_OUT = 6;
+    const SAME_ENDPOINT = 6;
 
     /**
      * 判断队列类型是否有效
@@ -45,7 +45,7 @@ class Type
             self::FRONT_ONLY_OUT,
             self::REAR_ONLY_IN,
             self::REAR_ONLY_OUT,
-            self::SAME_IN_OUT
+            self::SAME_ENDPOINT
         ];
 
         if(in_array($type, $types))

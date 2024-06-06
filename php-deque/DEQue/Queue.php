@@ -12,6 +12,16 @@ namespace DEQue;
 class Queue
 {
     /**
+     * 双向队列实例集合
+     *
+     * @var array
+     * @author fdipzone
+     * @DateTime 2024-06-06 22:47:44
+     *
+     */
+    private static $instances = [];
+
+    /**
      * 并发锁
      *
      * @var \SyncMutex
@@ -61,16 +71,17 @@ class Queue
     private $lock_timeout = 100;
 
     /**
-     * 初始化
+     * 获取双向队列实例
      *
      * @author fdipzone
-     * @DateTime 2024-05-31 10:23:17
+     * @DateTime 2024-06-06 22:49:41
      *
      * @param string $name 队列名称
      * @param int $type 队列类型
      * @param int $maxLength 队列长度，默认不限制
+     * @return \DEQue\Queue
      */
-    public function __construct(string $name, int $type, int $maxLength=0)
+    public static function getInstance(string $name, int $type, int $maxLength=0):\DEQue\Queue
     {
         // 检查队列名称
         if(empty($name))
@@ -90,11 +101,54 @@ class Queue
             throw new \Exception('queue max length invalid');
         }
 
+        // 判断单例是否存在
+        $key = self::instanceKey($name, $type, $maxLength);
+        if(isset(self::$instances[$key]))
+        {
+            return self::$instances[$key];
+        }
+        else
+        {
+            $instance = new \DEQue\Queue($name, $type, $maxLength);
+            self::$instances[$key] = $instance;
+            return $instance;
+        }
+    }
+
+    /**
+     * 创建实例唯一key
+     *
+     * @author fdipzone
+     * @DateTime 2024-06-06 23:26:21
+     *
+     * @param string $name 队列名称
+     * @param int $type 队列类型
+     * @param int $maxLength 队列长度，默认不限制
+     * @return string
+     */
+    private static function instanceKey(string $name, int $type, int $maxLength):string
+    {
+        return sprintf("q:%s:%d:%d", $name, $type, $maxLength);
+    }
+
+    /**
+     * 初始化
+     *
+     * @author fdipzone
+     * @DateTime 2024-05-31 10:23:17
+     *
+     * @param string $name 队列名称
+     * @param int $type 队列类型
+     * @param int $maxLength 队列长度，默认不限制
+     */
+    private function __construct(string $name, int $type, int $maxLength=0)
+    {
         $this->type = $type;
         $this->maxLength = $maxLength;
 
         // 创建并发锁
-        $this->mutex = new \SyncMutex($name);
+        $mutex_key = self::instanceKey($name, $type, $maxLength);
+        $this->mutex = new \SyncMutex($mutex_key);
     }
 
     /**
@@ -132,7 +186,7 @@ class Queue
             array_unshift($this->queue, $item);
 
             // 更新头部插入的元素数量
-            if($this->type==\DEQue\Type::SAME_IN_OUT)
+            if($this->type==\DEQue\Type::SAME_ENDPOINT)
             {
                 $this->incrFrontNum(1);
             }
@@ -177,7 +231,7 @@ class Queue
             }
 
             // 检查出队与入队是否同一端
-            if($this->type==\DEQue\Type::SAME_IN_OUT && $this->frontNum==0)
+            if($this->type==\DEQue\Type::SAME_ENDPOINT && $this->frontNum==0)
             {
                 return new \DEQue\Response(\DEQue\ErrCode::DIFFERENT_ENDPOINT);
             }
@@ -186,7 +240,7 @@ class Queue
             $item = array_shift($this->queue);
 
             // 更新头部插入的元素数量
-            if($this->type==\DEQue\Type::SAME_IN_OUT)
+            if($this->type==\DEQue\Type::SAME_ENDPOINT)
             {
                 $this->incrFrontNum(-1);
             }
@@ -235,7 +289,7 @@ class Queue
             array_push($this->queue, $item);
 
             // 更新尾部插入的元素数量
-            if($this->type==\DEQue\Type::SAME_IN_OUT)
+            if($this->type==\DEQue\Type::SAME_ENDPOINT)
             {
                 $this->incrRearNum(1);
             }
@@ -280,7 +334,7 @@ class Queue
             }
 
             // 检查出队与入队是否同一端
-            if($this->type==\DEQue\Type::SAME_IN_OUT && $this->rearNum==0)
+            if($this->type==\DEQue\Type::SAME_ENDPOINT && $this->rearNum==0)
             {
                 return new \DEQue\Response(\DEQue\ErrCode::DIFFERENT_ENDPOINT);
             }
@@ -289,7 +343,7 @@ class Queue
             $item = array_pop($this->queue);
 
             // 更新尾部插入的元素数量
-            if($this->type==\DEQue\Type::SAME_IN_OUT)
+            if($this->type==\DEQue\Type::SAME_ENDPOINT)
             {
                 $this->incrRearNum(-1);
             }
@@ -301,6 +355,30 @@ class Queue
             // 解锁
             $this->mutex->unlock();
         }
+    }
+
+    /**
+     * 清空队列
+     *
+     * @author fdipzone
+     * @DateTime 2024-06-06 23:10:11
+     *
+     * @return boolean
+     */
+    public function clear():bool
+    {
+        // 加锁
+        if(!$this->mutex->lock($this->lock_timeout))
+        {
+            return false;
+        }
+
+        $this->queue = [];
+        $this->frontNum = 0;
+        $this->rearNum = 0;
+
+        // 解锁
+        return $this->mutex->unlock();
     }
 
     /**
