@@ -40,7 +40,7 @@ class Queue
      *
      * @var int
      */
-    private $maxLength = 0;
+    private $max_length = 0;
 
     /**
      * 队列类型
@@ -54,14 +54,14 @@ class Queue
      *
      * @var int
      */
-    private $frontNum = 0;
+    private $front_num = 0;
 
     /**
      * 从队列尾部插入的元素个数
      *
      * @var int
      */
-    private $rearNum = 0;
+    private $rear_num = 0;
 
     /**
      * 加锁超时时间(ms)
@@ -78,10 +78,10 @@ class Queue
      *
      * @param string $name 队列名称
      * @param int $type 队列类型
-     * @param int $maxLength 队列长度，默认不限制
+     * @param int $max_length 队列长度，默认不限制
      * @return \DEQue\Queue
      */
-    public static function getInstance(string $name, int $type, int $maxLength=0):\DEQue\Queue
+    public static function getInstance(string $name, int $type, int $max_length=0):\DEQue\Queue
     {
         // 检查队列名称
         if(empty($name))
@@ -96,20 +96,20 @@ class Queue
         }
 
         // 检查队列长度
-        if($maxLength<0)
+        if($max_length<0)
         {
             throw new \Exception('queue max length invalid');
         }
 
         // 判断单例是否存在
-        $key = self::instanceKey($name, $type, $maxLength);
+        $key = self::instanceKey($name, $type, $max_length);
         if(isset(self::$instances[$key]))
         {
             return self::$instances[$key];
         }
         else
         {
-            $instance = new \DEQue\Queue($name, $type, $maxLength);
+            $instance = new \DEQue\Queue($name, $type, $max_length);
             self::$instances[$key] = $instance;
             return $instance;
         }
@@ -123,12 +123,12 @@ class Queue
      *
      * @param string $name 队列名称
      * @param int $type 队列类型
-     * @param int $maxLength 队列长度，默认不限制
+     * @param int $max_length 队列长度，默认不限制
      * @return string
      */
-    private static function instanceKey(string $name, int $type, int $maxLength):string
+    private static function instanceKey(string $name, int $type, int $max_length):string
     {
-        return sprintf("q:%s:%d:%d", $name, $type, $maxLength);
+        return sprintf("q:%s:%d:%d", $name, $type, $max_length);
     }
 
     /**
@@ -139,15 +139,15 @@ class Queue
      *
      * @param string $name 队列名称
      * @param int $type 队列类型
-     * @param int $maxLength 队列长度，默认不限制
+     * @param int $max_length 队列长度，默认不限制
      */
-    private function __construct(string $name, int $type, int $maxLength=0)
+    private function __construct(string $name, int $type, int $max_length=0)
     {
         $this->type = $type;
-        $this->maxLength = $maxLength;
+        $this->max_length = $max_length;
 
         // 创建并发锁
-        $mutex_key = self::instanceKey($name, $type, $maxLength);
+        $mutex_key = self::instanceKey($name, $type, $max_length);
         $this->mutex = new \SyncMutex($mutex_key);
     }
 
@@ -231,7 +231,7 @@ class Queue
             }
 
             // 检查出队与入队是否同一端
-            if($this->type==\DEQue\Type::SAME_ENDPOINT && $this->frontNum==0)
+            if($this->type==\DEQue\Type::SAME_ENDPOINT && $this->front_num==0)
             {
                 return new \DEQue\Response(\DEQue\ErrCode::DIFFERENT_ENDPOINT);
             }
@@ -334,7 +334,7 @@ class Queue
             }
 
             // 检查出队与入队是否同一端
-            if($this->type==\DEQue\Type::SAME_ENDPOINT && $this->rearNum==0)
+            if($this->type==\DEQue\Type::SAME_ENDPOINT && $this->rear_num==0)
             {
                 return new \DEQue\Response(\DEQue\ErrCode::DIFFERENT_ENDPOINT);
             }
@@ -374,8 +374,8 @@ class Queue
         }
 
         $this->queue = [];
-        $this->frontNum = 0;
-        $this->rearNum = 0;
+        $this->front_num = 0;
+        $this->rear_num = 0;
 
         // 解锁
         return $this->mutex->unlock();
@@ -391,7 +391,7 @@ class Queue
      */
     private function isFull():bool
     {
-        if($this->maxLength==0 || $this->maxLength>$this->length())
+        if($this->max_length==0 || $this->max_length>$this->length())
         {
             return false;
         }
@@ -442,7 +442,7 @@ class Queue
      */
     private function incrFrontNum(int $num):void
     {
-        $this->frontNum = $this->frontNum + $num;
+        $this->front_num = $this->front_num + $num;
     }
 
     /**
@@ -457,6 +457,6 @@ class Queue
      */
     private function incrRearNum(int $num):void
     {
-        $this->rearNum = $this->rearNum + $num;
+        $this->rear_num = $this->rear_num + $num;
     }
 }

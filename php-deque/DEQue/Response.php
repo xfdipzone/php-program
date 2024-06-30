@@ -23,7 +23,7 @@ class Response
      *
      * @var string
      */
-    private $errMsg;
+    private $err_msg;
 
     /**
      * 队列元素，出队时使用
@@ -44,7 +44,7 @@ class Response
     public function __construct(int $error, \DEQue\Item $item=null)
     {
         $this->error = $error;
-        $this->errMsg = \DEQue\ErrCode::msg($error);
+        $this->err_msg = \DEQue\ErrCode::msg($error);
         $this->item = $item;
     }
 
@@ -71,7 +71,7 @@ class Response
      */
     public function errMsg():string
     {
-        return $this->errMsg;
+        return $this->err_msg;
     }
 
     /**
