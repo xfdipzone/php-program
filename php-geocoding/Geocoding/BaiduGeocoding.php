@@ -51,9 +51,9 @@ class BaiduGeocoding implements \Geocoding\IGeocoding
         // 请求参数
         $request = array(
             'ak' => $this->config->ak(),
-            'coordtype' => 'wgs84ll',
+            'coordtype' => $this->config->coordType(),
             'location' => $latitude.','.$longitude,
-            'output' => 'json',
+            'output' => $this->config->output(),
             'extensions_poi' => $extensions_poi,
         );
 

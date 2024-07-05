@@ -39,6 +39,13 @@ class BaiduGeocodingConfig implements \Geocoding\Config\IGeocodingConfig
     private $geocoding_api = 'https://api.map.baidu.com/geocoding/v3/';
 
     /**
+     * 坐标类型
+     *
+     * @var string
+     */
+    private $coord_type = 'wgs84ll';
+
+    /**
      * 输出格式
      * json/xml
      *
@@ -121,6 +128,19 @@ class BaiduGeocodingConfig implements \Geocoding\Config\IGeocodingConfig
     public function geocodingApi():string
     {
         return $this->geocoding_api;
+    }
+
+    /**
+     * 获取坐标类型
+     *
+     * @author fdipzone
+     * @DateTime 2024-07-05 21:46:34
+     *
+     * @return string
+     */
+    public function coordType():string
+    {
+        return $this->coord_type;
     }
 
     /**
