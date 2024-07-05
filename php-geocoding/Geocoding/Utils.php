@@ -28,7 +28,7 @@ class Utils
         if(substr($url, 0, 5)=='https')
         {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true);  // 从证书中检查SSL加密算法是否存在
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);  // 从证书中检查SSL加密算法是否存在
         }
 
         curl_setopt($ch, CURLOPT_URL, $url);

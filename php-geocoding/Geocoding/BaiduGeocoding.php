@@ -16,11 +16,11 @@ namespace Geocoding;
 class BaiduGeocoding implements \Geocoding\IGeocoding
 {
     /**
-     * 百度 application key
+     * 百度地理位置服务配置
      *
-     * @var string
+     * @var \Geocoding\Config\BaiduGeocodingConfig
      */
-    private $ak;
+    private $config;
 
     /**
      * 初始化
@@ -30,14 +30,9 @@ class BaiduGeocoding implements \Geocoding\IGeocoding
      *
      * @param string $ak application key
      */
-    public function __construct(string $ak)
+    public function __construct(\Geocoding\Config\BaiduGeocodingConfig $config)
     {
-        if(empty($ak))
-        {
-            throw new \Exception('baidu-geocoding: application key is empty');
-        }
-
-        $this->ak = $ak;
+        $this->config = $config;
     }
 
     /**
@@ -48,12 +43,25 @@ class BaiduGeocoding implements \Geocoding\IGeocoding
      *
      * @param float $longitude 经度
      * @param float $latitude 纬度
-     * @param int $extensions_poi 是否返回周边数据
+     * @param int $extensions_poi 是否返回周边数据 在 \Geocoding\ExtensionsPoi 中定义
      * @return \Geocoding\AddressComponentResponse
      */
-    public function getAddressComponent(float $longitude, float $latitude, int $extensions_poi=0):\Geocoding\AddressComponentResponse
+    public function getAddressComponent(float $longitude, float $latitude, int $extensions_poi=\Geocoding\ExtensionsPoi::NO_POI):\Geocoding\AddressComponentResponse
     {
-        return new \Geocoding\AddressComponentResponse;
+        // 请求参数
+        $request = array(
+            'ak' => $this->config->ak(),
+            'coordtype' => 'wgs84ll',
+            'location' => $latitude.','.$longitude,
+            'output' => 'json',
+            'extensions_poi' => $extensions_poi,
+        );
+
+        // 发起请求
+        $ret = \Geocoding\Utils::HttpRequest($this->config->reverseGeocodingApi(), $request, $this->config->timeout());
+
+        $response = new \Geocoding\AddressComponentResponse($ret['error'], $ret['err_msg'], $ret['response']);
+        return $response;
     }
 
     /**
@@ -68,6 +76,18 @@ class BaiduGeocoding implements \Geocoding\IGeocoding
      */
     public function getLocation(string $address, string $city=''):\Geocoding\LocationResponse
     {
-        return new \Geocoding\LocationResponse;
+        // 请求参数
+        $request = array(
+            'ak' => $this->config->ak(),
+            'address' => $address,
+            'city' => $city,
+            'output' => $this->config->output(),
+        );
+
+        // 发起请求
+        $ret = \Geocoding\Utils::HttpRequest($this->config->geocodingApi(), $request, $this->config->timeout());
+
+        $response = new \Geocoding\LocationResponse($ret['error'], $ret['err_msg'], $ret['response']);
+        return $response;
     }
 }
