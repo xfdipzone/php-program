@@ -1,5 +1,5 @@
 <?php
-namespace Geocoding;
+namespace Geocoding\Response;
 
 /**
  * 定义地址编码返回结构

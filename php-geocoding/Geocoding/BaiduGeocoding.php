@@ -44,9 +44,9 @@ class BaiduGeocoding implements \Geocoding\IGeocoding
      * @param float $longitude 经度
      * @param float $latitude 纬度
      * @param int $extensions_poi 是否返回周边数据 在 \Geocoding\ExtensionsPoi 中定义
-     * @return \Geocoding\AddressComponentResponse
+     * @return \Geocoding\Response\AddressComponentResponse
      */
-    public function getAddressComponent(float $longitude, float $latitude, int $extensions_poi=\Geocoding\ExtensionsPoi::NO_POI):\Geocoding\AddressComponentResponse
+    public function getAddressComponent(float $longitude, float $latitude, int $extensions_poi=\Geocoding\ExtensionsPoi::NO_POI):\Geocoding\Response\AddressComponentResponse
     {
         // 请求参数
         $request = array(
@@ -60,7 +60,7 @@ class BaiduGeocoding implements \Geocoding\IGeocoding
         // 发起请求
         $ret = \Geocoding\Utils::HttpRequest($this->config->reverseGeocodingApi(), $request, $this->config->timeout());
 
-        $response = new \Geocoding\AddressComponentResponse($ret['error'], $ret['err_msg'], $ret['response']);
+        $response = new \Geocoding\Response\AddressComponentResponse($ret['error'], $ret['err_msg'], $ret['response']);
         return $response;
     }
 
@@ -72,9 +72,9 @@ class BaiduGeocoding implements \Geocoding\IGeocoding
      *
      * @param string $address 地址
      * @param string $city 城市
-     * @return \Geocoding\LocationResponse
+     * @return \Geocoding\Response\LocationResponse
      */
-    public function getLocation(string $address, string $city=''):\Geocoding\LocationResponse
+    public function getLocation(string $address, string $city=''):\Geocoding\Response\LocationResponse
     {
         // 请求参数
         $request = array(
@@ -87,7 +87,7 @@ class BaiduGeocoding implements \Geocoding\IGeocoding
         // 发起请求
         $ret = \Geocoding\Utils::HttpRequest($this->config->geocodingApi(), $request, $this->config->timeout());
 
-        $response = new \Geocoding\LocationResponse($ret['error'], $ret['err_msg'], $ret['response']);
+        $response = new \Geocoding\Response\LocationResponse($ret['error'], $ret['err_msg'], $ret['response']);
         return $response;
     }
 }

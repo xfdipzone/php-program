@@ -20,9 +20,9 @@ interface IGeocoding
      * @param float $longitude 经度
      * @param float $latitude 纬度
      * @param int $extensions_poi 是否返回周边数据
-     * @return \Geocoding\AddressComponentResponse
+     * @return \Geocoding\Response\AddressComponentResponse
      */
-    public function getAddressComponent(float $longitude, float $latitude, int $extensions_poi=0):\Geocoding\AddressComponentResponse;
+    public function getAddressComponent(float $longitude, float $latitude, int $extensions_poi=0):\Geocoding\Response\AddressComponentResponse;
 
     /**
      * 根据地址与城市获取坐标（地址编码）
@@ -32,7 +32,7 @@ interface IGeocoding
      *
      * @param string $address 地址
      * @param string $city 城市
-     * @return \Geocoding\LocationResponse
+     * @return \Geocoding\Response\LocationResponse
      */
-    public function getLocation(string $address, string $city=''):\Geocoding\LocationResponse;
+    public function getLocation(string $address, string $city=''):\Geocoding\Response\LocationResponse;
 }
