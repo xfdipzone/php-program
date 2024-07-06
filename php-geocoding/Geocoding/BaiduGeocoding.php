@@ -26,9 +26,9 @@ class BaiduGeocoding implements \Geocoding\IGeocoding
      * 初始化
      *
      * @author fdipzone
-     * @DateTime 2024-07-04 19:48:48
+     * @DateTime 2024-07-06 19:24:43
      *
-     * @param string $ak application key
+     * @param \Geocoding\Config\BaiduGeocodingConfig $config 百度地理位置服务配置
      */
     public function __construct(\Geocoding\Config\BaiduGeocodingConfig $config)
     {

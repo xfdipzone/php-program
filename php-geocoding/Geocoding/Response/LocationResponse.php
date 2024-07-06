@@ -123,6 +123,7 @@ class LocationResponse
      * @DateTime 2024-07-05 19:20:14
      *
      * @return array
+     * [lng=>xxx, lat=>xxx]
      */
     public function location():array
     {

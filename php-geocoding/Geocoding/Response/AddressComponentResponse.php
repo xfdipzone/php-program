@@ -42,6 +42,13 @@ class AddressComponentResponse
     private $response = [];
 
     /**
+     * 地址结构
+     *
+     * @var \Geocoding\Response\AddressComponent
+     */
+    private $addressComponent;
+
+    /**
      * 初始化
      *
      * @author fdipzone
@@ -61,6 +68,9 @@ class AddressComponentResponse
         if($error==0)
         {
             $this->response = json_decode($raw_response, true);
+            
+            // 解析地址结构
+            $this->parseAddressComponent();
         }
     }
 
@@ -148,26 +158,46 @@ class AddressComponentResponse
      * @author fdipzone
      * @DateTime 2024-07-05 20:02:02
      *
-     * @return array
+     * @return \Geocoding\Response\AddressComponent
      */
-    public function addressComponent():array
+    public function addressComponent():\Geocoding\Response\AddressComponent
     {
-        $addressComponent = [];
+        return $this->addressComponent;
+    }
 
+    /**
+     * 解析地址结构
+     * 创建地址结构对象
+     *
+     * @author fdipzone
+     * @DateTime 2024-07-06 19:43:25
+     *
+     * @return void
+     */
+    private function parseAddressComponent():void
+    {
         if(isset($this->response['result']['addressComponent']))
         {
-            $addressComponent['country'] = $this->response['result']['addressComponent']['country'];
-            $addressComponent['province'] = $this->response['result']['addressComponent']['province'];
-            $addressComponent['city'] = $this->response['result']['addressComponent']['city'];
-            $addressComponent['district'] = $this->response['result']['addressComponent']['district'];
-            $addressComponent['town'] = $this->response['result']['addressComponent']['town'];
-            $addressComponent['street'] = $this->response['result']['addressComponent']['street'];
-            $addressComponent['street_number'] = $this->response['result']['addressComponent']['street_number'];
-            $addressComponent['adcode'] = $this->response['result']['addressComponent']['adcode'];
-            $addressComponent['distance'] = $this->response['result']['addressComponent']['distance'];
-            $addressComponent['direction'] = $this->response['result']['addressComponent']['direction'];
-        }
+            $country = $this->response['result']['addressComponent']['country'];
+            $province = $this->response['result']['addressComponent']['province'];
+            $city = $this->response['result']['addressComponent']['city'];
+            $district = $this->response['result']['addressComponent']['district'];
+            $town = $this->response['result']['addressComponent']['town'];
+            $street = $this->response['result']['addressComponent']['street'];
+            $street_number = $this->response['result']['addressComponent']['street_number'];
+            $adcode = $this->response['result']['addressComponent']['adcode'];
+            $distance = $this->response['result']['addressComponent']['distance'];
+            $direction = $this->response['result']['addressComponent']['direction'];
 
-        return $addressComponent;
+            $addressComponent = new \Geocoding\Response\AddressComponent($country, $province, $city, $district);
+            $addressComponent->setTown($town);
+            $addressComponent->setStreet($street);
+            $addressComponent->setStreetNumber($street_number);
+            $addressComponent->setAdcode($adcode);
+            $addressComponent->setDistance($distance);
+            $addressComponent->setDirection($direction);
+
+            $this->addressComponent = $addressComponent;
+        }
     }
 }

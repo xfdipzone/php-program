@@ -66,7 +66,7 @@ class BaiduGeocodingConfig implements \Geocoding\Config\IGeocodingConfig
      * @author fdipzone
      * @DateTime 2024-07-05 12:20:40
      *
-     * @param string $ak
+     * @param string $ak 百度 application key
      */
     public function __construct(string $ak)
     {
