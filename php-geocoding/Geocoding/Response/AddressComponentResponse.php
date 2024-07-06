@@ -68,7 +68,7 @@ class AddressComponentResponse
         if($error==0)
         {
             $this->response = json_decode($raw_response, true);
-            
+
             // 解析地址结构
             $this->parseAddressComponent();
         }
@@ -199,5 +199,8 @@ class AddressComponentResponse
 
             $this->addressComponent = $addressComponent;
         }
+
+        // 没有地址结构
+        $this->addressComponent = new \Geocoding\Response\AddressComponent('', '', '', '');
     }
 }

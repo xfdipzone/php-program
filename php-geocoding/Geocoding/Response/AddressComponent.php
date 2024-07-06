@@ -164,7 +164,7 @@ class AddressComponent
     {
         $this->town = $town;
     }
-    
+
     /**
      * 获取乡镇名
      *
