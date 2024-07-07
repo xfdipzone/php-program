@@ -199,8 +199,10 @@ class AddressComponentResponse
 
             $this->addressComponent = $addressComponent;
         }
-
-        // 没有地址结构
-        $this->addressComponent = new \Geocoding\Response\AddressComponent('', '', '', '');
+        else
+        {
+            // 没有地址结构
+            $this->addressComponent = new \Geocoding\Response\AddressComponent('', '', '', '');
+        }
     }
 }
