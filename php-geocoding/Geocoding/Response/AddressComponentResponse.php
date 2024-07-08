@@ -49,6 +49,13 @@ class AddressComponentResponse
     private $addressComponent;
 
     /**
+     * POI 集合
+     *
+     * @var array [] \Geocoding\Response\POI
+     */
+    private $poi_set = [];
+
+    /**
      * 初始化
      *
      * @author fdipzone
@@ -71,6 +78,9 @@ class AddressComponentResponse
 
             // 解析地址结构
             $this->parseAddressComponent();
+
+            // 解析 POI
+            $this->parsePoiSet();
         }
     }
 
@@ -166,6 +176,19 @@ class AddressComponentResponse
     }
 
     /**
+     * 获取 POI 集合
+     *
+     * @author fdipzone
+     * @DateTime 2024-07-08 21:42:37
+     *
+     * @return array
+     */
+    public function poiSet():array
+    {
+        return $this->poi_set;
+    }
+
+    /**
      * 解析地址结构
      * 创建地址结构对象
      *
@@ -203,6 +226,32 @@ class AddressComponentResponse
         {
             // 没有地址结构
             $this->addressComponent = new \Geocoding\Response\AddressComponent('', '', '', '');
+        }
+    }
+
+    /**
+     * 解析 POI 结构
+     * 创建 POI 集合
+     *
+     * @author fdipzone
+     * @DateTime 2024-07-08 21:41:43
+     *
+     * @return void
+     */
+    private function parsePoiSet():void
+    {
+        if(isset($this->response['result']['pois']))
+        {
+            $pois = $this->response['result']['pois'];
+            foreach($pois as $poi)
+            {
+                $o = new \Geocoding\Response\Poi($poi['addr'], $poi['name'], $poi['tag']);
+                $o->setPoint($poi['point']['x'], $poi['point']['y']);
+                $o->setDirection($poi['direction']);
+                $o->setDistance($poi['distance']);
+
+                array_push($this->poi_set, $o);
+            }
         }
     }
 }

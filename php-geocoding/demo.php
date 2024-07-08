@@ -12,6 +12,7 @@ $status = $response->status();
 $formatted_address = $response->formattedAddress();
 $business = $response->business();
 $address_component = $response->addressComponent();
+$poi_set = $response->poiSet();
 
 echo '> 逆地理编码（返回 POI）'.PHP_EOL;
 
@@ -21,6 +22,13 @@ if($status==0)
     printf("country: %s\nprovince: %s\ncity: %s\ndistrict: %s\ntown: %s\nstreet: %s\nstreet_number: %s\nadcode: %s\ndistance: %s\ndirection: %s\n\n",
     $address_component->country(), $address_component->province(), $address_component->city(), $address_component->district(), $address_component->town(),
     $address_component->street(), $address_component->streetNumber(), $address_component->adcode(), $address_component->distance(), $address_component->direction());
+
+    echo 'POI 集合'.PHP_EOL;
+    foreach($poi_set as $poi)
+    {
+        printf("addr: %s\nname: %s\ntag: %s\nlng: %f\nlat: %f\ndirection: %s\ndistance: %s\n\n",
+        $poi->addr(), $poi->name(), $poi->tag(), $poi->point()['lng'], $poi->point()['lat'], $poi->direction(), $poi->distance());
+    }
 
     echo '原始响应数据'.PHP_EOL;
     echo $response->rawResponse().PHP_EOL.PHP_EOL;
