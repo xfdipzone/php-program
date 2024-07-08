@@ -40,7 +40,7 @@ class Utils
 
         $response = curl_exec($ch);
         $error = curl_errno($ch);
-        $err_msg=curl_error($ch);
+        $err_msg = curl_error($ch);
 
         curl_close($ch);
 

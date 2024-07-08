@@ -8,6 +8,8 @@ $geocoding = new \Geocoding\BaiduGeocoding($config);
 
 // 逆地理编码（返回 POI）
 $response = $geocoding->getAddressComponent(113.327782, 23.137202, \Geocoding\ExtensionsPoi::POI);
+$error = $response->error();
+$err_msg = $response->errMsg();
 $status = $response->status();
 $formatted_address = $response->formattedAddress();
 $business = $response->business();
@@ -16,7 +18,11 @@ $poi_set = $response->poiSet();
 
 echo '> 逆地理编码（返回 POI）'.PHP_EOL;
 
-if($status==0)
+if($error!=0)
+{
+    printf("error: %d\nerr msg: %s\n\n", $error, $err_msg);
+}
+elseif($status==0)
 {
     printf("status: %d\nformatted address: %s\nbusiness: %s\n", $status, $formatted_address, $business);
     printf("country: %s\nprovince: %s\ncity: %s\ndistrict: %s\ntown: %s\nstreet: %s\nstreet_number: %s\nadcode: %s\ndistance: %s\ndirection: %s\n\n",
@@ -40,6 +46,8 @@ else
 
 // 逆地理编码（不返回 POI）
 $response = $geocoding->getAddressComponent(113.327782, 23.137202, \Geocoding\ExtensionsPoi::NO_POI);
+$error = $response->error();
+$err_msg = $response->errMsg();
 $status = $response->status();
 $formatted_address = $response->formattedAddress();
 $business = $response->business();
@@ -47,7 +55,11 @@ $address_component = $response->addressComponent();
 
 echo '> 逆地理编码（不返回 POI）'.PHP_EOL;
 
-if($status==0)
+if($error!=0)
+{
+    printf("error: %d\nerr msg: %s\n\n", $error, $err_msg);
+}
+elseif($status==0)
 {
     printf("status: %d\nformatted address: %s\nbusiness: %s\n", $status, $formatted_address, $business);
     printf("country: %s\nprovince: %s\ncity: %s\ndistrict: %s\ntown: %s\nstreet: %s\nstreet_number: %s\nadcode: %s\ndistance: %s\ndirection: %s\n\n",
@@ -64,6 +76,8 @@ else
 
 // 地理编码
 $response = $geocoding->getLocation('海珠区江南大道中富力海珠城', '广州');
+$error = $response->error();
+$err_msg = $response->errMsg();
 $status = $response->status();
 $location = $response->location();
 $precise = $response->precise();
@@ -73,7 +87,11 @@ $level = $response->level();
 
 echo '> 地理编码'.PHP_EOL;
 
-if($status==0)
+if($error!=0)
+{
+    printf("error: %d\nerr msg: %s\n\n", $error, $err_msg);
+}
+elseif($status==0)
 {
     printf("status: %d\nlng: %f\nlat: %f\nprecise: %d\nconfidence: %d\ncomprehension: %d\nlevel: %s\n\n",
     $status, $location['lng'], $location['lat'], $precise, $confidence, $comprehension, $level);

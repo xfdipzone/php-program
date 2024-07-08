@@ -168,9 +168,9 @@ class AddressComponentResponse
      * @author fdipzone
      * @DateTime 2024-07-05 20:02:02
      *
-     * @return \Geocoding\Response\AddressComponent
+     * @return \Geocoding\Response\AddressComponent|null
      */
-    public function addressComponent():\Geocoding\Response\AddressComponent
+    public function addressComponent():?\Geocoding\Response\AddressComponent
     {
         return $this->addressComponent;
     }
