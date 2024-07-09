@@ -4,7 +4,7 @@ require 'autoload.php';
 // 基于百度地理位置服务
 $ak = '您注册的百度 application key';
 $config = new \Geocoding\Config\BaiduGeocodingConfig($ak);
-$geocoding = new \Geocoding\BaiduGeocoding($config);
+$geocoding = \Geocoding\Factory::make(\Geocoding\Type::BAIDU, $config);
 
 // 逆地理编码（返回 POI）
 $response = $geocoding->getAddressComponent(113.327782, 23.137202, \Geocoding\ExtensionsPoi::POI);
