@@ -42,4 +42,38 @@ class TimeZoneConversion
             throw new \Exception($e->getMessage());
         }
     }
+
+    /**
+     * 时间戳时区转换
+     * 将时间戳转换为指定时区的日期时间
+     *
+     * 时区格式使用 GMT+0000
+     * 输出格式化参考：https://www.php.net/manual/zh/datetime.format.php
+     *
+     * @author fdipzone
+     * @DateTime 2024-07-16 16:54:19
+     *
+     * @param int $timestamp 时间戳
+     * @param string $timezone 要转换的时区
+     * @param string $format 输出格式
+     * @return string
+     */
+    public static function timestampConvert(int $timestamp, string $timezone='GMT+0800', string $format='Y-m-d H:i:s'):string
+    {
+        try
+        {
+            $dt = new \DateTime('@'.$timestamp);
+
+            // 设置时区
+            $tz = timezone_open($timezone);
+            $dt->setTimezone($tz);
+
+            // 输出
+            return $dt->format($format);
+        }
+        catch(\Throwable $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
+    }
 }
