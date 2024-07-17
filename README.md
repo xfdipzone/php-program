@@ -85,3 +85,5 @@ php开发的程序，类库，小工具，不定期更新。
 - [php 地理编码类](https://github.com/xfdipzone/php-program/tree/master/php-geocoding) (php-geocoding)
 
 - [php 爬虫机器人检测类](https://github.com/xfdipzone/php-program/tree/master/php-spider-detector) (php-spider-detector)
+
+- [php 时区转换类](https://github.com/xfdipzone/php-program/tree/master/php-timezone-conversion) (php-timezone-conversion)
