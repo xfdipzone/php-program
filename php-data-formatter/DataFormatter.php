@@ -1,7 +1,7 @@
 <?php
 /**
  * 数据格式化类
- * 支持将数据按 Json, XML, Array, Js CallBack 格式输出
+ * 支持将数据按 Json, XML, Array, Js Callback 格式输出
  *
  * @author fdipzone
  * @DateTime 2024-07-18 19:45:00
@@ -10,7 +10,7 @@
 class DataFormatter
 {
     /**
-     * 输出的数据
+     * 原始数据
      *
      * @var array
      */
@@ -71,7 +71,7 @@ class DataFormatter
      * @param string $encoding XML 文档编码
      * @return string
      */
-    public function asXML(string $root_name, string $encoding='utf-8'):string
+    public function asXML(string $root_name='root', string $encoding='utf-8'):string
     {
         // 创建 XML 字符串
         $xml_data = new \SimpleXMLElement('<?xml version="1.0" encoding="'.$encoding.'"?><' . $root_name . '></' . $root_name . '>');
@@ -86,6 +86,25 @@ class DataFormatter
         $doc->formatOutput = true;
 
         return $doc->saveXML();
+    }
+
+    /**
+     * 输出为 Js Callback 格式
+     *
+     * @author fdipzone
+     * @DateTime 2024-07-19 22:12:17
+     *
+     * @param string $callback 回调方法名
+     * @return string
+     */
+    public function asJsCallback(string $callback):string
+    {
+        if(empty($callback))
+        {
+            throw new \Exception('callback is empty');
+        }
+
+        return $callback.'('.json_encode($this->data).');';
     }
 
     /**
@@ -116,7 +135,7 @@ class DataFormatter
                     $this->arrayConvertXML($value, $subnode);
                 }
             }
-            else 
+            else
             {
                 if (is_string($value) && (strpos($value, '<') !== false || strpos($value, '&') !== false))
                 {
