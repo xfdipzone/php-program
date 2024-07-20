@@ -71,7 +71,7 @@ class DataFormatter
      * @param string $encoding XML 文档编码
      * @return string
      */
-    public function asXML(string $root_name='root', string $encoding='utf-8'):string
+    public function asXml(string $root_name='root', string $encoding='utf-8'):string
     {
         // 创建 XML 字符串
         $xml_data = new \SimpleXMLElement('<?xml version="1.0" encoding="'.$encoding.'"?><' . $root_name . '></' . $root_name . '>');
