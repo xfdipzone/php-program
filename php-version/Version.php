@@ -27,8 +27,8 @@ class Version
         }
 
         list($major, $minor, $sub) = explode('.', $version);
-        $version_num = $major*10000 + $minor*100 + $sub;
-        return intval($version_num); 
+        $version_num = $major * 10000 + $minor * 100 + $sub;
+        return intval($version_num);
     }
 
     /**
@@ -49,9 +49,9 @@ class Version
         }
 
         $version = [];
-        $version[0] = intval($version_num/10000);
-        $version[1] = intval($version_num%10000/100);
-        $version[2] = intval($version_num%100);
+        $version[0] = intval($version_num / 10000);
+        $version[1] = intval($version_num % 10000 / 100);
+        $version[2] = intval($version_num % 100);
 
         return implode('.', $version);
     }
@@ -75,7 +75,7 @@ class Version
      * 比对两个版本大小
      * 0: 版本一致
      * 1: 版本1比版本2大
-     * -1: 版本1比版本2小 
+     * -1: 版本1比版本2小
      *
      * @author fdipzone
      * @DateTime 2024-07-22 21:56:00
