@@ -89,3 +89,5 @@ php开发的程序，类库，小工具，不定期更新。
 - [php 时区转换类](https://github.com/xfdipzone/php-program/tree/master/php-timezone-conversion) (php-timezone-conversion)
 
 - [php 数据格式化类](https://github.com/xfdipzone/php-program/tree/master/php-data-formatter) (php-data-formatter)
+
+- [php 版本比对类](https://github.com/xfdipzone/php-program/tree/master/php-version) (php-version)
