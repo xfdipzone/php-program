@@ -36,12 +36,12 @@ function TestTimestampConvert()
         array(
             'timestamp' => 1721120701,
             'timezone' => 'GMT+0700',
-            'format' => 'Y/m/d/ H:i:s',
+            'format' => 'Y/m/d/ H:i:s \G\M\TO',
         ),
         array(
             'timestamp' => 1721120701,
             'timezone' => 'GMT+0630',
-            'format' => 'Y/m/d/ H:i:s',
+            'format' => 'Y/m/d/ H:i:s \G\M\TO',
         ),
     );
 
