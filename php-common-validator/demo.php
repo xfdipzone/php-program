@@ -3,8 +3,9 @@ require 'CommonValidator.php';
 
 // 测试的方法集合$
 $test_funcs = [
-    'TestEmpty', 'TestLength', 'TestNumber', 'TestIsEnglish', 'TestHttp', 'TestDomain',
-    'TestIsChinese', 'TestIsThai', 'TestIsVietnamese'
+    'TestEmpty', 'TestLength', 'TestNumber', 'TestHttpUrl', 'TestDomain',
+    'TestEmail', 'TestDate', 'TestDatetime', 'TestVersion',
+    'TestIsEnglish', 'TestIsChinese', 'TestIsThai', 'TestIsVietnamese'
 ];
 
 foreach($test_funcs as $func)
@@ -71,6 +72,12 @@ function TestLength()
             'val' => 'a',
             'min_length' => 2,
             'max_length' => 5,
+            'want_ret' => false
+        ),
+        array(
+            'val' => 'abcdef',
+            'min_length' => 1,
+            'max_length' => 4,
             'want_ret' => false
         ),
         array(
@@ -151,8 +158,8 @@ function TestNumber()
     }
 }
 
-// 测试 http
-function TestHttp()
+// 测试 httpUrl
+function TestHttpUrl()
 {
     $cases = array(
         array(
@@ -179,7 +186,7 @@ function TestHttp()
 
     foreach($cases as $case)
     {
-        $ret = \CommonValidator::http($case['val']);
+        $ret = \CommonValidator::httpUrl($case['val']);
         assert($case['want_ret']==$ret);
     }
 }
@@ -205,6 +212,158 @@ function TestDomain()
     foreach($cases as $case)
     {
         $ret = \CommonValidator::domain($case['val']);
+        assert($case['want_ret']==$ret);
+    }
+}
+
+// 测试 email
+function TestEmail()
+{
+    $cases = array(
+        array(
+            'val' => 'good@fdipzone.com',
+            'want_ret' => true
+        ),
+        array(
+            'val' => 'good@good',
+            'want_ret' => false
+        ),
+    );
+
+    foreach($cases as $case)
+    {
+        $ret = \CommonValidator::email($case['val']);
+        assert($case['want_ret']==$ret);
+    }
+}
+
+// 测试 date
+function TestDate()
+{
+    $cases = array(
+        array(
+            'val' => '1995-01-01',
+            'min_year' => 1980,
+            'max_year' => 2000,
+            'want_ret' => true
+        ),
+        array(
+            'val' => '1988-01-01',
+            'min_year' => 1990,
+            'max_year' => 2000,
+            'want_ret' => false
+        ),
+        array(
+            'val' => '2001-01-01',
+            'min_year' => 1990,
+            'max_year' => 2000,
+            'want_ret' => false
+        ),
+        array(
+            'val' => '2000-12-31',
+            'min_year' => 2000,
+            'max_year' => 2000,
+            'want_ret' => true
+        ),
+        array(
+            'val' => '',
+            'min_year' => 1990,
+            'max_year' => 2000,
+            'want_ret' => false
+        ),
+        array(
+            'val' => '2000-12-31',
+            'min_year' => 2000,
+            'max_year' => 1999,
+            'want_ret' => false,
+            'want_exception' => 'common validator: min year > max year invalid'
+        ),
+    );
+
+    foreach($cases as $case)
+    {
+        try
+        {
+            $ret = \CommonValidator::date($case['val'], $case['min_year'], $case['max_year']);
+            assert($case['want_ret']==$ret);
+        }
+        catch(\Throwable $e)
+        {
+            assert($case['want_exception']==$e->getMessage());
+        }
+    }
+}
+
+// 测试 datetime
+function TestDatetime()
+{
+    $cases = array(
+        array(
+            'val' => '2024-01-01 12:00:00',
+            'want_ret' => true
+        ),
+        array(
+            'val' => '2023-02-29 12:00:00',
+            'want_ret' => false
+        ),
+        array(
+            'val' => '2048-02-29 12:00:00',
+            'want_ret' => true
+        ),
+        array(
+            'val' => '',
+            'want_ret' => false
+        ),
+        array(
+            'val' => 'abcdefg',
+            'want_ret' => false
+        ),
+    );
+
+    foreach($cases as $case)
+    {
+        $ret = \CommonValidator::datetime($case['val']);
+        assert($case['want_ret']==$ret);
+    }
+}
+
+// 测试 version
+function TestVersion()
+{
+    $cases = array(
+        array(
+            'val' => '1.0.0',
+            'want_ret' => true
+        ),
+        array(
+            'val' => '999.99.99',
+            'want_ret' => true
+        ),
+        array(
+            'val' => '1.0.0.0',
+            'want_ret' => false
+        ),
+        array(
+            'val' => '1.0.0.1',
+            'want_ret' => true
+        ),
+        array(
+            'val' => '999.99.99.99',
+            'want_ret' => true
+        ),
+        array(
+            'val' => 'abc',
+            'want_ret' => false
+        ),
+        array(
+            'val' => '2.0',
+            'want_ret' => false
+        ),
+    );
+
+    foreach($cases as $case)
+    {
+        $ret = \CommonValidator::version($case['val']);
         assert($case['want_ret']==$ret);
     }
 }
