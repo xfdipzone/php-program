@@ -4,7 +4,7 @@ require 'CommonValidator.php';
 // 测试的方法集合$
 $test_funcs = [
     'TestEmpty', 'TestLength', 'TestNumber', 'TestHttpUrl', 'TestDomain',
-    'TestEmail', 'TestDate', 'TestDatetime', 'TestVersion',
+    'TestEmail', 'TestDate', 'TestDatetime', 'TestVersion', 'TestLongitude', 'TestLatitude',
     'TestIsEnglish', 'TestIsChinese', 'TestIsThai', 'TestIsVietnamese'
 ];
 
@@ -364,6 +364,72 @@ function TestVersion()
     foreach($cases as $case)
     {
         $ret = \CommonValidator::version($case['val']);
+        assert($case['want_ret']==$ret);
+    }
+}
+
+// 测试 longitude
+function TestLongitude()
+{
+    $cases = array(
+        array(
+            'val' => 180,
+            'want_ret' => true
+        ),
+        array(
+            'val' => -180,
+            'want_ret' => true
+        ),
+        array(
+            'val' => 113.327782,
+            'want_ret' => true
+        ),
+        array(
+            'val' => 180.01,
+            'want_ret' => false
+        ),
+        array(
+            'val' => -180.01,
+            'want_ret' => false
+        ),
+    );
+
+    foreach($cases as $case)
+    {
+        $ret = \CommonValidator::longitude($case['val']);
+        assert($case['want_ret']==$ret);
+    }
+}
+
+// 测试 latitude
+function TestLatitude()
+{
+    $cases = array(
+        array(
+            'val' => 90,
+            'want_ret' => true
+        ),
+        array(
+            'val' => -90,
+            'want_ret' => true
+        ),
+        array(
+            'val' => 23.137202,
+            'want_ret' => true
+        ),
+        array(
+            'val' => 90.01,
+            'want_ret' => false
+        ),
+        array(
+            'val' => -90.01,
+            'want_ret' => false
+        ),
+    );
+
+    foreach($cases as $case)
+    {
+        $ret = \CommonValidator::latitude($case['val']);
         assert($case['want_ret']==$ret);
     }
 }

@@ -194,6 +194,34 @@ class CommonValidator
     }
 
     /**
+     * 验证坐标经度
+     *
+     * @author fdipzone
+     * @DateTime 2024-07-28 13:13:52
+     *
+     * @param float $val 坐标经度
+     * @return boolean
+     */
+    public static function longitude(float $val):bool
+    {
+        return is_numeric($val) && $val<=180 && $val>=-180;
+    }
+
+    /**
+     * 验证坐标纬度
+     *
+     * @author fdipzone
+     * @DateTime 2024-07-28 13:15:39
+     *
+     * @param float $val 坐标纬度
+     * @return boolean
+     */
+    public static function latitude(float $val):bool
+    {
+        return is_numeric($val) && $val<=90 && $val>=-90;
+    }
+
+    /**
      * 判断字符串是否英文
      *
      * @author fdipzone
