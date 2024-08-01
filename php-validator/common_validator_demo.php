@@ -3,8 +3,9 @@ require 'autoload.php';
 
 // 测试的方法集合
 $test_funcs = [
-    'TestEmpty', 'TestLength', 'TestNumber', 'TestHttpUrl', 'TestDomain',
-    'TestEmail', 'TestDate', 'TestDatetime', 'TestVersion', 'TestLongitude', 'TestLatitude',
+    'TestEmpty', 'TestLength', 'TestNumber', 'TestHttpUrl', 'TestDomain', 'TestEmail',
+    'TestDate', 'TestDatetime', 'TestVersion', 'TestLongitude', 'TestLatitude',
+    'TestFileExtension',
 ];
 
 foreach($test_funcs as $func)
@@ -429,6 +430,44 @@ function TestLatitude()
     foreach($cases as $case)
     {
         $ret = \Validator\CommonValidator::latitude($case['val']);
+        assert($case['want_ret']==$ret);
+    }
+}
+
+// 测试 fileExtension
+function TestFileExtension()
+{
+    $cases = array(
+        array(
+            'val' => 'a.jpg',
+            'allow_extensions' => ['jpg', 'gif', 'png'],
+            'want_ret' => true
+        ),
+        array(
+            'val' => 'b.GIF',
+            'allow_extensions' => ['gif'],
+            'want_ret' => true
+        ),
+        array(
+            'val' => 'a.jpg',
+            'allow_extensions' => ['gif', 'png'],
+            'want_ret' => false
+        ),
+        array(
+            'val' => 'a.jpg',
+            'allow_extensions' => [],
+            'want_ret' => false
+        ),
+        array(
+            'val' => '_jpg',
+            'allow_extensions' => ['jpg'],
+            'want_ret' => false
+        ),
+    );
+
+    foreach($cases as $case)
+    {
+        $ret = \Validator\CommonValidator::fileExtension($case['val'], $case['allow_extensions']);
         assert($case['want_ret']==$ret);
     }
 }

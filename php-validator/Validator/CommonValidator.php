@@ -3,7 +3,21 @@ namespace Validator;
 
 /**
  * 通用验证类
- * 提供常用的验证方法，例如是否为空，长度验证，是否数字，是否中文等
+ * 提供常用的验证方法
+ *
+ * 支持验证的方法：
+ * 验证为空
+ * 验证长度（长度范围）
+ * 验证数字（浮点型，整型，带符号）
+ * 验证 Http Url
+ * 验证域名
+ * 验证 Email
+ * 验证日期（年份范围）
+ * 验证日期时间
+ * 验证版本
+ * 验证坐标经度
+ * 验证坐标纬度
+ * 验证文件后缀
  *
  * @author fdipzone
  * @DateTime 2024-07-25 21:51:14
@@ -221,5 +235,29 @@ class CommonValidator
     public static function latitude(float $val):bool
     {
         return is_numeric($val) && $val<=90 && $val>=-90;
+    }
+
+    /**
+     * 验证文件后缀
+     * 允许的文件后缀列表使用小写
+     *
+     * @author fdipzone
+     * @DateTime 2024-08-01 17:48:07
+     *
+     * @param string $val 文件路径
+     * @param array $allow_extensions 允许的文件后缀列表
+     * @return boolean
+     */
+    public static function fileExtension(string $val, array $allow_extensions=[]):bool
+    {
+        // 获取文件路径最右边第一个 "." 的位置
+        $pos = strrpos($val, '.');
+        if($pos===false)
+        {
+            return false;
+        }
+
+        $extension = strtolower(substr($val, $pos+1));
+        return in_array($extension, $allow_extensions);
     }
 }
