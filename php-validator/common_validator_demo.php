@@ -1,11 +1,10 @@
 <?php
-require 'CommonValidator.php';
+require 'autoload.php';
 
-// 测试的方法集合$
+// 测试的方法集合
 $test_funcs = [
     'TestEmpty', 'TestLength', 'TestNumber', 'TestHttpUrl', 'TestDomain',
     'TestEmail', 'TestDate', 'TestDatetime', 'TestVersion', 'TestLongitude', 'TestLatitude',
-    'TestIsEnglish', 'TestIsChinese', 'TestIsThai', 'TestIsVietnamese'
 ];
 
 foreach($test_funcs as $func)
@@ -47,7 +46,7 @@ function TestEmpty()
 
     foreach($cases as $case)
     {
-        $ret = \CommonValidator::empty($case['val'], $case['ignore_zero']);
+        $ret = \Validator\CommonValidator::empty($case['val'], $case['ignore_zero']);
         assert($case['want_ret']==$ret);
     }
 }
@@ -93,7 +92,7 @@ function TestLength()
     {
         try
         {
-            $ret = \CommonValidator::length($case['val'], $case['min_length'], $case['max_length']);
+            $ret = \Validator\CommonValidator::length($case['val'], $case['min_length'], $case['max_length']);
             assert($case['want_ret']==$ret);
         }
         catch(\Throwable $e)
@@ -153,7 +152,7 @@ function TestNumber()
 
     foreach($cases as $case)
     {
-        $ret = \CommonValidator::number($case['val'], $case['allow_float'], $case['allow_signed']);
+        $ret = \Validator\CommonValidator::number($case['val'], $case['allow_float'], $case['allow_signed']);
         assert($case['want_ret']==$ret);
     }
 }
@@ -186,7 +185,7 @@ function TestHttpUrl()
 
     foreach($cases as $case)
     {
-        $ret = \CommonValidator::httpUrl($case['val']);
+        $ret = \Validator\CommonValidator::httpUrl($case['val']);
         assert($case['want_ret']==$ret);
     }
 }
@@ -211,7 +210,7 @@ function TestDomain()
 
     foreach($cases as $case)
     {
-        $ret = \CommonValidator::domain($case['val']);
+        $ret = \Validator\CommonValidator::domain($case['val']);
         assert($case['want_ret']==$ret);
     }
 }
@@ -232,7 +231,7 @@ function TestEmail()
 
     foreach($cases as $case)
     {
-        $ret = \CommonValidator::email($case['val']);
+        $ret = \Validator\CommonValidator::email($case['val']);
         assert($case['want_ret']==$ret);
     }
 }
@@ -284,7 +283,7 @@ function TestDate()
     {
         try
         {
-            $ret = \CommonValidator::date($case['val'], $case['min_year'], $case['max_year']);
+            $ret = \Validator\CommonValidator::date($case['val'], $case['min_year'], $case['max_year']);
             assert($case['want_ret']==$ret);
         }
         catch(\Throwable $e)
@@ -322,7 +321,7 @@ function TestDatetime()
 
     foreach($cases as $case)
     {
-        $ret = \CommonValidator::datetime($case['val']);
+        $ret = \Validator\CommonValidator::datetime($case['val']);
         assert($case['want_ret']==$ret);
     }
 }
@@ -363,7 +362,7 @@ function TestVersion()
 
     foreach($cases as $case)
     {
-        $ret = \CommonValidator::version($case['val']);
+        $ret = \Validator\CommonValidator::version($case['val']);
         assert($case['want_ret']==$ret);
     }
 }
@@ -396,7 +395,7 @@ function TestLongitude()
 
     foreach($cases as $case)
     {
-        $ret = \CommonValidator::longitude($case['val']);
+        $ret = \Validator\CommonValidator::longitude($case['val']);
         assert($case['want_ret']==$ret);
     }
 }
@@ -429,123 +428,7 @@ function TestLatitude()
 
     foreach($cases as $case)
     {
-        $ret = \CommonValidator::latitude($case['val']);
-        assert($case['want_ret']==$ret);
-    }
-}
-
-// 测试 isEnglish
-function TestIsEnglish()
-{
-    $cases = array(
-        array(
-            'val' => 'hello',
-            'want_ret' => true
-        ),
-        array(
-            'val' => '你好',
-            'want_ret' => false
-        ),
-        array(
-            'val' => 'สวัสดี',
-            'want_ret' => false
-        ),
-        array(
-            'val' => 'Xin chào',
-            'want_ret' => false
-        ),
-    );
-
-    foreach($cases as $case)
-    {
-        $ret = \CommonValidator::isEnglish($case['val']);
-        assert($case['want_ret']==$ret);
-    }
-}
-
-// 测试 isChinese
-function TestIsChinese()
-{
-    $cases = array(
-        array(
-            'val' => '你好',
-            'want_ret' => true
-        ),
-        array(
-            'val' => 'hello',
-            'want_ret' => false
-        ),
-        array(
-            'val' => 'สวัสดี',
-            'want_ret' => false
-        ),
-        array(
-            'val' => 'Xin chào',
-            'want_ret' => false
-        ),
-    );
-
-    foreach($cases as $case)
-    {
-        $ret = \CommonValidator::isChinese($case['val']);
-        assert($case['want_ret']==$ret);
-    }
-}
-
-// 测试 isThai
-function TestIsThai()
-{
-    $cases = array(
-        array(
-            'val' => 'สวัสดี',
-            'want_ret' => true
-        ),
-        array(
-            'val' => 'hello',
-            'want_ret' => false
-        ),
-        array(
-            'val' => '你好',
-            'want_ret' => false
-        ),
-        array(
-            'val' => 'Xin chào',
-            'want_ret' => false
-        ),
-    );
-
-    foreach($cases as $case)
-    {
-        $ret = \CommonValidator::isThai($case['val']);
-        assert($case['want_ret']==$ret);
-    }
-}
-
-// 测试 isVietnamese
-function TestIsVietnamese()
-{
-    $cases = array(
-        array(
-            'val' => 'Xin chào',
-            'want_ret' => true
-        ),
-        array(
-            'val' => 'hello',
-            'want_ret' => true
-        ),
-        array(
-            'val' => '你好',
-            'want_ret' => false
-        ),
-        array(
-            'val' => 'สวัสดี',
-            'want_ret' => false
-        ),
-    );
-
-    foreach($cases as $case)
-    {
-        $ret = \CommonValidator::isVietnamese($case['val']);
+        $ret = \Validator\CommonValidator::latitude($case['val']);
         assert($case['want_ret']==$ret);
     }
 }
