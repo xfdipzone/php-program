@@ -4,11 +4,13 @@ php验证类
 
 ## 介绍
 
-php 实现的验证类，包括通用验证类（CommonValidator）与语言验证类（LanguageValidator）
+php 实现的验证类，包括通用验证类（CommonValidator），语言验证类（LanguageValidator）与证件号码验证类（IDNumberValidator）
 
-通用验证类用于常用表单项的验证场景
+**通用验证类** 用于常用表单项的验证场景
 
-语言验证类用于语言文字相关的验证场景
+**语言验证类** 用于语言文字相关的验证场景
+
+**证件号码验证类** 用于各种证件号码的验证场景
 
 ---
 
@@ -50,6 +52,10 @@ php 实现的验证类，包括通用验证类（CommonValidator）与语言验�
 
 - 越南文
 
+证件号码验证类支持的验证功能：
+
+- 验证中国身份证号码（18位）
+
 ---
 
 ## 演示
@@ -57,6 +63,7 @@ php 实现的验证类，包括通用验证类（CommonValidator）与语言验�
 ```php
 require 'autoload.php';
 
+// CommonValidator
 var_dump(\Validator\CommonValidator::empty('0', false)); // false
 
 var_dump(\Validator\CommonValidator::length('abc', 3, 5)); // true
@@ -81,6 +88,7 @@ var_dump(\Validator\CommonValidator::latitude(23.137202)); // true
 
 var_dump(\Validator\CommonValidator::fileExtension('a.jpg', ['jpg', 'gif', 'png'])); // true
 
+// LanguageValidator
 var_dump(\Validator\LanguageValidator::isEnglish('hello')); // true
 
 var_dump(\Validator\LanguageValidator::isChinese('你好')); // true
@@ -88,4 +96,7 @@ var_dump(\Validator\LanguageValidator::isChinese('你好')); // true
 var_dump(\Validator\LanguageValidator::isThai('สวัสดี')); // true
 
 var_dump(\Validator\LanguageValidator::isVietnamese('Xin chào')); // true
+
+// IDNumberValidator
+var_dump(\Validator\IDNumberValidator::idCard('441234567890123456')); // false
 ```

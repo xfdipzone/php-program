@@ -36,7 +36,7 @@ function TestIDCard()
 
     foreach($cases as $case)
     {
-        $ret = \Validator\IDNumberValidator::idCard($case['val']); 
+        $ret = \Validator\IDNumberValidator::idCard($case['val']);
         assert($case['want_ret']==$ret);
     }
 }
