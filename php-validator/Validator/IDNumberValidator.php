@@ -7,6 +7,7 @@ namespace Validator;
  *
  * 支持的验证方法：
  * 验证中国身份证号码（18位）
+ * 验证中国车牌号码（包括新能源车牌）
  *
  * @author fdipzone
  * @DateTime 2024-08-02 22:12:28
@@ -100,5 +101,20 @@ class IDNumberValidator
         {
             return false;
         }
+    }
+
+    /**
+     * 验证中国车牌号码（包括新能源车牌）
+     *
+     * @author fdipzone
+     * @DateTime 2024-08-04 19:43:58
+     *
+     * @param string $license_plate 中国车牌号码
+     * @return boolean
+     */
+    public static function licensePlateNumber(string $license_plate):bool
+    {
+        $pattern = '/^(([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z](([0-9]{5}[DF])|([DF]([A-HJ-NP-Z0-9])[0-9]{4})))|([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳使领]))$/';
+        return preg_match($pattern, $license_plate);
     }
 }
