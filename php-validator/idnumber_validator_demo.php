@@ -73,6 +73,10 @@ function TestLicensePlateNumber()
             'val' => '辽A12345D1',
             'want_ret' => false
         ),
+        array(
+            'val' => '沪AFE2345',
+            'want_ret' => true
+        ),
     );
 
     foreach($cases as $case)

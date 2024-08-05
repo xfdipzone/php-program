@@ -56,6 +56,8 @@ php 实现的验证类，包括通用验证类（CommonValidator），语言验�
 
 - 验证中国身份证号码（18位）
 
+- 验证中国车牌号码（包括新能源车牌）
+
 ---
 
 ## 演示
@@ -99,4 +101,6 @@ var_dump(\Validator\LanguageValidator::isVietnamese('Xin chào')); // true
 
 // IDNumberValidator
 var_dump(\Validator\IDNumberValidator::idCard('441234567890123456')); // false
+
+var_dump(\Validator\IDNumberValidator::licensePlateNumber('粤AF12345')); // true
 ```
