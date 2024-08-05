@@ -12,7 +12,7 @@ foreach($test_funcs as $func)
     $func();
 }
 
-// 测试 IDCard
+// 测试 idCard
 function TestIDCard()
 {
     $cases = array(
