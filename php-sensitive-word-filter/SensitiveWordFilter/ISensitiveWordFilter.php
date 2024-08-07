@@ -12,6 +12,17 @@ namespace SensitiveWordFilter;
 interface ISensitiveWordFilter
 {
     /**
+     * 检查数据内容中是否包含敏感词
+     *
+     * @author fdipzone
+     * @DateTime 2024-08-07 20:03:31
+     *
+     * @param string $content 数据内容
+     * @return boolean
+     */
+    public function check(string $content):bool;
+
+    /**
      * 敏感词过滤
      * 将数据内容中的敏感词替换为指定字符，返回过滤敏感词后的数据内容
      *
