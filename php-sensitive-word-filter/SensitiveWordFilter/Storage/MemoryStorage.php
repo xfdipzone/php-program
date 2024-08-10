@@ -25,7 +25,7 @@ class MemoryStorage implements \SensitiveWordFilter\Storage\IStorage
      * @author fdipzone
      * @DateTime 2024-08-08 18:16:33
      *
-     * @param array $sensitive_words
+     * @param array $sensitive_words 敏感词列表
      */
     public function __construct(array $sensitive_words)
     {

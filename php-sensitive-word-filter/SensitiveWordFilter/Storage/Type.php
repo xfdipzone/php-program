@@ -13,8 +13,12 @@ class Type
     // 基于内存存储
     const MEMORY = 'memory';
 
+    // 基于文件存储
+    const FILE = 'file';
+
     // 类型与实现类关系
     public static $map = [
         self::MEMORY => 'SensitiveWordFilter\MemoryStorage',
+        self::FILE => 'SensitiveWordFilter\FileStorage',
     ];
 }
