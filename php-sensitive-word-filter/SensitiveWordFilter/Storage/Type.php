@@ -18,7 +18,7 @@ class Type
 
     // 类型与实现类关系
     public static $map = [
-        self::MEMORY => 'SensitiveWordFilter\MemoryStorage',
-        self::FILE => 'SensitiveWordFilter\FileStorage',
+        self::MEMORY => '\SensitiveWordFilter\Storage\MemoryStorage',
+        self::FILE => '\SensitiveWordFilter\Storage\FileStorage',
     ];
 }

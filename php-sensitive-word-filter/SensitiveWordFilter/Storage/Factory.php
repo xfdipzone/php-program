@@ -42,7 +42,7 @@ class Factory
      * @param string $type 敏感词存储类型
      * @return string
      */
-    private static function getStorageClass(string $type):string
+    final public static function getStorageClass(string $type):string
     {
         if(isset(\SensitiveWordFilter\Storage\Type::$map[$type]))
         {
