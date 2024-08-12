@@ -1,0 +1,26 @@
+{
+    "name": "fdipzone/php-sensitive-word-filter",
+    "description": "lib for php backend",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "fdipzone",
+            "email": "xfdipzone@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    },
+    "autoload": {
+        "psr-4": {
+            "SensitiveWordFilter\\": "php-sensitive-word-filter/SensitiveWordFilter/"
+        },
+        "classmap": [
+            "php-sensitive-word-filter/"
+        ]
+    }
+}
