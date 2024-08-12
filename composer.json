@@ -1,6 +1,6 @@
 {
-    "name": "fdipzone/php-sensitive-word-filter",
-    "description": "lib for php backend",
+    "name": "fdipzone/php-program",
+    "description": "lib for php",
     "type": "library",
     "license": "proprietary",
     "authors": [
@@ -17,10 +17,12 @@
     },
     "autoload": {
         "psr-4": {
-            "SensitiveWordFilter\\": "php-sensitive-word-filter/SensitiveWordFilter/"
+            "SensitiveWordFilter\\": "php-sensitive-word-filter/SensitiveWordFilter/",
+            "DEQue\\": "php-deque/php-deque/"
         },
         "classmap": [
-            "php-sensitive-word-filter/"
+            "php-sensitive-word-filter/",
+            "php-deque/"
         ]
     }
 }

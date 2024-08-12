@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 
 /**
- * 测试 \SensitiveWordFilter\Storage\Factory
+ * 测试 php-sensitive-word-filter\SensitiveWordFilter\Storage\Factory
  *
  * @author fdipzone
  */
