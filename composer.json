@@ -17,12 +17,17 @@
     },
     "autoload": {
         "psr-4": {
-            "SensitiveWordFilter\\": "php-sensitive-word-filter/SensitiveWordFilter/",
-            "DEQue\\": "php-deque/php-deque/"
+            "SensitiveWordFilter\\": "php-sensitive-word-filter/SensitiveWordFilter",
+            "DEQue\\": "php-deque/php-deque"
         },
         "classmap": [
             "php-sensitive-word-filter/",
             "php-deque/"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TestUtils\\": "tests/Utils"
+        }
     }
 }

@@ -47,7 +47,7 @@ class FileStorage implements \SensitiveWordFilter\Storage\IStorage
      * @DateTime 2024-08-11 18:55:34
      *
      * @param string $sensitive_word_file 敏感词文件路径
-     * @return array
+     * @return array key=>value key:敏感词 value:true
      */
     private function parseSensitiveWordFile(string $sensitive_word_file):array
     {
@@ -63,7 +63,7 @@ class FileStorage implements \SensitiveWordFilter\Storage\IStorage
                 $word = str_replace(array(' ', chr(10), chr(13)), '', $word);
                 if($word!='')
                 {
-                    $sensitive_words[] = $word;
+                    $sensitive_words[$word] = true;
                 }
             }
         }
