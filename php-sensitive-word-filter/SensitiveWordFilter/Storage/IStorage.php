@@ -16,7 +16,7 @@ interface IStorage
      * @author fdipzone
      * @DateTime 2024-08-07 20:15:54
      *
-     * @return array
+     * @return array [敏感词1,敏感词2,敏感词3,...敏感词n]
      */
     public function sensitiveWords():array;
 }

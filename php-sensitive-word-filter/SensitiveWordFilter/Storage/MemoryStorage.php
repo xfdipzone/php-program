@@ -45,10 +45,10 @@ class MemoryStorage implements \SensitiveWordFilter\Storage\IStorage
      * @author fdipzone
      * @DateTime 2024-08-08 18:17:32
      *
-     * @return array
+     * @return array [敏感词1,敏感词2,敏感词3,...敏感词n]
      */
     public function sensitiveWords():array
     {
-        return $this->sensitive_words;
+        return array_keys($this->sensitive_words);
     }
 }

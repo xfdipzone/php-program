@@ -46,7 +46,7 @@ final class FileStorageTest extends TestCase
 
         $sensitive_words = $memory_storage->sensitiveWords();
         $this->assertEquals(7, count($sensitive_words));
-        $this->assertEquals('a,b,c,d,e,f,g', implode(',', array_keys($sensitive_words)));
+        $this->assertEquals('a,b,c,d,e,f,g', implode(',', $sensitive_words));
     }
 
     /**
