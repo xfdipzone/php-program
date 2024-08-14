@@ -18,9 +18,9 @@ interface ISensitiveWordFilter
      * @DateTime 2024-08-07 20:03:31
      *
      * @param string $content 数据内容
-     * @return boolean
+     * @return boolean true: 包含敏感词, false: 不包含敏感词
      */
-    public function check(string $content):bool;
+    public function isContain(string $content):bool;
 
     /**
      * 敏感词过滤
@@ -30,7 +30,8 @@ interface ISensitiveWordFilter
      * @DateTime 2024-08-06 19:06:59
      *
      * @param string $content 数据内容
+     * @param string $replacement 敏感词替换字符
      * @return string
      */
-    public function filter(string $content):string;
+    public function filter(string $content, string $replacement='*'):string;
 }
