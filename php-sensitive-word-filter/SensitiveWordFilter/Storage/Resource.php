@@ -28,14 +28,14 @@ class Resource
      *
      * @var array
      */
-    private $sensitive_words;
+    private $sensitive_words = [];
 
     /**
      * 敏感词文件
      *
      * @var string
      */
-    private $sensitive_word_file;
+    private $sensitive_word_file = '';
 
     /**
      * 初始化
@@ -54,6 +54,19 @@ class Resource
         }
 
         $this->type = $type;
+    }
+
+    /**
+     * 获取敏感词来源类型
+     *
+     * @author fdipzone
+     * @DateTime 2024-08-16 22:50:50
+     *
+     * @return string
+     */
+    public function type():string
+    {
+        return $this->type;
     }
 
     /**

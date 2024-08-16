@@ -30,6 +30,15 @@ final class ResourceTest extends TestCase
     }
 
     /**
+     * @covers \SensitiveWordFilter\Storage\Resource::type
+     */
+    public function testType()
+    {
+        $resource = new \SensitiveWordFilter\Storage\Resource(\SensitiveWordFilter\Storage\Resource::MEMORY);
+        $this->assertEquals(\SensitiveWordFilter\Storage\Resource::MEMORY, $resource->type());
+    }
+
+    /**
      * @covers \SensitiveWordFilter\Storage\Resource::setWords
      * @covers \SensitiveWordFilter\Storage\Resource::getWords
      */
