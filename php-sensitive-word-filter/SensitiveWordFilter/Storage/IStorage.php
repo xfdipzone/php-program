@@ -20,7 +20,7 @@ interface IStorage
      * @param \SensitiveWordFilter\Resource $resource 敏感词数据源
      * @return void
      */
-    public function setResource(\SensitiveWordFilter\Resource $resource);
+    public function setResource(\SensitiveWordFilter\Resource $resource):void;
 
     /**
      * 获取敏感词集合

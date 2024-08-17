@@ -45,6 +45,9 @@ final class QueueTest extends TestCase
         $resp = $de_queue->pushFront(new \DEQue\Item('c'));
         $this->assertEquals($resp->error(), \DEQue\ErrCode::FULL);
 
+        $resp = $de_queue->pushRear(new \DEQue\Item('d'));
+        $this->assertEquals($resp->error(), \DEQue\ErrCode::FULL);
+
         $clear = $de_queue->clear();
         $this->assertEquals($clear, true);
 
@@ -92,5 +95,43 @@ final class QueueTest extends TestCase
         $resp = $de_queue->popFront();
         $this->assertEquals($resp->error(), 0);
         $this->assertEquals($resp->item()->data(), 'a');
+
+        $de_queue->pushRear(new \DEQue\Item('b'));
+        $resp = $de_queue->popFront();
+        $this->assertEquals($resp->error(), \DEQue\ErrCode::DIFFERENT_ENDPOINT);
+
+        $resp = $de_queue->popRear();
+        $this->assertEquals($resp->error(), 0);
+        $this->assertEquals($resp->item()->data(), 'b');
+    }
+
+    /**
+     * @covers \DEQue\Queue::getInstance
+     */
+    public function testGetInstanceQueueNameEmptyException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('queue name is empty');
+        \DEQue\Queue::getInstance('', \DEQue\Type::UNRESTRICTED);
+    }
+
+    /**
+     * @covers \DEQue\Queue::getInstance
+     */
+    public function testGetInstanceQueueTypeException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('queue type invalid');
+        \DEQue\Queue::getInstance('double_queue', 0);
+    }
+
+    /**
+     * @covers \DEQue\Queue::getInstance
+     */
+    public function testGetInstanceQueueMaxLengthException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('queue max length invalid');
+        \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, -1);
     }
 }

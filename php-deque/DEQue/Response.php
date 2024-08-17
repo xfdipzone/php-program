@@ -80,9 +80,9 @@ class Response
      * @author fdipzone
      * @DateTime 2024-05-31 11:11:40
      *
-     * @return \DEQue\Item
+     * @return \DEQue\Item|null
      */
-    public function item():\DEQue\Item
+    public function item():?\DEQue\Item
     {
         return $this->item;
     }
