@@ -14,8 +14,11 @@ final class DefaultFilterTest extends TestCase
      */
     public function testConstruct()
     {
-        $sensitive_word_storage = new \SensitiveWordFilter\Storage\MemoryStorage;
-        $sensitive_word_storage->save(['a', 'b', 'c']);
+        $resource = new \SensitiveWordFilter\Resource(\SensitiveWordFilter\Resource::MEMORY);
+        $resource->setWords(['a', 'b', 'c']);
+
+        $sensitive_word_storage = \SensitiveWordFilter\Storage\Factory::make(\SensitiveWordFilter\Storage\Type::MEMORY);
+        $sensitive_word_storage->setResource($resource);
 
         $filter = new \SensitiveWordFilter\DefaultFilter($sensitive_word_storage);
         $this->assertEquals(get_class($filter), 'SensitiveWordFilter\DefaultFilter');
@@ -26,8 +29,11 @@ final class DefaultFilterTest extends TestCase
      */
     public function testIsContain()
     {
-        $sensitive_word_storage = new \SensitiveWordFilter\Storage\MemoryStorage;
-        $sensitive_word_storage->save(['a', 'b', 'c']);
+        $resource = new \SensitiveWordFilter\Resource(\SensitiveWordFilter\Resource::MEMORY);
+        $resource->setWords(['a', 'b', 'c']);
+
+        $sensitive_word_storage = \SensitiveWordFilter\Storage\Factory::make(\SensitiveWordFilter\Storage\Type::MEMORY);
+        $sensitive_word_storage->setResource($resource);
 
         $filter = new \SensitiveWordFilter\DefaultFilter($sensitive_word_storage);
 
@@ -46,8 +52,11 @@ final class DefaultFilterTest extends TestCase
      */
     public function testFilter()
     {
-        $sensitive_word_storage = new \SensitiveWordFilter\Storage\MemoryStorage;
-        $sensitive_word_storage->save(['巴黎', '奥运', '金牌']);
+        $resource = new \SensitiveWordFilter\Resource(\SensitiveWordFilter\Resource::MEMORY);
+        $resource->setWords(['巴黎', '奥运', '金牌']);
+
+        $sensitive_word_storage = \SensitiveWordFilter\Storage\Factory::make(\SensitiveWordFilter\Storage\Type::MEMORY);
+        $sensitive_word_storage->setResource($resource);
 
         $filter = new \SensitiveWordFilter\DefaultFilter($sensitive_word_storage);
 
@@ -64,8 +73,11 @@ final class DefaultFilterTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('default filter: replacement can not be empty');
 
-        $sensitive_word_storage = new \SensitiveWordFilter\Storage\MemoryStorage;
-        $sensitive_word_storage->save(['巴黎', '奥运', '金牌']);
+        $resource = new \SensitiveWordFilter\Resource(\SensitiveWordFilter\Resource::MEMORY);
+        $resource->setWords(['巴黎', '奥运', '金牌']);
+
+        $sensitive_word_storage = \SensitiveWordFilter\Storage\Factory::make(\SensitiveWordFilter\Storage\Type::MEMORY);
+        $sensitive_word_storage->setResource($resource);
 
         $filter = new \SensitiveWordFilter\DefaultFilter($sensitive_word_storage);
 

@@ -1,5 +1,5 @@
 <?php
-namespace SensitiveWordFilter\Storage;
+namespace SensitiveWordFilter;
 
 /**
  * 敏感词列表来源

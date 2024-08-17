@@ -19,23 +19,28 @@ class MemoryStorage implements \SensitiveWordFilter\Storage\IStorage
     private $sensitive_words = [];
 
     /**
-     * 设置敏感词列表
-     * 此方法可多次调用，追加到敏感词列表
+     * 设置敏感词数据源
+     * 此方法可多次调用，追加敏感词列表
      *
      * @author fdipzone
-     * @DateTime 2024-08-11 18:42:20
+     * @DateTime 2024-08-16 22:49:28
      *
-     * @param array $sensitive_words 敏感词列表
+     * @param \SensitiveWordFilter\Resource $resource 敏感词数据源
      * @return void
      */
-    public function save(array $sensitive_words):void
+    public function setResource(\SensitiveWordFilter\Resource $resource):void
     {
-        if(!$sensitive_words)
+        if($resource->type()!=\SensitiveWordFilter\Resource::MEMORY)
+        {
+            throw new \Exception('memory storage: resource type not match');
+        }
+
+        if(!$resource->getWords())
         {
             throw new \Exception('memory storage: sensitive words is empty');
         }
 
-        $new_sensitive_words = array_fill_keys($sensitive_words, true);
+        $new_sensitive_words = array_fill_keys($resource->getWords(), true);
         $this->sensitive_words = array_merge($this->sensitive_words, $new_sensitive_words);
     }
 

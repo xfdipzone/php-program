@@ -20,23 +20,28 @@ class FileStorage implements \SensitiveWordFilter\Storage\IStorage
     private $sensitive_words = [];
 
     /**
-     * 从敏感词文件中读取敏感词列表
-     * 此方法可多次调用，读取多个文件的敏感词，追加到敏感词列表
+     * 设置敏感词数据源
+     * 此方法可多次调用，追加敏感词列表
      *
      * @author fdipzone
-     * @DateTime 2024-08-11 18:43:23
+     * @DateTime 2024-08-16 22:49:28
      *
-     * @param string $sensitive_word_file 敏感词文件路径
+     * @param \SensitiveWordFilter\Resource $resource 敏感词数据源
      * @return void
      */
-    public function save(string $sensitive_word_file):void
+    public function setResource(\SensitiveWordFilter\Resource $resource):void
     {
-        if(!file_exists($sensitive_word_file))
+        if($resource->type()!=\SensitiveWordFilter\Resource::FILE)
+        {
+            throw new \Exception('file storage: resource type not match');
+        }
+
+        if(!file_exists($resource->getFile()))
         {
             throw new \Exception('file storage: sensitive word file not exists');
         }
 
-        $new_sensitive_words = $this->parseSensitiveWordFile($sensitive_word_file);
+        $new_sensitive_words = $this->parseSensitiveWordFile($resource->getFile());
         $this->sensitive_words = array_merge($this->sensitive_words, $new_sensitive_words);
     }
 

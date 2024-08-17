@@ -35,14 +35,20 @@ final class FileStorageTest extends TestCase
     }
 
     /**
-     * @covers \SensitiveWordFilter\Storage\FileStorage::save
+     * @covers \SensitiveWordFilter\Storage\FileStorage::setResource
      * @covers \SensitiveWordFilter\Storage\FileStorage::sensitiveWords
      */
-    public function testSaveAndGet()
+    public function testSetResourceAndGet()
     {
+        $resource1 = new \SensitiveWordFilter\Resource(\SensitiveWordFilter\Resource::FILE);
+        $resource1->setFile(self::$sensitive_words_file1);
+
+        $resource2 = new \SensitiveWordFilter\Resource(\SensitiveWordFilter\Resource::FILE);
+        $resource2->setFile(self::$sensitive_words_file2);
+
         $memory_storage = new \SensitiveWordFilter\Storage\FileStorage;
-        $memory_storage->save(self::$sensitive_words_file1);
-        $memory_storage->save(self::$sensitive_words_file2);
+        $memory_storage->setResource($resource1);
+        $memory_storage->setResource($resource2);
 
         $sensitive_words = $memory_storage->sensitiveWords();
         $this->assertEquals(7, count($sensitive_words));
@@ -61,13 +67,30 @@ final class FileStorageTest extends TestCase
     }
 
     /**
-     * @covers \SensitiveWordFilter\Storage\FileStorage::save
+     * @covers \SensitiveWordFilter\Storage\FileStorage::setResource
      */
-    public function testSaveException()
+    public function testSetResourceTypeNotMatchException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('file storage: resource type not match');
+
+        $resource = new \SensitiveWordFilter\Resource(\SensitiveWordFilter\Resource::MEMORY);
+
+        $memory_storage = new \SensitiveWordFilter\Storage\FileStorage;
+        $memory_storage->setResource($resource);
+    }
+
+    /**
+     * @covers \SensitiveWordFilter\Storage\FileStorage::setResource
+     */
+    public function testSetResourceException()
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('file storage: sensitive word file not exists');
+
+        $resource = new \SensitiveWordFilter\Resource(\SensitiveWordFilter\Resource::FILE);
+
         $memory_storage = new \SensitiveWordFilter\Storage\FileStorage;
-        $memory_storage->save('/tmp/not_exists_file.txt');
+        $memory_storage->setResource($resource);
     }
 }
