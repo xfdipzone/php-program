@@ -24,7 +24,7 @@ class Queue
     /**
      * 并发锁
      *
-     * @var \SyncMutex
+     * @var \DEQue\MutexLock
      */
     private $mutex;
 
@@ -64,11 +64,11 @@ class Queue
     private $rear_num = 0;
 
     /**
-     * 加锁超时时间(ms)
+     * 加锁等待超时时间(ms)
      *
      * @var int
      */
-    private $lock_timeout = 100;
+    private $wait_timeout = 100;
 
     /**
      * 获取双向队列实例
@@ -148,7 +148,7 @@ class Queue
 
         // 创建并发锁
         $mutex_key = self::instanceKey($name, $type, $max_length);
-        $this->mutex = new \SyncMutex($mutex_key);
+        $this->mutex = new \DEQue\MutexLock($mutex_key);
     }
 
     /**
@@ -163,7 +163,7 @@ class Queue
     public function pushFront(\DEQue\Item $item):\DEQue\Response
     {
         // 加锁
-        if(!$this->mutex->lock($this->lock_timeout))
+        if(!$this->mutex->lock($this->wait_timeout))
         {
             return new \DEQue\Response(\DEQue\ErrCode::TRYLOCK_TIMEOUT);
         }
@@ -211,7 +211,7 @@ class Queue
     public function popFront():\DEQue\Response
     {
         // 加锁
-        if(!$this->mutex->lock($this->lock_timeout))
+        if(!$this->mutex->lock($this->wait_timeout))
         {
             return new \DEQue\Response(\DEQue\ErrCode::TRYLOCK_TIMEOUT);
         }
@@ -266,7 +266,7 @@ class Queue
     public function pushRear(\DEQue\Item $item):\DEQue\Response
     {
         // 加锁
-        if(!$this->mutex->lock($this->lock_timeout))
+        if(!$this->mutex->lock($this->wait_timeout))
         {
             return new \DEQue\Response(\DEQue\ErrCode::TRYLOCK_TIMEOUT);
         }
@@ -314,7 +314,7 @@ class Queue
     public function popRear():\DEQue\Response
     {
         // 加锁
-        if(!$this->mutex->lock($this->lock_timeout))
+        if(!$this->mutex->lock($this->wait_timeout))
         {
             return new \DEQue\Response(\DEQue\ErrCode::TRYLOCK_TIMEOUT);
         }
@@ -368,7 +368,7 @@ class Queue
     public function clear():bool
     {
         // 加锁
-        if(!$this->mutex->lock($this->lock_timeout))
+        if(!$this->mutex->lock($this->wait_timeout))
         {
             return false;
         }

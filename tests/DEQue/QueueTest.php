@@ -134,4 +134,123 @@ final class QueueTest extends TestCase
         $this->expectExceptionMessage('queue max length invalid');
         \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, -1);
     }
+
+    /**
+     * @covers \DEQue\Queue::pushFront
+     */
+    public function testPushFrontLockTimeout()
+    {
+        // mock mutex lock
+        $mock_lock = $this->getMockBuilder('\DEQue\MutexLock')
+                          ->setConstructorArgs(['double_queue:1:10'])
+                          ->setMethods(['lock'])
+                          ->getMock();
+        $mock_lock->expects($this->any())
+                  ->method('lock')
+                  ->willReturn(false);
+
+        $de_queue = \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, 10);
+
+        // 修改 mutex 属性
+        \TestUtils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
+
+        $resp = $de_queue->pushFront(new \DEQue\Item('a'));
+        $this->assertEquals(\DEQue\ErrCode::TRYLOCK_TIMEOUT, $resp->error());
+        $this->assertEquals(\DEQue\ErrCode::msg(\DEQue\ErrCode::TRYLOCK_TIMEOUT), $resp->errMsg());
+    }
+
+    /**
+     * @covers \DEQue\Queue::popFront
+     */
+    public function testPopFrontLockTimeout()
+    {
+        // mock mutex lock
+        $mock_lock = $this->getMockBuilder('\DEQue\MutexLock')
+                          ->setConstructorArgs(['double_queue:1:10'])
+                          ->setMethods(['lock'])
+                          ->getMock();
+        $mock_lock->expects($this->any())
+                  ->method('lock')
+                  ->willReturn(false);
+
+        $de_queue = \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, 10);
+
+        // 修改 mutex 属性
+        \TestUtils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
+
+        $resp = $de_queue->popFront();
+        $this->assertEquals(\DEQue\ErrCode::TRYLOCK_TIMEOUT, $resp->error());
+        $this->assertEquals(\DEQue\ErrCode::msg(\DEQue\ErrCode::TRYLOCK_TIMEOUT), $resp->errMsg());
+    }
+
+    /**
+     * @covers \DEQue\Queue::pushRear
+     */
+    public function testPushRearLockTimeout()
+    {
+        // mock mutex lock
+        $mock_lock = $this->getMockBuilder('\DEQue\MutexLock')
+                          ->setConstructorArgs(['double_queue:1:10'])
+                          ->setMethods(['lock'])
+                          ->getMock();
+        $mock_lock->expects($this->any())
+                  ->method('lock')
+                  ->willReturn(false);
+
+        $de_queue = \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, 10);
+
+        // 修改 mutex 属性
+        \TestUtils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
+
+        $resp = $de_queue->pushRear(new \DEQue\Item('a'));
+        $this->assertEquals(\DEQue\ErrCode::TRYLOCK_TIMEOUT, $resp->error());
+        $this->assertEquals(\DEQue\ErrCode::msg(\DEQue\ErrCode::TRYLOCK_TIMEOUT), $resp->errMsg());
+    }
+
+    /**
+     * @covers \DEQue\Queue::popRear
+     */
+    public function testPopRearLockTimeout()
+    {
+        // mock mutex lock
+        $mock_lock = $this->getMockBuilder('\DEQue\MutexLock')
+                          ->setConstructorArgs(['double_queue:1:10'])
+                          ->setMethods(['lock'])
+                          ->getMock();
+        $mock_lock->expects($this->any())
+                  ->method('lock')
+                  ->willReturn(false);
+
+        $de_queue = \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, 10);
+
+        // 修改 mutex 属性
+        \TestUtils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
+
+        $resp = $de_queue->popRear();
+        $this->assertEquals(\DEQue\ErrCode::TRYLOCK_TIMEOUT, $resp->error());
+        $this->assertEquals(\DEQue\ErrCode::msg(\DEQue\ErrCode::TRYLOCK_TIMEOUT), $resp->errMsg());
+    }
+
+    /**
+     * @covers \DEQue\Queue::clear
+     */
+    public function testClearLockTimeout()
+    {
+        // mock mutex lock
+        $mock_lock = $this->getMockBuilder('\DEQue\MutexLock')
+                          ->setConstructorArgs(['double_queue:1:10'])
+                          ->setMethods(['lock'])
+                          ->getMock();
+        $mock_lock->expects($this->any())
+                  ->method('lock')
+                  ->willReturn(false);
+
+        $de_queue = \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, 10);
+
+        // 修改 mutex 属性
+        \TestUtils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
+
+        $resp = $de_queue->clear();
+        $this->assertSame(false, $resp);
+    }
 }
