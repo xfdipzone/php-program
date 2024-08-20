@@ -12,8 +12,16 @@ namespace SensitiveWordFilter\Storage;
 class FileStorage implements \SensitiveWordFilter\Storage\IStorage
 {
     /**
-     * 敏感词集合
+     * 敏感词集合 KV 结构
      * key=>value key:敏感词 value:true
+     * 用于过滤重复敏感词与加速追加处理
+     *
+     * @var array
+     */
+    private $kv_sensitive_words = [];
+
+    /**
+     * 敏感词集合
      *
      * @var array
      */
@@ -41,8 +49,10 @@ class FileStorage implements \SensitiveWordFilter\Storage\IStorage
             throw new \Exception('file storage: sensitive word file not exists');
         }
 
-        $new_sensitive_words = $this->parseSensitiveWordFile($resource->getFile());
-        $this->sensitive_words = array_merge($this->sensitive_words, $new_sensitive_words);
+        $new_kv_sensitive_words = $this->parseSensitiveWordFile($resource->getFile());
+        $this->kv_sensitive_words = array_merge($this->kv_sensitive_words, $new_kv_sensitive_words);
+
+        $this->sensitive_words = array_keys($this->kv_sensitive_words);
     }
 
     /**
@@ -86,6 +96,6 @@ class FileStorage implements \SensitiveWordFilter\Storage\IStorage
      */
     public function sensitiveWords():array
     {
-        return array_keys($this->sensitive_words);
+        return $this->sensitive_words;
     }
 }
