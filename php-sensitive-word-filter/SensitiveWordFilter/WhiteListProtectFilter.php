@@ -36,6 +36,20 @@ class WhiteListProtectFilter implements \SensitiveWordFilter\ISensitiveWordFilte
     private $white_list_words = [];
 
     /**
+     * 保护标记左定界符
+     *
+     * @var string
+     */
+    private $left_delimiter = '[[#';
+
+    /**
+     * 保护标记右定界符
+     *
+     * @var string
+     */
+    private $right_delimiter = '#]]';
+
+    /**
      * 初始化
      * 传入敏感词过滤器
      *
@@ -129,6 +143,27 @@ class WhiteListProtectFilter implements \SensitiveWordFilter\ISensitiveWordFilte
     }
 
     /**
+     * 设置保护标记定界符
+     *
+     * @author fdipzone
+     * @DateTime 2024-08-22 18:15:18
+     *
+     * @param string $left_delimiter 保护标记左定界符
+     * @param string $right_delimiter 保护标记右定界符
+     * @return void
+     */
+    public function setDelimiter(string $left_delimiter, string $right_delimiter):void
+    {
+        if(empty($left_delimiter) || empty($right_delimiter))
+        {
+            throw new \Exception('white list protect filter: left delimiter or right delimiter is empty');
+        }
+
+        $this->left_delimiter = $left_delimiter;
+        $this->right_delimiter = $right_delimiter;
+    }
+
+    /**
      * 保护数据内容中的敏感词白名单
      *
      * @author fdipzone
@@ -145,7 +180,8 @@ class WhiteListProtectFilter implements \SensitiveWordFilter\ISensitiveWordFilte
         {
             foreach($white_list_words as $index=>$word)
             {
-                $content = str_replace($word, '[[#'.$index.'#]]', $content);
+                $replacement = $this->left_delimiter . $index . $this->right_delimiter;
+                $content = str_replace($word, $replacement, $content);
             }
         }
 
@@ -174,7 +210,8 @@ class WhiteListProtectFilter implements \SensitiveWordFilter\ISensitiveWordFilte
                 return isset($white_list_words[$key])? $white_list_words[$key] : '';
             };
 
-            $content = preg_replace_callback("/\[\[#(.*?)#\]\].*?/si", $replace_callback, $content);
+            $pattern = sprintf('/%s(.*?)%s.*?/si', preg_quote($this->left_delimiter), preg_quote($this->right_delimiter));
+            $content = preg_replace_callback($pattern, $replace_callback, $content);
         }
 
         return $content;
