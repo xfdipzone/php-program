@@ -160,4 +160,56 @@ final class WhiteListProtectFilterTest extends TestCase
         $white_list_filter = new \SensitiveWordFilter\WhiteListProtectFilter($filter);
         $white_list_filter->setWhiteListWords([]);
     }
+
+    /**
+     * @covers \SensitiveWordFilter\WhiteListProtectFilter::protectWhiteListWords
+     */
+    public function testProtectWhiteListWords()
+    {
+        $resource = new \SensitiveWordFilter\Resource(\SensitiveWordFilter\Resource::MEMORY);
+        $resource->setWords(['巴黎', '奥运', '金牌']);
+
+        $sensitive_word_storage = \SensitiveWordFilter\Storage\Factory::make(\SensitiveWordFilter\Storage\Type::MEMORY);
+        $sensitive_word_storage->setResource($resource);
+
+        // default filter
+        $filter = new \SensitiveWordFilter\DefaultFilter($sensitive_word_storage);
+
+        // white list protect filter
+        $white_list_filter = new \SensitiveWordFilter\WhiteListProtectFilter($filter);
+
+        // set white list
+        $white_list_filter->setWhiteListWords(['巴黎人', '奥运会', '获金牌']);
+
+        $content = '今天巴黎人们很开心，举办了巴黎2024奥运会，中国获得40面金牌，可喜可贺，再次祝贺获金牌的运动员';
+        $protect_content = '今天[[#0#]]们很开心，举办了巴黎2024[[#1#]]，中国获得40面金牌，可喜可贺，再次祝贺[[#2#]]的运动员';
+        $resp = \TestUtils\PHPUnitExtension::callMethod($white_list_filter, 'protectWhiteListWords', [$content]);
+        $this->assertEquals($protect_content, $resp);
+    }
+
+    /**
+     * @covers \SensitiveWordFilter\WhiteListProtectFilter::resumeWhiteListWords
+     */
+    public function testResumeWhiteListWords()
+    {
+        $resource = new \SensitiveWordFilter\Resource(\SensitiveWordFilter\Resource::MEMORY);
+        $resource->setWords(['巴黎', '奥运', '金牌']);
+
+        $sensitive_word_storage = \SensitiveWordFilter\Storage\Factory::make(\SensitiveWordFilter\Storage\Type::MEMORY);
+        $sensitive_word_storage->setResource($resource);
+
+        // default filter
+        $filter = new \SensitiveWordFilter\DefaultFilter($sensitive_word_storage);
+
+        // white list protect filter
+        $white_list_filter = new \SensitiveWordFilter\WhiteListProtectFilter($filter);
+
+        // set white list
+        $white_list_filter->setWhiteListWords(['巴黎人', '奥运会', '获金牌']);
+
+        $protect_content = '今天[[#0#]]们很开心，举办了巴黎2024[[#1#]]，中国获得40面金牌，可喜可贺，再次祝贺[[#2#]]的运动员';
+        $resume_content = '今天巴黎人们很开心，举办了巴黎2024奥运会，中国获得40面金牌，可喜可贺，再次祝贺获金牌的运动员';
+        $resp = \TestUtils\PHPUnitExtension::callMethod($white_list_filter, 'resumeWhiteListWords', [$protect_content]);
+        $this->assertEquals($resume_content, $resp);
+    }
 }
