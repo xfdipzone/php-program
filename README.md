@@ -93,3 +93,19 @@ php开发的程序，类库，小工具，不定期更新。
 - [php 版本比对类](https://github.com/xfdipzone/php-program/tree/master/php-version) (php-version)
 
 - [php 验证类](https://github.com/xfdipzone/php-program/tree/master/php-validator) (php-validator)
+
+- [php 敏感词过滤类](https://github.com/xfdipzone/php-program/tree/master/php-sensitive-word-filter) (php-sensitive-word-filter)
+
+---
+
+## 单元测试
+
+部分项目增加了单元测试，运行流程如下
+
+```shell
+# 安装 composer 依赖
+composer install
+
+# 运行单元测试
+./vendor/bin/phpunit -c phpunit.xml
+```
