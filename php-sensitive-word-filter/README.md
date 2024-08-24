@@ -59,4 +59,4 @@ $content = '巴黎2024奥运会，中国获得40面金牌，可喜可贺';
 echo $filter->filter($content, '**'); // '**2024**会，中国获得40面**，可喜可贺';
 ```
 
-更多使用详情可参考单元测试代码 [https://github.com/xfdipzone/php-program/tree/master/tests/SensitiveWordFilter](<https://github.com/xfdipzone/php-program/tree/master/tests/SensitiveWordFilter>)
+更多功能演示可参考单元测试代码 [SensitiveWordFilter Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/SensitiveWordFilter>)
