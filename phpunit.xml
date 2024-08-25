@@ -17,6 +17,7 @@
         <whitelist>
             <directory>./php-sensitive-word-filter</directory>
             <directory>./php-deque</directory>
+            <directory>./php-timer</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>

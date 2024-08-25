@@ -18,11 +18,13 @@
     "autoload": {
         "psr-4": {
             "SensitiveWordFilter\\": "php-sensitive-word-filter/SensitiveWordFilter",
-            "DEQue\\": "php-deque/php-deque"
+            "DEQue\\": "php-deque/DEQue",
+            "Timer\\": "php-timer/Timer"
         },
         "classmap": [
             "php-sensitive-word-filter/",
-            "php-deque/"
+            "php-deque/",
+            "php-timer/"
         ]
     },
     "autoload-dev": {
