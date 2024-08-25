@@ -177,7 +177,7 @@ class QRCodeGenerator{
 
             // 合拼图片并保留各自透明度
             $dest_img = $this->imagecopymerge_alpha($tmp_qrcode_img, $new_logo_img, $pos_x, $pos_y, 0, 0, $new_logo_w, $new_logo_h, $this->_config['logo_opacity']);
-      
+
             // 生成图片
             switch($dest_ext){
                 case 1: imagegif($dest_img, $this->_config['dest_file'], $this->_config['quality']); break;
@@ -189,9 +189,9 @@ class QRCodeGenerator{
 
         // 不需要加入logo
         }else{
-            
+
             $dest_img = imagecreatefrompng($tmp_qrcode_file);
-            
+
             // 生成图片
             switch($dest_ext){
                 case 1: imagegif($dest_img, $this->_config['dest_file'], $this->_config['quality']); break;
