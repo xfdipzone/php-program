@@ -40,7 +40,7 @@ class Event
         {
             throw new \Exception('timer event: millisecond timestamp invalid');
         }
-    
+
         if(empty($content))
         {
             throw new \Exception('timer event: content is empty');

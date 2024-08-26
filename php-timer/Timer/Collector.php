@@ -86,10 +86,10 @@ class Collector
         {
             throw new \Exception('timer collector: the current state cannot be ended');
         }
-    
+
         // 状态设置为结束
         $this->state = self::ENDED;
-    
+
         // 记录结束时间
         $event = new \Timer\Event($this->getMilliSecondTimestamp(), 'end');
         $this->timeline->push($event);
