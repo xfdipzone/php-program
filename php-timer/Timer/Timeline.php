@@ -2,7 +2,7 @@
 namespace Timer;
 
 /**
- * 时间线，用于记录多个时间序列
+ * 时间线，用于记录多个时间事件
  *
  * @author fdipzone
  * @DateTime 2024-08-25 18:17:35
