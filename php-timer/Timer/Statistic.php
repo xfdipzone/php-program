@@ -85,7 +85,7 @@ class Statistic
         {
             $millisecond_timestamp = $event->millisecondTimestamp();
             $second = (int)($millisecond_timestamp / 1000);
-            $millisecond = $millisecond_timestamp % 100;
+            $millisecond = $millisecond_timestamp % 1000;
 
             $result[] = array(
                 'time' => date('Y-m-d H:i:s', $second).'.'.$millisecond,

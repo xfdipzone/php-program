@@ -127,14 +127,24 @@ final class StatisticTest extends TestCase
         $statistic = new \Timer\Statistic($timeline);
         $detail_time = $statistic->detailTime();
         $this->assertSame(5, count($detail_time));
+        $this->assertSame(date('Y-m-d H:i:s', $now).'.100', $detail_time[0]['time']);
+        $this->assertSame('start', $detail_time[0]['content']);
         $this->assertSame(0, $detail_time[0]['execution_time']);
         $this->assertSame(0, $detail_time[0]['flow_execution_time']);
+        $this->assertSame(date('Y-m-d H:i:s', $now).'.120', $detail_time[1]['time']);
+        $this->assertSame('event1', $detail_time[1]['content']);
         $this->assertSame(20, $detail_time[1]['execution_time']);
         $this->assertSame(20, $detail_time[1]['flow_execution_time']);
+        $this->assertSame(date('Y-m-d H:i:s', $now).'.130', $detail_time[2]['time']);
+        $this->assertSame('event2', $detail_time[2]['content']);
         $this->assertSame(10, $detail_time[2]['execution_time']);
         $this->assertSame(30, $detail_time[2]['flow_execution_time']);
+        $this->assertSame(date('Y-m-d H:i:s', $now).'.160', $detail_time[3]['time']);
+        $this->assertSame('event3', $detail_time[3]['content']);
         $this->assertSame(30, $detail_time[3]['execution_time']);
         $this->assertSame(60, $detail_time[3]['flow_execution_time']);
+        $this->assertSame(date('Y-m-d H:i:s', $now).'.200', $detail_time[4]['time']);
+        $this->assertSame('end', $detail_time[4]['content']);
         $this->assertSame(40, $detail_time[4]['execution_time']);
         $this->assertSame(100, $detail_time[4]['flow_execution_time']);
     }
