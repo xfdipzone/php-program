@@ -96,6 +96,8 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 敏感词过滤类](https://github.com/xfdipzone/php-program/tree/master/php-sensitive-word-filter) (php-sensitive-word-filter)
 
+- [php 执行时间统计类](https://github.com/xfdipzone/php-program/tree/master/php-timer) (php-timer)
+
 ---
 
 ## 单元测试
