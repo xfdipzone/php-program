@@ -52,16 +52,16 @@ $collector = new \Timer\Collector;
 
 // 随机 sleep 20 ~ 100 ms 模拟代码执行
 $collector->start();
-usleep(mt_rand(10000, 100000));
+usleep(mt_rand(20000, 100000));
 
 $collector->savePoint('event1');
-usleep(mt_rand(10000, 100000));
+usleep(mt_rand(20000, 100000));
 
 $collector->savePoint('event2');
-usleep(mt_rand(10000, 100000));
+usleep(mt_rand(20000, 100000));
 
 $collector->savePoint('event3');
-usleep(mt_rand(10000, 100000));
+usleep(mt_rand(20000, 100000));
 
 $collector->end();
 
