@@ -76,3 +76,55 @@ assert($resp->item()->data()=='d');
 $resp = $de_queue->popRear();
 assert($resp->item()->data()=='b');
 ```
+
+---
+
+## SyncMutex 多进程并发演示
+
+多个子进程并发获取锁，只有一个子进程获取成功，其他子进程获取超时
+
+```php
+// 创建 SyncMutex 对象
+$mutex = new \SyncMutex('my_mutex');
+
+// 创建多个子进程
+for($i=0; $i<5; $i++)
+{
+    $pid = pcntl_fork();
+
+    if($pid==-1)
+    {
+        // 创建子进程失败
+        exit('无法创建子进程');
+    }
+    elseif($pid)
+    {
+        // 父进程
+        continue;
+    }
+    else
+    {
+        // 子进程，尝试 10ms 内获取锁
+        if($mutex->lock(10))
+        {
+            printf("进程 %d 获取锁成功\n", getmypid());
+
+            // 延迟 20 ms
+            usleep(20000);
+
+            // 解锁
+            $mutex->unlock();
+        }
+        else
+        {
+            printf("进程 %d 获取锁超时\n", getmypid());
+        }
+
+        // 退出子进程
+        exit();
+    }
+}
+
+// 等待所有子进程运行结束
+while(pcntl_waitpid(0, $status)!=-1);
+```
