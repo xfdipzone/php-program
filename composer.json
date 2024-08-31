@@ -19,13 +19,9 @@
         "psr-4": {
             "SensitiveWordFilter\\": "php-sensitive-word-filter/SensitiveWordFilter",
             "DEQue\\": "php-deque/DEQue",
-            "Timer\\": "php-timer/Timer"
-        },
-        "classmap": [
-            "php-sensitive-word-filter/",
-            "php-deque/",
-            "php-timer/"
-        ]
+            "Timer\\": "php-timer/Timer",
+            "FileParser\\": "php-file-parser/FileParser"
+        }
     },
     "autoload-dev": {
         "psr-4": {
