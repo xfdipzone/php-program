@@ -186,14 +186,14 @@ class BatchDownLoad{
      * @return void
      */
     private function to_log(array $data, array $flag):void{
- 
+
         // 临时日志数据
         $tmp_log = '';
- 
+
         foreach($data as $k=>$v){
             $tmp_log .= '['.date('Y-m-d H:i:s').'] url:'.$v[0].' file:'.$v[1].' status:'.$flag[$k].PHP_EOL;
         }
- 
+
         // 创建日志目录
         if(!is_dir(dirname($this->log_file))){
             mkdir(dirname($this->log_file), 0777, true);

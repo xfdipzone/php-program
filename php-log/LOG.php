@@ -5,7 +5,7 @@
  * @author fdipzone
  * @DateTime 2023-03-26 17:24:09
  *
- * Description: 
+ * Description:
  * 1.自定义日志根目录及日志文件名称。
  * 2.使用日期时间格式自定义日志目录。
  * 3.自动创建不存在的日志目录。
@@ -69,7 +69,7 @@ class LOG{
      * @return void
      */
     public static function set_config(array $config=array()):void{
-        self::$_CONFIG = $config; 
+        self::$_CONFIG = $config;
     }
 
     /**

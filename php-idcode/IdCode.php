@@ -1,7 +1,7 @@
 <?php
 /**
  * php 根据自增id创建唯一编号类
- * 
+ *
  * 格式 [prefix]-[multiple letters]-[multiple numbers]
  * 例: 3999 => F-D-999
  *

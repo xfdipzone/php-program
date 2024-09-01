@@ -6,7 +6,7 @@ define('LOG_PATH', dirname(__FILE__).'/logs');
 // 总配置设定
 $config = array(
     'default' => array(
-        'log_path' => LOG_PATH,       // 日志根目录 
+        'log_path' => LOG_PATH,       // 日志根目录
         'log_file' => 'default.log',  // 日志文件
         'format' => 'Y/m/d',          // 日志自定义目录，使用日期时间定义
     ),

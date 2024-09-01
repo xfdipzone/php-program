@@ -143,10 +143,10 @@ class QRCodeGenerator{
             list($logo_w, $logo_h, $logo_type) = getimagesize($this->_config['logo']);
 
             // 创建logo图片对象
-            switch($logo_type){  
-                case 1: $logo_img = imagecreatefromgif($this->_config['logo']); break;  
-                case 2: $logo_img = imagecreatefromjpeg($this->_config['logo']); break;  
-                case 3: $logo_img = imagecreatefrompng($this->_config['logo']); break;  
+            switch($logo_type){
+                case 1: $logo_img = imagecreatefromgif($this->_config['logo']); break;
+                case 2: $logo_img = imagecreatefromjpeg($this->_config['logo']); break;
+                case 3: $logo_img = imagecreatefrompng($this->_config['logo']); break;
                 default:
                     throw new \Exception('logo type not supported');
             }
@@ -185,7 +185,7 @@ class QRCodeGenerator{
                 case 3: imagepng($dest_img, $this->_config['dest_file'], (int)(($this->_config['quality']-1)/10)); break;
                 default:
                     throw new \Exception('dest type not supported');
-            } 
+            }
 
         // 不需要加入logo
         }else{
