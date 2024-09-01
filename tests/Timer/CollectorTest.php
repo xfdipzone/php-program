@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+namespace Tests\Timer;
 
 use PHPUnit\Framework\TestCase;
 
@@ -24,9 +25,9 @@ final class CollectorTest extends TestCase
     public function testStart()
     {
         $collector = new \Timer\Collector;
-        $this->assertEquals(\Timer\Collector::NOT_STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::NOT_STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->start();
-        $this->assertEquals(\Timer\Collector::STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
     }
 
     /**
@@ -38,9 +39,9 @@ final class CollectorTest extends TestCase
         $this->expectExceptionMessage('timer collector: the current state cannot be started');
 
         $collector = new \Timer\Collector;
-        $this->assertEquals(\Timer\Collector::NOT_STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::NOT_STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->start();
-        $this->assertEquals(\Timer\Collector::STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->start();
     }
 
@@ -50,11 +51,11 @@ final class CollectorTest extends TestCase
     public function testEnd()
     {
         $collector = new \Timer\Collector;
-        $this->assertEquals(\Timer\Collector::NOT_STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::NOT_STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->start();
-        $this->assertEquals(\Timer\Collector::STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->end();
-        $this->assertEquals(\Timer\Collector::ENDED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::ENDED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
     }
 
     /**
@@ -66,7 +67,7 @@ final class CollectorTest extends TestCase
         $this->expectExceptionMessage('timer collector: the current state cannot be ended');
 
         $collector = new \Timer\Collector;
-        $this->assertEquals(\Timer\Collector::NOT_STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::NOT_STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->end();
     }
 
@@ -76,16 +77,16 @@ final class CollectorTest extends TestCase
     public function testSavePoint()
     {
         $collector = new \Timer\Collector;
-        $this->assertEquals(\Timer\Collector::NOT_STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::NOT_STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->start();
-        $this->assertEquals(\Timer\Collector::STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
 
         $collector->savePoint('event 1');
         $collector->savePoint('event2');
-        $this->assertEquals(\Timer\Collector::STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
 
         $collector->end();
-        $this->assertEquals(\Timer\Collector::ENDED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::ENDED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
 
         $this->assertSame(4, count($collector->timeline()->events()));
     }
@@ -99,7 +100,7 @@ final class CollectorTest extends TestCase
         $this->expectExceptionMessage('timer collector: the current state cannot be save point');
 
         $collector = new \Timer\Collector;
-        $this->assertEquals(\Timer\Collector::NOT_STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::NOT_STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->savePoint('event');
     }
 
@@ -112,9 +113,9 @@ final class CollectorTest extends TestCase
         $this->expectExceptionMessage('timer collector: save point content is empty');
 
         $collector = new \Timer\Collector;
-        $this->assertEquals(\Timer\Collector::NOT_STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::NOT_STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->start();
-        $this->assertEquals(\Timer\Collector::STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->savePoint('');
     }
 
@@ -138,9 +139,9 @@ final class CollectorTest extends TestCase
         $this->expectExceptionMessage('timer collector: the current state cannot be get timeline');
 
         $collector = new \Timer\Collector;
-        $this->assertEquals(\Timer\Collector::NOT_STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::NOT_STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->start();
-        $this->assertEquals(\Timer\Collector::STARTED, \TestUtils\PHPUnitExtension::getVariable($collector, 'state'));
+        $this->assertEquals(\Timer\Collector::STARTED, \Tests\Utils\PHPUnitExtension::getVariable($collector, 'state'));
         $collector->timeline();
     }
 
@@ -150,7 +151,7 @@ final class CollectorTest extends TestCase
     public function testGetMilliSecondTimestamp()
     {
         $collector = new \Timer\Collector;
-        $millisecond_timestamp = \TestUtils\PHPUnitExtension::callMethod($collector, 'getMilliSecondTimestamp', []);
+        $millisecond_timestamp = \Tests\Utils\PHPUnitExtension::callMethod($collector, 'getMilliSecondTimestamp', []);
         $this->assertTrue($millisecond_timestamp>0);
     }
 }

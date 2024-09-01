@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+namespace Tests\DEQue;
 
 use PHPUnit\Framework\TestCase;
 
@@ -152,7 +153,7 @@ final class QueueTest extends TestCase
         $de_queue = \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, 10);
 
         // 修改 mutex 属性
-        \TestUtils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
+        \Tests\Utils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
 
         $resp = $de_queue->pushFront(new \DEQue\Item('a'));
         $this->assertEquals(\DEQue\ErrCode::TRYLOCK_TIMEOUT, $resp->error());
@@ -176,7 +177,7 @@ final class QueueTest extends TestCase
         $de_queue = \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, 10);
 
         // 修改 mutex 属性
-        \TestUtils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
+        \Tests\Utils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
 
         $resp = $de_queue->popFront();
         $this->assertEquals(\DEQue\ErrCode::TRYLOCK_TIMEOUT, $resp->error());
@@ -200,7 +201,7 @@ final class QueueTest extends TestCase
         $de_queue = \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, 10);
 
         // 修改 mutex 属性
-        \TestUtils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
+        \Tests\Utils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
 
         $resp = $de_queue->pushRear(new \DEQue\Item('a'));
         $this->assertEquals(\DEQue\ErrCode::TRYLOCK_TIMEOUT, $resp->error());
@@ -224,7 +225,7 @@ final class QueueTest extends TestCase
         $de_queue = \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, 10);
 
         // 修改 mutex 属性
-        \TestUtils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
+        \Tests\Utils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
 
         $resp = $de_queue->popRear();
         $this->assertEquals(\DEQue\ErrCode::TRYLOCK_TIMEOUT, $resp->error());
@@ -248,7 +249,7 @@ final class QueueTest extends TestCase
         $de_queue = \DEQue\Queue::getInstance('double_queue', \DEQue\Type::UNRESTRICTED, 10);
 
         // 修改 mutex 属性
-        \TestUtils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
+        \Tests\Utils\PHPUnitExtension::setVariable($de_queue, 'mutex', $mock_lock);
 
         $resp = $de_queue->clear();
         $this->assertSame(false, $resp);

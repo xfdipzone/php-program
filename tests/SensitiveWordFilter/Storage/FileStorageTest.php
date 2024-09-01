@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+namespace Tests\SensitiveWordFilter\Storage;
 
 use PHPUnit\Framework\TestCase;
 
@@ -61,7 +62,7 @@ final class FileStorageTest extends TestCase
     public function testParseSensitiveWordFile()
     {
         $memory_storage = new \SensitiveWordFilter\Storage\FileStorage;
-        $sensitive_words = \TestUtils\PHPUnitExtension::callMethod($memory_storage, 'parseSensitiveWordFile', [self::$sensitive_words_file1]);
+        $sensitive_words = \Tests\Utils\PHPUnitExtension::callMethod($memory_storage, 'parseSensitiveWordFile', [self::$sensitive_words_file1]);
         $this->assertEquals(4, count($sensitive_words));
         $this->assertEquals('a,b,c,d', implode(',', array_keys($sensitive_words)));
     }

@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace TestUtils;
+namespace Tests\Utils;
 
 /**
  * PHP Unit 扩展类

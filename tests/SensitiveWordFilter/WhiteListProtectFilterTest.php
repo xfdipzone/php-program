@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+namespace Tests\SensitiveWordFilter;
 
 use PHPUnit\Framework\TestCase;
 
@@ -189,7 +190,7 @@ final class WhiteListProtectFilterTest extends TestCase
 
         $content = '今天巴黎人们很开心，举办了巴黎2024奥运会，中国获得40面金牌，可喜可贺，再次祝贺获金牌的运动员';
         $protect_content = '今天[[#0#]]们很开心，举办了巴黎2024[[#1#]]，中国获得40面金牌，可喜可贺，再次祝贺[[#2#]]的运动员';
-        $resp = \TestUtils\PHPUnitExtension::callMethod($white_list_filter, 'protectWhiteListWords', [$content]);
+        $resp = \Tests\Utils\PHPUnitExtension::callMethod($white_list_filter, 'protectWhiteListWords', [$content]);
         $this->assertEquals($protect_content, $resp);
     }
 
@@ -215,7 +216,7 @@ final class WhiteListProtectFilterTest extends TestCase
 
         $protect_content = '今天[[#0#]]们很开心，举办了巴黎2024[[#1#]]，中国获得40面金牌，可喜可贺，再次祝贺[[#2#]]的运动员';
         $resume_content = '今天巴黎人们很开心，举办了巴黎2024奥运会，中国获得40面金牌，可喜可贺，再次祝贺获金牌的运动员';
-        $resp = \TestUtils\PHPUnitExtension::callMethod($white_list_filter, 'resumeWhiteListWords', [$protect_content]);
+        $resp = \Tests\Utils\PHPUnitExtension::callMethod($white_list_filter, 'resumeWhiteListWords', [$protect_content]);
         $this->assertEquals($resume_content, $resp);
     }
 
@@ -237,8 +238,8 @@ final class WhiteListProtectFilterTest extends TestCase
         $white_list_filter = new \SensitiveWordFilter\WhiteListProtectFilter($filter);
 
         $white_list_filter->setDelimiter('{{', '}}');
-        $this->assertEquals('{{', \TestUtils\PHPUnitExtension::getVariable($white_list_filter, 'left_delimiter'));
-        $this->assertEquals('}}', \TestUtils\PHPUnitExtension::getVariable($white_list_filter, 'right_delimiter'));
+        $this->assertEquals('{{', \Tests\Utils\PHPUnitExtension::getVariable($white_list_filter, 'left_delimiter'));
+        $this->assertEquals('}}', \Tests\Utils\PHPUnitExtension::getVariable($white_list_filter, 'right_delimiter'));
     }
 
     /**
