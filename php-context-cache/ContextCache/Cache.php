@@ -31,11 +31,13 @@ class Cache
     {
         try
         {
-            // 根据类型获取缓存实现类
-            $class = self::getCacheClass($type);
-
+            // 实例不存在
             if(!isset(self::$instance[$type]))
             {
+                // 根据类型获取缓存实现类
+                $class = self::getCacheClass($type);
+
+                // 创建实例
                 self::$instance[$type] = new $class;
             }
 
