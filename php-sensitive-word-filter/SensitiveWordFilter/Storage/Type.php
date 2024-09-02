@@ -16,7 +16,7 @@ class Type
     // 基于文件存储
     const FILE = 'file';
 
-    // 类型与实现类关系
+    // 类型与实现类对应关系
     public static $map = [
         self::MEMORY => '\SensitiveWordFilter\Storage\MemoryStorage',
         self::FILE => '\SensitiveWordFilter\Storage\FileStorage',

@@ -15,6 +15,6 @@ class Type
 
     // 类型与实现类对应关系
     public static $map = [
-        self::BAIDU => 'Geocoding\\BaiduGeocoding',
+        self::BAIDU => '\Geocoding\\BaiduGeocoding',
     ];
 }

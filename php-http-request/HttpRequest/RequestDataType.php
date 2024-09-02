@@ -17,7 +17,7 @@ class RequestDataType
     const FILE_DATA = 'file_data';
 
     /**
-     * 类型与实现类对象关系
+     * 类型与实现类对应关系
      *
      * @var array
      * @author fdipzone
@@ -25,7 +25,7 @@ class RequestDataType
      *
      */
     public static $map = [
-        self::FORM_DATA => 'HttpRequest\\RequestData\FormData',
-        self::FILE_DATA => 'HttpRequest\\RequestData\FileData',
+        self::FORM_DATA => '\HttpRequest\\RequestData\FormData',
+        self::FILE_DATA => '\HttpRequest\\RequestData\FileData',
     ];
 }

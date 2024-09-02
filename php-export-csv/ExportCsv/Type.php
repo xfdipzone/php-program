@@ -18,7 +18,7 @@ class Type
 
     // 类型与实现类对象关系
     public static $map = [
-        self::STREAM => 'ExportCsv\ExportStream',
-        self::FILE => 'ExportCsv\ExportFile'
+        self::STREAM => '\ExportCsv\ExportStream',
+        self::FILE => '\ExportCsv\ExportFile'
     ];
 }

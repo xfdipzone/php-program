@@ -26,7 +26,7 @@ final class WhiteListProtectFilterTest extends TestCase
 
         // white list protect filter
         $white_list_filter = new \SensitiveWordFilter\WhiteListProtectFilter($filter);
-        $this->assertEquals(get_class($white_list_filter), 'SensitiveWordFilter\WhiteListProtectFilter');
+        $this->assertEquals('SensitiveWordFilter\WhiteListProtectFilter', get_class($white_list_filter));
     }
 
     /**

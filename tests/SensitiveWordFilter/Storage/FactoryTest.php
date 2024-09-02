@@ -39,10 +39,10 @@ final class FactoryTest extends TestCase
     public function testMake()
     {
         $storage = \SensitiveWordFilter\Storage\Factory::make(\SensitiveWordFilter\Storage\Type::MEMORY);
-        $this->assertEquals(get_class($storage), 'SensitiveWordFilter\Storage\MemoryStorage');
+        $this->assertEquals('SensitiveWordFilter\Storage\MemoryStorage', get_class($storage));
 
         $storage = \SensitiveWordFilter\Storage\Factory::make(\SensitiveWordFilter\Storage\Type::FILE);
-        $this->assertEquals(get_class($storage), 'SensitiveWordFilter\Storage\FileStorage');
+        $this->assertEquals('SensitiveWordFilter\Storage\FileStorage', get_class($storage));
     }
 
     /**

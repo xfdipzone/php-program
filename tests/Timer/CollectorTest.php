@@ -16,7 +16,7 @@ final class CollectorTest extends TestCase
     public function testConstruct()
     {
         $collector = new \Timer\Collector;
-        $this->assertEquals(get_class($collector), 'Timer\Collector');
+        $this->assertEquals('Timer\Collector', get_class($collector));
     }
 
     /**

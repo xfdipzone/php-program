@@ -18,7 +18,7 @@ final class EventTest extends TestCase
         $millisecond_timestamp = time()*1000+mt_rand(100,999);
         $content = 'event content';
         $event = new \Timer\Event($millisecond_timestamp, $content);
-        $this->assertEquals(get_class($event), 'Timer\Event');
+        $this->assertEquals('Timer\Event', get_class($event));
     }
 
     /**

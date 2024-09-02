@@ -22,7 +22,7 @@ final class DefaultFilterTest extends TestCase
         $sensitive_word_storage->setResource($resource);
 
         $filter = new \SensitiveWordFilter\DefaultFilter($sensitive_word_storage);
-        $this->assertEquals(get_class($filter), 'SensitiveWordFilter\DefaultFilter');
+        $this->assertEquals('SensitiveWordFilter\DefaultFilter', get_class($filter));
     }
 
     /**

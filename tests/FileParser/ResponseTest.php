@@ -20,7 +20,7 @@ final class ResponseTest extends TestCase
         $status = true;
         $data = array('name'=>'fdipzone');
         $response = new \FileParser\Response($status, $data);
-        $this->assertEquals(get_class($response), 'FileParser\Response');
+        $this->assertEquals('FileParser\Response', get_class($response));
         $this->assertSame($status, $response->status());
         $this->assertEquals($data['name'], $response->data()['name']);
     }

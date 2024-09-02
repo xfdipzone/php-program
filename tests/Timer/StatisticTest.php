@@ -24,7 +24,7 @@ final class StatisticTest extends TestCase
         $timeline->push($event_end);
 
         $statistic = new \Timer\Statistic($timeline);
-        $this->assertEquals(get_class($statistic), 'Timer\Statistic');
+        $this->assertEquals('Timer\Statistic', get_class($statistic));
     }
 
     /**

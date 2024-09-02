@@ -16,7 +16,7 @@ final class ResourceTest extends TestCase
     public function testConstruct()
     {
         $resource = new \SensitiveWordFilter\Resource(\SensitiveWordFilter\Resource::MEMORY);
-        $this->assertEquals(get_class($resource), 'SensitiveWordFilter\Resource');
+        $this->assertEquals('SensitiveWordFilter\Resource', get_class($resource));
     }
 
     /**
