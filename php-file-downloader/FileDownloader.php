@@ -32,6 +32,7 @@ class FileDownloader
      * @DateTime 2023-09-07 18:36:36
      *
      * @param int $download_speed 每次读取下载文件的长度
+     * @param boolean $is_resume 是否开启断点续传（默认开启）
      */
     public function __construct(int $download_speed=512, bool $is_resume=true)
     {
