@@ -39,8 +39,8 @@ class Generator{
      * @return string
      */
     private static function getGeneratorClass(string $type):string{
-        if(isset(TYPE::$lookup[$type])){
-            return TYPE::$lookup[$type];
+        if(isset(TYPE::$map[$type])){
+            return TYPE::$map[$type];
         }else{
             throw new \Exception(sprintf('%s type generator not exists', $type));
         }

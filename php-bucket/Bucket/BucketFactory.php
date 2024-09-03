@@ -39,8 +39,8 @@ class BucketFactory{
      * @return string
      */
     private static function getBucketClass(string $type):string{
-        if(isset(Type::$lookup[$type])){
-            return Type::$lookup[$type];
+        if(isset(Type::$map[$type])){
+            return Type::$map[$type];
         }else{
             throw new \Exception(sprintf('%s type bucket not exists', $type));
         }

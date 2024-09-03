@@ -13,10 +13,10 @@ class Type{
     // 新浪微博短链接生成器
     const SINA = 'sina';
 
-    // 类型与生成器类对应关系
-    public static $lookup = array(
-        self::SINA => 'ShortUrlGenerator\\SinaGenerator',
-    );
+    // 类型与实现类对应关系
+    public static $map = [
+        self::SINA => '\ShortUrlGenerator\SinaGenerator',
+    ];
 
 }
 

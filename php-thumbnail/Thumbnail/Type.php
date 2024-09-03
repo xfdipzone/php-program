@@ -17,9 +17,9 @@ class Type{
     const GD = 'gd';
 
     // 类型与实现类对应关系
-    public static $lookup = [
-        self::IMAGEMAGICK => 'Thumbnail\\ImageMagick',
-        self::GD => 'Thumbnail\\GD'
+    public static $map = [
+        self::IMAGEMAGICK => '\Thumbnail\ImageMagick',
+        self::GD => '\Thumbnail\GD'
     ];
 
 }

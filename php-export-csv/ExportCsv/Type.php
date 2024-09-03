@@ -16,7 +16,7 @@ class Type
     // 导出本地文件
     const FILE = 'File';
 
-    // 类型与实现类对象关系
+    // 类型与实现类对应关系
     public static $map = [
         self::STREAM => '\ExportCsv\ExportStream',
         self::FILE => '\ExportCsv\ExportFile'

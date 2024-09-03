@@ -16,16 +16,9 @@ class RequestDataType
     // 文件
     const FILE_DATA = 'file_data';
 
-    /**
-     * 类型与实现类对应关系
-     *
-     * @var array
-     * @author fdipzone
-     * @DateTime 2023-06-08 23:04:21
-     *
-     */
+    // 类型与实现类对应关系
     public static $map = [
-        self::FORM_DATA => '\HttpRequest\\RequestData\FormData',
-        self::FILE_DATA => '\HttpRequest\\RequestData\FileData',
+        self::FORM_DATA => '\HttpRequest\RequestData\FormData',
+        self::FILE_DATA => '\HttpRequest\RequestData\FileData',
     ];
 }

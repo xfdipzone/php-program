@@ -17,9 +17,9 @@ class Type{
     const REDIS = 'Redis';
 
     // 类型与实现类对应关系
-    public static $lookup = array(
-        self::SESSION => 'Captcha\\Storage\\SessionStorage',
-        self::REDIS => 'Captcha\\Storage\\RedisStorage',
-    );
+    public static $map = [
+        self::SESSION => '\Captcha\Storage\SessionStorage',
+        self::REDIS => '\Captcha\Storage\RedisStorage',
+    ];
 
 }

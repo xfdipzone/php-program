@@ -16,10 +16,10 @@ class Type{
     // 排序
     const SORT = 'sort';
 
-    // 类型与处理器类对应关系
-    public static $lookup = [
-        self::UNIQUE => 'FileContentOrganization\\Handler\\Unique',
-        self::SORT => 'FileContentOrganization\\Handler\\Sort',
+    // 类型与实现类对应关系
+    public static $map = [
+        self::UNIQUE => '\FileContentOrganization\Handler\Unique',
+        self::SORT => '\FileContentOrganization\Handler\Sort',
     ];
 
 }

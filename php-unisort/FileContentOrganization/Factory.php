@@ -40,8 +40,8 @@ class Factory{
      * @return string
      */
     private static function getHandlerClass(string $type):string{
-        if(isset(TYPE::$lookup[$type])){
-            return TYPE::$lookup[$type];
+        if(isset(TYPE::$map[$type])){
+            return TYPE::$map[$type];
         }else{
             throw new \Exception(sprintf('%s type handler not exists', $type));
         }

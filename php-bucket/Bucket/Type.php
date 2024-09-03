@@ -14,8 +14,8 @@ class Type{
     const REDIS = 'redis';
 
     // 类型与实现类对应关系
-    public static $lookup = array(
-        self::REDIS => 'Bucket\\RedisBucket'
-    );
+    public static $map = [
+        self::REDIS => '\Bucket\RedisBucket'
+    ];
 
 }
