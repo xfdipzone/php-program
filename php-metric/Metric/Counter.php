@@ -38,7 +38,7 @@ class Counter implements IMetric, IMetricCallback
      * @author fdipzone
      * @DateTime 2024-03-09 19:07:57
      *
-     * @param integer $max_times 最大可执行次数
+     * @param int $max_times 最大可执行次数
      */
     public function __construct(int $max_times)
     {

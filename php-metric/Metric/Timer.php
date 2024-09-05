@@ -38,7 +38,7 @@ class Timer implements IMetric, IMetricCallback
      * @author fdipzone
      * @DateTime 2024-03-10 17:18:30
      *
-     * @param integer $max_seconds
+     * @param int $max_seconds 最大可执行秒数
      */
     public function __construct(int $max_seconds)
     {
