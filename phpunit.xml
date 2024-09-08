@@ -19,6 +19,7 @@
             <directory>./php-deque</directory>
             <directory>./php-timer</directory>
             <directory>./php-file-parser</directory>
+            <directory>./php-file-encryptor</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>

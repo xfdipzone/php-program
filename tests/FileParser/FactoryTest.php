@@ -18,7 +18,7 @@ final class FactoryTest extends TestCase
         // 创建 XML 解析器对象
         $parser = \FileParser\Factory::make(\FileParser\Type::XML);
         $this->assertEquals('FileParser\XmlParser', get_class($parser));
-    
+
         // 创建 XML 解析器对象（单例）
         $parser2 = \FileParser\Factory::make(\FileParser\Type::XML);
 

@@ -20,7 +20,8 @@
             "SensitiveWordFilter\\": "php-sensitive-word-filter/SensitiveWordFilter",
             "DEQue\\": "php-deque/DEQue",
             "Timer\\": "php-timer/Timer",
-            "FileParser\\": "php-file-parser/FileParser"
+            "FileParser\\": "php-file-parser/FileParser",
+            "FileEncryptor\\": "php-file-encryptor/FileEncryptor"
         }
     },
     "autoload-dev": {
