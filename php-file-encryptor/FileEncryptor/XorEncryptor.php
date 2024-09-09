@@ -26,7 +26,7 @@ class XorEncryptor implements \FileEncryptor\IFileEncryptor
      * @author fdipzone
      * @DateTime 2024-09-08 11:40:22
      *
-     * @param string $key
+     * @param string $encrypt_key 密钥
      */
     public function __construct(string $encrypt_key)
     {
