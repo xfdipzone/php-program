@@ -43,7 +43,7 @@ class Factory
      * @param string $type 文件加密器类型，在 \FileEncryptor\Type 中定义
      * @return string
      */
-    public static function getEncryptorClass(string $type):string
+    final public static function getEncryptorClass(string $type):string
     {
         if(isset(\FileEncryptor\Type::$map[$type]))
         {
