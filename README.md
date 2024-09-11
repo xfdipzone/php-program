@@ -104,6 +104,8 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 文件解析类](https://github.com/xfdipzone/php-program/tree/master/php-file-parser) (php-file-parser)
 
+- [php 文件加密类](https://github.com/xfdipzone/php-program/tree/master/php-file-encryptor) (php-file-encryptor)
+
 ---
 
 ## 单元测试
