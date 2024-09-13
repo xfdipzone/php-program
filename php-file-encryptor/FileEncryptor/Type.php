@@ -16,9 +16,13 @@ class Type
     // AES-256-CBC 算法
     const AES = 'aes';
 
+    // DES 算法
+    const DES = 'des';
+
     // 类型与实现类对应关系
     public static $map = [
         self::XOR => '\FileEncryptor\XorEncryptor',
         self::AES => '\FileEncryptor\AesEncryptor',
+        self::DES => '\FileEncryptor\DesEncryptor',
     ];
 }

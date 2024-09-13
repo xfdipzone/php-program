@@ -22,6 +22,9 @@ final class FactoryTest extends TestCase
 
         $aes_encryptor = \FileEncryptor\Factory::make(\FileEncryptor\Type::AES, $encrypt_key);
         $this->assertEquals('FileEncryptor\AesEncryptor', get_class($aes_encryptor));
+
+        $des_encryptor = \FileEncryptor\Factory::make(\FileEncryptor\Type::DES, $encrypt_key);
+        $this->assertEquals('FileEncryptor\DesEncryptor', get_class($des_encryptor));
     }
 
     /**
@@ -47,6 +50,9 @@ final class FactoryTest extends TestCase
 
         $aes_encryptor_class = \FileEncryptor\Factory::getEncryptorClass(\FileEncryptor\Type::AES);
         $this->assertEquals('\FileEncryptor\AesEncryptor', $aes_encryptor_class);
+
+        $des_encryptor_class = \FileEncryptor\Factory::getEncryptorClass(\FileEncryptor\Type::DES);
+        $this->assertEquals('\FileEncryptor\DesEncryptor', $des_encryptor_class);
     }
 
     /**

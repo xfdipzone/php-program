@@ -24,6 +24,8 @@ php 实现的文件加密解密类，可以对文件进行加密与解密操作�
 
   - AES AES-256-CBC 加密算法
 
+  - DES DES 加密算法
+
 ---
 
 ## 类说明
@@ -44,9 +46,17 @@ php 实现的文件加密解密类，可以对文件进行加密与解密操作�
 
 XOR 异或算法文件加密器
 
+**AbstractBaseEncryptor** `FileEncryptor/AbstractBaseEncryptor.php`
+
+基于 openssl 加密解密算法的公用模版抽象类
+
 **AesEncryptor** `FileEncryptor/AesEncryptor.php`
 
 AES 算法文件加密器
+
+**DesEncryptor** `FileEncryptor/DesEncryptor.php`
+
+DES 算法文件加密器
 
 ---
 
@@ -73,6 +83,12 @@ assert(file_get_contents($source_file)==file_get_contents($decrypt_file));
 $aes_encryptor = \FileEncryptor\Factory::make(\FileEncryptor\Type::AES, $encrypt_key);
 $aes_encryptor->encrypt($source_file, $encrypt_file);
 $aes_encryptor->decrypt($encrypt_file, $decrypt_file);
+assert(file_get_contents($source_file)==file_get_contents($decrypt_file));
+
+// des 文件加密器
+$des_encryptor = \FileEncryptor\Factory::make(\FileEncryptor\Type::DES, $encrypt_key);
+$des_encryptor->encrypt($source_file, $encrypt_file);
+$des_encryptor->decrypt($encrypt_file, $decrypt_file);
 assert(file_get_contents($source_file)==file_get_contents($decrypt_file));
 ```
 

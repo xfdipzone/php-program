@@ -5,7 +5,7 @@ namespace FileEncryptor;
  * 基本文件加密器抽象类
  * 提供使用 openssl 加密与解密的加密器公用方法模版
  *
- * @author terry
+ * @author fdipzone
  * @DateTime 2024-09-13 17:42:06
  *
  */
@@ -15,7 +15,7 @@ abstract class AbstractBaseEncryptor implements \FileEncryptor\IFileEncryptor
      * 获取加密器名称
      * 抽象方法，由子类实现
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2024-09-13 18:15:25
      *
      * @return string
@@ -26,7 +26,7 @@ abstract class AbstractBaseEncryptor implements \FileEncryptor\IFileEncryptor
      * 获取加密算法
      * 抽象方法，由子类实现
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2024-09-13 18:15:36
      *
      * @return string
@@ -37,7 +37,7 @@ abstract class AbstractBaseEncryptor implements \FileEncryptor\IFileEncryptor
      * 获取加密初始化向量
      * 抽象方法，由子类实现
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2024-09-13 18:15:59
      *
      * @return string
