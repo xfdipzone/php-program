@@ -39,7 +39,7 @@ class Factory
      * @author fdipzone
      * @DateTime 2024-08-12 15:17:31
      *
-     * @param string $type 敏感词存储类型
+     * @param string $type 敏感词存储类型 在 \SensitiveWordFilter\Storage\Type 中定义
      * @return string
      */
     final public static function getStorageClass(string $type):string

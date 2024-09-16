@@ -160,7 +160,7 @@ class RestorePrint
      * @author fdipzone
      * @DateTime 2024-05-23 19:09:32
      *
-     * @param mixed $p
+     * @param mixed $p 标记字典
      * @param int $i 下标
      * @return int
      */

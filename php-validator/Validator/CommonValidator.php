@@ -114,7 +114,7 @@ class CommonValidator
      * @author fdipzone
      * @DateTime 2024-07-26 19:24:36
      *
-     * @param string $val
+     * @param string $val 字符串
      * @return boolean
      */
     public static function domain(string $val):bool

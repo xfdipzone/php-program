@@ -23,7 +23,7 @@ class DataFormatter
      * @author fdipzone
      * @DateTime 2024-07-18 20:03:35
      *
-     * @param array $data
+     * @param array $data 原始数据
      */
     public function __construct(array $data)
     {
