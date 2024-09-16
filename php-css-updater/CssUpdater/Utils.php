@@ -75,9 +75,10 @@ class Utils
      *
      * @param string $path 目录
      * @param array $result 目录中文件集合（指针）
+     * @param boolean $recursive 是否遍历子目录，默认 false
      * @return array
      */
-    public static function traversing(string $path, array &$result=[]):void
+    public static function traversing(string $path, array &$result=[], bool $recursive=false):void
     {
         if($handle = opendir($path))
         {
@@ -88,9 +89,9 @@ class Utils
                     $cur_file = $path.'/'.$file;
 
                     // folder
-                    if(is_dir($cur_file))
+                    if(is_dir($cur_file) && $recursive)
                     {
-                        self::traversing($cur_file, $result);
+                        self::traversing($cur_file, $result, $recursive);
                     }
                     // file
                     else
