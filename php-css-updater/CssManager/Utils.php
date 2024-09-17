@@ -1,5 +1,5 @@
 <?php
-namespace CssUpdater;
+namespace CssManager;
 
 /**
  * 通用方法集合
