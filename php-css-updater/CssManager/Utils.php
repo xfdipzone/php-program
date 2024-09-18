@@ -17,7 +17,7 @@ class Utils
      * @DateTime 2024-09-14 18:22:07
      *
      * @param string $file 文件
-     * @param array $extensions 后缀集合
+     * @param array $extensions 后缀集合，不需要包含 "."，例如 jpg, gif, png
      * @return boolean
      */
     public static function checkExtension(string $file, array $extensions):bool
@@ -89,9 +89,13 @@ class Utils
                     $cur_file = $path.'/'.$file;
 
                     // folder
-                    if(is_dir($cur_file) && $recursive)
+                    if(is_dir($cur_file))
                     {
-                        self::traversing($cur_file, $result, $recursive);
+                        // 遍历子目录
+                        if($recursive)
+                        {
+                            self::traversing($cur_file, $result, $recursive);
+                        }
                     }
                     // file
                     else

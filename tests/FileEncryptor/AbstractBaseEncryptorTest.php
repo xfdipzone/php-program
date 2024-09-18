@@ -19,8 +19,8 @@ final class AbstractBaseEncryptorTest extends TestCase
     public static function setUpBeforeClass()
     {
         $date_folder = date('YmdHis');
-        self::$encrypt_file = sprintf('/tmp/%s%d/encrypt_file.txt', $date_folder, 1);
-        self::$decrypt_file = sprintf('/tmp/%s%d/decrypt_file.txt', $date_folder, 2);
+        self::$encrypt_file = sprintf('/tmp/%s-%d/encrypt_file.txt', $date_folder, 1);
+        self::$decrypt_file = sprintf('/tmp/%s-%d/decrypt_file.txt', $date_folder, 2);
 
         file_put_contents(self::$source_file, 'abcdef');
     }

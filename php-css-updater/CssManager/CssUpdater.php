@@ -28,7 +28,7 @@ class CssUpdater
 
     /**
      * 需要处理的引用文件后缀集合
-     * 包括 "."，例如 '.jpg', '.gif', '.png', '.js'
+     * 不需要包含 "."，例如 jpg, gif, png
      *
      * @var array
      */
@@ -59,7 +59,7 @@ class CssUpdater
      * @param array $replace_tags 需要处理的引用文件后缀集合
      * @param boolean $recursive 是否遍历子目录
      */
-    public function __construct(string $css_tmpl_path, string $css_path, array $replace_tags, bool $recursive)
+    public function __construct(string $css_tmpl_path, string $css_path, array $replace_tags, bool $recursive=false)
     {
         // 检查参数
         if(!is_dir($css_tmpl_path))
@@ -178,13 +178,11 @@ class CssUpdater
 
         // 加入时间版本
         $version = date('YmdHis');
-        $version_tags = [];
-        foreach($this->replace_tags as $tag)
-        {
-            $version_tags[] = $tag.'?'.$version;
-        }
 
-        $css_content = str_replace($this->replace_tags, $version_tags, $css_content);
+        // 正则替换模版
+        $pattern = sprintf('/url\(([\'"])(.*?\.(%s))\\1\)/', implode('|', $this->replace_tags));
+        $replacement = 'url($1$2?'.$version.'$1)';
+        $css_content = preg_replace($pattern, $replacement, $css_content);
 
         // 创建文件目录
         \CssManager\Utils::createDirs(dirname($dest_file));
