@@ -1,0 +1,15 @@
+/* main.css */
+@import url('common/reset.css'); /* 引入重置样式的CSS文件 */
+@import url('css/theme.css'); /* 引入主题样式的CSS文件 */
+
+body {
+    background-image: url('images/background.jpg');
+}
+
+.header {
+    background-image: url('images/header.png');
+}
+
+.logo {
+    background-image: url('images/logo.gif');
+}

@@ -20,6 +20,7 @@
             <directory>./php-timer</directory>
             <directory>./php-file-parser</directory>
             <directory>./php-file-encryptor</directory>
+            <directory>./php-css-updater</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>

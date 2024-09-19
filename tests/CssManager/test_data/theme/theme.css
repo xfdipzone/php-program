@@ -1,0 +1,27 @@
+/* theme.css */
+body {
+    font-family: 'MyCustomFont', sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    line-height: 1.6;
+}
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('fonts/MyCustomFont.woff') format('woff'), 
+         url('fonts/MyCustomFont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+header {
+    background: url('images/header-bg.jpg') no-repeat center center; 
+    background-size: cover;
+    color: #ffffff;
+    padding: 20px 0;
+}
+
+nav a {
+    background: url('images/menu-icon.png') no-repeat left center;
+    padding-left: 30px;
+}
