@@ -8,14 +8,14 @@ body {
 
 @font-face {
     font-family: 'MyCustomFont';
-    src: url('fonts/MyCustomFont.woff') format('woff'), 
+    src: url('fonts/MyCustomFont.woff') format('woff'),
          url('fonts/MyCustomFont.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
 header {
-    background: url('images/header-bg.jpg') no-repeat center center; 
+    background: url('images/header-bg.jpg') no-repeat center center;
     background-size: cover;
     color: #ffffff;
     padding: 20px 0;
