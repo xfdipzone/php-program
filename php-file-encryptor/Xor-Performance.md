@@ -66,7 +66,7 @@ $xor_encryptor = \FileEncryptor\Factory::make(\FileEncryptor\Type::XOR, $encrypt
 $xor_encryptor->decrypt($encrypt_file, $decrypt_file);
 ```
 
-2.23s user 0.03s system 99% cpu 2.269 total
+用时：2.23s user 0.03s system 99% cpu 2.269 total
 
 ## 总结
 
