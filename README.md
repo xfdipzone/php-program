@@ -106,6 +106,8 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 文件加密类](https://github.com/xfdipzone/php-program/tree/master/php-file-encryptor) (php-file-encryptor)
 
+- [php CSS 更新类](https://github.com/xfdipzone/php-program/tree/master/php-css-updater) (php-css-updater)
+
 ---
 
 ## 单元测试
