@@ -63,8 +63,6 @@ php 实现的验证类，包括通用验证类（CommonValidator），语言验�
 ## 演示
 
 ```php
-require 'autoload.php';
-
 // CommonValidator
 var_dump(\Validator\CommonValidator::empty('0', false)); // false
 
@@ -104,3 +102,5 @@ var_dump(\Validator\IDNumberValidator::idCard('441234567890123456')); // false
 
 var_dump(\Validator\IDNumberValidator::licensePlateNumber('粤AF12345')); // true
 ```
+
+更多功能演示可参考单元测试代码 [Validator Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/Validator>)

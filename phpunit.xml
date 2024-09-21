@@ -21,6 +21,7 @@
             <directory>./php-file-parser</directory>
             <directory>./php-file-encryptor</directory>
             <directory>./php-css-updater</directory>
+            <directory>./php-validator</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>
