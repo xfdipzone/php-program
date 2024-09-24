@@ -31,9 +31,9 @@ RUN rm /usr/local/etc/php-fpm.d/docker.conf /usr/local/etc/php-fpm.d/zz-docker.c
 
 
 # 创建日志目录并设置权限
-RUN mkdir -p /var/log/nginx /var/run/php && \
-    chown www-data:www-data /var/log/nginx /var/run/php && \
-    chmod 0777 /var/log/nginx /var/run/php
+RUN mkdir -p /var/log/nginx && \
+    chown www-data:www-data /var/log/nginx && \
+    chmod 0777 /var/log/nginx
 
 
 # 设置工作目录
