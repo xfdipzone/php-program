@@ -56,7 +56,44 @@ class SharedMemory implements \SharedData\ISharedData
      */
     public function store(string $data):bool
     {
-        return true;
+        if(empty($data))
+        {
+            throw new \Exception('shared memory: store data is empty');
+        }
+
+        try
+        {
+            $shm_id = shmop_open($this->shmKey(), 'c', 0644, $this->shared_size);
+
+            if(!$shm_id)
+            {
+                throw new \Exception('shared memory: shm_id create fail');
+            }
+
+            // 获取已用共享内存大小
+            $shm_size = shmop_size($shm_id);
+
+            // 清空共享内存数据
+            $clear_size = shmop_write($shm_id, str_repeat("\0", $shm_size), 0);
+
+            if($clear_size===false)
+            {
+                return false;
+            }
+
+            // 写入共享内存数据
+            $written_size = shmop_write($shm_id, $data, 0);
+
+            // 关闭共享内存块标识符
+            $this->closeShmId($shm_id);
+
+            return $written_size===false? false : true;
+
+        }
+        catch(\Throwable $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     /**
@@ -69,7 +106,30 @@ class SharedMemory implements \SharedData\ISharedData
      */
     public function load():string
     {
-        return '';
+        try
+        {
+            $shm_id = shmop_open($this->shmKey(), 'a', 0, 0);
+
+            if(!$shm_id)
+            {
+                throw new \Exception('shared memory: shm_id get fail');
+            }
+
+            // 获取已用共享内存大小
+            $shm_size = shmop_size($shm_id);
+
+            // 读取共享内存数据
+            $data = shmop_read($shm_id, 0, $shm_size);
+
+            // 关闭共享内存块标识符
+            $this->closeShmId($shm_id);
+
+            return $data;
+        }
+        catch(\Throwable $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     /**
@@ -82,7 +142,30 @@ class SharedMemory implements \SharedData\ISharedData
      */
     public function clear():bool
     {
-        return true;
+        try
+        {
+            $shm_id = shmop_open($this->shmKey(), 'w', 0, 0);
+
+            if(!$shm_id)
+            {
+                throw new \Exception('shared memory: shm_id get fail');
+            }
+
+            // 获取已用共享内存大小
+            $shm_size = shmop_size($shm_id);
+
+            // 清空共享内存数据
+            $clear_size = shmop_write($shm_id, str_repeat("\0", $shm_size), 0);
+
+            // 关闭共享内存块标识符
+            $this->closeShmId($shm_id);
+
+            return $clear_size===false? false : true;
+        }
+        catch(\Throwable $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     /**
@@ -95,7 +178,27 @@ class SharedMemory implements \SharedData\ISharedData
      */
     public function close():bool
     {
-        return true;
+        try
+        {
+            $shm_id = shmop_open($this->shmKey(), 'w', 0, 0);
+
+            if(!$shm_id)
+            {
+                throw new \Exception('shared memory: shm_id get fail');
+            }
+
+            // 删除共享内存段
+            $deleted = shmop_delete($shm_id);
+
+            // 关闭共享内存块标识符
+            $this->closeShmId($shm_id);
+
+            return $deleted;
+        }
+        catch(\Throwable $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     /**
@@ -126,5 +229,20 @@ class SharedMemory implements \SharedData\ISharedData
         $project_id = $this->shared_key.'-shm';
         $shm_key = ftok(__FILE__, $project_id);
         return $shm_key;
+    }
+
+    /**
+     * 关闭共享内存块调用
+     *
+     * @author fdipzone
+     * @DateTime 2024-09-26 20:07:45
+     *
+     * @param \Shmop $shm_id 共享内存块标识符
+     * @return void
+     */
+    private function closeShmId(\Shmop $shm_id):void
+    {
+        // Warning: This function has been DEPRECATED as of PHP 8.0.0. Relying on this function is highly discouraged.
+        shmop_close($shm_id);
     }
 }
