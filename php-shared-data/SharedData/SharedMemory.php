@@ -25,6 +25,14 @@ class SharedMemory implements \SharedData\ISharedData
     private $shared_size;
 
     /**
+     * IPC 文件，用于 ftok 方法生成 System V IPC key
+     * https://www.php.net/manual/en/function.ftok.php
+     *
+     * @var string
+     */
+    private $ipc_file = '';
+
+    /**
      * 初始化
      * 设置共享数据标识与共享数据块容量
      *
@@ -41,8 +49,22 @@ class SharedMemory implements \SharedData\ISharedData
             throw new \Exception('shared memory: shared key is empty');
         }
 
+        if($shared_size<1)
+        {
+            throw new \Exception('shared memory: shared size must be greater than 0');
+        }
+
         $this->shared_key = $shared_key;
         $this->shared_size = $shared_size;
+
+        // 创建 IPC 文件
+        $this->ipc_file = '/tmp/'.$this->shared_key.'.ipc';
+
+        $created = $this->createIpcFile($this->ipc_file);
+        if(!$created)
+        {
+            throw new \Exception('shared memory: ipc file already exists or create fail');
+        }
     }
 
     /**
@@ -59,6 +81,11 @@ class SharedMemory implements \SharedData\ISharedData
         if(empty($data))
         {
             throw new \Exception('shared memory: store data is empty');
+        }
+
+        if(mb_strlen($data, 'utf8')>$this->shared_size)
+        {
+            throw new \Exception('shared memory: store data length more than shared memory size');
         }
 
         try
@@ -124,7 +151,7 @@ class SharedMemory implements \SharedData\ISharedData
             // 关闭共享内存块标识符
             $this->closeShmId($shm_id);
 
-            return $data;
+            return rtrim($data, "\0");
         }
         catch(\Throwable $e)
         {
@@ -193,6 +220,9 @@ class SharedMemory implements \SharedData\ISharedData
             // 关闭共享内存块标识符
             $this->closeShmId($shm_id);
 
+            // 删除 IPC 文件
+            $this->removeIpcFile($this->ipc_file);
+
             return $deleted;
         }
         catch(\Throwable $e)
@@ -202,17 +232,66 @@ class SharedMemory implements \SharedData\ISharedData
     }
 
     /**
+     * 创建 IPC 文件
+     *
+     * @author fdipzone
+     * @DateTime 2024-09-27 11:53:09
+     *
+     * @return boolean
+     */
+    /**
+     * 创建 IPC 文件
+     *
+     * @author fdipzone
+     * @DateTime 2024-09-27 15:57:10
+     *
+     * @param string $ipc_file IPC 文件
+     * @return boolean
+     */
+    private function createIpcFile(string $ipc_file):bool
+    {
+        // 检查文件是否存在
+        if(file_exists($ipc_file))
+        {
+            return false;
+        }
+
+        // 创建文件
+        return file_put_contents($ipc_file, '')!==false;
+    }
+
+    /**
+     * 删除 IPC 文件
+     *
+     * @author fdipzone
+     * @DateTime 2024-09-27 17:04:58
+     *
+     * @param string $ipc_file IPC 文件
+     * @return boolean
+     */
+    private function removeIpcFile(string $ipc_file):bool
+    {
+        if(file_exists($ipc_file))
+        {
+            return unlink($ipc_file);
+        }
+
+        return false;
+    }
+
+    /**
      * 获取信号唯一id
      *
      * @author fdipzone
      * @DateTime 2024-09-25 22:21:22
      *
-     * @return \SysvSemaphore
+     * @return mixed
      */
-    private function semId():\SysvSemaphore
+    private function semId()
     {
-        $project_id = $this->shared_key.'-sem';
-        $sem_key = ftok(__FILE__, $project_id);
+        // Project identifier. This must be a one character string.
+        $project_id = 's';
+        $sem_key = ftok($this->ipc_file, $project_id);
         return sem_get($sem_key, 1, 0666, 1);
     }
 
@@ -226,8 +305,9 @@ class SharedMemory implements \SharedData\ISharedData
      */
     private function shmKey():int
     {
-        $project_id = $this->shared_key.'-shm';
-        $shm_key = ftok(__FILE__, $project_id);
+        // Project identifier. This must be a one character string.
+        $project_id = 'm';
+        $shm_key = ftok($this->ipc_file, $project_id);
         return $shm_key;
     }
 
@@ -240,7 +320,7 @@ class SharedMemory implements \SharedData\ISharedData
      * @param \Shmop $shm_id 共享内存块标识符
      * @return void
      */
-    private function closeShmId(\Shmop $shm_id):void
+    private function closeShmId($shm_id):void
     {
         // Warning: This function has been DEPRECATED as of PHP 8.0.0. Relying on this function is highly discouraged.
         shmop_close($shm_id);
