@@ -23,7 +23,8 @@
             "FileParser\\": "php-file-parser/FileParser",
             "FileEncryptor\\": "php-file-encryptor/FileEncryptor",
             "CssManager\\": "php-css-updater/CssManager",
-            "Validator\\": "php-validator/Validator"
+            "Validator\\": "php-validator/Validator",
+            "SharedData\\": "php-shared-data/SharedData"
         }
     },
     "autoload-dev": {

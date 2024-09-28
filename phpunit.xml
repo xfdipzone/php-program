@@ -22,6 +22,7 @@
             <directory>./php-file-encryptor</directory>
             <directory>./php-css-updater</directory>
             <directory>./php-validator</directory>
+            <directory>./php-shared-data</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>

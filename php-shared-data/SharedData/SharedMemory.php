@@ -151,6 +151,7 @@ class SharedMemory implements \SharedData\ISharedData
             // 关闭共享内存块标识符
             $this->closeShmId($shm_id);
 
+            // 去除数据结尾多余的 \0
             return rtrim($data, "\0");
         }
         catch(\Throwable $e)
