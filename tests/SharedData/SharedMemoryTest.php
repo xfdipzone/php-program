@@ -10,6 +10,25 @@ use PHPUnit\Framework\TestCase;
  */
 final class SharedDataTest extends TestCase
 {
+    // 初始化测试用例设置
+    protected function setUp()
+    {
+        // 设置 Warning 级别处理方法
+        set_error_handler([$this, 'handleWarningAsIgnore'], E_WARNING);
+    }
+
+    // 清理测试用例设置
+    protected function tearDown()
+    {
+        restore_error_handler();
+    }
+
+    // 忽略 Warning 处理
+    public function handleWarningAsIgnore($err_no, $err_str, $err_file, $err_line)
+    {
+        // 忽略警告
+    }
+
     /**
      * @covers \SharedData\SharedMemory::__construct
      */
@@ -73,6 +92,7 @@ final class SharedDataTest extends TestCase
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
+        // 写入数据
         $data = 'shared memory content';
         $ret = $shared_memory->store($data);
         $this->assertTrue($ret);
@@ -115,6 +135,23 @@ final class SharedDataTest extends TestCase
     }
 
     /**
+     * @covers \SharedData\SharedMemory::store
+     */
+    public function testStoreException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: shm_id create fail');
+
+        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+
+        // 写入数据
+        $data = 'shared memory content';
+        $shared_memory->store($data);
+    }
+
+    /**
      * @covers \SharedData\SharedMemory::load
      */
     public function testLoad()
@@ -142,6 +179,7 @@ final class SharedDataTest extends TestCase
     public function testLoadException()
     {
         $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: shm_id get fail');
 
         $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
         $shared_size = 128;
@@ -191,6 +229,7 @@ final class SharedDataTest extends TestCase
     public function testClearException()
     {
         $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: shm_id get fail');
 
         $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
         $shared_size = 128;
@@ -232,6 +271,7 @@ final class SharedDataTest extends TestCase
     public function testCloseException()
     {
         $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: shm_id get fail');
 
         $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
         $shared_size = 128;

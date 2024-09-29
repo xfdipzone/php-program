@@ -103,11 +103,6 @@ class SharedMemory implements \SharedData\ISharedData
             // 清空共享内存数据
             $clear_size = shmop_write($shm_id, str_repeat("\0", $shm_size), 0);
 
-            if($clear_size===false)
-            {
-                return false;
-            }
-
             // 写入共享内存数据
             $written_size = shmop_write($shm_id, $data, 0);
 
