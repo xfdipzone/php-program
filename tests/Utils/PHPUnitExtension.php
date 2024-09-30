@@ -13,6 +13,9 @@ namespace Tests\Utils;
  */
 class PHPUnitExtension
 {
+    // 自增序号，用于测试
+    private static $sequenceId = 0;
+
     /**
      * 调用对象的 protected/private 方法
      * 利用 Reflection 反射实现
@@ -129,5 +132,19 @@ class PHPUnitExtension
        $property->setAccessible(true);
        $new_obj = new $class_name;
        return $property->getValue($new_obj);
+    }
+
+    /**
+     * 获取自增序号
+     *
+     * @author fdipzone
+     * @DateTime 2024-09-30 11:59:20
+     *
+     * @return int
+     */
+    public static function sequenceId():int
+    {
+        self::$sequenceId++;
+        return self::$sequenceId;
     }
 }
