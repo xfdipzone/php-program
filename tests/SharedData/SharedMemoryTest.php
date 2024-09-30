@@ -29,12 +29,18 @@ final class SharedDataTest extends TestCase
         // 忽略警告
     }
 
+    // 生成共享数据标识，用于测试
+    private function generateSharedKey():string
+    {
+        return sprintf('ut-%s-sm-key-%s-%d', md5(__CLASS__), date('YmdHis'), \Tests\Utils\PHPUnitExtension::sequenceId());
+    }
+
     /**
      * @covers \SharedData\SharedMemory::__construct
      */
     public function testConstruct()
     {
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
         $this->assertEquals('SharedData\SharedMemory', get_class($shared_memory));
@@ -61,7 +67,7 @@ final class SharedDataTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('shared memory: shared size must be greater than 0');
 
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 0;
         new \SharedData\SharedMemory($shared_key, $shared_size);
     }
@@ -74,7 +80,7 @@ final class SharedDataTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('shared memory: ipc file already exists or create fail');
 
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
 
         // 预先创建 IPC 文件
@@ -88,7 +94,7 @@ final class SharedDataTest extends TestCase
      */
     public function testStore()
     {
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -110,7 +116,7 @@ final class SharedDataTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('shared memory: store data is empty');
 
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -126,7 +132,7 @@ final class SharedDataTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('shared memory: store data length more than shared memory size');
 
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 3;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -142,7 +148,7 @@ final class SharedDataTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('shared memory: shm_id create fail');
 
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -156,7 +162,7 @@ final class SharedDataTest extends TestCase
      */
     public function testLoad()
     {
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -181,7 +187,7 @@ final class SharedDataTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('shared memory: shm_id get fail');
 
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -202,7 +208,7 @@ final class SharedDataTest extends TestCase
      */
     public function testClear()
     {
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -231,7 +237,7 @@ final class SharedDataTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('shared memory: shm_id get fail');
 
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -252,7 +258,7 @@ final class SharedDataTest extends TestCase
      */
     public function testClose()
     {
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -273,7 +279,7 @@ final class SharedDataTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('shared memory: shm_id get fail');
 
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -294,7 +300,7 @@ final class SharedDataTest extends TestCase
      */
     public function testCreateIpcFile()
     {
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -321,7 +327,7 @@ final class SharedDataTest extends TestCase
      */
     public function testRemoveIpcFile()
     {
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -345,7 +351,7 @@ final class SharedDataTest extends TestCase
      */
     public function testSemId()
     {
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -358,7 +364,7 @@ final class SharedDataTest extends TestCase
      */
     public function testShmKey()
     {
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 
@@ -371,7 +377,7 @@ final class SharedDataTest extends TestCase
      */
     public function testCloseShmId()
     {
-        $shared_key = 'sm-key-'.date('YmdHis').'-'.mt_rand(100, 999);
+        $shared_key = $this->generateSharedKey();
         $shared_size = 128;
         $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
 

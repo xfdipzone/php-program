@@ -141,8 +141,8 @@ final class XorEncryptorTest extends TestCase
         $encrypt_key = '123456';
         $xor_encryptor = new \FileEncryptor\XorEncryptor($encrypt_key);
 
-        $encrypt_file = '/tmp/'.date('YmdHis').'/encrypt_file.txt';
-        $decrypt_file = '/tmp/'.date('YmdHis').'/decrypt_file.txt';
+        $encrypt_file = sprintf('/tmp/ut-%s-%s/encrypt_file.txt', md5(__CLASS__), date('YmdHis'));
+        $decrypt_file = sprintf('/tmp/ut-%s-%s/decrypt_file.txt', md5(__CLASS__), date('YmdHis'));
 
         // encrypt
         $ret = \Tests\Utils\PHPUnitExtension::callMethod($xor_encryptor, 'xorEncrypt', [self::$source_file, $encrypt_file]);

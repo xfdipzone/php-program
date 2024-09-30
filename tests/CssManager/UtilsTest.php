@@ -28,7 +28,7 @@ final class UtilsTest extends TestCase
      */
     public function testCreateDirs()
     {
-        $path = '/tmp/'.date('YmdHis').'-'.mt_rand(100,999).'/test';
+        $path = sprintf('/tmp/ut-%s-%s-%d/test', md5(__CLASS__), date('YmdHis'), \Tests\Utils\PHPUnitExtension::sequenceId());
         $ret = \CssManager\Utils::createDirs($path);
         $this->assertTrue($ret);
         $this->assertTrue(is_dir($path));
@@ -44,7 +44,7 @@ final class UtilsTest extends TestCase
      */
     public function testLog()
     {
-        $log_file = '/tmp/'.date('YmdHis').'-'.mt_rand(100,999).'/log/test.log';
+        $log_file = sprintf('/tmp/ut-%s-%s-%d/log/test.log', md5(__CLASS__), date('YmdHis'), \Tests\Utils\PHPUnitExtension::sequenceId());
         $content = 'my log content';
 
         \CssManager\Utils::log($log_file, $content);

@@ -101,10 +101,10 @@ final class CssUpdaterTest extends TestCase
     public function testUpdate()
     {
         $css_tmpl_path = dirname(__FILE__).'/test_data';
-        $css_path = '/tmp/'.date('YmdHis').'-'.mt_rand(100,999).'/css';
+        $css_path = sprintf('/tmp/ut-%s-%s-%d/css', md5(__CLASS__), date('YmdHis'), \Tests\Utils\PHPUnitExtension::sequenceId());
         $replace_tags = ['jpg', 'png', 'gif', 'woff2', 'woff'];
 
-        $log_file = '/tmp/'.date('YmdHis').'-'.mt_rand(100,999).'/update.log';
+        $log_file = sprintf('/tmp/ut-%s-%s-%d/update.log', md5(__CLASS__), date('YmdHis'), \Tests\Utils\PHPUnitExtension::sequenceId());
 
         // 不遍历子目录
         $css_updater = new \CssManager\CssUpdater($css_tmpl_path, $css_path, $replace_tags);
@@ -124,7 +124,7 @@ final class CssUpdaterTest extends TestCase
     public function testCreate()
     {
         $css_tmpl_path = dirname(__FILE__).'/test_data';
-        $css_path = '/tmp/'.date('YmdHis').'-'.mt_rand(100,999).'/css';
+        $css_path = sprintf('/tmp/ut-%s-%s-%d/css', md5(__CLASS__), date('YmdHis'), \Tests\Utils\PHPUnitExtension::sequenceId());
         $replace_tags = ['jpg', 'png', 'gif'];
 
         $source_file = $css_tmpl_path.'/main.css';
