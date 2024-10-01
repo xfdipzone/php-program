@@ -90,7 +90,14 @@ class SharedMemory implements \SharedData\ISharedData
 
         try
         {
-            $shm_id = shmop_open($this->shmKey(), 'c', 0644, $this->shared_size);
+            $shm_key = $this->shmKey();
+
+            if($shm_key==-1)
+            {
+                throw new \Exception('shared memory: shm_key invalid');
+            }
+
+            $shm_id = shmop_open($shm_key, 'c', 0644, $this->shared_size);
 
             if(!$shm_id)
             {
@@ -193,6 +200,7 @@ class SharedMemory implements \SharedData\ISharedData
 
     /**
      * 关闭共享数据
+     * 关闭后将不能执行任何操作，例如写入，读取等
      *
      * @author fdipzone
      * @DateTime 2024-09-22 19:35:48

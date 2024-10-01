@@ -44,6 +44,7 @@ interface ISharedData
 
     /**
      * 关闭共享数据
+     * 关闭后将不能执行任何操作，例如写入，读取等
      *
      * @author fdipzone
      * @DateTime 2024-09-22 19:35:48

@@ -158,6 +158,31 @@ final class SharedDataTest extends TestCase
     }
 
     /**
+     * @covers \SharedData\SharedMemory::store
+     */
+    public function testStoreShmKeyException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: shm_key invalid');
+
+        $shared_key = $this->generateSharedKey();
+        $shared_size = 128;
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+
+        // 写入数据
+        $data = 'shared memory content';
+        $ret = $shared_memory->store($data);
+        $this->assertTrue($ret);
+
+        // 关闭共享内存
+        $closed = $shared_memory->close();
+        $this->assertTrue($closed);
+
+        // 关闭之后再执行写入
+        $shared_memory->store($data);
+    }
+
+    /**
      * @covers \SharedData\SharedMemory::load
      */
     public function testLoad()
