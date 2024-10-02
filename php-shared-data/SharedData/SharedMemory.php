@@ -25,12 +25,19 @@ class SharedMemory implements \SharedData\ISharedData
     private $shared_size;
 
     /**
-     * IPC 文件，用于 ftok 方法生成 System V IPC key
+     * 共享内存 IPC 文件，用于 ftok 方法生成 System V IPC key
      * https://www.php.net/manual/en/function.ftok.php
      *
      * @var string
      */
-    private $ipc_file = '';
+    private $shm_ipc_file = '';
+
+    /**
+     * 信号量 IPC 文件
+     *
+     * @var string
+     */
+    private $sem_ipc_file = '';
 
     /**
      * 初始化
@@ -57,13 +64,22 @@ class SharedMemory implements \SharedData\ISharedData
         $this->shared_key = $shared_key;
         $this->shared_size = $shared_size;
 
-        // 创建 IPC 文件
-        $this->ipc_file = '/tmp/'.$this->shared_key.'.ipc';
+        // 创建共享内存 IPC 文件
+        $this->shm_ipc_file = '/tmp/'.$this->shared_key.'.ipc';
 
-        $created = $this->createIpcFile($this->ipc_file);
+        $created = $this->createIpcFile($this->shm_ipc_file);
         if(!$created)
         {
-            throw new \Exception('shared memory: ipc file already exists or create fail');
+            throw new \Exception('shared memory: shm ipc file already exists or create fail');
+        }
+
+        // 创建信号量 IPC 文件
+        $this->sem_ipc_file = '/tmp/'.$this->shared_key.'-sem.ipc';
+
+        $created = $this->createIpcFile($this->sem_ipc_file);
+        if(!$created)
+        {
+            throw new \Exception('shared memory: sem ipc file already exists or create fail');
         }
     }
 
@@ -90,6 +106,15 @@ class SharedMemory implements \SharedData\ISharedData
 
         try
         {
+            // 获取信号量锁标识
+            $sem_id = $this->semId();
+
+            // 获取信号量锁（阻塞等待）
+            if(!sem_acquire($sem_id))
+            {
+                throw new \Exception('shared memory: semaphore acquire fail');
+            }
+
             $shm_key = $this->shmKey();
 
             if($shm_key==-1)
@@ -123,6 +148,11 @@ class SharedMemory implements \SharedData\ISharedData
         {
             throw new \Exception($e->getMessage());
         }
+        finally
+        {
+            // 释放信号量锁
+            sem_release($sem_id);
+        }
     }
 
     /**
@@ -137,6 +167,15 @@ class SharedMemory implements \SharedData\ISharedData
     {
         try
         {
+            // 获取信号量锁标识
+            $sem_id = $this->semId();
+
+            // 获取信号量锁（阻塞等待）
+            if(!sem_acquire($sem_id))
+            {
+                throw new \Exception('shared memory: semaphore acquire fail');
+            }
+
             $shm_id = shmop_open($this->shmKey(), 'a', 0, 0);
 
             if(!$shm_id)
@@ -160,6 +199,11 @@ class SharedMemory implements \SharedData\ISharedData
         {
             throw new \Exception($e->getMessage());
         }
+        finally
+        {
+            // 释放信号量锁
+            sem_release($sem_id);
+        }
     }
 
     /**
@@ -174,6 +218,15 @@ class SharedMemory implements \SharedData\ISharedData
     {
         try
         {
+            // 获取信号量锁标识
+            $sem_id = $this->semId();
+
+            // 获取信号量锁（阻塞等待）
+            if(!sem_acquire($sem_id))
+            {
+                throw new \Exception('shared memory: semaphore acquire fail');
+            }
+
             $shm_id = shmop_open($this->shmKey(), 'w', 0, 0);
 
             if(!$shm_id)
@@ -196,6 +249,11 @@ class SharedMemory implements \SharedData\ISharedData
         {
             throw new \Exception($e->getMessage());
         }
+        finally
+        {
+            // 释放信号量锁
+            sem_release($sem_id);
+        }
     }
 
     /**
@@ -211,6 +269,15 @@ class SharedMemory implements \SharedData\ISharedData
     {
         try
         {
+            // 获取信号量锁标识
+            $sem_id = $this->semId();
+
+            // 获取信号量锁（阻塞等待）
+            if(!sem_acquire($sem_id))
+            {
+                throw new \Exception('shared memory: semaphore acquire fail');
+            }
+
             $shm_id = shmop_open($this->shmKey(), 'w', 0, 0);
 
             if(!$shm_id)
@@ -224,14 +291,19 @@ class SharedMemory implements \SharedData\ISharedData
             // 关闭共享内存块标识符
             $this->closeShmId($shm_id);
 
-            // 删除 IPC 文件
-            $this->removeIpcFile($this->ipc_file);
+            // 删除共享内存 IPC 文件
+            $this->removeIpcFile($this->shm_ipc_file);
 
             return $deleted;
         }
         catch(\Throwable $e)
         {
             throw new \Exception($e->getMessage());
+        }
+        finally
+        {
+            // 释放信号量锁
+            sem_release($sem_id);
         }
     }
 
@@ -284,7 +356,7 @@ class SharedMemory implements \SharedData\ISharedData
     }
 
     /**
-     * 获取信号唯一id
+     * 获取信号量唯一id
      *
      * @author fdipzone
      * @DateTime 2024-09-25 22:21:22
@@ -295,7 +367,13 @@ class SharedMemory implements \SharedData\ISharedData
     {
         // Project identifier. This must be a one character string.
         $project_id = 's';
-        $sem_key = ftok($this->ipc_file, $project_id);
+        $sem_key = ftok($this->sem_ipc_file, $project_id);
+
+        if($sem_key==-1)
+        {
+            return false;
+        }
+
         return sem_get($sem_key, 1, 0666, 1);
     }
 
@@ -311,7 +389,7 @@ class SharedMemory implements \SharedData\ISharedData
     {
         // Project identifier. This must be a one character string.
         $project_id = 'm';
-        $shm_key = ftok($this->ipc_file, $project_id);
+        $shm_key = ftok($this->shm_ipc_file, $project_id);
         return $shm_key;
     }
 

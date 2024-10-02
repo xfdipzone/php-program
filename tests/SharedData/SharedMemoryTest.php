@@ -75,16 +75,33 @@ final class SharedDataTest extends TestCase
     /**
      * @covers \SharedData\SharedMemory::__construct
      */
-    public function testConstructCreateIpcFileException()
+    public function testConstructCreateShmIpcFileException()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('shared memory: ipc file already exists or create fail');
+        $this->expectExceptionMessage('shared memory: shm ipc file already exists or create fail');
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
 
-        // 预先创建 IPC 文件
+        // 预先创建共享内存 IPC 文件
         file_put_contents('/tmp/'.$shared_key.'.ipc', '');
+
+        new \SharedData\SharedMemory($shared_key, $shared_size);
+    }
+
+    /**
+     * @covers \SharedData\SharedMemory::__construct
+     */
+    public function testConstructCreateSemIpcFileException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: sem ipc file already exists or create fail');
+
+        $shared_key = $this->generateSharedKey();
+        $shared_size = 128;
+
+        // 预先创建信号量 IPC 文件
+        file_put_contents('/tmp/'.$shared_key.'-sem.ipc', '');
 
         new \SharedData\SharedMemory($shared_key, $shared_size);
     }
@@ -382,6 +399,26 @@ final class SharedDataTest extends TestCase
 
         $sem_id = \Tests\Utils\PHPUnitExtension::callMethod($shared_memory, 'semId', []);
         $this->assertEquals('sysvsem', get_resource_type($sem_id));
+    }
+
+    /**
+     * @covers \SharedData\SharedMemory::semId
+     */
+    public function testSemIdFalse()
+    {
+        $shared_key = $this->generateSharedKey();
+        $shared_size = 128;
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+
+        // 删除信号量 IPC 文件
+        $ipc_file = '/tmp/'.$shared_key.'-sem.ipc';
+        if(file_exists($ipc_file))
+        {
+            unlink($ipc_file);
+        }
+
+        $sem_id = \Tests\Utils\PHPUnitExtension::callMethod($shared_memory, 'semId', []);
+        $this->assertFalse($sem_id);
     }
 
     /**
