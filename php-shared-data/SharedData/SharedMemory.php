@@ -304,6 +304,12 @@ class SharedMemory implements \SharedData\ISharedData
         {
             // 释放信号量锁
             sem_release($sem_id);
+
+            // 删除信号量锁
+            sem_remove($sem_id);
+
+            // 删除信号量 IPC 文件
+            $this->removeIpcFile($this->sem_ipc_file);
         }
     }
 

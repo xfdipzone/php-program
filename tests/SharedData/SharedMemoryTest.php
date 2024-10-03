@@ -177,6 +177,31 @@ final class SharedDataTest extends TestCase
     /**
      * @covers \SharedData\SharedMemory::store
      */
+    public function testStoreSemIdException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: semaphore acquire fail');
+
+        $shared_key = $this->generateSharedKey();
+        $shared_size = 128;
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+
+        // 写入数据
+        $data = 'shared memory content';
+        $ret = $shared_memory->store($data);
+        $this->assertTrue($ret);
+
+        // 关闭共享内存
+        $closed = $shared_memory->close();
+        $this->assertTrue($closed);
+
+        // 关闭之后再执行写入
+        $shared_memory->store($data);
+    }
+
+    /**
+     * @covers \SharedData\SharedMemory::store
+     */
     public function testStoreShmKeyException()
     {
         $this->expectException(\Exception::class);
@@ -194,6 +219,9 @@ final class SharedDataTest extends TestCase
         // 关闭共享内存
         $closed = $shared_memory->close();
         $this->assertTrue($closed);
+
+        // 重新创建信号量 IPC 文件，使信号量锁获取成功，方便测试后续流程的异常
+        file_put_contents('/tmp/'.$shared_key.'-sem.ipc', '');
 
         // 关闭之后再执行写入
         $shared_memory->store($data);
@@ -224,6 +252,30 @@ final class SharedDataTest extends TestCase
     /**
      * @covers \SharedData\SharedMemory::load
      */
+    public function testLoadSemIdException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: semaphore acquire fail');
+
+        $shared_key = $this->generateSharedKey();
+        $shared_size = 128;
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+
+        // 写入数据
+        $data = 'shared memory content';
+        $shared_memory->store($data);
+
+        // 关闭共享内存
+        $closed = $shared_memory->close();
+        $this->assertTrue($closed);
+
+        // 关闭之后再执行读取
+        $shared_memory->load();
+    }
+
+    /**
+     * @covers \SharedData\SharedMemory::load
+     */
     public function testLoadException()
     {
         $this->expectException(\Exception::class);
@@ -240,6 +292,9 @@ final class SharedDataTest extends TestCase
         // 关闭共享内存
         $closed = $shared_memory->close();
         $this->assertTrue($closed);
+
+        // 重新创建信号量 IPC 文件，使信号量锁获取成功，方便测试后续流程的异常
+        file_put_contents('/tmp/'.$shared_key.'-sem.ipc', '');
 
         // 关闭之后再执行读取
         $shared_memory->load();
@@ -274,6 +329,30 @@ final class SharedDataTest extends TestCase
     /**
      * @covers \SharedData\SharedMemory::clear
      */
+    public function testClearSemIdException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: semaphore acquire fail');
+
+        $shared_key = $this->generateSharedKey();
+        $shared_size = 128;
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+
+        // 写入数据
+        $data = 'shared memory content';
+        $shared_memory->store($data);
+
+        // 关闭共享内存
+        $closed = $shared_memory->close();
+        $this->assertTrue($closed);
+
+        // 关闭之后再执行清空
+        $shared_memory->clear();
+    }
+
+    /**
+     * @covers \SharedData\SharedMemory::clear
+     */
     public function testClearException()
     {
         $this->expectException(\Exception::class);
@@ -290,6 +369,9 @@ final class SharedDataTest extends TestCase
         // 关闭共享内存
         $closed = $shared_memory->close();
         $this->assertTrue($closed);
+
+        // 重新创建信号量 IPC 文件，使信号量锁获取成功，方便测试后续流程的异常
+        file_put_contents('/tmp/'.$shared_key.'-sem.ipc', '');
 
         // 关闭之后再执行清空
         $shared_memory->clear();
@@ -316,6 +398,30 @@ final class SharedDataTest extends TestCase
     /**
      * @covers \SharedData\SharedMemory::close
      */
+    public function testCloseSemIdException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: semaphore acquire fail');
+
+        $shared_key = $this->generateSharedKey();
+        $shared_size = 128;
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+
+        // 写入数据
+        $data = 'shared memory content';
+        $shared_memory->store($data);
+
+        // 关闭共享内存
+        $closed = $shared_memory->close();
+        $this->assertTrue($closed);
+
+        // 关闭之后再执行关闭
+        $shared_memory->close();
+    }
+
+    /**
+     * @covers \SharedData\SharedMemory::close
+     */
     public function testCloseException()
     {
         $this->expectException(\Exception::class);
@@ -332,6 +438,9 @@ final class SharedDataTest extends TestCase
         // 关闭共享内存
         $closed = $shared_memory->close();
         $this->assertTrue($closed);
+
+        // 重新创建信号量 IPC 文件，使信号量锁获取成功，方便测试后续流程的异常
+        file_put_contents('/tmp/'.$shared_key.'-sem.ipc', '');
 
         // 关闭之后再执行关闭
         $shared_memory->close();
