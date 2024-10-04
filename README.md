@@ -108,6 +108,8 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php CSS 更新类](https://github.com/xfdipzone/php-program/tree/master/php-css-updater) (php-css-updater)
 
+- [php 共享数据类](https://github.com/xfdipzone/php-program/tree/master/php-shared-data) (php-shared-data)
+
 ---
 
 ## 单元测试
