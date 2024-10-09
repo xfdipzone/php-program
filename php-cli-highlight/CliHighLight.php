@@ -12,8 +12,8 @@
  * @DateTime 2023-04-07 14:32:37
  *
  */
-class CliHighLight{
-
+class CliHighLight
+{
     // 黑色
     const BLACK = 'black';
 
@@ -43,7 +43,7 @@ class CliHighLight{
      *
      * @var array
      */
-    private static $color_map = array(
+    private static $color_map = [
         self::BLACK => '30',
         self::RED => '31',
         self::GREEN => '32',
@@ -52,14 +52,14 @@ class CliHighLight{
         self::PURPLE => '35',
         self::CYAN => '36',
         self::GREY => '37'
-    );
+    ];
 
     /**
      * 背景颜色转换对照
      *
      * @var array
      */
-    private static $bg_color_map = array(
+    private static $bg_color_map = [
         self::BLACK => '40',
         self::RED => '41',
         self::GREEN => '42',
@@ -68,7 +68,7 @@ class CliHighLight{
         self::PURPLE => '45',
         self::CYAN => '46',
         self::GREY => '47'
-    );
+    ];
 
     /**
      * 按设置输出数据
@@ -84,36 +84,49 @@ class CliHighLight{
      * @param boolean $underline    下划线 true/false
      * @return string
      */
-    public static function output(string $output, string $color, string $bg_color='', bool $bold=false, bool $underline=false):string{
-
+    public static function output(string $output, string $color, string $bg_color='', bool $bold=false, bool $underline=false):string
+    {
         // 非cli模式，直接返回原始数据
-        if(php_sapi_name()!='cli'){
+        if(php_sapi_name()!='cli')
+        {
             return $output;
         }
 
-        // 获取color code
-        $color_code = isset(self::$color_map[$color])? self::$color_map[$color] : '';
-
-        // 获取bg color code
-        $bg_color_code = isset(self::$bg_color_map[$bg_color])? self::$bg_color_map[$bg_color].';' : '';
-
-        // 粗体
-        $bold_code = $bold? '1;' : '';
+        // 配置项
+        $config = [];
 
         // 下划线
-        $underline_code = $underline? '4;' : '';
-
-        // 设置文字颜色与背景颜色
-        if($color_code && $bg_color_code){
-            $output = chr(27).'['. $underline_code . $bold_code . $bg_color_code . $color_code. 'm'.$output.chr(27).'[0m';
-
-        // 只设置文字颜色，不设置背景颜色
-        }elseif($color_code){
-            $output = chr(27).'['. $underline_code . $bold_code . $color_code. 'm'.$output.chr(27).'[0m';
+        if($underline)
+        {
+            $config[] = '4';
         }
 
+        // 粗体
+        if($bold)
+        {
+            $config[] = '1';
+        }
+
+        // 获取 background color code
+        if(isset(self::$bg_color_map[$bg_color]))
+        {
+            $config[] = self::$bg_color_map[$bg_color];
+        }
+
+        // 获取color code
+        if(isset(self::$color_map[$color]))
+        {
+            $config[] = self::$color_map[$color];
+        }
+
+        // 使用默认配置
+        if(count($config)==0)
+        {
+            return $output;
+        }
+
+        $output = sprintf(chr(27).'[%sm%s'.chr(27).'[0m', implode(';', $config), $output);
+
         return $output;
-
     }
-
 }

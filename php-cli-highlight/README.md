@@ -37,7 +37,8 @@ $configs = [
     [CliHighLight::GREY, CliHighLight::BLACK, true, false],
 ];
 
-foreach($configs as $config){
+foreach($configs as $config)
+{
     echo CliHighLight::output($str, $config[0], $config[1], $config[2], $config[3]).PHP_EOL;
 }
 ```
