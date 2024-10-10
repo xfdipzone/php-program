@@ -12,7 +12,7 @@ php 实现的共享数据类，用于本地服务进程之间共享数据
 
 ## 扩展依赖
 
-基于 php 扩展实现，需要安装 `shmop` 与 `sysvsem` 扩展
+基于 php 扩展实现，需要安装 `shmop`, `sysvsem` 与 `sysvshm` 扩展
 
 ### 扩展说明
 
@@ -22,24 +22,30 @@ php 实现的共享数据类，用于本地服务进程之间共享数据
 
 **sysvsem** 用于信号量锁，控制并发
 
+**sysvshm** 用于进程间 key value 形式内存共享数据
+
 [https://www.php.net/manual/zh/ref.sem.php](<https://www.php.net/manual/zh/ref.sem.php>)
 
 ### 扩展安装
 
-检查是否已安装 `shmop` 与 `sysvsem` 扩展
+检查是否已安装 `shmop`, `sysvsem` 与 `sysvshm` 扩展
 
 ```shell
 php -m | grep shmop
 
 php -m | grep sysvsem
+
+php -m | grep sysvshm
 ```
 
-安装 `shmop` 与 `sysvsem` 扩展
+安装 `shmop`, `sysvsem` 与 `sysvshm` 扩展
 
 ```shell
 pecl install shmop
 
 pecl install sysvsem
+
+pecl install sysvshm
 ```
 
 ### Docker 环境安装

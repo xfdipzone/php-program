@@ -9,7 +9,7 @@ ENV WEBAPP_PATH                 /data/webapp
 # 安装所需的扩展
 RUN apt-get update && apt-get install -y \
     nginx procps vim \
-    && docker-php-ext-install shmop sysvsem
+    && docker-php-ext-install shmop sysvsem sysvshm
 
 
 # 设置时区为中国
