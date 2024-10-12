@@ -317,14 +317,6 @@ class SharedMemory implements \SharedData\ISharedData
      * 创建 IPC 文件
      *
      * @author fdipzone
-     * @DateTime 2024-09-27 11:53:09
-     *
-     * @return boolean
-     */
-    /**
-     * 创建 IPC 文件
-     *
-     * @author fdipzone
      * @DateTime 2024-09-27 15:57:10
      *
      * @param string $ipc_file IPC 文件
