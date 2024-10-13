@@ -1,40 +1,13 @@
 <?php declare(strict_types=1);
 namespace Tests\SharedData;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * 测试 php-shared-data\SharedData\SharedMemory
  *
  * @author fdipzone
  */
-final class SharedDataTest extends TestCase
+final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestCase
 {
-    // 初始化测试用例设置
-    protected function setUp()
-    {
-        // 设置 Warning 级别处理方法
-        set_error_handler([$this, 'handleWarningAsIgnore'], E_WARNING);
-    }
-
-    // 清理测试用例设置
-    protected function tearDown()
-    {
-        restore_error_handler();
-    }
-
-    // 忽略 Warning 处理
-    public function handleWarningAsIgnore($err_no, $err_str, $err_file, $err_line)
-    {
-        // 忽略警告
-    }
-
-    // 生成共享数据标识，用于测试
-    private function generateSharedKey():string
-    {
-        return sprintf('ut-%s-sm-key-%s-%d', md5(__CLASS__), date('YmdHis'), \Tests\Utils\PHPUnitExtension::sequenceId());
-    }
-
     /**
      * @covers \SharedData\SharedMemory::__construct
      */
@@ -444,103 +417,6 @@ final class SharedDataTest extends TestCase
 
         // 关闭之后再执行关闭
         $shared_memory->close();
-    }
-
-    /**
-     * @covers \SharedData\SharedMemory::createIpcFile
-     */
-    public function testCreateIpcFile()
-    {
-        $shared_key = $this->generateSharedKey();
-        $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
-
-        // 测试文件
-        $ipc_file = '/tmp/sm-key-test.ipc';
-
-        // IPC 文件不存在
-        $created = \Tests\Utils\PHPUnitExtension::callMethod($shared_memory, 'createIpcFile', [$ipc_file]);
-        $this->assertTrue($created);
-
-        // IPC 文件已存在
-        $created = \Tests\Utils\PHPUnitExtension::callMethod($shared_memory, 'createIpcFile', [$ipc_file]);
-        $this->assertFalse($created);
-
-        // 删除测试文件
-        if(file_exists($ipc_file))
-        {
-            unlink($ipc_file);
-        }
-    }
-
-    /**
-     * @covers \SharedData\SharedMemory::removeIpcFile
-     */
-    public function testRemoveIpcFile()
-    {
-        $shared_key = $this->generateSharedKey();
-        $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
-
-        // 测试文件
-        $ipc_file = '/tmp/sm-key-test.ipc';
-
-        // 预先创建 IPC 文件
-        file_put_contents($ipc_file, '');
-
-        // IPC 文件已存在
-        $removed = \Tests\Utils\PHPUnitExtension::callMethod($shared_memory, 'removeIpcFile', [$ipc_file]);
-        $this->assertTrue($removed);
-
-        // IPC 文件不存在
-        $removed = \Tests\Utils\PHPUnitExtension::callMethod($shared_memory, 'removeIpcFile', [$ipc_file]);
-        $this->assertFalse($removed);
-    }
-
-    /**
-     * @covers \SharedData\SharedMemory::semId
-     */
-    public function testSemId()
-    {
-        $shared_key = $this->generateSharedKey();
-        $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
-
-        $sem_id = \Tests\Utils\PHPUnitExtension::callMethod($shared_memory, 'semId', []);
-        $this->assertEquals('sysvsem', get_resource_type($sem_id));
-    }
-
-    /**
-     * @covers \SharedData\SharedMemory::semId
-     */
-    public function testSemIdFalse()
-    {
-        $shared_key = $this->generateSharedKey();
-        $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
-
-        // 删除信号量 IPC 文件
-        $ipc_file = '/tmp/'.$shared_key.'-sem.ipc';
-        if(file_exists($ipc_file))
-        {
-            unlink($ipc_file);
-        }
-
-        $sem_id = \Tests\Utils\PHPUnitExtension::callMethod($shared_memory, 'semId', []);
-        $this->assertFalse($sem_id);
-    }
-
-    /**
-     * @covers \SharedData\SharedMemory::shmKey
-     */
-    public function testShmKey()
-    {
-        $shared_key = $this->generateSharedKey();
-        $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
-
-        $shm_key = \Tests\Utils\PHPUnitExtension::callMethod($shared_memory, 'shmKey', []);
-        $this->assertTrue($shm_key>0);
     }
 
     /**

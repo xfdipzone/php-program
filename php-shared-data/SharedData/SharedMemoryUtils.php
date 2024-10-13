@@ -2,13 +2,13 @@
 namespace SharedData;
 
 /**
- * 通用方法集合
+ * 共享内存通用方法集合
  *
  * @author fdipzone
  * @DateTime 2024-10-12 22:45:18
  *
  */
-class Utils
+class SharedMemoryUtils
 {
     /**
      * 创建 IPC 文件

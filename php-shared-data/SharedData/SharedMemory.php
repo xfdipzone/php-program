@@ -67,7 +67,7 @@ class SharedMemory implements \SharedData\ISharedData
         // 创建共享内存 IPC 文件
         $this->shm_ipc_file = '/tmp/'.$this->shared_key.'.ipc';
 
-        $created = $this->createIpcFile($this->shm_ipc_file);
+        $created = \SharedData\SharedMemoryUtils::createIpcFile($this->shm_ipc_file);
         if(!$created)
         {
             throw new \Exception('shared memory: shm ipc file already exists or create fail');
@@ -76,7 +76,7 @@ class SharedMemory implements \SharedData\ISharedData
         // 创建信号量 IPC 文件
         $this->sem_ipc_file = '/tmp/'.$this->shared_key.'-sem.ipc';
 
-        $created = $this->createIpcFile($this->sem_ipc_file);
+        $created = \SharedData\SharedMemoryUtils::createIpcFile($this->sem_ipc_file);
         if(!$created)
         {
             throw new \Exception('shared memory: sem ipc file already exists or create fail');
@@ -107,7 +107,7 @@ class SharedMemory implements \SharedData\ISharedData
         try
         {
             // 获取信号量锁标识
-            $sem_id = $this->semId();
+            $sem_id = \SharedData\SharedMemoryUtils::semId($this->sem_ipc_file, 's');
 
             // 获取信号量锁（阻塞等待）
             if(!sem_acquire($sem_id))
@@ -115,7 +115,7 @@ class SharedMemory implements \SharedData\ISharedData
                 throw new \Exception('shared memory: semaphore acquire fail');
             }
 
-            $shm_key = $this->shmKey();
+            $shm_key = \SharedData\SharedMemoryUtils::shmKey($this->shm_ipc_file, 'm');
 
             if($shm_key==-1)
             {
@@ -168,7 +168,7 @@ class SharedMemory implements \SharedData\ISharedData
         try
         {
             // 获取信号量锁标识
-            $sem_id = $this->semId();
+            $sem_id = \SharedData\SharedMemoryUtils::semId($this->sem_ipc_file, 's');
 
             // 获取信号量锁（阻塞等待）
             if(!sem_acquire($sem_id))
@@ -176,7 +176,8 @@ class SharedMemory implements \SharedData\ISharedData
                 throw new \Exception('shared memory: semaphore acquire fail');
             }
 
-            $shm_id = shmop_open($this->shmKey(), 'a', 0, 0);
+            $shm_key = \SharedData\SharedMemoryUtils::shmKey($this->shm_ipc_file, 'm');
+            $shm_id = shmop_open($shm_key, 'a', 0, 0);
 
             if(!$shm_id)
             {
@@ -219,7 +220,7 @@ class SharedMemory implements \SharedData\ISharedData
         try
         {
             // 获取信号量锁标识
-            $sem_id = $this->semId();
+            $sem_id = \SharedData\SharedMemoryUtils::semId($this->sem_ipc_file, 's');
 
             // 获取信号量锁（阻塞等待）
             if(!sem_acquire($sem_id))
@@ -227,7 +228,8 @@ class SharedMemory implements \SharedData\ISharedData
                 throw new \Exception('shared memory: semaphore acquire fail');
             }
 
-            $shm_id = shmop_open($this->shmKey(), 'w', 0, 0);
+            $shm_key = \SharedData\SharedMemoryUtils::shmKey($this->shm_ipc_file, 'm');
+            $shm_id = shmop_open($shm_key, 'w', 0, 0);
 
             if(!$shm_id)
             {
@@ -270,7 +272,7 @@ class SharedMemory implements \SharedData\ISharedData
         try
         {
             // 获取信号量锁标识
-            $sem_id = $this->semId();
+            $sem_id = \SharedData\SharedMemoryUtils::semId($this->sem_ipc_file, 's');
 
             // 获取信号量锁（阻塞等待）
             if(!sem_acquire($sem_id))
@@ -278,7 +280,8 @@ class SharedMemory implements \SharedData\ISharedData
                 throw new \Exception('shared memory: semaphore acquire fail');
             }
 
-            $shm_id = shmop_open($this->shmKey(), 'w', 0, 0);
+            $shm_key = \SharedData\SharedMemoryUtils::shmKey($this->shm_ipc_file, 'm');
+            $shm_id = shmop_open($shm_key, 'w', 0, 0);
 
             if(!$shm_id)
             {
@@ -292,7 +295,7 @@ class SharedMemory implements \SharedData\ISharedData
             $this->closeShmId($shm_id);
 
             // 删除共享内存 IPC 文件
-            $this->removeIpcFile($this->shm_ipc_file);
+            \SharedData\SharedMemoryUtils::removeIpcFile($this->shm_ipc_file);
 
             return $deleted;
         }
@@ -309,86 +312,8 @@ class SharedMemory implements \SharedData\ISharedData
             sem_remove($sem_id);
 
             // 删除信号量 IPC 文件
-            $this->removeIpcFile($this->sem_ipc_file);
+            \SharedData\SharedMemoryUtils::removeIpcFile($this->sem_ipc_file);
         }
-    }
-
-    /**
-     * 创建 IPC 文件
-     *
-     * @author fdipzone
-     * @DateTime 2024-09-27 15:57:10
-     *
-     * @param string $ipc_file IPC 文件
-     * @return boolean
-     */
-    private function createIpcFile(string $ipc_file):bool
-    {
-        // 检查文件是否存在
-        if(file_exists($ipc_file))
-        {
-            return false;
-        }
-
-        // 创建文件
-        return file_put_contents($ipc_file, '')!==false;
-    }
-
-    /**
-     * 删除 IPC 文件
-     *
-     * @author fdipzone
-     * @DateTime 2024-09-27 17:04:58
-     *
-     * @param string $ipc_file IPC 文件
-     * @return boolean
-     */
-    private function removeIpcFile(string $ipc_file):bool
-    {
-        if(file_exists($ipc_file))
-        {
-            return unlink($ipc_file);
-        }
-
-        return false;
-    }
-
-    /**
-     * 获取信号量唯一id
-     *
-     * @author fdipzone
-     * @DateTime 2024-09-25 22:21:22
-     *
-     * @return mixed
-     */
-    private function semId()
-    {
-        // Project identifier. This must be a one character string.
-        $project_id = 's';
-        $sem_key = ftok($this->sem_ipc_file, $project_id);
-
-        if($sem_key==-1)
-        {
-            return false;
-        }
-
-        return sem_get($sem_key, 1, 0666, 1);
-    }
-
-    /**
-     * 获取共享数据进程通信标识
-     *
-     * @author fdipzone
-     * @DateTime 2024-09-25 22:26:27
-     *
-     * @return int
-     */
-    private function shmKey():int
-    {
-        // Project identifier. This must be a one character string.
-        $project_id = 'm';
-        $shm_key = ftok($this->shm_ipc_file, $project_id);
-        return $shm_key;
     }
 
     /**
