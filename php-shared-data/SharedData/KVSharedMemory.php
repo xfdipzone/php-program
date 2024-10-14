@@ -11,6 +11,79 @@ namespace SharedData;
 class KVSharedMemory implements \SharedData\IKVSharedStorage
 {
     /**
+     * 共享数据标识
+     *
+     * @var string
+     */
+    private $shared_key;
+
+    /**
+     * 共享数据最大容量（字节）
+     *
+     * @var int
+     */
+    private $shared_size;
+
+    /**
+     * 共享内存 IPC 文件，用于 ftok 方法生成 System V IPC key
+     * https://www.php.net/manual/en/function.ftok.php
+     *
+     * @var string
+     */
+    private $shm_ipc_file = '';
+
+    /**
+     * 信号量 IPC 文件
+     *
+     * @var string
+     */
+    private $sem_ipc_file = '';
+
+    /**
+     * 初始化
+     * 设置共享数据标识与共享数据块容量
+     *
+     * @author fdipzone
+     * @DateTime 2024-10-14 16:40:11
+     *
+     * @param string $shared_key 共享数据标识
+     * @param int $shared_size 共享数据最大容量（字节）
+     */
+    public function __construct(string $shared_key, int $shared_size)
+    {
+        if(empty($shared_key))
+        {
+            throw new \Exception('kv shared memory: shared key is empty');
+        }
+
+        if($shared_size<1)
+        {
+            throw new \Exception('kv shared memory: shared size must be greater than 0');
+        }
+
+        $this->shared_key = $shared_key;
+        $this->shared_size = $shared_size;
+
+        // 创建共享内存 IPC 文件
+        $this->shm_ipc_file = '/tmp/'.$this->shared_key.'-kv.ipc';
+
+        $created = \SharedData\SharedMemoryUtils::createIpcFile($this->shm_ipc_file);
+        if(!$created)
+        {
+            throw new \Exception('kv shared memory: shm ipc file already exists or create fail');
+        }
+
+        // 创建信号量 IPC 文件
+        $this->sem_ipc_file = '/tmp/'.$this->shared_key.'-kv-sem.ipc';
+
+        $created = \SharedData\SharedMemoryUtils::createIpcFile($this->sem_ipc_file);
+        if(!$created)
+        {
+            throw new \Exception('kv shared memory: sem ipc file already exists or create fail');
+        }
+    }
+
+    /**
      * 存储 KV 共享数据
      *
      * @author fdipzone
@@ -22,7 +95,58 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
      */
     public function store(string $key, $data):bool
     {
-        return true;
+        if(empty($key))
+        {
+            throw new \Exception('kv shared memory: store key is empty');
+        }
+
+        if(empty($data))
+        {
+            throw new \Exception('kv shared memory: store data is empty');
+        }
+
+        try
+        {
+            // 获取信号量锁标识
+            $sem_id = \SharedData\SharedMemoryUtils::semId($this->sem_ipc_file, 's');
+
+            // 获取信号量锁（阻塞等待）
+            if(!sem_acquire($sem_id))
+            {
+                throw new \Exception('kv shared memory: semaphore acquire fail');
+            }
+
+            $shm_key = \SharedData\SharedMemoryUtils::shmKey($this->shm_ipc_file, 'm');
+
+            if($shm_key==-1)
+            {
+                throw new \Exception('kv shared memory: shm_key invalid');
+            }
+
+            $shm_id = shm_attach($shm_key, $this->shared_size, 0755);
+
+            if(!$shm_id)
+            {
+                throw new \Exception('kv shared memory: shm_id create fail');
+            }
+
+            // 写入共享内存 KV 数据
+            $written = shm_put_var($shm_id, $this->keyConvert($key), $data);
+
+            // 关闭共享内存块连接
+            shm_detach($shm_id);
+
+            return $written? true : false;
+        }
+        catch(\Throwable $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
+        finally
+        {
+            // 释放信号量锁
+            sem_release($sem_id);
+        }
     }
 
     /**
@@ -36,7 +160,47 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
      */
     public function load(string $key)
     {
-        return '';
+        if(empty($key))
+        {
+            throw new \Exception('kv shared memory: load key is empty');
+        }
+
+        try
+        {
+            // 获取信号量锁标识
+            $sem_id = \SharedData\SharedMemoryUtils::semId($this->sem_ipc_file, 's');
+
+            // 获取信号量锁（阻塞等待）
+            if(!sem_acquire($sem_id))
+            {
+                throw new \Exception('kv shared memory: semaphore acquire fail');
+            }
+
+            $shm_key = \SharedData\SharedMemoryUtils::shmKey($this->shm_ipc_file, 'm');
+            $shm_id = shm_attach($shm_key, $this->shared_size, 755);
+
+            if(!$shm_id)
+            {
+                throw new \Exception('kv shared memory: shm_id get fail');
+            }
+
+            // 读取共享内存 KV 数据
+            $data = shm_get_var($shm_id, $this->keyConvert($key));
+
+            // 关闭共享内存块连接
+            shm_detach($shm_id);
+
+            return $data;
+        }
+        catch(\Throwable $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
+        finally
+        {
+            // 释放信号量锁
+            sem_release($sem_id);
+        }
     }
 
     /**
@@ -50,7 +214,53 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
      */
     public function remove(string $key):bool
     {
-        return true;
+        if(empty($key))
+        {
+            throw new \Exception('kv shared memory: remove key is empty');
+        }
+
+        try
+        {
+            // 获取信号量锁标识
+            $sem_id = \SharedData\SharedMemoryUtils::semId($this->sem_ipc_file, 's');
+
+            // 获取信号量锁（阻塞等待）
+            if(!sem_acquire($sem_id))
+            {
+                throw new \Exception('kv shared memory: semaphore acquire fail');
+            }
+
+            $shm_key = \SharedData\SharedMemoryUtils::shmKey($this->shm_ipc_file, 'm');
+            $shm_id = shm_attach($shm_key, $this->shared_size, 0755);
+
+            if(!$shm_id)
+            {
+                throw new \Exception('kv shared memory: shm_id get fail');
+            }
+
+            $removed = false;
+            $int_key = $this->keyConvert($key);
+
+            // 判断 key 是否存在
+            if(shm_has_var($shm_id, $int_key))
+            {
+                $removed = shm_remove_var($shm_id, $int_key);
+            }
+
+            // 关闭共享内存块连接
+            shm_detach($shm_id);
+
+            return $removed;
+        }
+        catch(\Throwable $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
+        finally
+        {
+            // 释放信号量锁
+            sem_release($sem_id);
+        }
     }
 
     /**
@@ -63,6 +273,65 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
      */
     public function close():bool
     {
-        return true;
+        try
+        {
+            // 获取信号量锁标识
+            $sem_id = \SharedData\SharedMemoryUtils::semId($this->sem_ipc_file, 's');
+
+            // 获取信号量锁（阻塞等待）
+            if(!sem_acquire($sem_id))
+            {
+                throw new \Exception('kv shared memory: semaphore acquire fail');
+            }
+
+            $shm_key = \SharedData\SharedMemoryUtils::shmKey($this->shm_ipc_file, 'm');
+            $shm_id = shm_attach($shm_key, $this->shared_size, 0755);
+
+            if(!$shm_id)
+            {
+                throw new \Exception('kv shared memory: shm_id get fail');
+            }
+
+            // 删除共享内存段
+            $deleted = shm_remove($shm_id);
+
+            // 关闭共享内存块连接
+            shm_detach($shm_id);
+
+            // 删除共享内存 IPC 文件
+            \SharedData\SharedMemoryUtils::removeIpcFile($this->shm_ipc_file);
+
+            return $deleted;
+        }
+        catch(\Throwable $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
+        finally
+        {
+            // 释放信号量锁
+            sem_release($sem_id);
+
+            // 删除信号量锁
+            sem_remove($sem_id);
+
+            // 删除信号量 IPC 文件
+            \SharedData\SharedMemoryUtils::removeIpcFile($this->sem_ipc_file);
+        }
+    }
+
+    /**
+     * 将 key 转为无符号整型数字
+     *
+     * @author fdipzone
+     * @DateTime 2024-10-14 17:57:55
+     *
+     * @param string $key 数据键
+     * @return int
+     */
+    private function keyConvert(string $key):int
+    {
+        $hex_str = hash('crc32b', $key);
+        return hexdec($hex_str);
     }
 }
