@@ -177,7 +177,13 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
             }
 
             $shm_key = \SharedData\SharedMemoryUtils::shmKey($this->shm_ipc_file, 'm');
-            $shm_id = shm_attach($shm_key, $this->shared_size, 755);
+
+            if($shm_key==-1)
+            {
+                throw new \Exception('kv shared memory: shm_key invalid');
+            }
+
+            $shm_id = shm_attach($shm_key, $this->shared_size, 0755);
 
             if(!$shm_id)
             {
@@ -231,6 +237,12 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
             }
 
             $shm_key = \SharedData\SharedMemoryUtils::shmKey($this->shm_ipc_file, 'm');
+
+            if($shm_key==-1)
+            {
+                throw new \Exception('kv shared memory: shm_key invalid');
+            }
+
             $shm_id = shm_attach($shm_key, $this->shared_size, 0755);
 
             if(!$shm_id)
@@ -265,6 +277,7 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
 
     /**
      * 关闭 KV 共享存储
+     * 关闭后将不能执行任何操作，例如写入，读取等
      *
      * @author fdipzone
      * @DateTime 2024-10-11 18:49:46
@@ -285,6 +298,12 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
             }
 
             $shm_key = \SharedData\SharedMemoryUtils::shmKey($this->shm_ipc_file, 'm');
+
+            if($shm_key==-1)
+            {
+                throw new \Exception('kv shared memory: shm_key invalid');
+            }
+
             $shm_id = shm_attach($shm_key, $this->shared_size, 0755);
 
             if(!$shm_id)

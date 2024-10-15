@@ -47,6 +47,7 @@ interface IKVSharedStorage
 
     /**
      * 关闭 KV 共享存储
+     * 关闭后将不能执行任何操作，例如写入，读取等
      *
      * @author fdipzone
      * @DateTime 2024-10-11 18:49:46
