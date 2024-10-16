@@ -85,12 +85,20 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
     public function testStore()
     {
         $shared_key = $this->generateSharedKey();
-        $shared_size = 128;
+        $shared_size = 1024;
         $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
 
         // 写入数据
         $key = 'test';
         $data = 'kv shared memory content';
+        $ret = $kv_shared_memory->store($key, $data);
+        $this->assertTrue($ret);
+
+        // 写入数组数据
+        $key = 'test1';
+        $data = array(
+            'name' => 'fdipzone',
+        );
         $ret = $kv_shared_memory->store($key, $data);
         $this->assertTrue($ret);
 
@@ -212,7 +220,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
     public function testLoad()
     {
         $shared_key = $this->generateSharedKey();
-        $shared_size = 128;
+        $shared_size = 1024;
         $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
 
         // 写入数据
@@ -225,6 +233,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
         $this->assertEquals($data, $load_data);
 
         // 写入数组数据
+        $key = 'test1';
         $data = array(
             'name' => 'fdipzone'
         );
