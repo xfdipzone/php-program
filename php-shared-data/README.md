@@ -108,6 +108,14 @@ ipcrm -m [shm-id]
 
 - 删除共享存储
 
+- 创建共享存储并写入 KV 数据
+
+- 读取 KV 共享数据
+
+- 移除 KV 共享数据
+
+- 删除 KV 共享存储
+
 ---
 
 ## 类说明
@@ -123,6 +131,14 @@ ipcrm -m [shm-id]
 **SharedMemory** `SharedData/SharedMemory.php`
 
 基于内存共享实现的共享数据类
+
+**IKVSharedStorage** `SharedData/IKVSharedStorage.php`
+
+共享 Key Value 存储数据接口，定义共享数据 KV 存储类需要实现的方法
+
+**KVSharedMemory** `SharedData/KVSharedMemory.php`
+
+基于共享内存实现的 KV 存储类
 
 ---
 
@@ -150,6 +166,42 @@ var_dump($is_clear);
 
 // 关闭共享存储
 $closed = $shared_memory->close();
+var_dump($closed);
+```
+
+KVSharedMemory
+
+```php
+$shared_key = 'test-shared-key';
+$shared_size = 1024;
+$kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+
+// 写入数据
+$key1 = 'test1';
+$data1 = 'shared data content';
+$written = $kv_shared_memory->store($key1, $data1);
+var_dump($written);
+
+// 写入数组数据
+$key2 = 'test2';
+$data2 = array('name' => 'fdipzone');
+$written = $kv_shared_memory->store($key2, $data2);
+var_dump($written);
+
+// 读取数据
+$load_data = $kv_shared_memory->load($key1);
+echo $load_data.PHP_EOL;
+
+// 读取数组数据
+$load_data = $kv_shared_memory->load($key2);
+print_r($load_data);
+
+// 移除 key2
+$removed = $kv_shared_memory->remove($key2);
+var_dump($removed);
+
+// 关闭共享存储
+$closed = $kv_shared_memory->close();
 var_dump($closed);
 ```
 
