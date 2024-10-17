@@ -124,10 +124,6 @@ ipcrm -m [shm-id]
 
 共享数据接口，定义共享数据实现类必须实现的方法
 
-**SharedMemoryUtils** `SharedData/SharedMemoryUtils.php`
-
-共享内存通用方法集合
-
 **SharedMemory** `SharedData/SharedMemory.php`
 
 基于内存共享实现的共享数据类
@@ -139,6 +135,10 @@ ipcrm -m [shm-id]
 **KVSharedMemory** `SharedData/KVSharedMemory.php`
 
 基于共享内存实现的 KV 存储类
+
+**SharedMemoryUtils** `SharedData/SharedMemoryUtils.php`
+
+共享内存通用方法集合
 
 ---
 

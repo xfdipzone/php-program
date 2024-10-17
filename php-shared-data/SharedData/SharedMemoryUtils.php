@@ -58,7 +58,7 @@ class SharedMemoryUtils
      *
      * @param string $sem_ipc_file 信号量 IPC 文件
      * @param string $project_id Project identifier. This must be a one character string.
-     * @return mixed
+     * @return mixed SysvSemaphore|false
      */
     public static function semId(string $sem_ipc_file, string $project_id)
     {
