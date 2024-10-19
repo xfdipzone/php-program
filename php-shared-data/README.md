@@ -149,7 +149,7 @@ SharedMemory
 ```php
 $shared_key = 'test-shared-key';
 $shared_size = 128;
-$shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+$shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
 // 写入数据
 $data = 'shared data';
@@ -174,7 +174,7 @@ KVSharedMemory
 ```php
 $shared_key = 'test-shared-key';
 $shared_size = 1024;
-$kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+$kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
 // 写入数据
 $key1 = 'test1';
