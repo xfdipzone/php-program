@@ -48,8 +48,9 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
      *
      * @param string $shared_key 共享数据标识
      * @param int $shared_size 共享数据最大容量（字节）
+     * @param boolean $init 是否初始化
      */
-    public function __construct(string $shared_key, int $shared_size)
+    public function __construct(string $shared_key, int $shared_size, bool $init=false)
     {
         if(empty($shared_key))
         {
@@ -67,19 +68,39 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
         // 创建共享内存 IPC 文件
         $this->shm_ipc_file = '/tmp/'.$this->shared_key.'-kv.ipc';
 
-        $created = \SharedData\SharedMemoryUtils::createIpcFile($this->shm_ipc_file);
-        if(!$created)
+        if($init)
         {
-            throw new \Exception('kv shared memory: shm ipc file already exists or create fail');
+            $created = \SharedData\SharedMemoryUtils::createIpcFile($this->shm_ipc_file);
+            if(!$created)
+            {
+                throw new \Exception('kv shared memory: shm ipc file already exists or create fail');
+            }
+        }
+        else
+        {
+            if(!file_exists($this->shm_ipc_file))
+            {
+                throw new \Exception('kv shared memory: shm ipc file not exists');
+            }
         }
 
         // 创建信号量 IPC 文件
         $this->sem_ipc_file = '/tmp/'.$this->shared_key.'-kv-sem.ipc';
 
-        $created = \SharedData\SharedMemoryUtils::createIpcFile($this->sem_ipc_file);
-        if(!$created)
+        if($init)
         {
-            throw new \Exception('kv shared memory: sem ipc file already exists or create fail');
+            $created = \SharedData\SharedMemoryUtils::createIpcFile($this->sem_ipc_file);
+            if(!$created)
+            {
+                throw new \Exception('kv shared memory: sem ipc file already exists or create fail');
+            }
+        }
+        else
+        {
+            if(!file_exists($this->sem_ipc_file))
+            {
+                throw new \Exception('kv shared memory: sem ipc file not exists');
+            }
         }
     }
 

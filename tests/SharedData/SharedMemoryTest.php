@@ -15,7 +15,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
         $this->assertEquals('SharedData\SharedMemory', get_class($shared_memory));
     }
 
@@ -29,7 +29,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = '';
         $shared_size = 128;
-        new \SharedData\SharedMemory($shared_key, $shared_size);
+        new \SharedData\SharedMemory($shared_key, $shared_size, true);
     }
 
     /**
@@ -42,7 +42,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 0;
-        new \SharedData\SharedMemory($shared_key, $shared_size);
+        new \SharedData\SharedMemory($shared_key, $shared_size, true);
     }
 
     /**
@@ -59,7 +59,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
         // 预先创建共享内存 IPC 文件
         file_put_contents('/tmp/'.$shared_key.'.ipc', '');
 
-        new \SharedData\SharedMemory($shared_key, $shared_size);
+        new \SharedData\SharedMemory($shared_key, $shared_size, true);
     }
 
     /**
@@ -76,6 +76,37 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
         // 预先创建信号量 IPC 文件
         file_put_contents('/tmp/'.$shared_key.'-sem.ipc', '');
 
+        new \SharedData\SharedMemory($shared_key, $shared_size, true);
+    }
+
+    /**
+     * @covers \SharedData\SharedMemory::__construct
+     */
+    public function testConstructShmIpcFileException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: shm ipc file not exists');
+
+        $shared_key = $this->generateSharedKey();
+        $shared_size = 128;
+
+        new \SharedData\SharedMemory($shared_key, $shared_size);
+    }
+
+    /**
+     * @covers \SharedData\SharedMemory::__construct
+     */
+    public function testConstructSemIpcFileException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('shared memory: sem ipc file not exists');
+
+        $shared_key = $this->generateSharedKey();
+        $shared_size = 128;
+
+        // 预先创建共享内存 IPC 文件
+        file_put_contents('/tmp/'.$shared_key.'.ipc', '');
+
         new \SharedData\SharedMemory($shared_key, $shared_size);
     }
 
@@ -86,7 +117,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -108,7 +139,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         $data = '';
         $shared_memory->store($data);
@@ -124,7 +155,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 3;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         $data = 'abcd';
         $shared_memory->store($data);
@@ -140,7 +171,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -157,7 +188,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -182,7 +213,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -207,7 +238,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -232,7 +263,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -256,7 +287,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -280,7 +311,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -309,7 +340,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -333,7 +364,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -357,7 +388,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -378,7 +409,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -402,7 +433,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $data = 'shared memory content';
@@ -426,7 +457,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size);
+        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
 
         // 测试文件
         $ipc_file = '/tmp/sm-key-test.ipc';

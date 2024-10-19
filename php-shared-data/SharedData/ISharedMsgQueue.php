@@ -9,7 +9,7 @@ namespace SharedData;
  * @DateTime 2024-10-18 21:33:39
  *
  */
-interface ISharedMsg
+interface ISharedMsgQueue
 {
     /**
      * 发送消息

@@ -15,7 +15,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
         $this->assertEquals('SharedData\KVSharedMemory', get_class($kv_shared_memory));
     }
 
@@ -29,7 +29,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = '';
         $shared_size = 128;
-        new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
     }
 
     /**
@@ -42,7 +42,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 0;
-        new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
     }
 
     /**
@@ -59,7 +59,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
         // 预先创建共享内存 IPC 文件
         file_put_contents('/tmp/'.$shared_key.'-kv.ipc', '');
 
-        new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
     }
 
     /**
@@ -76,6 +76,37 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
         // 预先创建信号量 IPC 文件
         file_put_contents('/tmp/'.$shared_key.'-kv-sem.ipc', '');
 
+        new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
+    }
+
+    /**
+     * @covers \SharedData\KVSharedMemory::__construct
+     */
+    public function testConstructShmIpcFileException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('kv shared memory: shm ipc file not exists');
+
+        $shared_key = $this->generateSharedKey();
+        $shared_size = 128;
+
+        new \SharedData\KVSharedMemory($shared_key, $shared_size);
+    }
+
+    /**
+     * @covers \SharedData\KVSharedMemory::__construct
+     */
+    public function testConstructSemIpcFileException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('kv shared memory: sem ipc file not exists');
+
+        $shared_key = $this->generateSharedKey();
+        $shared_size = 128;
+
+        // 预先创建共享内存 IPC 文件
+        file_put_contents('/tmp/'.$shared_key.'-kv.ipc', '');
+
         new \SharedData\KVSharedMemory($shared_key, $shared_size);
     }
 
@@ -86,7 +117,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 1024;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -117,7 +148,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         $key = '';
         $data = 'kv shared memory content';
@@ -134,7 +165,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         $key = 'test';
         $data = [];
@@ -151,7 +182,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -169,7 +200,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -195,7 +226,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -221,7 +252,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 1024;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -258,7 +289,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 读取数据
         $key = '';
@@ -275,7 +306,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -300,7 +331,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -328,7 +359,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 读取数据
         $key = 'test';
@@ -342,7 +373,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -372,7 +403,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 移除数据
         $key = '';
@@ -389,7 +420,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -414,7 +445,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -442,7 +473,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 移除数据
         $key = 'test';
@@ -456,7 +487,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -478,7 +509,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -503,7 +534,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 写入数据
         $key = 'test';
@@ -531,7 +562,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
 
         $shared_key = $this->generateSharedKey();
         $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         // 关闭共享内存
         $kv_shared_memory->close();
@@ -544,7 +575,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
     {
         $shared_key = $this->generateSharedKey();
         $shared_size = 128;
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size);
+        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
         $key = 'test';
         $expect_key = hexdec(hash('crc32b', $key));
