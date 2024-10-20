@@ -309,6 +309,8 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
     {
         try
         {
+            $deleted = false;
+
             // 获取信号量锁标识
             $sem_id = \SharedData\SharedMemoryUtils::semId($this->sem_ipc_file, 's');
 
@@ -338,9 +340,6 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
             // 关闭共享内存块连接
             shm_detach($shm_id);
 
-            // 删除共享内存 IPC 文件
-            \SharedData\SharedMemoryUtils::removeIpcFile($this->shm_ipc_file);
-
             return $deleted;
         }
         catch(\Throwable $e)
@@ -352,11 +351,17 @@ class KVSharedMemory implements \SharedData\IKVSharedStorage
             // 释放信号量锁
             sem_release($sem_id);
 
-            // 删除信号量锁
-            sem_remove($sem_id);
+            if($deleted)
+            {
+                // 删除信号量锁
+                sem_remove($sem_id);
 
-            // 删除信号量 IPC 文件
-            \SharedData\SharedMemoryUtils::removeIpcFile($this->sem_ipc_file);
+                // 删除信号量 IPC 文件
+                \SharedData\SharedMemoryUtils::removeIpcFile($this->sem_ipc_file);
+
+                // 删除共享内存 IPC 文件
+                \SharedData\SharedMemoryUtils::removeIpcFile($this->shm_ipc_file);
+            }
         }
     }
 
