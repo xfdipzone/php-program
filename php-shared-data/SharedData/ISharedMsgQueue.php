@@ -31,4 +31,15 @@ interface ISharedMsgQueue
      * @return string
      */
     public function receive():string;
+
+    /**
+     * 关闭消息队列
+     * 关闭后将不能执行任何操作，例如发送，接收等
+     *
+     * @author fdipzone
+     * @DateTime 2024-10-20 11:29:57
+     *
+     * @return boolean
+     */
+    public function close():bool;
 }
