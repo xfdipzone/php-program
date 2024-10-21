@@ -109,7 +109,7 @@ class SharedMemoryMsgQueue implements \SharedData\ISharedMsgQueue
                 throw new \Exception('shared memory msg queue: msg key invalid');
             }
 
-            $msg_queue = msg_get_queue($msg_key, 0666);
+            $msg_queue = $this->getQueue($msg_key, 0666);
 
             if(!$msg_queue)
             {
@@ -145,7 +145,7 @@ class SharedMemoryMsgQueue implements \SharedData\ISharedMsgQueue
                 throw new \Exception('shared memory msg queue: msg key invalid');
             }
 
-            $msg_queue = msg_get_queue($msg_key, 0666);
+            $msg_queue = $this->getQueue($msg_key, 0666);
 
             if(!$msg_queue)
             {
@@ -188,7 +188,7 @@ class SharedMemoryMsgQueue implements \SharedData\ISharedMsgQueue
                 throw new \Exception('shared memory msg queue: msg key invalid');
             }
 
-            $msg_queue = msg_get_queue($msg_key, 0666);
+            $msg_queue = $this->getQueue($msg_key, 0666);
 
             if(!$msg_queue)
             {
@@ -209,5 +209,21 @@ class SharedMemoryMsgQueue implements \SharedData\ISharedMsgQueue
         {
             throw new \Exception($e->getMessage());
         }
+    }
+
+    /**
+     * 获取队列
+     *
+     * @VisibleForTesting
+     * @author fdipzone
+     * @DateTime 2024-10-21 12:44:23
+     *
+     * @param int $msg_key 消息队列 id
+     * @param int $permission 消息队列权限
+     * @return mixed SysvMessageQueue|false
+     */
+    protected function getQueue(int $msg_key, int $permission=0666)
+    {
+        return msg_get_queue($msg_key, $permission);
     }
 }
