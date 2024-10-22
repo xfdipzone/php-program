@@ -193,7 +193,7 @@ final class SharedMemoryMsgQueueTest extends \Tests\SharedData\AbstractSharedMem
         $receive_message = $shared_memory_msg_queue->receive();
         $this->assertEquals($message, $receive_message);
 
-        // 关闭共享内存
+        // 关闭消息队列
         $closed = $shared_memory_msg_queue->close();
         $this->assertTrue($closed);
     }
@@ -214,7 +214,7 @@ final class SharedMemoryMsgQueueTest extends \Tests\SharedData\AbstractSharedMem
         $message = 'shared memory msg content';
         $shared_memory_msg_queue->send($message);
 
-        // 关闭共享内存
+        // 关闭消息队列
         $closed = $shared_memory_msg_queue->close();
         $this->assertTrue($closed);
 
@@ -274,7 +274,7 @@ final class SharedMemoryMsgQueueTest extends \Tests\SharedData\AbstractSharedMem
         $message = 'shared memory msg content';
         $shared_memory_msg_queue->send($message);
 
-        // 关闭共享内存
+        // 关闭消息队列
         $closed = $shared_memory_msg_queue->close();
         $this->assertTrue($closed);
     }
@@ -295,7 +295,7 @@ final class SharedMemoryMsgQueueTest extends \Tests\SharedData\AbstractSharedMem
         $message = 'shared memory msg content';
         $shared_memory_msg_queue->send($message);
 
-        // 关闭共享内存
+        // 关闭消息队列
         $closed = $shared_memory_msg_queue->close();
         $this->assertTrue($closed);
 
@@ -322,7 +322,7 @@ final class SharedMemoryMsgQueueTest extends \Tests\SharedData\AbstractSharedMem
                        ->method('getQueue')
                        ->willReturn(false);
 
-        // 关闭共享内存
+        // 关闭消息队列
         $mock_msg_queue->close();
     }
 

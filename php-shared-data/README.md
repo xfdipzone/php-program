@@ -6,13 +6,13 @@ php 共享数据类
 
 php 实现的共享数据类，用于本地服务进程之间共享数据
 
-基于内存共享来实现进程间数据共享
+基于内存共享来实现进程间数据共享，进程间消息队列通讯
 
 ---
 
 ## 扩展依赖
 
-基于 php 扩展实现，需要安装 `shmop`, `sysvsem` 与 `sysvshm` 扩展
+基于 php 扩展实现，需要安装 `shmop`, `sysvsem`, `sysvshm`, `sysvmsg` 扩展
 
 ### 扩展说明
 
@@ -24,11 +24,13 @@ php 实现的共享数据类，用于本地服务进程之间共享数据
 
 **sysvshm** 用于进程间 key value 形式内存共享数据
 
+**sysvmsg** 用于进程间消息队列通讯
+
 [https://www.php.net/manual/zh/ref.sem.php](<https://www.php.net/manual/zh/ref.sem.php>)
 
 ### 扩展安装
 
-检查是否已安装 `shmop`, `sysvsem` 与 `sysvshm` 扩展
+检查是否已安装 `shmop`, `sysvsem`, `sysvshm`, `sysvmsg` 扩展
 
 ```shell
 php -m | grep shmop
@@ -36,9 +38,11 @@ php -m | grep shmop
 php -m | grep sysvsem
 
 php -m | grep sysvshm
+
+php -m | grep sysvmsg
 ```
 
-安装 `shmop`, `sysvsem` 与 `sysvshm` 扩展
+安装 `shmop`, `sysvsem`, `sysvshm`, `sysvmsg` 扩展
 
 ```shell
 pecl install shmop
@@ -46,6 +50,8 @@ pecl install shmop
 pecl install sysvsem
 
 pecl install sysvshm
+
+pecl install sysvmsg
 ```
 
 ### Docker 环境安装
@@ -100,6 +106,8 @@ ipcrm -m [shm-id]
 
 ## 功能
 
+共享数据
+
 - 创建共享存储并写入数据
 
 - 读取共享数据
@@ -108,13 +116,25 @@ ipcrm -m [shm-id]
 
 - 删除共享存储
 
-- 创建共享存储并写入 KV 数据
+KV 共享存储
+
+- 创建 KV 共享存储并写入 KV 数据
 
 - 读取 KV 共享数据
 
 - 移除 KV 共享数据
 
 - 删除 KV 共享存储
+
+共享队列
+
+- 创建共享队列
+
+- 发送消息
+
+- 接收消息
+
+- 关闭共享队列
 
 ---
 
@@ -202,6 +222,27 @@ var_dump($removed);
 
 // 关闭共享存储
 $closed = $kv_shared_memory->close();
+var_dump($closed);
+```
+
+SharedMemoryMsgQueue
+
+```php
+$queue_name = 'test-shared-queue';
+$max_message_size = 128;
+$shared_memory_msg_queue = new \SharedData\SharedMemoryMsgQueue($queue_name, $max_message_size, true);
+
+// 发送消息
+$message = 'shared memory msg content';
+$written = $shared_memory_msg_queue->send($message);
+var_dump($written);
+
+// 接收消息
+$receive_message = $shared_memory_msg_queue->receive();
+echo $receive_message.PHP_EOL;
+
+// 关闭共享队列
+$closed = $shared_memory_msg_queue->close();
 var_dump($closed);
 ```
 
