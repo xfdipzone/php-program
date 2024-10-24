@@ -24,7 +24,8 @@
             "FileEncryptor\\": "php-file-encryptor/FileEncryptor",
             "CssManager\\": "php-css-updater/CssManager",
             "Validator\\": "php-validator/Validator",
-            "SharedData\\": "php-shared-data/SharedData"
+            "SharedData\\": "php-shared-data/SharedData",
+            "Mail\\": "php-mailer/Mail"
         }
     },
     "autoload-dev": {

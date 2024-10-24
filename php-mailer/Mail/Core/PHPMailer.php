@@ -1221,7 +1221,8 @@ class PHPMailer
             $this->SetError($this->Lang('file_open') . $path);
             return '';
         }
-        $magic_quotes = get_magic_quotes_runtime();
+
+        $magic_quotes = ini_get('magic_quotes_runtime');
         ini_set('magic_quotes_runtime', 0);
         $file_buffer = fread($fd, filesize($path));
         $file_buffer = $this->EncodeString($file_buffer, $encoding);
