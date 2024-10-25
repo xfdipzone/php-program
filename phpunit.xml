@@ -23,6 +23,7 @@
             <directory>./php-css-updater</directory>
             <directory>./php-validator</directory>
             <directory>./php-shared-data</directory>
+            <directory>./php-mailer</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>
@@ -30,6 +31,7 @@
                 <directory>./test</directory>
                 <directory>./travis</directory>
                 <directory>./vendor</directory>
+                <directory>./php-mailer/Mail/Core</directory>
             </exclude>
         </whitelist>
     </filter>

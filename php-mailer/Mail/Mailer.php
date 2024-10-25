@@ -2,7 +2,7 @@
 namespace Mail;
 
 /**
- * 电子邮件发送类
+ * 电子邮件发送器
  * 用于发送电子邮件，支持批量发送及发送附件
  *
  * @author fdipzone
