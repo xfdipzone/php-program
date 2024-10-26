@@ -3,12 +3,13 @@ namespace Mail;
 
 /**
  * 电子邮件发送器配置文件
+ * 使用 SMTP（Simple Mail Transfer Protocol）协议
  *
  * @author fdipzone
  * @DateTime 2024-10-25 10:51:43
  *
  */
-class Config
+class ServerConfig
 {
     /**
      * SMTP 服务器地址

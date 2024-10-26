@@ -4,14 +4,14 @@ namespace Tests\Mail;
 use PHPUnit\Framework\TestCase;
 
 /**
- * 测试 php-mailer\Mail\Config
+ * 测试 php-mailer\Mail\ServerConfig
  *
  * @author fdipzone
  */
-final class ConfigTest extends TestCase
+final class ServerConfigTest extends TestCase
 {
     /**
-     * @covers \Mail\Config::__construct
+     * @covers \Mail\ServerConfig::__construct
      */
     public function testConstruct()
     {
@@ -19,12 +19,12 @@ final class ConfigTest extends TestCase
         $smtp_username = 'fdipzone';
         $smtp_password = '123456abc!@#$';
 
-        $config = new \Mail\Config($smtp_host, $smtp_username, $smtp_password);
-        $this->assertEquals('Mail\Config', get_class($config));
+        $server_config = new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
+        $this->assertEquals('Mail\ServerConfig', get_class($server_config));
     }
 
     /**
-     * @covers \Mail\Config::__construct
+     * @covers \Mail\ServerConfig::__construct
      */
     public function testConstructSmtpHostException()
     {
@@ -35,11 +35,11 @@ final class ConfigTest extends TestCase
         $smtp_username = 'fdipzone';
         $smtp_password = '123456abc!@#$';
 
-        new \Mail\Config($smtp_host, $smtp_username, $smtp_password);
+        new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
     }
 
     /**
-     * @covers \Mail\Config::__construct
+     * @covers \Mail\ServerConfig::__construct
      */
     public function testConstructSmtpUsernameException()
     {
@@ -50,11 +50,11 @@ final class ConfigTest extends TestCase
         $smtp_username = '';
         $smtp_password = '123456abc!@#$';
 
-        new \Mail\Config($smtp_host, $smtp_username, $smtp_password);
+        new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
     }
 
     /**
-     * @covers \Mail\Config::__construct
+     * @covers \Mail\ServerConfig::__construct
      */
     public function testConstructSmtpPasswordException()
     {
@@ -65,11 +65,11 @@ final class ConfigTest extends TestCase
         $smtp_username = 'fdipzone';
         $smtp_password = '';
 
-        new \Mail\Config($smtp_host, $smtp_username, $smtp_password);
+        new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
     }
 
     /**
-     * @covers \Mail\Config
+     * @covers \Mail\ServerConfig
      */
     public function testSetAndGet()
     {
@@ -81,23 +81,23 @@ final class ConfigTest extends TestCase
         $smtp_password = '123456abc!@#$';
         $smtp_debug = false;
 
-        $config = new \Mail\Config($smtp_host, $smtp_username, $smtp_password);
-        $config->setSmtpPort($smtp_port);
-        $config->setSmtpSecure($smtp_secure);
-        $config->setSmtpAuth($smtp_auth);
-        $config->setSmtpDebug($smtp_debug);
+        $server_config = new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
+        $server_config->setSmtpPort($smtp_port);
+        $server_config->setSmtpSecure($smtp_secure);
+        $server_config->setSmtpAuth($smtp_auth);
+        $server_config->setSmtpDebug($smtp_debug);
 
-        $this->assertEquals($smtp_host, $config->smtpHost());
-        $this->assertEquals($smtp_port, $config->smtpPort());
-        $this->assertEquals($smtp_secure, $config->smtpSecure());
-        $this->assertEquals($smtp_auth, $config->smtpAuth());
-        $this->assertEquals($smtp_username, $config->smtpUsername());
-        $this->assertEquals($smtp_password, $config->smtpPassword());
-        $this->assertEquals($smtp_debug, $config->smtpDebug());
+        $this->assertEquals($smtp_host, $server_config->smtpHost());
+        $this->assertEquals($smtp_port, $server_config->smtpPort());
+        $this->assertEquals($smtp_secure, $server_config->smtpSecure());
+        $this->assertEquals($smtp_auth, $server_config->smtpAuth());
+        $this->assertEquals($smtp_username, $server_config->smtpUsername());
+        $this->assertEquals($smtp_password, $server_config->smtpPassword());
+        $this->assertEquals($smtp_debug, $server_config->smtpDebug());
     }
 
     /**
-     * @covers \Mail\Config::setSmtpPort
+     * @covers \Mail\ServerConfig::setSmtpPort
      */
     public function testSetSmtpPortLowerLimitException()
     {
@@ -108,12 +108,12 @@ final class ConfigTest extends TestCase
         $smtp_username = 'fdipzone';
         $smtp_password = '123456abc!@#$';
 
-        $config = new \Mail\Config($smtp_host, $smtp_username, $smtp_password);
-        $config->setSmtpPort(-1);
+        $server_config = new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
+        $server_config->setSmtpPort(-1);
     }
 
     /**
-     * @covers \Mail\Config::setSmtpPort
+     * @covers \Mail\ServerConfig::setSmtpPort
      */
     public function testSetSmtpPortUpperLimitException()
     {
@@ -124,12 +124,12 @@ final class ConfigTest extends TestCase
         $smtp_username = 'fdipzone';
         $smtp_password = '123456abc!@#$';
 
-        $config = new \Mail\Config($smtp_host, $smtp_username, $smtp_password);
-        $config->setSmtpPort(65536);
+        $server_config = new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
+        $server_config->setSmtpPort(65536);
     }
 
     /**
-     * @covers \Mail\Config::setSmtpSecure
+     * @covers \Mail\ServerConfig::setSmtpSecure
      */
     public function testSetSmtpSecureException()
     {
@@ -140,7 +140,7 @@ final class ConfigTest extends TestCase
         $smtp_username = 'fdipzone';
         $smtp_password = '123456abc!@#$';
 
-        $config = new \Mail\Config($smtp_host, $smtp_username, $smtp_password);
-        $config->setSmtpSecure('');
+        $server_config = new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
+        $server_config->setSmtpSecure('');
     }
 }
