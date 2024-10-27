@@ -71,17 +71,17 @@ class ServerConfig
     {
         if(empty($smtp_host))
         {
-            throw new \Exception('mailer config: smtp host is empty');
+            throw new \Exception('mailer server config: smtp host is empty');
         }
 
         if(empty($smtp_username))
         {
-            throw new \Exception('mailer config: smtp username is empty');
+            throw new \Exception('mailer server config: smtp username is empty');
         }
 
         if(empty($smtp_password))
         {
-            throw new \Exception('mailer config: smtp password is empty');
+            throw new \Exception('mailer server config: smtp password is empty');
         }
 
         $this->smtp_host = $smtp_host;
@@ -141,7 +141,7 @@ class ServerConfig
     {
         if($port<0 || $port>65535)
         {
-            throw new \Exception('mailer config: port must be between 0 and 65535');
+            throw new \Exception('mailer server config: port must be between 0 and 65535');
         }
 
         $this->smtp_port = $port;
@@ -173,7 +173,7 @@ class ServerConfig
     {
         if(empty($smtp_secure))
         {
-            throw new \Exception('mailer config: smtp secure is empty');
+            throw new \Exception('mailer server config: smtp secure is empty');
         }
 
         $this->smtp_secure = $smtp_secure;

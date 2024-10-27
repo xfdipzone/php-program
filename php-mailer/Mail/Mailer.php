@@ -23,7 +23,7 @@ class Mailer
      * 初始化
      * 设置电子邮件服务器配置
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2024-10-26 16:18:49
      *
      * @param \Mail\ServerConfig $server_config 电子邮件服务器配置

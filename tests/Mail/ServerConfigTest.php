@@ -29,7 +29,7 @@ final class ServerConfigTest extends TestCase
     public function testConstructSmtpHostException()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('mailer config: smtp host is empty');
+        $this->expectExceptionMessage('mailer server config: smtp host is empty');
 
         $smtp_host = '';
         $smtp_username = 'fdipzone';
@@ -44,7 +44,7 @@ final class ServerConfigTest extends TestCase
     public function testConstructSmtpUsernameException()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('mailer config: smtp username is empty');
+        $this->expectExceptionMessage('mailer server config: smtp username is empty');
 
         $smtp_host = 'smtp.mxhichina.com';
         $smtp_username = '';
@@ -59,7 +59,7 @@ final class ServerConfigTest extends TestCase
     public function testConstructSmtpPasswordException()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('mailer config: smtp password is empty');
+        $this->expectExceptionMessage('mailer server config: smtp password is empty');
 
         $smtp_host = 'smtp.mxhichina.com';
         $smtp_username = 'fdipzone';
@@ -102,7 +102,7 @@ final class ServerConfigTest extends TestCase
     public function testSetSmtpPortLowerLimitException()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('mailer config: port must be between 0 and 65535');
+        $this->expectExceptionMessage('mailer server config: port must be between 0 and 65535');
 
         $smtp_host = 'smtp.mxhichina.com';
         $smtp_username = 'fdipzone';
@@ -118,7 +118,7 @@ final class ServerConfigTest extends TestCase
     public function testSetSmtpPortUpperLimitException()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('mailer config: port must be between 0 and 65535');
+        $this->expectExceptionMessage('mailer server config: port must be between 0 and 65535');
 
         $smtp_host = 'smtp.mxhichina.com';
         $smtp_username = 'fdipzone';
@@ -134,7 +134,7 @@ final class ServerConfigTest extends TestCase
     public function testSetSmtpSecureException()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('mailer config: smtp secure is empty');
+        $this->expectExceptionMessage('mailer server config: smtp secure is empty');
 
         $smtp_host = 'smtp.mxhichina.com';
         $smtp_username = 'fdipzone';
