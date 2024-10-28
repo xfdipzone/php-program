@@ -8,7 +8,7 @@ namespace Mail;
  * @DateTime 2024-10-27 19:11:25
  *
  */
-class EmailRecipient
+class Recipient
 {
     /**
      * 电子邮箱地址
