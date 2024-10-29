@@ -27,7 +27,7 @@ final class RecipientTest extends TestCase
     public function testConstructEmailEmptyException()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('mailer email recipient: email is empty');
+        $this->expectExceptionMessage('mailer recipient: email is empty');
 
         $email = '';
         new \Mail\Recipient($email);
@@ -39,7 +39,7 @@ final class RecipientTest extends TestCase
     public function testConstructEmailInvalidException()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('mailer email recipient: email is invalid');
+        $this->expectExceptionMessage('mailer recipient: email is invalid');
 
         $email = 'good@good';
         new \Mail\Recipient($email);
@@ -62,22 +62,5 @@ final class RecipientTest extends TestCase
         $recipient = new \Mail\Recipient($email);
         $this->assertEquals($email, $recipient->email());
         $this->assertEquals($email, $recipient->name());
-    }
-
-    /**
-     * @covers \Mail\Recipient::validateEmail
-     */
-    public function testValidateEmail()
-    {
-        $email = 'technology@zone.com';
-        $name = 'fdipzone';
-        $recipient = new \Mail\Recipient($email, $name);
-
-        $ret = \Tests\Utils\PHPUnitExtension::callMethod($recipient, 'validateEmail', [$email]);
-        $this->assertTrue($ret);
-
-        $email = 'good@good';
-        $ret = \Tests\Utils\PHPUnitExtension::callMethod($recipient, 'validateEmail', [$email]);
-        $this->assertFalse($ret);
     }
 }

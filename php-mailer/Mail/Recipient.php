@@ -38,12 +38,12 @@ class Recipient
     {
         if(empty($email))
         {
-            throw new \Exception('mailer email recipient: email is empty');
+            throw new \Exception('mailer recipient: email is empty');
         }
 
-        if(!$this->validateEmail($email))
+        if(!\Mail\Utils::validateEmail($email))
         {
-            throw new \Exception('mailer email recipient: email is invalid');
+            throw new \Exception('mailer recipient: email is invalid');
         }
 
         // 收件人名称为空使用电子邮箱地址作为收件人名称
@@ -80,19 +80,5 @@ class Recipient
     public function name():string
     {
         return $this->name;
-    }
-
-    /**
-     * 验证电子邮箱地址是否合法
-     *
-     * @author fdipzone
-     * @DateTime 2024-10-28 10:22:22
-     *
-     * @param string $email 电子邮箱地址
-     * @return boolean
-     */
-    private function validateEmail(string $email):bool
-    {
-        return preg_match("/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/", $email);
     }
 }
