@@ -16,7 +16,7 @@ class Utils
      * @author fdipzone
      * @DateTime 2024-10-29 11:51:30
      *
-     * @param string $email
+     * @param string $email 电子邮箱地址
      * @return boolean
      */
     public static function validateEmail(string $email):bool
