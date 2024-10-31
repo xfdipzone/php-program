@@ -115,7 +115,7 @@ class Mailer
      * @author fdipzone
      * @DateTime 2024-10-30 19:22:07
      *
-     * @return array [] \Mail\Recipient
+     * @return array [email] => \Mail\Recipient
      */
     public function recipients():array
     {
@@ -142,7 +142,7 @@ class Mailer
      * @author fdipzone
      * @DateTime 2024-10-30 19:23:00
      *
-     * @return array [] \Mail\Recipient
+     * @return array [email] => \Mail\Recipient
      */
     public function ccRecipients():array
     {
@@ -169,7 +169,7 @@ class Mailer
      * @author fdipzone
      * @DateTime 2024-10-30 19:23:39
      *
-     * @return array [] \Mail\Recipient
+     * @return array [email] => \Mail\Recipient
      */
     public function bccRecipients():array
     {
@@ -196,7 +196,7 @@ class Mailer
      * @author fdipzone
      * @DateTime 2024-10-30 19:25:05
      *
-     * @return array [] \Mail\attachment
+     * @return array [file] => \Mail\attachment
      */
     public function attachments():array
     {

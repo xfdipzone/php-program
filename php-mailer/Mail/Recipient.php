@@ -3,6 +3,7 @@ namespace Mail;
 
 /**
  * 电子邮件收件人结构体
+ * 用于电子邮件收件人，抄送收件人，密件抄送收件人，回复人
  *
  * @author fdipzone
  * @DateTime 2024-10-27 19:11:25
