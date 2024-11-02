@@ -4,3 +4,4 @@ vendor
 codeCoverage
 /data
 .vscode
+private.config
