@@ -240,4 +240,85 @@ final class MailerTest extends TestCase
             unlink($attachment_file);
         }
     }
+
+    /**
+     * @covers \Mail\Mailer::send
+     */
+    public function testSendSubjectEmptyException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('mailer: email subject is empty');
+
+        $smtp_host = 'smtp.mxhichina.com';
+        $smtp_username = 'fdipzone';
+        $smtp_password = '123456abc!@#$';
+        $server_config = new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
+        $mailer = new \Mail\Mailer($server_config);
+
+        $subject = '';
+        $body = '测试电邮内容';
+        $mailer->send($subject, $body);
+    }
+
+    /**
+     * @covers \Mail\Mailer::send
+     */
+    public function testSendBodyEmptyException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('mailer: email body is empty');
+
+        $smtp_host = 'smtp.mxhichina.com';
+        $smtp_username = 'fdipzone';
+        $smtp_password = '123456abc!@#$';
+        $server_config = new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
+        $mailer = new \Mail\Mailer($server_config);
+
+        $subject = '测试电邮标题';
+        $body = '';
+        $mailer->send($subject, $body);
+    }
+
+    /**
+     * @covers \Mail\Mailer::send
+     */
+    public function testSendSenderNotSetupException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('mailer: sender not setup');
+
+        $smtp_host = 'smtp.mxhichina.com';
+        $smtp_username = 'fdipzone';
+        $smtp_password = '123456abc!@#$';
+        $server_config = new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
+        $mailer = new \Mail\Mailer($server_config);
+
+        $subject = '测试电邮标题';
+        $body = '测试电邮内容';
+        $mailer->send($subject, $body);
+    }
+
+    /**
+     * @covers \Mail\Mailer::send
+     */
+    public function testSendRecipientNotSetupException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('mailer: recipient not setup');
+
+        $smtp_host = 'smtp.mxhichina.com';
+        $smtp_username = 'fdipzone';
+        $smtp_password = '123456abc!@#$';
+        $server_config = new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
+        $mailer = new \Mail\Mailer($server_config);
+
+        $from_email = 'technology@zone.com';
+        $from_name = 'fdipzone';
+        $sender = new \Mail\Sender($from_email, $from_name);
+        $mailer->setSender($sender);
+
+        $subject = '测试电邮标题';
+        $body = '测试电邮内容';
+        $mailer->send($subject, $body);
+    }
 }

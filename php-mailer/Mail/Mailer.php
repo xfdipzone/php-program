@@ -24,35 +24,35 @@ class Mailer
      *
      * @var \Mail\Sender
      */
-    private $sender;
+    private $sender = null;
 
     /**
      * 收件人集合
      *
      * @var array [] \Mail\Recipient
      */
-    private $recipients;
+    private $recipients = [];
 
     /**
      * 抄送收件人集合
      *
      * @var array [] \Mail\Recipient
      */
-    private $ccRecipients;
+    private $ccRecipients = [];
 
     /**
      * 密件抄送收件人集合
      *
      * @var array [] \Mail\Recipient
      */
-    private $bccRecipients;
+    private $bccRecipients = [];
 
     /**
      * 附件集合
      *
      * @var array [] \Mail\Attachment
      */
-    private $attachments;
+    private $attachments = [];
 
     /**
      * 是否使用 html 格式发送
@@ -95,9 +95,9 @@ class Mailer
      * @author fdipzone
      * @DateTime 2024-10-30 19:21:04
      *
-     * @return \Mail\Sender
+     * @return \Mail\Sender|null
      */
-    public function sender():\Mail\Sender
+    public function sender():?\Mail\Sender
     {
         return $this->sender;
     }
