@@ -27,6 +27,14 @@ class Mailer
     private $sender = null;
 
     /**
+     * 回复人
+     * 用于接收收件人的回复电邮
+     *
+     * @var \Mail\Recipient
+     */
+    private $replier = null;
+
+    /**
      * 收件人集合
      *
      * @var array [] \Mail\Recipient
@@ -100,6 +108,33 @@ class Mailer
     public function sender():?\Mail\Sender
     {
         return $this->sender;
+    }
+
+    /**
+     * 设置回复人
+     *
+     * @author fdipzone
+     * @DateTime 2024-11-04 23:00:33
+     *
+     * @param \Mail\Recipient $replier 回复人
+     * @return void
+     */
+    public function setReplier(\Mail\Recipient $replier):void
+    {
+        $this->replier = $replier;
+    }
+
+    /**
+     * 获取回复人
+     *
+     * @author fdipzone
+     * @DateTime 2024-11-04 23:00:50
+     *
+     * @return \Mail\Recipient|null
+     */
+    public function Replier():?\Mail\Recipient
+    {
+        return $this->replier;
     }
 
     /**
