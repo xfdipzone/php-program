@@ -49,6 +49,29 @@ final class MailerTest extends TestCase
     }
 
     /**
+     * @covers \Mail\Mailer::addReplier
+     * @covers \Mail\Mailer::repliers
+     */
+    public function testReplier()
+    {
+        $smtp_host = 'smtp.mxhichina.com';
+        $smtp_username = 'fdipzone';
+        $smtp_password = '123456abc!@#$';
+        $server_config = new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
+        $mailer = new \Mail\Mailer($server_config);
+
+        $email = 'technology@zone.com';
+        $name = 'fdipzone';
+        $recipient = new \Mail\Recipient($email, $name);
+
+        $mailer->addReplier($recipient);
+        $mailer_repliers = $mailer->repliers();
+        $this->assertSame(1, count($mailer_repliers));
+        $this->assertEquals($email, $mailer_repliers[$email]->email());
+        $this->assertEquals($name, $mailer_repliers[$email]->name());
+    }
+
+    /**
      * @covers \Mail\Mailer::addRecipient
      * @covers \Mail\Mailer::recipients
      */
@@ -199,6 +222,12 @@ final class MailerTest extends TestCase
         $from_name = $private_config['from_name'];
         $sender = new \Mail\Sender($from_email, $from_name);
         $mailer->setSender($sender);
+
+        // replier
+        $replier_email = $private_config['replier_email'];
+        $replier_name = $private_config['replier_name'];
+        $replier = new \Mail\Recipient($replier_email, $replier_name);
+        $mailer->addReplier($replier);
 
         // recipients
         $recipient_email = $private_config['recipient_email'];

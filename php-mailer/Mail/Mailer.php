@@ -30,9 +30,9 @@ class Mailer
      * 回复人
      * 用于接收收件人的回复电邮
      *
-     * @var \Mail\Recipient
+     * @var array [] \Mail\Recipient
      */
-    private $replier = null;
+    private $repliers = [];
 
     /**
      * 收件人集合
@@ -111,7 +111,7 @@ class Mailer
     }
 
     /**
-     * 设置回复人
+     * 添加回复人
      *
      * @author fdipzone
      * @DateTime 2024-11-04 23:00:33
@@ -119,22 +119,22 @@ class Mailer
      * @param \Mail\Recipient $replier 回复人
      * @return void
      */
-    public function setReplier(\Mail\Recipient $replier):void
+    public function addReplier(\Mail\Recipient $replier):void
     {
-        $this->replier = $replier;
+        $this->repliers[$replier->email()] = $replier;
     }
 
     /**
-     * 获取回复人
+     * 获取回复人集合
      *
      * @author fdipzone
-     * @DateTime 2024-11-04 23:00:50
+     * @DateTime 2024-11-05 19:28:12
      *
-     * @return \Mail\Recipient|null
+     * @return array
      */
-    public function Replier():?\Mail\Recipient
+    public function repliers():array
     {
-        return $this->replier;
+        return $this->repliers;
     }
 
     /**
@@ -330,6 +330,16 @@ class Mailer
             $mailer->From = $this->sender->fromEmail();
             $mailer->FromName = $this->sender->fromName();
             $mailer->Sender = $this->sender->senderEmail();
+
+            // 回复人
+            $repliers = $this->repliers();
+            if(count($repliers)>0)
+            {
+                foreach($repliers as $replier)
+                {
+                    $mailer->AddReplyTo($replier->email(), $replier->name());
+                }
+            }
 
             // 收件人
             $recipients = $this->recipients();
