@@ -110,6 +110,8 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 共享数据类](https://github.com/xfdipzone/php-program/tree/master/php-shared-data) (php-shared-data)
 
+- [php 电邮发送类](https://github.com/xfdipzone/php-program/tree/master/php-mailer) (php-mailer)
+
 ---
 
 ## 单元测试

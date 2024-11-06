@@ -211,7 +211,7 @@ final class MailerTest extends TestCase
         // 解析私有配置文件
         $private_config = json_decode(file_get_contents($private_config_file), true);
 
-        $smtp_host = 'smtp.mxhichina.com';
+        $smtp_host = $private_config['smtp_host'];
         $smtp_username = $private_config['smtp_username'];
         $smtp_password = $private_config['smtp_password'];
         $server_config = new \Mail\ServerConfig($smtp_host, $smtp_username, $smtp_password);
