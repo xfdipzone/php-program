@@ -25,7 +25,8 @@
             "CssManager\\": "php-css-updater/CssManager",
             "Validator\\": "php-validator/Validator",
             "SharedData\\": "php-shared-data/SharedData",
-            "Mail\\": "php-mailer/Mail"
+            "Mail\\": "php-mailer/Mail",
+            "HtmlAnalyzer\\": "php-html-analyzer/HtmlAnalyzer"
         }
     },
     "autoload-dev": {

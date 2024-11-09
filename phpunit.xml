@@ -24,6 +24,7 @@
             <directory>./php-validator</directory>
             <directory>./php-shared-data</directory>
             <directory>./php-mailer</directory>
+            <directory>./php-html-analyzer</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>
