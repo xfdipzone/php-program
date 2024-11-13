@@ -31,4 +31,49 @@ class Analyzer
     {
         $this->document = $document;
     }
+
+    /**
+     * 获取 HTML 文档中所有 email
+     *
+     * @author fdipzone
+     * @DateTime 2024-11-13 23:22:17
+     *
+     * @return array
+     */
+    public function emails():array
+    {
+        $pattern = '/([\w\-\.]+@[\w\-\.]+(\.\w+))/';
+        preg_match_all($pattern, $this->document->doc(), $matches);
+        return $matches;
+    }
+
+    /**
+     * 获取 HTML 文档中所有 url
+     *
+     * @author fdipzone
+     * @DateTime 2024-11-13 23:24:16
+     *
+     * @return array
+     */
+    public function urls():array
+    {
+        $pattern = '/<a.*?href="((http(s)?:\/\/).*?)".*?/si';
+        preg_match_all($pattern, $this->document->doc(), $matches);
+        return $matches;
+    }
+
+    /**
+     * 获取 HTML 文档中所有 image
+     *
+     * @author fdipzone
+     * @DateTime 2024-11-13 23:24:54
+     *
+     * @return array
+     */
+    public function images():array
+    {
+        $pattern = '/<img.*?src=\"(http:\/\/.+\.(jpg|jpeg|gif|bmp|png))\">/i';
+        preg_match_all($pattern, $this->document->doc(), $matches);
+        return $matches;
+    }
 }
