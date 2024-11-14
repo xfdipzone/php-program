@@ -34,6 +34,7 @@ class Analyzer
 
     /**
      * 获取 HTML 文档中所有 email
+     * 过滤重复的数据
      *
      * @author fdipzone
      * @DateTime 2024-11-13 23:22:17
@@ -44,11 +45,12 @@ class Analyzer
     {
         $pattern = '/([\w\-\.]+@[\w\-\.]+(\.\w+))/';
         preg_match_all($pattern, $this->document->doc(), $matches);
-        return $matches;
+        return isset($matches[1])? array_unique($matches[1]) : [];
     }
 
     /**
      * 获取 HTML 文档中所有 url
+     * 过滤重复的数据
      *
      * @author fdipzone
      * @DateTime 2024-11-13 23:24:16
@@ -59,11 +61,12 @@ class Analyzer
     {
         $pattern = '/<a.*?href="((http(s)?:\/\/).*?)".*?/si';
         preg_match_all($pattern, $this->document->doc(), $matches);
-        return $matches;
+        return isset($matches[1])? array_unique($matches[1]) : [];
     }
 
     /**
      * 获取 HTML 文档中所有 image
+     * 过滤重复的数据
      *
      * @author fdipzone
      * @DateTime 2024-11-13 23:24:54
@@ -72,8 +75,8 @@ class Analyzer
      */
     public function images():array
     {
-        $pattern = '/<img.*?src=\"(http:\/\/.+\.(jpg|jpeg|gif|bmp|png))\">/i';
+        $pattern = '/<img[^>]*src=["\']([^"\']+)["\'][^>]*>/i';
         preg_match_all($pattern, $this->document->doc(), $matches);
-        return $matches;
+        return isset($matches[1])? array_unique($matches[1]) : [];
     }
 }
