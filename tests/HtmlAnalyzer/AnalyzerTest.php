@@ -24,23 +24,40 @@ final class AnalyzerTest extends TestCase
     }
 
     /**
-     * @covers \HtmlAnalyzer\Analyzer::emails
-     * @covers \HtmlAnalyzer\Analyzer::urls
-     * @covers \HtmlAnalyzer\Analyzer::images
+     * @covers \HtmlAnalyzer\Analyzer::getResource
      */
-    public function testAnalyzer()
+    public function testGetResource()
     {
         $url = 'https://www.sina.com.cn';
         $doc = file_get_contents(dirname(__FILE__).'/test_data/test.html');
         $document = new \HtmlAnalyzer\Document($url, $doc);
 
         $analyzer = new \HtmlAnalyzer\Analyzer($document);
-        $emails = $analyzer->emails();
-        $urls = $analyzer->urls();
-        $images = $analyzer->images();
+        $emails = $analyzer->getResource(\HtmlAnalyzer\Type::EMAIL);
+        $urls = $analyzer->getResource(\HtmlAnalyzer\Type::URL);
+        $images = $analyzer->getResource(\HtmlAnalyzer\Type::IMAGE);
+        $css = $analyzer->getResource(\HtmlAnalyzer\Type::CSS);
 
         $this->assertTrue(count($emails)>0);
         $this->assertTrue(count($urls)>0);
         $this->assertTrue(count($images)>0);
+        $this->assertTrue(count($css)>0);
+    }
+
+    /**
+     * @covers \HtmlAnalyzer\Analyzer::getResource
+     */
+    public function testGetResourceException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('html analyzer: type not_exists_type not exists');
+
+        $url = 'https://www.sina.com.cn';
+        $doc = file_get_contents(dirname(__FILE__).'/test_data/test.html');
+        $document = new \HtmlAnalyzer\Document($url, $doc);
+
+        $analyzer = new \HtmlAnalyzer\Analyzer($document);
+        $type = 'not_exists_type';
+        $analyzer->getResource($type);
     }
 }

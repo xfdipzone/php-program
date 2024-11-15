@@ -25,7 +25,7 @@ class Analyzer
      * @author fdipzone
      * @DateTime 2024-11-08 19:29:30
      *
-     * @param \HtmlAnalyzer\Document $html_doc HTML 文档对象
+     * @param \HtmlAnalyzer\Document $document HTML 文档对象
      */
     public function __construct(\HtmlAnalyzer\Document $document)
     {
@@ -33,50 +33,22 @@ class Analyzer
     }
 
     /**
-     * 获取 HTML 文档中所有 email
-     * 过滤重复的数据
+     * 根据类型解析文档，获取文档中指定类型的数据
      *
-     * @author fdipzone
-     * @DateTime 2024-11-13 23:22:17
+     * @author terry
+     * @DateTime 2024-11-15 18:06:12
      *
+     * @param string $type 资源类型，在 \HtmlAnalyzer\Type 中定义
      * @return array
      */
-    public function emails():array
+    public function getResource(string $type):array
     {
-        $pattern = '/([\w\-\.]+@[\w\-\.]+(\.\w+))/';
-        preg_match_all($pattern, $this->document->doc(), $matches);
-        return isset($matches[1])? array_unique($matches[1]) : [];
-    }
+        if(!isset(\HtmlAnalyzer\Type::$map[$type]))
+        {
+            throw new \Exception(sprintf('html analyzer: type %s not exists', $type));
+        }
 
-    /**
-     * 获取 HTML 文档中所有 url
-     * 过滤重复的数据
-     *
-     * @author fdipzone
-     * @DateTime 2024-11-13 23:24:16
-     *
-     * @return array
-     */
-    public function urls():array
-    {
-        $pattern = '/<a.*?href="((http(s)?:\/\/).*?)".*?/si';
-        preg_match_all($pattern, $this->document->doc(), $matches);
-        return isset($matches[1])? array_unique($matches[1]) : [];
-    }
-
-    /**
-     * 获取 HTML 文档中所有 image
-     * 过滤重复的数据
-     *
-     * @author fdipzone
-     * @DateTime 2024-11-13 23:24:54
-     *
-     * @return array
-     */
-    public function images():array
-    {
-        $pattern = '/<img[^>]*src=["\']([^"\']+)["\'][^>]*>/i';
-        preg_match_all($pattern, $this->document->doc(), $matches);
-        return isset($matches[1])? array_unique($matches[1]) : [];
+        $class = \HtmlAnalyzer\Type::$map[$type];
+        return $class::parse($this->document);
     }
 }
