@@ -35,7 +35,7 @@ class Analyzer
     /**
      * 根据类型解析文档，获取文档中指定类型的数据
      *
-     * @author terry
+     * @author fdipzone
      * @DateTime 2024-11-15 18:06:12
      *
      * @param string $type 资源类型，在 \HtmlAnalyzer\Type 中定义

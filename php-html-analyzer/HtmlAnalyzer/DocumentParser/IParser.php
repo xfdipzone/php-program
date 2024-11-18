@@ -18,7 +18,7 @@ interface IParser
      * @author fdipzone
      * @DateTime 2024-11-15 17:17:05
      *
-     * @param \HtmlAnalyzer\Document $document
+     * @param \HtmlAnalyzer\Document $document HTML 文档对象
      * @return array
      */
     public static function parse(\HtmlAnalyzer\Document $document):array;

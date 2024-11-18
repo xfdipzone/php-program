@@ -112,6 +112,8 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 电邮发送类](https://github.com/xfdipzone/php-program/tree/master/php-mailer) (php-mailer)
 
+- [php HTML文档分析类](https://github.com/xfdipzone/php-program/tree/master/php-html-analyzer) (php-html-analyzer)
+
 ---
 
 ## 单元测试
