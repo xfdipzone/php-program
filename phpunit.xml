@@ -25,6 +25,7 @@
             <directory>./php-shared-data</directory>
             <directory>./php-mailer</directory>
             <directory>./php-html-analyzer</directory>
+            <directory>./php-password-generator</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>

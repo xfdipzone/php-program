@@ -26,7 +26,8 @@
             "Validator\\": "php-validator/Validator",
             "SharedData\\": "php-shared-data/SharedData",
             "Mail\\": "php-mailer/Mail",
-            "HtmlAnalyzer\\": "php-html-analyzer/HtmlAnalyzer"
+            "HtmlAnalyzer\\": "php-html-analyzer/HtmlAnalyzer",
+            "PasswordGenerator\\": "php-password-generator/PasswordGenerator"
         }
     },
     "autoload-dev": {
