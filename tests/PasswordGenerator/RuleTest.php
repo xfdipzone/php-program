@@ -60,15 +60,21 @@ final class RuleTest extends TestCase
         $length = 8;
         $rule = new \PasswordGenerator\Rule($length);
 
-        $rule->setHasUppercase(true);
+        // 测试默认设置
+        $this->assertTrue($rule->hasUppercase());
+        $this->assertTrue($rule->hasLowercase());
+        $this->assertTrue($rule->hasNumber());
+        $this->assertTrue($rule->hasSpecialCharacter());
+
+        $rule->setHasUppercase(false);
         $rule->setHasLowercase(false);
-        $rule->setHasNumber(true);
+        $rule->setHasNumber(false);
         $rule->setHasSpecialCharacter(false);
 
         $this->assertEquals($length, $rule->length());
-        $this->assertTrue($rule->hasUppercase());
+        $this->assertFalse($rule->hasUppercase());
         $this->assertFalse($rule->hasLowercase());
-        $this->assertTrue($rule->hasNumber());
+        $this->assertFalse($rule->hasNumber());
         $this->assertFalse($rule->hasSpecialCharacter());
     }
 
@@ -80,6 +86,9 @@ final class RuleTest extends TestCase
     {
         $length = 8;
         $rule = new \PasswordGenerator\Rule($length);
+
+        // 测试默认特殊字符
+        $this->assertEquals('!@#$%^&*()_+=-', $rule->specialCharacters());
 
         $special_characters = '!@#$';
         $rule->setSpecialCharacters($special_characters);
