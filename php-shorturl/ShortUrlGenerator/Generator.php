@@ -8,8 +8,8 @@ namespace ShortUrlGenerator;
  * @DateTime 2023-03-22 21:43:36
  *
  */
-class Generator{
-
+class Generator
+{
     /**
      * 创建短链接生成器对象
      *
@@ -20,11 +20,15 @@ class Generator{
      * @param array $config 生成器初始化配置
      * @return IGenerator
      */
-    public static function make(string $type, array $config):IGenerator{
-        try{
+    public static function make(string $type, array $config):IGenerator
+    {
+        try
+        {
             $class = self::getGeneratorClass($type);
             return new $class($config);
-        }catch(\Throwable $e){
+        }
+        catch(\Throwable $e)
+        {
             throw new \Exception($e->getMessage());
         }
     }
@@ -38,12 +42,15 @@ class Generator{
      * @param string $type 生成器类型
      * @return string
      */
-    private static function getGeneratorClass(string $type):string{
-        if(isset(TYPE::$map[$type])){
+    private static function getGeneratorClass(string $type):string
+    {
+        if(isset(TYPE::$map[$type]))
+        {
             return TYPE::$map[$type];
-        }else{
+        }
+        else
+        {
             throw new \Exception(sprintf('%s type generator not exists', $type));
         }
     }
-
 }

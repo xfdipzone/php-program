@@ -11,8 +11,8 @@ namespace ShortUrlGenerator;
  * @DateTime 2023-03-22 22:00:43
  *
  */
-class SinaGenerator implements IGenerator{
-
+class SinaGenerator implements IGenerator
+{
     /**
      * 新浪生成短链接接口
      *
@@ -43,10 +43,14 @@ class SinaGenerator implements IGenerator{
      * @param array $config 生成器配置
      * @return void
      */
-    public function __construct(array $config){
-        if(isset($config['app_key'])){
+    public function __construct(array $config)
+    {
+        if(isset($config['app_key']))
+        {
             $this->APP_KEY = $config['app_key'];
-        }else{
+        }
+        else
+        {
             throw new \Exception('app key is empty');
         }
     }
@@ -60,16 +64,20 @@ class SinaGenerator implements IGenerator{
      * @param array $urls 链接集合
      * @return array
      */
-    public function generate(array $urls):array{
-
-        if(!$urls){
+    public function generate(array $urls):array
+    {
+        if(!$urls)
+        {
             throw new \Exception('urls is empty');
         }
 
         // 拼接urls参数请求格式
-        $url_param = array_map(function($value){
-            return '&url_long='.urlencode($value);
-        }, $urls);
+        $url_param = array_map(
+            function($value)
+            {
+                return '&url_long='.urlencode($value);
+            },
+            $urls);
 
         $url_param = implode('', $url_param);
 
@@ -86,15 +94,14 @@ class SinaGenerator implements IGenerator{
         curl_setopt($ch, CURLOPT_URL, $request_url);
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->TIMEOUT);
         $data = curl_exec($ch);
-        if(curl_errno($ch)){
+        if(curl_errno($ch))
+        {
             throw new \Exception(curl_error($ch));
         }
         curl_close($ch);
 
         $result = json_decode($data, true);
 
-        return $result;
-
+        return $result? $result : [];
     }
-
 }

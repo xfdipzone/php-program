@@ -8,8 +8,8 @@ namespace ShortUrlGenerator;
  * @DateTime 2023-03-22 21:45:35
  *
  */
-class Type{
-
+class Type
+{
     // 新浪微博短链接生成器
     const SINA = 'sina';
 
@@ -17,6 +17,5 @@ class Type{
     public static $map = [
         self::SINA => '\ShortUrlGenerator\SinaGenerator',
     ];
-
 }
 

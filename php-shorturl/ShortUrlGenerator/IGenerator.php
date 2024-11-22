@@ -8,8 +8,8 @@ namespace ShortUrlGenerator;
  * @DateTime 2023-03-22 21:37:12
  *
  */
-interface IGenerator{
-
+interface IGenerator
+{
     /**
      * 初始化生成器类
      *
@@ -31,5 +31,4 @@ interface IGenerator{
      * @return array
      */
     public function generate(array $urls):array;
-
 }
