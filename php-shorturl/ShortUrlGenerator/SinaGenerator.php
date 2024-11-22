@@ -4,6 +4,9 @@ namespace ShortUrlGenerator;
 /**
  * 基于新浪API实现短链接生成器
  *
+ * 新浪微博开放平台已将此接口功能下线
+ * https://open.weibo.com/wiki/Short_url/shorten
+ *
  * @author fdipzone
  * @DateTime 2023-03-22 22:00:43
  *
