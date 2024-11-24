@@ -147,4 +147,29 @@ class PHPUnitExtension
         self::$sequenceId++;
         return self::$sequenceId;
     }
+
+    /**
+     * 验证一个字符串中所有字符是否都存在于另一个字符串中
+     *
+     * @author fdipzone
+     * @DateTime 2024-11-24 18:14:45
+     *
+     * @param string $source 源字符串
+     * @param string $target 目标字符串
+     * @return boolean
+     */
+    public static function containInString(string $source, string $target):bool
+    {
+        $length = strlen($source);
+        for($i=0; $i<$length; $i++)
+        {
+            $c = substr($source, $i, 1);
+            if(strpos($target, $c)===false)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
