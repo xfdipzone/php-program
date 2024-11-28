@@ -28,13 +28,31 @@ php实现的计量监控类，用于统计监控指标，当指标到达指定�
 
 ---
 
+## 类说明
+
+**IMetric** `Metric/IMetric.php`
+
+计量接口
+
+**IMetricCallback** `Metric/IMetricCallback.php`
+
+计量回调接口
+
+**Counter** `Metric/Counter.php`
+
+基于执行次数实现的计量类
+
+**Timer** `Metric/Timer.php`
+
+基于执行时间实现的计量类
+
+---
+
 ## 演示
 
 计数监控
 
 ```php
-require 'autoload.php';
-
 $counter_metric = new \Metric\Counter(3);
 $counter_metric->setCallback(function()
 {
@@ -55,8 +73,6 @@ while(true)
 计时监控
 
 ```php
-require 'autoload.php';
-
 $timer_metric = new \Metric\Timer(5);
 $timer_metric->setCallback(function()
 {
@@ -74,3 +90,5 @@ while(true)
     }
 }
 ```
+
+更多功能演示可参考单元测试代码 [Metric Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/Metric>)

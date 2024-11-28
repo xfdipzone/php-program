@@ -87,12 +87,6 @@ class Timer implements IMetric, IMetricCallback
      */
     public function setCallback(callable $callback):void
     {
-        // 检查回调方法
-        if(!is_callable($callback))
-        {
-            throw new \Exception('callback is not callable');
-        }
-
         $this->callback = $callback;
     }
 }
