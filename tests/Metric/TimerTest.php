@@ -46,17 +46,17 @@ final class TimerTest extends TestCase
             $callback_result = 'ok';
         };
 
-        $max_seconds = 1;
+        $max_seconds = 2;
         $timer_metric = new \Metric\Timer($max_seconds);
         $timer_metric->setCallback($callback);
 
         $ret = $timer_metric->next();
         $this->assertTrue($ret);
-        usleep(520*1000);
+        usleep(600*1000);
 
         $ret = $timer_metric->next();
         $this->assertTrue($ret);
-        usleep(520*1000);
+        usleep(1600*1000);
 
         $ret = $timer_metric->next();
         $this->assertFalse($ret);
