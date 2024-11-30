@@ -27,6 +27,7 @@
             <directory>./php-html-analyzer</directory>
             <directory>./php-password-generator</directory>
             <directory>./php-metric</directory>
+            <directory>./php-backoff</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>

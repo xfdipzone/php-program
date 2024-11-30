@@ -28,7 +28,8 @@
             "Mail\\": "php-mailer/Mail",
             "HtmlAnalyzer\\": "php-html-analyzer/HtmlAnalyzer",
             "PasswordGenerator\\": "php-password-generator/PasswordGenerator",
-            "Metric\\": "php-metric/Metric"
+            "Metric\\": "php-metric/Metric",
+            "Backoff\\": "php-backoff//Backoff"
         }
     },
     "autoload-dev": {

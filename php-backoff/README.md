@@ -36,15 +36,33 @@ php实现的退避算法类，退避算法是一种用于处理临时故障的�
 
 ---
 
+## 类说明
+
+**IBackoff** `Backoff/IBackoff.php`
+
+退避算法接口类
+
+**Request** `Backoff/Request.php`
+
+退避算法请求结构，定义当前已请求次数
+
+**Response** `Backoff/Response.php`
+
+退避算法返回结构，返回是否需要继续重试及下次重试的间隔
+
+**ExponentialBackoff** `Backoff/ExponentialBackoff.php`
+
+指数退避算法，支持随机因子
+
+---
+
 ## 演示
 
 ```php
-require 'autoload.php';
-
 // 配置参数
 $start_retry_interval = 5;
-$factor = 2;
 $max_retry_interval = 300;
+$factor = 2;
 $max_retry_times = 8;
 $random_factor = 3;
 
