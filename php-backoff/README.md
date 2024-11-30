@@ -77,3 +77,5 @@ for($i=0; $i<9; $i++)
     printf("retry_times=%d, retry=%b, retry_interval=%d\n", $i, $response->retry(), $response->retryInterval());
 }
 ```
+
+更多功能演示可参考单元测试代码 [Backoff Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/Backoff>)
