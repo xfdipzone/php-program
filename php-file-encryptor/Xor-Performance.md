@@ -2,7 +2,7 @@
 
 使用 **C** 实现 XOR 文件加密器
 
-[XorEncryptor.c](<./php-file-encryptor/XorEncryptor.c>)
+[XorEncryptor.c](<./XorEncryptor.c>)
 
 ## 1. 编译文件
 

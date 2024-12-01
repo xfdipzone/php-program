@@ -60,6 +60,22 @@ php 实现的验证类，包括通用验证类（CommonValidator），语言验�
 
 ---
 
+## 类说明
+
+**CommonValidator** `Validator/CommonValidator.php`
+
+通用验证类，提供常用的验证方法
+
+**LanguageValidator** `Validator/LanguageValidator.php`
+
+语言验证类，提供多种语言验证方法，检查输入的文字是否对应的语言
+
+**IDNumberValidator** `Validator/IDNumberValidator.php`
+
+证件号码验证类，提供多种证件号码验证方法
+
+---
+
 ## 演示
 
 ```php

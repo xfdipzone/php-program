@@ -98,4 +98,4 @@ assert(file_get_contents($source_file)==file_get_contents($decrypt_file));
 
 ## XOR 文件加密性能优化
 
-[C语言版本与PHP版本的XOR文件加密器性能对比](<./php-file-encryptor/Xor-Performance.md>)
+[C语言版本与PHP版本的XOR文件加密器性能对比](<./Xor-Performance.md>)

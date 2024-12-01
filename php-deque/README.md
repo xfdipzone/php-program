@@ -50,6 +50,34 @@ pecl install sync
 
 ---
 
+## 类说明
+
+**Item** `DEQue/Item.php`
+
+双向队列元素结构
+
+**Type** `DEQue/Type.php`
+
+双向队列支持的操作类型
+
+**Response** `DEQue/Response.php`
+
+双向队列入队与出队的响应结构
+
+**ErrCode** `DEQue/ErrCode.php`
+
+双向队列错误码
+
+**MutexLock** `DEQue/MutexLock.php`
+
+并发锁，基于 SyncMutex 实现
+
+**Queue** `DEQue/Queue.php`
+
+双向队列，基于数组存储，支持入队出队方向限制
+
+---
+
 ## 演示
 
 ```php

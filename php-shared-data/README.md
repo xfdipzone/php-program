@@ -56,7 +56,7 @@ pecl install sysvmsg
 
 ### Docker 环境安装
 
-Docker 环境安装方法，参考 [Docker](<./php-shared-data/Docker>)
+Docker 环境安装方法，参考 [Docker](<./Docker>)
 
 Docker 镜像已配置好 Nginx, PHP 及依赖的扩展
 
