@@ -91,4 +91,4 @@ while(true)
 }
 ```
 
-更多功能演示可参考单元测试代码 [Metric Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/Metric>)
+更多功能演示可参考单元测试代码 [Metric Unit Test](<../tests/Metric>)

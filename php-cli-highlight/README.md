@@ -47,4 +47,4 @@ foreach($configs as $config)
 
 ## Cli模式下效果图
 
-![效果图](https://github.com/xfdipzone/php-program/blob/master/php-cli-highlight/demo.png)
+![效果图](./demo.png)

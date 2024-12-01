@@ -35,4 +35,4 @@ echo '<img src="'.$dest.'">';
 
 ### 效果如下图
 
-![原图与打马赛克后图片比较](https://github.com/xfdipzone/php-program/blob/master/php-mosaics/vs.jpg)
+![原图与打马赛克后图片比较](./vs.jpg)

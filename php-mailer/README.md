@@ -140,7 +140,7 @@ $ret = $mailer->send($subject, $body);
 var_dump($ret);
 ```
 
-更多功能演示可参考单元测试代码 [Mailer Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/Mail>)
+更多功能演示可参考单元测试代码 [Mailer Unit Test](<../tests/Mail>)
 
 执行 `Mailer` 发送方法的单元测试，需要在 `tests/Mail/` 目录中手动创建 `private.config` 文件
 

@@ -128,3 +128,5 @@ for($i=0; $i<5; $i++)
 // 等待所有子进程运行结束
 while(pcntl_waitpid(0, $status)!=-1);
 ```
+
+更多功能演示可参考单元测试代码 [DEQue Unit Test](<../tests/DEQue>)

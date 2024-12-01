@@ -54,4 +54,4 @@ echo HtmlEntityConverter::decode($str);
 
 两种都可以在浏览器正常显示，如下图：
 
-![效果图](https://github.com/xfdipzone/php-program/blob/master/php-htmlentitie/html_entitie.jpg)
+![效果图](./html_entitie.jpg)

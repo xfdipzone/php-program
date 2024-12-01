@@ -69,4 +69,4 @@ $success_num = $css_updater->update();
 echo $success_num.PHP_EOL;
 ```
 
-更多功能演示可参考单元测试代码 [CssManager Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/CssManager>)
+更多功能演示可参考单元测试代码 [CssManager Unit Test](<../tests/CssManager>)

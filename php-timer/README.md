@@ -78,4 +78,4 @@ printf("total execute time: %s ms \n", $statistic->totalTime());
 print_r($statistic->detailTime());
 ```
 
-更多功能演示可参考单元测试代码 [Timer Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/Timer>)
+更多功能演示可参考单元测试代码 [Timer Unit Test](<../tests/Timer>)

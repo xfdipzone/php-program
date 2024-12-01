@@ -41,4 +41,4 @@ $passwords = \PasswordGenerator\Generator::generate($rule, 10);
 print_r($passwords);
 ```
 
-更多功能演示可参考单元测试代码 [PasswordGenerator Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/PasswordGenerator>)
+更多功能演示可参考单元测试代码 [PasswordGenerator Unit Test](<../tests/PasswordGenerator>)

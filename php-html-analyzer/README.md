@@ -75,4 +75,4 @@ print_r($images);
 print_r($css);
 ```
 
-更多功能演示可参考单元测试代码 [HtmlAnalyzer Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/HtmlAnalyzer>)
+更多功能演示可参考单元测试代码 [HtmlAnalyzer Unit Test](<../tests/HtmlAnalyzer>)

@@ -103,4 +103,4 @@ var_dump(\Validator\IDNumberValidator::idCard('441234567890123456')); // false
 var_dump(\Validator\IDNumberValidator::licensePlateNumber('粤AF12345')); // true
 ```
 
-更多功能演示可参考单元测试代码 [Validator Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/Validator>)
+更多功能演示可参考单元测试代码 [Validator Unit Test](<../tests/Validator>)

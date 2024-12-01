@@ -89,4 +89,4 @@ $response = $xml_parser->parseFromString($xml_string);
 print_r($response->data());
 ```
 
-更多功能演示可参考单元测试代码 [FileParser Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/FileParser>)
+更多功能演示可参考单元测试代码 [FileParser Unit Test](<../tests/FileParser>)

@@ -14,11 +14,11 @@ Captcha 是 "Completely Automated Public Turing test to tell Computers and Human
 
 **文本型验证码图片效果图：**
 
-![文本型验证码图片效果图](https://github.com/xfdipzone/php-program/blob/master/php-captcha/text_captcha.png)
+![文本型验证码图片效果图](./text_captcha.png)
 
 **点击型验证码图片效果图：**
 
-![点击型验证码图片效果图](https://github.com/xfdipzone/php-program/blob/master/php-captcha/click_captcha.png)
+![点击型验证码图片效果图](./click_captcha.png)
 
 ---
 

@@ -56,7 +56,7 @@ pecl install sysvmsg
 
 ### Docker 环境安装
 
-Docker 环境安装方法，参考 [Docker](<https://github.com/xfdipzone/php-program/tree/master/php-shared-data/Docker>)
+Docker 环境安装方法，参考 [Docker](<./php-shared-data/Docker>)
 
 Docker 镜像已配置好 Nginx, PHP 及依赖的扩展
 
@@ -246,4 +246,4 @@ $closed = $shared_memory_msg_queue->close();
 var_dump($closed);
 ```
 
-更多功能演示可参考单元测试代码 [SharedData Unit Test](<https://github.com/xfdipzone/php-program/tree/master/tests/SharedData>)
+更多功能演示可参考单元测试代码 [SharedData Unit Test](<../tests/SharedData>)
