@@ -24,9 +24,9 @@ class AnnotationReader implements \AnnotationReader\IAnnotationReader
      * @author fdipzone
      * @DateTime 2024-12-14 16:06:48
      *
-     * @param object $class 类对象
+     * @param object|string $class 类对象或类名称
      */
-    public function __construct(object $class)
+    public function __construct($class)
     {
         try
         {
