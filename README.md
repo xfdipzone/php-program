@@ -116,6 +116,8 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 密码生成类](./php-password-generator) (php-password-generator)
 
+- [php 注解阅读器](./php-annotation-reader) (php-annotation-reader)
+
 ---
 
 ## 单元测试
