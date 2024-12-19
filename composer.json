@@ -30,7 +30,8 @@
             "PasswordGenerator\\": "php-password-generator/PasswordGenerator",
             "Metric\\": "php-metric/Metric",
             "Backoff\\": "php-backoff//Backoff",
-            "AnnotationReader\\": "php-annotation-reader/AnnotationReader"
+            "AnnotationReader\\": "php-annotation-reader/AnnotationReader",
+            "DbModel\\": "php-db-model/DbModel"
         }
     },
     "autoload-dev": {
