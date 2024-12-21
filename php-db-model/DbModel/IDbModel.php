@@ -69,4 +69,24 @@ interface IDbModel
      * @return string
      */
     public function collate():string;
+
+    /**
+     * 获取主键字段
+     *
+     * @author fdipzone
+     * @DateTime 2024-12-21 17:58:39
+     *
+     * @return string
+     */
+    public function primaryKey():string;
+
+    /**
+     * 获取自增主键初始值
+     *
+     * @author fdipzone
+     * @DateTime 2024-12-21 17:58:43
+     *
+     * @return int
+     */
+    public function autoIncrement():int;
 }
