@@ -116,7 +116,7 @@ class AnnotationReader implements \AnnotationReader\IAnnotationReader
     {
         $annotations = [];
 
-        $pattern = '/('.implode('|', $annotation_tags->tags()).')\s(.*?)(\s|\r\n|\r|\n|$)/';
+        $pattern = '/('.implode('|', $annotation_tags->tags()).')\s(.*)(\s|\r\n|\r|\n|$)/';
         preg_match_all($pattern, $doc_comment, $matches, PREG_SET_ORDER);
 
         if($matches)
