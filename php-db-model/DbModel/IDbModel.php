@@ -89,4 +89,14 @@ interface IDbModel
      * @return int
      */
     public function autoIncrement():int;
+
+    /**
+     * 获取数据表索引设置
+     *
+     * @author fdipzone
+     * @DateTime 2024-12-28 16:58:17
+     *
+     * @return string
+     */
+    public function tableIndex():string;
 }

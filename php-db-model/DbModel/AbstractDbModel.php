@@ -169,4 +169,17 @@ abstract class AbstractDbModel
     {
         return $this->auto_increment;
     }
+
+    /**
+     * 获取数据表索引设置
+     *
+     * @author fdipzone
+     * @DateTime 2024-12-28 16:59:50
+     *
+     * @return string
+     */
+    public function tableIndex():string
+    {
+        return '';
+    }
 }

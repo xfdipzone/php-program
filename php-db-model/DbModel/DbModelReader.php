@@ -43,14 +43,16 @@ class DbModelReader
 
         // SQL 模版
         $sql_template = "CREATE TABLE `%s`.`%s` (".PHP_EOL;
-        $sql_template .= "%s".PHP_EOL;
+        $sql_template .= "%s"; // column sql
+        $sql_template .= "%s"; // index sql
         $sql_template .= "PRIMARY KEY(%s)".PHP_EOL;
         $sql_template .= ") ENGINE=%s %s DEFAULT CHARSET=%s COLLATE=%s COMMENT '%s';";
 
         $sql = sprintf($sql_template,
             $db_model->dbName(),
             $db_model->tableName(),
-            implode(','.PHP_EOL, $columns_sql).',',
+            implode(','.PHP_EOL, $columns_sql).','.PHP_EOL,
+            $db_model->tableIndex()!=''? $db_model->tableIndex().','.PHP_EOL : '',
             self::primaryKeySql($db_model->primaryKey()),
             $db_model->engine(),
             self::autoIncrementSql($db_model->autoIncrement()),
