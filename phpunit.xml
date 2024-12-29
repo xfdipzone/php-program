@@ -29,6 +29,7 @@
             <directory>./php-metric</directory>
             <directory>./php-backoff</directory>
             <directory>./php-annotation-reader</directory>
+            <directory>./php-db-model</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>

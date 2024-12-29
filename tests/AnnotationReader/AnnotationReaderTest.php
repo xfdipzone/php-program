@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 namespace Tests\AnnotationReader;
 
-use Error;
 use PHPUnit\Framework\TestCase;
 
 /**

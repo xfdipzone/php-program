@@ -85,10 +85,10 @@ class DbModelReader
      * @author fdipzone
      * @DateTime 2024-12-26 16:43:04
      *
-     * @param string $auto_increment 自增设置
+     * @param int $auto_increment 自增设置
      * @return string
      */
-    private static function autoIncrementSql(string $auto_increment):string
+    private static function autoIncrementSql(int $auto_increment):string
     {
         // 不设置自增值
         if($auto_increment==\DbModel\Constants::NO_AUTO_INCREMENT)
