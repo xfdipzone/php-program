@@ -1,5 +1,6 @@
 <?php
-require 'autoload.php';
+require dirname(dirname(dirname(dirname(__FILE__)))).'/vendor/autoload.php';
+
 /**
  * 模拟调用第三方系统获取数据，使用 ContextCache 缓存返回数据
  * 避免同一个请求中多次调用第三方系统

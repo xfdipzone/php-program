@@ -24,11 +24,29 @@ php实现的上下文缓存类，用于在一个请求中设置与获取暂存�
 
 ---
 
+## 类说明
+
+**IContextCache** `ContextCache/IContextCache.php`
+
+上下文缓存组件接口
+
+**Type** `ContextCache/Type.php`
+
+上下文缓存组件类型
+
+**Cache** `ContextCache/Cache.php`
+
+上下文缓存入口类，用于创建上下文缓存组件实例
+
+**LocalContextCache** `ContextCache/LocalContextCache.php`
+
+基于本地 HashMap 实现的上下文缓存组件
+
+---
+
 ## 演示
 
 ```php
-require 'autoload.php';
-
 // 获取上下文缓存组件实例
 $context_cache = \ContextCache\Cache::getInstance();
 
@@ -56,3 +74,5 @@ $context_cache->clear();
 // 清空所有缓存后再读取
 var_dump($context_cache->get('name'));
 ```
+
+更多功能演示可参考单元测试代码 [ContextCache Unit Test](<../tests/ContextCache>)

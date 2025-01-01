@@ -31,7 +31,8 @@
             "Metric\\": "php-metric/Metric",
             "Backoff\\": "php-backoff//Backoff",
             "AnnotationReader\\": "php-annotation-reader/AnnotationReader",
-            "DbModel\\": "php-db-model/DbModel"
+            "DbModel\\": "php-db-model/DbModel",
+            "ContextCache\\": "php-context-cache/ContextCache"
         }
     },
     "autoload-dev": {
