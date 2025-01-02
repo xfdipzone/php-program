@@ -280,9 +280,11 @@ class Mailer
      *
      * @param string $subject 邮件标题
      * @param string $body 邮件内容
+     * @param \Mail\Core\PHPMailer|null $core_mailer 邮件发送器，为空则使用默认邮件发送器
+     *
      * @return boolean
      */
-    public function send(string $subject, string $body):bool
+    public function send(string $subject, string $body, \Mail\Core\PHPMailer $core_mailer=null):bool
     {
         try
         {
@@ -311,7 +313,7 @@ class Mailer
             }
 
             // Core PHP Mailer
-            $mailer = new \Mail\Core\PHPMailer;
+            $mailer = $core_mailer==null? new \Mail\Core\PHPMailer : $core_mailer;
             $mailer->SMTPDebug = $this->server_config->smtpDebug();
             $mailer->IsSMTP();
             $mailer->Host = $this->server_config->smtpHost();

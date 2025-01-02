@@ -261,7 +261,9 @@ final class MailerTest extends TestCase
         // send
         $subject = '测试电邮标题';
         $body = '测试电邮内容';
-        $ret = $mailer->send($subject, $body);
+
+        // use mock php mailer
+        $ret = $mailer->send($subject, $body, new \Tests\Mail\MockPHPMailer);
         $this->assertTrue($ret);
 
         if(file_exists($attachment_file))
