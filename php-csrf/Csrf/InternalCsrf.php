@@ -11,10 +11,18 @@ namespace Csrf;
  */
 class InternalCsrf implements \Csrf\ICsrf
 {
-    // 密钥
+    /**
+     * 密钥
+     *
+     * @var string
+     */
     protected $secret;
 
-    // 客户端传入的token过期时间（默认30秒）
+    /**
+     * 客户端传入的token过期时间（默认30秒）
+     *
+     * @var int
+     */
     protected $timeout;
 
     /**
@@ -28,13 +36,13 @@ class InternalCsrf implements \Csrf\ICsrf
     public function __construct(\Csrf\Config\InternalCsrfConfig $config)
     {
         // 检查secret
-        if(empty($config->getSecret()))
+        if(empty($config->secret()))
         {
             throw new \Csrf\Exception\TokenException('config secret is empty');
         }
 
-        $this->secret = $config->getSecret();
-        $this->timeout = $config->getTimeout();
+        $this->secret = $config->secret();
+        $this->timeout = $config->timeout();
     }
 
     /**

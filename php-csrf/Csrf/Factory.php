@@ -21,22 +21,22 @@ class Factory
      * @param \Csrf\Config\IConfig $config 组件配置
      * @return \Csrf\ICsrf
      */
-    final public static function create(string $type, \Csrf\Config\IConfig $config):\Csrf\ICsrf
+    final public static function make(string $type, \Csrf\Config\IConfig $config):\Csrf\ICsrf
     {
-        // 根据类型获取token组件类
-        $verify_class = self::getVerifyClass($type);
-
-        // 创建token组件对象
         try
         {
-            $handler = new $verify_class($config);
+            // 根据类型获取token组件类
+            $token_class = self::getTokenClass($type);
+
+            // 创建token组件对象
+            $handler = new $token_class($config);
+
+            return $handler;
         }
         catch(\Throwable $e)
         {
             throw new \Csrf\Exception\FactoryException($e->getMessage());
         }
-
-        return $handler;
     }
 
     /**
@@ -48,7 +48,7 @@ class Factory
      * @param string $type 组件类型，在 \Csrf\Type 中定义
      * @return string
      */
-    final public static function getVerifyClass(string $type):string
+    final public static function getTokenClass(string $type):string
     {
         if(isset(\Csrf\Type::$map[$type]))
         {

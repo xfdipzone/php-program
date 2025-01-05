@@ -10,10 +10,18 @@ namespace Csrf\Config;
  */
 class InternalCsrfConfig implements \Csrf\Config\IConfig
 {
-    // 密钥
+    /**
+     * 密钥
+     *
+     * @var string
+     */
     protected $secret = '';
 
-    // 设置客户端传入的token过期时间（默认30秒）
+    /**
+     * 设置客户端传入的token过期时间（默认30秒）
+     *
+     * @var int
+     */
     protected $timeout = 30;
 
     /**
@@ -61,7 +69,7 @@ class InternalCsrfConfig implements \Csrf\Config\IConfig
      *
      * @return string
      */
-    public function getSecret():string
+    public function secret():string
     {
         return $this->secret;
     }
@@ -74,7 +82,7 @@ class InternalCsrfConfig implements \Csrf\Config\IConfig
      *
      * @return int
      */
-    public function getTimeout():int
+    public function timeout():int
     {
         return $this->timeout;
     }

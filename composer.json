@@ -32,7 +32,8 @@
             "Backoff\\": "php-backoff//Backoff",
             "AnnotationReader\\": "php-annotation-reader/AnnotationReader",
             "DbModel\\": "php-db-model/DbModel",
-            "ContextCache\\": "php-context-cache/ContextCache"
+            "ContextCache\\": "php-context-cache/ContextCache",
+            "Csrf\\": "php-csrf/Csrf"
         }
     },
     "autoload-dev": {

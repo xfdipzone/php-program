@@ -31,6 +31,7 @@
             <directory>./php-annotation-reader</directory>
             <directory>./php-db-model</directory>
             <directory>./php-context-cache</directory>
+            <directory>./php-csrf</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>

@@ -24,6 +24,16 @@ class CryptoUtils
      */
     public static function encrypt(string $source_string, string $secret):string
     {
+        if(empty($source_string))
+        {
+            throw new \Csrf\Exception\CryptoException('source string is empty');
+        }
+
+        if(empty($secret))
+        {
+            throw new \Csrf\Exception\CryptoException('secret is empty');
+        }
+
         $iv = openssl_random_pseudo_bytes(16);
         $encrypt_data = openssl_encrypt($source_string, 'AES-256-CBC', $secret, 0, $iv);
 
@@ -44,6 +54,16 @@ class CryptoUtils
      */
     public static function decrypt(string $encrypt_string, string $secret):string
     {
+        if(empty($encrypt_string))
+        {
+            throw new \Csrf\Exception\CryptoException('encrypt string is empty');
+        }
+
+        if(empty($secret))
+        {
+            throw new \Csrf\Exception\CryptoException('secret is empty');
+        }
+
         // 从加密文件中获取初始化向量
         list($encrypt_data, $base64_iv) = explode('::::', $encrypt_string);
         $iv = base64_decode($base64_iv);
