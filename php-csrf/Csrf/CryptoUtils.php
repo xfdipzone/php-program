@@ -65,10 +65,24 @@ class CryptoUtils
         }
 
         // 从加密文件中获取初始化向量
-        list($encrypt_data, $base64_iv) = explode('::::', $encrypt_string);
-        $iv = base64_decode($base64_iv);
-        $decrypt_string = openssl_decrypt($encrypt_data, 'AES-256-CBC', $secret, 0, $iv);
+        $encrypt_arr = explode('::::', $encrypt_string);
+        if(count($encrypt_arr)!=2)
+        {
+            return '';
+        }
 
-        return $decrypt_string;
+        $encrypt_data = $encrypt_arr[0];
+        $base64_iv = $encrypt_arr[1];
+
+        try
+        {
+            $iv = base64_decode($base64_iv);
+            $decrypt_string = openssl_decrypt($encrypt_data, 'AES-256-CBC', $secret, 0, $iv);
+            return $decrypt_string;
+        }
+        catch(\Throwable $e)
+        {
+            return '';
+        }
     }
 }

@@ -95,7 +95,7 @@ class InternalCsrf implements \Csrf\ICsrf
 
         if(!is_array($token_arr) || count($token_arr)!=3)
         {
-            return $this->response(false, ['csrf token invalidate']);
+            return $this->response(false, ['csrf token invalid']);
         }
 
         // 检查action

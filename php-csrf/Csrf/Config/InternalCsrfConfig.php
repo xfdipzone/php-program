@@ -15,14 +15,14 @@ class InternalCsrfConfig implements \Csrf\Config\IConfig
      *
      * @var string
      */
-    protected $secret = '';
+    private $secret = '';
 
     /**
      * 设置客户端传入的token过期时间（默认30秒）
      *
      * @var int
      */
-    protected $timeout = 30;
+    private $timeout = 30;
 
     /**
      * 初始化，设置密钥

@@ -29,6 +29,28 @@ final class CryptoUtilsTest extends TestCase
     }
 
     /**
+     * @covers \Csrf\CryptoUtils::decrypt
+     */
+    public function testDecryptEncryptStringError()
+    {
+        $secret = 'abc123';
+        $encrypt_string = 'error';
+        $decrypt_string = \Csrf\CryptoUtils::decrypt($encrypt_string, $secret);
+        $this->assertEquals('', $decrypt_string);
+    }
+
+    /**
+     * @covers \Csrf\CryptoUtils::decrypt
+     */
+    public function testDecryptFail()
+    {
+        $secret = 'abc123';
+        $encrypt_string = 'abc::::456';
+        $decrypt_string = \Csrf\CryptoUtils::decrypt($encrypt_string, $secret);
+        $this->assertEquals('', $decrypt_string);
+    }
+
+    /**
      * @covers \Csrf\CryptoUtils::encrypt
      * @dataProvider encryptExceptionCases
      */
