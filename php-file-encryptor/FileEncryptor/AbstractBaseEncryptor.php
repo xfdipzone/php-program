@@ -144,9 +144,16 @@ abstract class AbstractBaseEncryptor implements \FileEncryptor\IFileEncryptor
             $encrypt_file_data = file_get_contents($encrypt_file);
 
             // 从加密文件中获取初始化向量
-            list($encrypt_data, $base64_iv) = explode('::::', $encrypt_file_data);
-            $iv = base64_decode($base64_iv);
+            $encrypt_arr = explode('::::', $encrypt_file_data);
+            if(count($encrypt_arr)!=2)
+            {
+                return false;
+            }
 
+            $encrypt_data = $encrypt_arr[0];
+            $base64_iv = $encrypt_arr[1];
+
+            $iv = base64_decode($base64_iv);
             $decrypt_data = openssl_decrypt($encrypt_data, $this->cipherAlgo(), $this->encrypt_key, 0, $iv);
 
             // 创建目标文件目录

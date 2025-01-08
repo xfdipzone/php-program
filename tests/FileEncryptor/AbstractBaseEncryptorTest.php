@@ -159,4 +159,32 @@ final class AbstractBaseEncryptorTest extends TestCase
         $ret = $aes_encryptor->decrypt(self::$encrypt_file, $decrypt_file);
         $this->assertFalse($ret);
     }
+
+    /**
+     * @covers \FileEncryptor\AbstractBaseEncryptor::decrypt
+     */
+    public function testDecryptEncryptDataError()
+    {
+        // 设置加密文件内容
+        file_put_contents(self::$encrypt_file, 'error');
+
+        $encrypt_key = '123456';
+        $aes_encryptor = new \FileEncryptor\AesEncryptor($encrypt_key);
+        $ret = $aes_encryptor->decrypt(self::$encrypt_file, self::$decrypt_file);
+        $this->assertFalse($ret);
+    }
+
+    /**
+     * @covers \FileEncryptor\AbstractBaseEncryptor::decrypt
+     */
+    public function testDecryptFail()
+    {
+        // 设置加密文件内容
+        file_put_contents(self::$encrypt_file, 'abc::::456');
+
+        $encrypt_key = '123456';
+        $aes_encryptor = new \FileEncryptor\AesEncryptor($encrypt_key);
+        $ret = $aes_encryptor->decrypt(self::$encrypt_file, self::$decrypt_file);
+        $this->assertFalse($ret);
+    }
 }
