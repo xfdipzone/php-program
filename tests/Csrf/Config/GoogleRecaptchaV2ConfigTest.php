@@ -52,8 +52,6 @@ final class GoogleRecaptchaV2ConfigTest extends TestCase
         $this->assertEquals($timeout, $config->timeout());
     }
 
-
-
     /**
      * @covers \Csrf\Config\GoogleRecaptchaV2Config::setTimeout
      * @dataProvider setTimeoutExceptionCases

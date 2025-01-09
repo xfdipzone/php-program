@@ -15,9 +15,13 @@ final class FactoryResponseTest extends TestCase
      */
     public function testGetTokenClass()
     {
-        $type= \Csrf\Type::INTERNAL_CSRF;
+        $type = \Csrf\Type::INTERNAL_CSRF;
         $token_class = \Csrf\Factory::getTokenClass($type);
         $this->assertEquals('\Csrf\InternalCsrf', $token_class);
+
+        $type = \Csrf\Type::GOOGLE_RECAPTCHA_V2;
+        $token_class = \Csrf\Factory::getTokenClass($type);
+        $this->assertEquals('\Csrf\GoogleRecaptchaV2', $token_class);
     }
 
     /**
@@ -28,7 +32,7 @@ final class FactoryResponseTest extends TestCase
         $this->expectException(\Csrf\Exception\TypeException::class);
         $this->expectExceptionMessage('csrf type not exists');
 
-        $type= 'not_exists_type';
+        $type = 'not_exists_type';
         \Csrf\Factory::getTokenClass($type);
     }
 
@@ -37,11 +41,18 @@ final class FactoryResponseTest extends TestCase
      */
     public function testMake()
     {
-        $type= \Csrf\Type::INTERNAL_CSRF;
         $secret = 'abc123';
+
+        $type = \Csrf\Type::INTERNAL_CSRF;
         $config = new \Csrf\Config\InternalCsrfConfig($secret);
         $csrf = \Csrf\Factory::make($type, $config);
         $this->assertEquals('Csrf\InternalCsrf', get_class($csrf));
+        $this->assertInstanceOf(\Csrf\ICsrf::class, $csrf);
+
+        $type = \Csrf\Type::GOOGLE_RECAPTCHA_V2;
+        $config = new \Csrf\Config\GoogleRecaptchaV2Config($secret);
+        $csrf = \Csrf\Factory::make($type, $config);
+        $this->assertEquals('Csrf\GoogleRecaptchaV2', get_class($csrf));
         $this->assertInstanceOf(\Csrf\ICsrf::class, $csrf);
     }
 
@@ -53,7 +64,7 @@ final class FactoryResponseTest extends TestCase
         $this->expectException(\Csrf\Exception\FactoryException::class);
         $this->expectExceptionMessage('csrf type not exists');
 
-        $type= 'not_exists_type';
+        $type = 'not_exists_type';
         $secret = 'abc123';
         $config = new \Csrf\Config\InternalCsrfConfig($secret);
         \Csrf\Factory::make($type, $config);
