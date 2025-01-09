@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "google/recaptcha": "^1.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^7"
