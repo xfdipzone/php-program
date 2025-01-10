@@ -14,7 +14,7 @@ namespace Csrf;
 class GoogleRecaptchaV2 implements \Csrf\ICsrf
 {
     /**
-     * google recaptcha服务密钥
+     * google recaptcha 服务密钥
      *
      * @var string
      */
@@ -78,7 +78,7 @@ class GoogleRecaptchaV2 implements \Csrf\ICsrf
     {
         try
         {
-            // 调用google recaptcha v2服务执行验证
+            // 调用 google recaptcha v2 服务执行验证
             $recaptcha_response = $this->googleRecaptchaVerify($token, $action, $remote_ip);
 
             // 整理返回数据
@@ -103,7 +103,7 @@ class GoogleRecaptchaV2 implements \Csrf\ICsrf
     }
 
     /**
-     * 调用google recaptcha v2服务执行验证
+     * 调用 google recaptcha v2 服务执行验证
      *
      * @VisibleForTesting
      *

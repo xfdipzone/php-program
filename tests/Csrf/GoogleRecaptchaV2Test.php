@@ -131,4 +131,22 @@ final class GoogleRecaptchaV2Test extends TestCase
         $token = 'google recaptcha v2 token';
         $mock_google_recaptcha_v2->verify($token, $action, $remote_ip);
     }
+
+    /**
+     * @covers \Csrf\GoogleRecaptchaV2::googleRecaptchaVerify
+     */
+    public function testGoogleRecaptchaVerify()
+    {
+        $secret = 'abc123';
+        $config = new \Csrf\Config\GoogleRecaptchaV2Config($secret);
+        $google_recaptcha_v2 = new \Csrf\GoogleRecaptchaV2($config);
+
+        $action = 'login';
+        $remote_ip = '192.168.1.1';
+        $token = '';
+        $recaptcha_response = \Tests\Utils\PHPUnitExtension::callMethod($google_recaptcha_v2, 'googleRecaptchaVerify', [$token, $action, $remote_ip]);
+        $this->assertFalse($recaptcha_response->isSuccess());
+        $this->assertSame(1, count($recaptcha_response->getErrorCodes()));
+        $this->assertEquals(\ReCaptcha\Recaptcha::E_MISSING_INPUT_RESPONSE, $recaptcha_response->getErrorCodes()[0]);
+    }
 }

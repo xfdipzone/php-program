@@ -28,7 +28,7 @@ class GoogleRecaptchaV2Config implements \Csrf\Config\IConfig
     protected $timeout = 30;
 
     /**
-     * 初始化，设置google recaptcha服务密钥
+     * 初始化，设置 google recaptcha 服务密钥
      *
      * @author fdipzone
      * @DateTime 2025-01-09 19:13:09
