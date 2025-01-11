@@ -2,16 +2,16 @@
 namespace Csrf;
 
 /**
- * google recaptcha v2 token类
+ * google recaptcha v3 token类
  *
  * composer lib: https://github.com/google/recaptcha
  * 文档: https://developers.google.com/recaptcha/intro
  *
  * @author fdipzone
- * @DateTime 2025-01-09 18:49:35
+ * @DateTime 2025-01-11 17:06:58
  *
  */
-class GoogleRecaptchaV2 implements \Csrf\ICsrf
+class GoogleRecaptchaV3 implements \Csrf\ICsrf
 {
     /**
      * google recaptcha 服务密钥
@@ -28,14 +28,21 @@ class GoogleRecaptchaV2 implements \Csrf\ICsrf
     private $timeout;
 
     /**
+     * 分数阈值(浮点类型），范围0~1，计算返回分数>=阈值表示通过，否则不通过（默认0.5）
+     *
+     * @var float
+     */
+    private $score_threshold;
+
+    /**
      * 初始化
      *
      * @author fdipzone
-     * @DateTime 2025-01-09 18:52:47
+     * @DateTime 2025-01-11 17:06:58
      *
-     * @param \Csrf\Config\GoogleRecaptchaV2Config $config 配置类对象
+     * @param \Csrf\Config\GoogleRecaptchaV3Config $config 配置类对象
      */
-    public function __construct(\Csrf\Config\GoogleRecaptchaV2Config $config)
+    public function __construct(\Csrf\Config\GoogleRecaptchaV3Config $config)
     {
         // 检查secret
         if(empty($config->secret()))
@@ -45,6 +52,7 @@ class GoogleRecaptchaV2 implements \Csrf\ICsrf
 
         $this->secret = $config->secret();
         $this->timeout = $config->timeout();
+        $this->score_threshold = $config->scoreThreshold();
     }
 
     /**
@@ -53,7 +61,7 @@ class GoogleRecaptchaV2 implements \Csrf\ICsrf
      * 如服务端可使用 \Csrf\InternalCsrf 类实现
      *
      * @author fdipzone
-     * @DateTime 2025-01-09 18:53:36
+     * @DateTime 2025-01-11 17:06:58
      *
      * @param string $action 请求标识，例如 login, register
      * @return string
@@ -67,7 +75,7 @@ class GoogleRecaptchaV2 implements \Csrf\ICsrf
      * 验证 csrf token 是否有效
      *
      * @author fdipzone
-     * @DateTime 2025-01-09 18:55:00
+     * @DateTime 2025-01-11 17:06:58
      *
      * @param string $token csrf token
      * @param string $action 请求标识，例如 login, register
@@ -78,7 +86,7 @@ class GoogleRecaptchaV2 implements \Csrf\ICsrf
     {
         try
         {
-            // 调用 google recaptcha v2 服务执行验证
+            // 调用 google recaptcha v3 服务执行验证
             $recaptcha_response = $this->googleRecaptchaVerify($token, $action, $remote_ip);
 
             // 整理返回数据
@@ -98,17 +106,17 @@ class GoogleRecaptchaV2 implements \Csrf\ICsrf
         }
         catch(\Exception $e)
         {
-            throw new \Csrf\Exception\TokenException('google recaptcha v2 call fail');
+            throw new \Csrf\Exception\TokenException('google recaptcha v3 call fail');
         }
     }
 
     /**
-     * 调用 google recaptcha v2 服务执行验证
+     * 调用 google recaptcha v3 服务执行验证
      *
      * @VisibleForTesting
      *
      * @author fdipzone
-     * @DateTime 2025-01-09 18:55:47
+     * @DateTime 2025-01-11 17:06:58
      *
      * @param string $token csrf token
      * @param string $action 请求标识，例如 login, register
@@ -118,7 +126,9 @@ class GoogleRecaptchaV2 implements \Csrf\ICsrf
     protected function googleRecaptchaVerify(string $token, string $action, string $remote_ip):\ReCaptcha\Response
     {
         $recaptcha = new \ReCaptcha\ReCaptcha($this->secret);
-        $resp = $recaptcha->setChallengeTimeout($this->timeout)
+        $resp = $recaptcha->setExpectedAction($action)
+                          ->setScoreThreshold($this->score_threshold)
+                          ->setChallengeTimeout($this->timeout)
                           ->verify($token, $remote_ip);
         return $resp;
     }

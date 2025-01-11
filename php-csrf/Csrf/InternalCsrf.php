@@ -16,14 +16,14 @@ class InternalCsrf implements \Csrf\ICsrf
      *
      * @var string
      */
-    protected $secret;
+    private $secret;
 
     /**
      * 客户端传入的token过期时间（默认30秒）
      *
      * @var int
      */
-    protected $timeout;
+    private $timeout;
 
     /**
      * 初始化
