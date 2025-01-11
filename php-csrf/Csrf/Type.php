@@ -16,9 +16,13 @@ class Type
     // google recaptcha v2
     const GOOGLE_RECAPTCHA_V2 = 'google_recaptcha_v2';
 
+    // google recaptcha v3
+    const GOOGLE_RECAPTCHA_V3 = 'google_recaptcha_v3';
+
     // 类型与实现类对应关系
     public static $map = [
         self::INTERNAL_CSRF => '\Csrf\InternalCsrf',
         self::GOOGLE_RECAPTCHA_V2 => '\Csrf\GoogleRecaptchaV2',
+        self::GOOGLE_RECAPTCHA_V3 => '\Csrf\GoogleRecaptchaV3',
     ];
 }

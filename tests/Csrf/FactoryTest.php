@@ -22,6 +22,10 @@ final class FactoryResponseTest extends TestCase
         $type = \Csrf\Type::GOOGLE_RECAPTCHA_V2;
         $token_class = \Csrf\Factory::getTokenClass($type);
         $this->assertEquals('\Csrf\GoogleRecaptchaV2', $token_class);
+
+        $type = \Csrf\Type::GOOGLE_RECAPTCHA_V3;
+        $token_class = \Csrf\Factory::getTokenClass($type);
+        $this->assertEquals('\Csrf\GoogleRecaptchaV3', $token_class);
     }
 
     /**
@@ -53,6 +57,12 @@ final class FactoryResponseTest extends TestCase
         $config = new \Csrf\Config\GoogleRecaptchaV2Config($secret);
         $csrf = \Csrf\Factory::make($type, $config);
         $this->assertEquals('Csrf\GoogleRecaptchaV2', get_class($csrf));
+        $this->assertInstanceOf(\Csrf\ICsrf::class, $csrf);
+
+        $type = \Csrf\Type::GOOGLE_RECAPTCHA_V3;
+        $config = new \Csrf\Config\GoogleRecaptchaV3Config($secret);
+        $csrf = \Csrf\Factory::make($type, $config);
+        $this->assertEquals('Csrf\GoogleRecaptchaV3', get_class($csrf));
         $this->assertInstanceOf(\Csrf\ICsrf::class, $csrf);
     }
 
