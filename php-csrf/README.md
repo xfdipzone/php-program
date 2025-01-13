@@ -30,6 +30,49 @@ php 实现的 CSRF(Cross-Site Request Forgery) 组件类，实现 `CSRF Token` �
 
 ---
 
+## 类关系图
+
+![CSRF 组件类关系图](<./class_diagram.svg>)
+
+<details>
+<summary>点击查看 PlantUML 代码</summary>
+<pre>
+<code>
+```plantuml
+@startuml component-diagram
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Component.puml
+title "CSRF 组件类关系图"
+Component(IConfig, "IConfig", "CSRF 组件配置接口")
+Component(GoogleRecaptchaV2Config, "GoogleRecaptchaV2Config", "Google Recaptcha V2 CSRF 组件配置类")
+Component(GoogleRecaptchaV3Config, "GoogleRecaptchaV3Config", "Google Recaptcha V3 CSRF 组件配置类")
+Component(InternalCsrfConfig, "InternalCsrfConfig", "内部 CSRF 组件配置类")
+Component(Type, "Type", " CSRF 组件类型")
+Component(VerifyResponse, "VerifyResponse", "CSRF 组件验证返回结构")
+Component(GoogleRecaptchaV2, "GoogleRecaptchaV2", "Google Recaptcha V2 CSRF 组件")
+Component(GoogleRecaptchaV3, "GoogleRecaptchaV3", "Google Recaptcha V3 CSRF 组件")
+Component(InternalCsrf, "InternalCsrf", "内部 CSRF 组件")
+Component(CryptoUtils, "CryptoUtils", "加密解密类")
+Component(ICsrf, "ICsrf", "CSRF 组件接口")
+Component(Factory, "Factory", "CSRF 组件工厂类")
+Rel_Back(IConfig, GoogleRecaptchaV2Config, "implements")
+Rel_Back(IConfig, GoogleRecaptchaV3Config, "implements")
+Rel_Back(IConfig, InternalCsrfConfig, "implements")
+Rel_Back(ICsrf, GoogleRecaptchaV2, "implements")
+Rel_Back(ICsrf, GoogleRecaptchaV3, "implements")
+Rel_Back(ICsrf, InternalCsrf, "implements")
+Rel(InternalCsrf, CryptoUtils, "depend on")
+Rel(Factory, IConfig, "depend on")
+Rel(Factory, ICsrf, "depend on")
+Rel(Factory, Type, "depend on")
+Rel(Factory, VerifyResponse, "depend on")
+@enduml
+```
+</code>
+</pre>
+</details>
+
+---
+
 ## 类说明
 
 **IConfig** `Csrf/Config/IConfig.php`
