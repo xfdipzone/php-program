@@ -48,11 +48,11 @@ require_once('config.php');
 
     $.get("verify_v2.php",{token:token})
       .done(function(data){
-      	if(data.success==true){
-      		alert('v2 verify success');
-      	}else{
-      		alert('v2 verify fail error:' + data.errors);
-      	}
+        if(data.success==true){
+          alert('v2 verify success');
+        }else{
+          alert('v2 verify fail error:' + data.errors);
+        }
       });
  }
 
