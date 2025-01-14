@@ -1,0 +1,21 @@
+{
+    "name": "fdipzone/php-program",
+    "description": "lib for php",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "fdipzone",
+            "email": "xfdipzone@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "google/recaptcha": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Csrf\\": "php-csrf/Csrf"
+        }
+    }
+}

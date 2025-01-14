@@ -1,0 +1,34 @@
+<?php
+define('ROOT_PATH', dirname(__FILE__));
+require_once ROOT_PATH.'/vendor/autoload.php';
+require_once('config.php');
+
+// verify v3
+$secret = RECAPTCHA_V3_SECRET;
+$remote_ip = getIp();
+$action = 'login';
+$token = isset($_GET['token'])? $_GET['token'] : '';
+
+$config = new \Csrf\Config\GoogleRecaptchaV3Config($secret);
+$config->setScoreThreshold(0.5);
+$recaptcha = \Csrf\Factory::make(\Csrf\Type::GOOGLE_RECAPTCHA_V3, $config);
+$resp = $recaptcha->verify($token, $action, $remote_ip);
+
+if($resp->success())
+{
+    // Verified!
+    $data = array(
+        'success' => true
+    );
+}
+else
+{
+    $errors = $resp->errors();
+    $data = array(
+        'success' => false,
+        'errors' => $errors
+    );
+}
+
+header('content-type:application/json;charset=utf8');
+echo json_encode($data, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);

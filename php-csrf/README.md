@@ -137,6 +137,8 @@ CSRF 组件工厂类，根据组件类型，创建组件对象
 
 **Google Recaptcha 文档:** [https://developers.google.com/recaptcha/intro](https://developers.google.com/recaptcha/intro)
 
+Google Recaptcha 集成测试 [Integration](<../tests/Csrf/integration/>)
+
 ---
 
 ## 演示
