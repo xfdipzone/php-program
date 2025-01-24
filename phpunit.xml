@@ -32,6 +32,7 @@
             <directory>./php-db-model</directory>
             <directory>./php-context-cache</directory>
             <directory>./php-csrf</directory>
+            <directory>./php-mq</directory>
             <exclude>
                 <directory>./build</directory>
                 <directory>./codesniffer</directory>

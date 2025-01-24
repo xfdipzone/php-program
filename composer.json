@@ -34,7 +34,8 @@
             "AnnotationReader\\": "php-annotation-reader/AnnotationReader",
             "DbModel\\": "php-db-model/DbModel",
             "ContextCache\\": "php-context-cache/ContextCache",
-            "Csrf\\": "php-csrf/Csrf"
+            "Csrf\\": "php-csrf/Csrf",
+            "MQ\\": "php-mq/MQ"
         }
     },
     "autoload-dev": {
