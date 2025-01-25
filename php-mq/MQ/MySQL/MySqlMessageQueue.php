@@ -1,15 +1,14 @@
 <?php
-namespace MQ;
+namespace MQ\MySQL;
 
 /**
- * 消息队列接口
- * 定义消息队列实现类必须实现的方法
+ * 基于 MySQL 存储实现的消息队列组件
  *
  * @author fdipzone
- * @DateTime 2025-01-18 15:46:01
+ * @DateTime 2025-01-25 20:19:51
  *
  */
-interface IMessageQueue
+class MySqlMessageQueue implements \MQ\IMessageQueue
 {
     /**
      * 生产主题消息
@@ -21,7 +20,10 @@ interface IMessageQueue
      * @param \MQ\MessageBody $message_body 消息体
      * @return boolean
      */
-    public function produce(string $topic, \MQ\MessageBody $message_body):bool;
+    public function produce(string $topic, \MQ\MessageBody $message_body):bool
+    {
+        return true;
+    }
 
     /**
      * 消费主题消息
@@ -32,5 +34,8 @@ interface IMessageQueue
      * @param string $topic 消息主题
      * @return \MQ\MessageBody
      */
-    public function consume(string $topic):\MQ\MessageBody;
+    public function consume(string $topic):\MQ\MessageBody
+    {
+        return new \MQ\MessageBody('', '', '');
+    }
 }

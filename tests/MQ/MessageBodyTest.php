@@ -4,7 +4,7 @@ namespace Tests\MQ;
 use PHPUnit\Framework\TestCase;
 
 /**
- * 测试 php-message\MQ\MessageBody
+ * 测试 php-mq\MQ\MessageBody
  *
  * @author fdipzone
  */
