@@ -22,6 +22,7 @@ updated_at | int(11) | 最后修改时间
 
 字段 | 类型 | 说明
 --|--|--
+id | int(11) | 消息主题分区 id（自增）
 topic_id | int(11) | 消息主题id (topic.id)
 name | string(128) | 分区名称
 status | int(3) | 状态 1:正常 0:删除
