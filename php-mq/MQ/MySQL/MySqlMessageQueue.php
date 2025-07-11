@@ -11,6 +11,26 @@ namespace MQ\MySQL;
 class MySqlMessageQueue implements \MQ\IMessageQueue
 {
     /**
+     * MySql 消息队列配置对象
+     *
+     * @var \MQ\Config\MySqlConfig
+     */
+    private $config;
+
+    /**
+     * 初始化
+     *
+     * @author fdipzone
+     * @DateTime 2025-07-11 17:45:56
+     *
+     * @param \MQ\Config\MySqlConfig $config MySql 消息队列配置对象
+     */
+    public function __construct(\MQ\Config\MySqlConfig $config)
+    {
+        $this->config = $config;
+    }
+
+    /**
      * 生产主题消息
      *
      * @author fdipzone

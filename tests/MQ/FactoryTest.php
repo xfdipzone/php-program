@@ -38,7 +38,8 @@ final class FactoryTest extends TestCase
     public function testMake()
     {
         $type = \MQ\Type::MYSQL;
-        $mq = \MQ\Factory::make($type);
+        $config = new \MQ\Config\MySqlConfig;
+        $mq = \MQ\Factory::make($type, $config);
         $this->assertEquals('MQ\MySQL\MySqlMessageQueue', get_class($mq));
         $this->assertInstanceOf(\MQ\IMessageQueue::class, $mq);
     }
@@ -52,6 +53,7 @@ final class FactoryTest extends TestCase
         $this->expectExceptionMessage('not_exists type not exists');
 
         $type = 'not_exists';
-        \MQ\Factory::make($type);
+        $config = new \MQ\Config\MySqlConfig;
+        \MQ\Factory::make($type, $config);
     }
 }
