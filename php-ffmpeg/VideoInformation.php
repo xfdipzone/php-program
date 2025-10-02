@@ -6,8 +6,8 @@
  * @DateTime 2023-03-18 21:53:34
  *
  */
-class VideoInformation{
-
+class VideoInformation
+{
     /**
      * ffmpeg执行文件路径
      *
@@ -23,8 +23,10 @@ class VideoInformation{
      *
      * @param string $ffmpeg_file ffmpeg执行文件路径
      */
-    public function __construct(string $ffmpeg_file){
-        if(!file_exists($ffmpeg_file)){
+    public function __construct(string $ffmpeg_file)
+    {
+        if(!file_exists($ffmpeg_file))
+        {
             throw new \Exception('ffmepg file not exists');
         }
         $this->ffmpeg_file = $ffmpeg_file;
@@ -39,7 +41,8 @@ class VideoInformation{
      * @param string $file 视频文件
      * @return array
      */
-    public function getInfo(string $file):array{
+    public function getInfo(string $file):array
+    {
         ob_start();
         passthru($this->ffmpegCmd($file));
         $video_info = ob_get_contents();
@@ -49,7 +52,8 @@ class VideoInformation{
         $ret = array();
 
         // Duration: 00:33:42.64, start: 0.000000, bitrate: 152 kb/s
-        if (preg_match("/Duration: (.*?), start: (.*?), bitrate: (\d*) kb\/s/", $video_info, $matches)){
+        if (preg_match("/Duration: (.*?), start: (.*?), bitrate: (\d*) kb\/s/", $video_info, $matches))
+        {
             $ret['duration'] = $matches[1]; // 视频长度
             $duration = explode(':', $matches[1]);
             $ret['seconds'] = $duration[0]*3600 + $duration[1]*60 + $duration[2]; // 转为秒数
@@ -58,7 +62,8 @@ class VideoInformation{
         }
 
         // Stream #0:1: Video: rv20 (RV20 / 0x30325652), yuv420p, 352x288, 117 kb/s, 15 fps, 15 tbr, 1k tbn, 1k tbc
-        if(preg_match("/Video: (.*?), (.*?), (.*?)[,\s]/", $video_info, $matches)){
+        if(preg_match("/Video: (.*?), (.*?), (.*?)[,\s]/", $video_info, $matches))
+        {
             $ret['vcodec'] = $matches[1];     // 编码格式
             $ret['vformat'] = $matches[2];    // 视频格式
             $ret['resolution'] = $matches[3]; // 分辨率
@@ -68,13 +73,15 @@ class VideoInformation{
         }
 
         // Stream #0:0: Audio: cook (cook / 0x6B6F6F63), 22050 Hz, stereo, fltp, 32 kb/s
-        if(preg_match("/Audio: (.*), (\d*) Hz/", $video_info, $matches)){
+        if(preg_match("/Audio: (.*), (\d*) Hz/", $video_info, $matches))
+        {
             $ret['acodec'] = $matches[1];      // 音频编码
             $ret['asamplerate'] = $matches[2]; // 音频采样频率
         }
 
         // 计算实际播放时间
-        if(isset($ret['seconds']) && isset($ret['start'])){
+        if(isset($ret['seconds']) && isset($ret['start']))
+        {
             $ret['play_time'] = $ret['seconds'] + $ret['start']; // 实际播放时间
         }
 
@@ -97,7 +104,8 @@ class VideoInformation{
      * @param string $file 视频文件
      * @return string
      */
-    private function ffmpegCmd(string $file):string{
+    private function ffmpegCmd(string $file):string
+    {
         return sprintf('%s -i "%s" 2>&1', $this->ffmpeg_file, $file);
     }
 }
