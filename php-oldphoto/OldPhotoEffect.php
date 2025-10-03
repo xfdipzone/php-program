@@ -7,8 +7,8 @@
  * @DateTime 2023-03-19 11:30:23
  *
  */
-class OldPhotoEffect{
-
+class OldPhotoEffect
+{
     /**
      * 生成老照片效果图
      *
@@ -19,15 +19,17 @@ class OldPhotoEffect{
      * @param string $dest   老照片效果图
      * @return boolean
      */
-    public static function create(string $source, string $dest):bool{
-
+    public static function create(string $source, string $dest):bool
+    {
         // 判断原图是否存在
-        if(!file_exists($source)){
+        if(!file_exists($source))
+        {
             throw new \Exception('source file not exists');
         }
 
         // 检查是否已安装ImageMagick
-        if(strstr(shell_exec('convert -version'),'Version: ImageMagick')==''){
+        if(strstr(shell_exec('convert -version'),'Version: ImageMagick')=='')
+        {
             throw new \Exception('ImageMagick not installed');
         }
 
@@ -39,7 +41,5 @@ class OldPhotoEffect{
 
         // 判断是否创建成功
         return file_exists($dest)? true : false;
-
     }
-
 }

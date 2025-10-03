@@ -6,11 +6,11 @@ php 调用imagemagick实现老照片效果
 
 使用 `imagemagick` 生成老照片效果，需要执行下面几个步骤
 
-1.将输入图像使用 sepia-tone 滤镜处理
+1.将输入图像使用 `sepia-tone` 滤镜处理
 
-2.生成一个白色蒙版，填充随机噪声，转化为灰度，并加上alpha通道
+2.生成一个白色蒙版，填充随机噪声，转化为灰度，并加上 `alpha` 通道
 
-3.将步骤1和步骤2的结果使用overlay的方式compose
+3.将步骤1和步骤2的结果使用 `overlay` 的方式 `compose`
 
 ---
 
