@@ -16,7 +16,7 @@ final class AbstractBaseEncryptorTest extends TestCase
     private static $decrypt_file;
 
     // 初始化测试文件
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass():void
     {
         $date_folder = date('YmdHis');
         self::$encrypt_file = sprintf('/tmp/ut-%s-%s-%d/encrypt_file.txt', md5(__CLASS__), $date_folder, \Tests\Utils\PHPUnitExtension::sequenceId());
@@ -26,7 +26,7 @@ final class AbstractBaseEncryptorTest extends TestCase
     }
 
     // 删除测试文件
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass():void
     {
         if(file_exists(self::$source_file))
         {

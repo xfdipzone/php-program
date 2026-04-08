@@ -30,7 +30,7 @@ final class XmlParserTest extends TestCase
 </xmlroot>';
 
     // 初始化测试文件
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass():void
     {
         file_put_contents(self::$xml_file, self::$xml_string);
 
@@ -39,7 +39,7 @@ final class XmlParserTest extends TestCase
     }
 
     // 删除测试文件
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass():void
     {
         if(file_exists(self::$xml_file))
         {

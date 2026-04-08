@@ -16,13 +16,13 @@ final class XorEncryptorTest extends TestCase
     private static $decrypt_file = '/tmp/decrypt_file.txt';
 
     // 初始化测试文件
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass():void
     {
         file_put_contents(self::$source_file, 'abcdef');
     }
 
     // 删除测试文件
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass():void
     {
         if(file_exists(self::$source_file))
         {

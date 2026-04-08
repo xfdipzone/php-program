@@ -15,14 +15,14 @@ final class FileStorageTest extends TestCase
     private static $sensitive_words_file2 = '/tmp/sensitive_words2.txt';
 
     // 初始化测试文件
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass():void
     {
         file_put_contents(self::$sensitive_words_file1, implode(PHP_EOL, ['a', 'b', 'c', 'd']));
         file_put_contents(self::$sensitive_words_file2, implode(PHP_EOL, ['d', 'e', 'f', 'g']), FILE_APPEND);
     }
 
     // 删除测试文件
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass():void
     {
         if(file_exists(self::$sensitive_words_file1))
         {

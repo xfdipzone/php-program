@@ -12,14 +12,14 @@ use PHPUnit\Framework\TestCase;
 abstract class AbstractSharedMemoryTestCase extends TestCase
 {
     // 初始化测试用例设置
-    protected function setUp()
+    protected function setUp():void
     {
         // 设置 Warning 级别处理方法
         set_error_handler([$this, 'handleWarningAsIgnore'], E_WARNING);
     }
 
     // 清理测试用例设置
-    protected function tearDown()
+    protected function tearDown():void
     {
         restore_error_handler();
     }
