@@ -18,7 +18,7 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 利用反射API获取类信息](./php-reflection) (php-reflection)
 
-- [php 文件内容去重及排序](./php-unisort) (php-unisort)
+- [php 文件内容整理](./php-file-content-organization/) (php-file-content-organization)
 
 - [php 利用curl实现多进程下载文件](./php-batch-download) (php-batch-download)
 
