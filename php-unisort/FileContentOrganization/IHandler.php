@@ -8,8 +8,8 @@ namespace FileContentOrganization;
  * @DateTime 2023-03-23 22:41:38
  *
  */
-interface IHandler{
-
+interface IHandler
+{
     /**
      * 执行处理
      *
@@ -20,5 +20,4 @@ interface IHandler{
      * @return string
      */
     public function handle(string $data):string;
-
 }

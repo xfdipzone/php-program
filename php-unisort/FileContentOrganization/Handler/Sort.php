@@ -8,8 +8,8 @@ namespace FileContentOrganization\Handler;
  * @DateTime 2023-03-24 20:18:40
  *
  */
-class Sort implements \FileContentOrganization\IHandler{
-
+class Sort implements \FileContentOrganization\IHandler
+{
     /**
      * 排序顺序
      * 可设置的值：asc/desc
@@ -35,11 +35,15 @@ class Sort implements \FileContentOrganization\IHandler{
      * @param string $order 排序顺序
      * @return void
      */
-    public function setOrder(string $order):void{
+    public function setOrder(string $order):void
+    {
         $order = strtolower($order);
-        if(!in_array($order, ['asc', 'desc'])){
+
+        if(!in_array($order, ['asc', 'desc']))
+        {
             throw new \Exception('order must be asc or desc');
         }
+
         $this->order = $order;
     }
 
@@ -52,10 +56,13 @@ class Sort implements \FileContentOrganization\IHandler{
      * @param int $sort_flag 排序类型
      * @return void
      */
-    public function setSortFlag(int $sort_flag):void{
-        if(!in_array($sort_flag, [SORT_NUMERIC, SORT_STRING])){
+    public function setSortFlag(int $sort_flag):void
+    {
+        if(!in_array($sort_flag, [SORT_NUMERIC, SORT_STRING]))
+        {
             throw new \Exception('sort_flag must be SORT_NUMERIC or SORT_STRING sorting type flags');
         }
+
         $this->sort_flag = $sort_flag;
     }
 
@@ -67,7 +74,8 @@ class Sort implements \FileContentOrganization\IHandler{
      *
      * @return string
      */
-    public function order():string{
+    public function order():string
+    {
         return $this->order;
     }
 
@@ -79,7 +87,8 @@ class Sort implements \FileContentOrganization\IHandler{
      *
      * @return int
      */
-    public function sortFlag():int{
+    public function sortFlag():int
+    {
         return $this->sort_flag;
     }
 
@@ -92,21 +101,22 @@ class Sort implements \FileContentOrganization\IHandler{
      * @param string $data 文件内容
      * @return string
      */
-    public function handle(string $data):string{
-
+    public function handle(string $data):string
+    {
         // 将内容按换行符分割为数组
         $rows = explode(PHP_EOL, $data);
 
         // 排序
-        if($this->order() == 'asc'){
+        if($this->order() == 'asc')
+        {
             sort($rows, $this->sortFlag());
-        }else{
+        }
+        else
+        {
             rsort($rows, $this->sortFlag());
         }
 
         // 数组按换行符合拼为字符串
         return implode(PHP_EOL, $rows);
-
     }
-
 }

@@ -9,8 +9,8 @@ namespace FileContentOrganization;
  * @DateTime 2023-03-24 19:26:52
  *
  */
-class Factory{
-
+class Factory
+{
     /**
      * 根据类型创建处理器对象
      *
@@ -20,12 +20,16 @@ class Factory{
      * @param string $type 处理器类型
      * @return IHandler
      */
-    public static function make(string $type):IHandler{
-        try{
+    public static function make(string $type):IHandler
+    {
+        try
+        {
             $class = self::getHandlerClass($type);
             $handler = new $class;
             return $handler;
-        }catch(\Throwable $e){
+        }
+        catch(\Throwable $e)
+        {
             throw new \Exception($e->getMessage());
         }
     }
@@ -39,12 +43,15 @@ class Factory{
      * @param string $type 处理器类型
      * @return string
      */
-    private static function getHandlerClass(string $type):string{
-        if(isset(TYPE::$map[$type])){
+    private static function getHandlerClass(string $type):string
+    {
+        if(isset(TYPE::$map[$type]))
+        {
             return TYPE::$map[$type];
-        }else{
+        }
+        else
+        {
             throw new \Exception(sprintf('%s type handler not exists', $type));
         }
     }
-
 }

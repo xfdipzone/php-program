@@ -10,8 +10,8 @@ namespace FileContentOrganization;
  * @DateTime 2023-03-23 22:13:08
  *
  */
-class Organizer{
-
+class Organizer
+{
     /**
      * 源文件
      *
@@ -29,7 +29,7 @@ class Organizer{
     /**
      * 处理器类对象集合
      *
-     * @var array [] \IHandler
+     * @var IHandler[]
      */
     private $handlers = [];
 
@@ -42,23 +42,25 @@ class Organizer{
      * @param string $source 源文件
      * @param string $dest   整理后的文件
      */
-    public function __construct(string $source, string $dest){
-
-        if($source==''){
+    public function __construct(string $source, string $dest)
+    {
+        if($source=='')
+        {
             throw new \Exception('source not set');
         }
 
-        if($dest==''){
+        if($dest=='')
+        {
             throw new \Exception('dest not set');
         }
 
-        if(!file_exists($source)){
+        if(!file_exists($source))
+        {
             throw new \Exception('source not exists');
         }
 
         $this->source = $source;
         $this->dest = $dest;
-
     }
 
     /**
@@ -70,7 +72,8 @@ class Organizer{
      * @param IHandler $handler 处理器类对象
      * @return void
      */
-    public function addHandler(IHandler $handler):void{
+    public function addHandler(IHandler $handler):void
+    {
         $this->handlers[] = $handler;
     }
 
@@ -82,26 +85,28 @@ class Organizer{
      *
      * @return boolean
      */
-    public function handle():bool{
-
-        try{
+    public function handle():bool
+    {
+        try
+        {
             // 读取源文件内容
             $data = file_get_contents($this->source);
 
             // 调用多个处理器进行处理
-            if($this->handlers){
-                foreach($this->handlers as $handler){
+            if($this->handlers)
+            {
+                foreach($this->handlers as $handler)
+                {
                     $data = $handler->handle($data);
                 }
             }
 
             // 输出内容到目标文件
             return file_put_contents($this->dest, $data, true)? true : false;
-
-        }catch(\Throwable $e){
+        }
+        catch(\Throwable $e)
+        {
             throw new \Exception($e->getMessage());
         }
-
     }
-
 }

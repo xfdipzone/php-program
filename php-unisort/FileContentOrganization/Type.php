@@ -8,8 +8,8 @@ namespace FileContentOrganization;
  * @DateTime 2023-03-23 22:37:39
  *
  */
-class Type{
-
+class Type
+{
     // 去重
     const UNIQUE = 'unique';
 
@@ -21,5 +21,4 @@ class Type{
         self::UNIQUE => '\FileContentOrganization\Handler\Unique',
         self::SORT => '\FileContentOrganization\Handler\Sort',
     ];
-
 }
