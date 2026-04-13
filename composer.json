@@ -35,6 +35,7 @@
             "DbModel\\": "php-db-model/DbModel",
             "ContextCache\\": "php-context-cache/ContextCache",
             "Csrf\\": "php-csrf/Csrf",
+            "FileContentOrganization\\": "php-file-content-organization/FileContentOrganization",
             "MQ\\": "php-mq/MQ"
         }
     },
