@@ -43,7 +43,7 @@ class Factory
      * @param string $type 处理器类型
      * @return string
      */
-    private static function getHandlerClass(string $type):string
+    final public static function getHandlerClass(string $type):string
     {
         if(isset(TYPE::$map[$type]))
         {
