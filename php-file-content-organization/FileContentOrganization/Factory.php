@@ -17,7 +17,7 @@ class Factory
      * @author fdipzone
      * @DateTime 2023-03-24 19:27:19
      *
-     * @param string $type 处理器类型
+     * @param string $type 处理器类型，在 \FileContentOrganization\Type 中定义
      * @return IHandler
      */
     public static function make(string $type):IHandler
@@ -40,7 +40,7 @@ class Factory
      * @author fdipzone
      * @DateTime 2023-03-24 19:28:28
      *
-     * @param string $type 处理器类型
+     * @param string $type 处理器类型，在 \FileContentOrganization\Type 中定义
      * @return string
      */
     final public static function getHandlerClass(string $type):string

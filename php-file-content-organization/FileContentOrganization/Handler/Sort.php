@@ -10,21 +10,33 @@ namespace FileContentOrganization\Handler;
  */
 class Sort implements \FileContentOrganization\IHandler
 {
+    // 排序顺序（正序）
+    const ORDER_ASC = 'asc';
+
+    // 排序顺序（逆序）
+    const ORDER_DESC = 'desc';
+
+    // 排序类型（按数字排序）
+    const SORT_TYPE_NUMERIC = SORT_NUMERIC;
+
+    // 排序类型（按字符串排序）
+    const SORT_TYPE_STRING = SORT_STRING;
+
     /**
      * 排序顺序
      * 可设置的值：asc/desc
      *
      * @var string
      */
-    private $order = 'asc';
+    private $order = self::ORDER_ASC;
 
     /**
      * 排序类型
-     * 可设置的值：SORT_NUMERIC/SORT_STRING
+     * 可设置的值：常量 SORT_NUMERIC/SORT_STRING
      *
      * @var int
      */
-    private $sort_flag = SORT_NUMERIC;
+    private $sort_type = self::SORT_TYPE_NUMERIC;
 
     /**
      * 设置排序顺序
@@ -39,7 +51,7 @@ class Sort implements \FileContentOrganization\IHandler
     {
         $order = strtolower($order);
 
-        if(!in_array($order, ['asc', 'desc']))
+        if(!in_array($order, [self::ORDER_ASC, self::ORDER_DESC]))
         {
             throw new \Exception('order must be asc or desc');
         }
@@ -53,17 +65,17 @@ class Sort implements \FileContentOrganization\IHandler
      * @author fdipzone
      * @DateTime 2023-03-24 20:25:00
      *
-     * @param int $sort_flag 排序类型
+     * @param int $sort_type 排序类型
      * @return void
      */
-    public function setSortFlag(int $sort_flag):void
+    public function setSortType(int $sort_type):void
     {
-        if(!in_array($sort_flag, [SORT_NUMERIC, SORT_STRING]))
+        if(!in_array($sort_type, [self::SORT_TYPE_NUMERIC, self::SORT_TYPE_STRING]))
         {
-            throw new \Exception('sort_flag must be SORT_NUMERIC or SORT_STRING sorting type flags');
+            throw new \Exception('sort_type must be SORT_NUMERIC or SORT_STRING sorting type types');
         }
 
-        $this->sort_flag = $sort_flag;
+        $this->sort_type = $sort_type;
     }
 
     /**
@@ -87,9 +99,9 @@ class Sort implements \FileContentOrganization\IHandler
      *
      * @return int
      */
-    public function sortFlag():int
+    public function sortType():int
     {
-        return $this->sort_flag;
+        return $this->sort_type;
     }
 
     /**
@@ -109,11 +121,11 @@ class Sort implements \FileContentOrganization\IHandler
         // 排序
         if($this->order() == 'asc')
         {
-            sort($rows, $this->sortFlag());
+            sort($rows, $this->sortType());
         }
         else
         {
-            rsort($rows, $this->sortFlag());
+            rsort($rows, $this->sortType());
         }
 
         // 数组按换行符合拼为字符串
