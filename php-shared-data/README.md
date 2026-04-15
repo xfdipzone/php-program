@@ -102,6 +102,21 @@ ipcs -m
 ipcrm -m [shm-id]
 ```
 
+查看已使用的共享消息队列
+
+```shell
+ipcs -q
+```
+
+删除已使用的共享消息队列
+
+```shell
+ipcrm -q [message-id]
+
+# 批量删除所有共享消息队列
+ipcs -q | awk '{print $2}' | grep -E "^[0-9]+$" | xargs -I {} ipcrm -q {}
+```
+
 ---
 
 ## 功能
