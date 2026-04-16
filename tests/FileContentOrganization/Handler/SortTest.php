@@ -77,7 +77,7 @@ final class SortTest extends TestCase
         $sort->setOrder(\FileContentOrganization\Handler\Sort::ORDER_ASC);
         $sort->setSortType(\FileContentOrganization\Handler\Sort::SORT_TYPE_NUMERIC);
 
-        $expected = implode(PHP_EOL, ['0', '0', '2', '3', '4', '4', '5', '6', '7', '8', '9', '9', '10', '11', '12', '20']);
+        $expected = implode(PHP_EOL, ['0', '0', '  ', '', '2', '3', '4', '4', '5', '6', '7', '8', '9', '9', '10', '11', '12', '20']);
         $result = $sort->handle($source);
         $this->assertEquals($expected, $result);
 
@@ -85,7 +85,7 @@ final class SortTest extends TestCase
         $sort->setOrder(\FileContentOrganization\Handler\Sort::ORDER_ASC);
         $sort->setSortType(\FileContentOrganization\Handler\Sort::SORT_TYPE_STRING);
 
-        $expected = implode(PHP_EOL, ['0', '0', '10', '11', '12', '2', '20', '3', '4', '4', '5', '6', '7', '8', '9', '9']);
+        $expected = implode(PHP_EOL, ['', '  ', '0', '0', '10', '11', '12', '2', '20', '3', '4', '4', '5', '6', '7', '8', '9', '9']);
         $result = $sort->handle($source);
         $this->assertEquals($expected, $result);
 
@@ -93,7 +93,7 @@ final class SortTest extends TestCase
         $sort->setOrder(\FileContentOrganization\Handler\Sort::ORDER_DESC);
         $sort->setSortType(\FileContentOrganization\Handler\Sort::SORT_TYPE_NUMERIC);
 
-        $expected = implode(PHP_EOL, ['20', '12', '11', '10', '9', '9', '8', '7', '6', '5', '4', '4', '3', '2', '0', '0']);
+        $expected = implode(PHP_EOL, ['20', '12', '11', '10', '9', '9', '8', '7', '6', '5', '4', '4', '3', '2', '', '  ', '0', '0']);
         $result = $sort->handle($source);
         $this->assertEquals($expected, $result);
 
@@ -101,7 +101,7 @@ final class SortTest extends TestCase
         $sort->setOrder(\FileContentOrganization\Handler\Sort::ORDER_DESC);
         $sort->setSortType(\FileContentOrganization\Handler\Sort::SORT_TYPE_STRING);
 
-        $expected = implode(PHP_EOL, ['9', '9', '8', '7', '6', '5', '4', '4', '3', '20', '2', '12', '11', '10', '0', '0']);
+        $expected = implode(PHP_EOL, ['9', '9', '8', '7', '6', '5', '4', '4', '3', '20', '2', '12', '11', '10', '0', '0', '  ', '']);
         $result = $sort->handle($source);
         $this->assertEquals($expected, $result);
     }
