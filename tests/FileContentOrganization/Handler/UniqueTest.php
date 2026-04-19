@@ -15,7 +15,7 @@ final class UniqueTest extends TestCase
      */
     public function testHandle()
     {
-        $source = file_get_contents(dirname(dirname(__FILE__)) . '/test_data/source.txt');
+        $source = file_get_contents(dirname(__DIR__) . '/test_data/source.txt');
 
         $unique = new \FileContentOrganization\Handler\Unique;
         $expected = implode(PHP_EOL, ['0', '4', '10', '2', '9', '3', '11', '8', '5', '6', '12', '7', '20']);

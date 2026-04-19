@@ -69,7 +69,7 @@ final class SortTest extends TestCase
      */
     public function testHandle()
     {
-        $source = file_get_contents(dirname(dirname(__FILE__)) . '/test_data/source.txt');
+        $source = file_get_contents(dirname(__DIR__) . '/test_data/source.txt');
 
         $sort = new \FileContentOrganization\Handler\Sort;
 
