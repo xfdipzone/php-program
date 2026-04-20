@@ -117,6 +117,33 @@ final class OrganizerTest extends TestCase
         $this->assertEquals($expected, file_get_contents(self::$dest));
     }
 
+    /**
+     * @covers \FileContentOrganization\Organizer::handle
+     */
+    public function testHandleException()
+    {
+        $exception_message = 'handle exception';
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage($exception_message);
+
+        $organizer = new \FileContentOrganization\Organizer(self::$source, self::$dest);
+
+        // 创建一个执行异常的 handler
+        $mock = $this->getMockBuilder('\FileContentOrganization\Handler\Sort')
+                     ->onlyMethods(['handle'])
+                     ->getMock();
+
+        $mock->expects($this->any())
+             ->method('handle')
+             ->will($this->throwException(new \Exception($exception_message)));
+
+        /** @var \FileContentOrganization\IHandler $mock */
+        $organizer->addHandler($mock);
+
+        $organizer->handle();
+    }
+
     // 清理测试用例设置
     protected function tearDown():void
     {
