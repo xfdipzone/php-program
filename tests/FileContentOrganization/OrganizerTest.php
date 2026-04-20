@@ -12,17 +12,16 @@ final class OrganizerTest extends TestCase
 {
     // 定义用例用到的测试文件
     private static $source = __DIR__ . '/test_data/source.txt';
+    private static $dest = '/tmp/file_content_organization_dest.txt';
 
     /**
      * @covers \FileContentOrganization\Organizer::__construct
      */
     public function testConstruct()
     {
-        $dest = sprintf('/tmp/file_content_organization_dest_%d.txt', \Tests\Utils\PHPUnitExtension::sequenceId());
-
-        $organizer = new \FileContentOrganization\Organizer(self::$source, $dest);
+        $organizer = new \FileContentOrganization\Organizer(self::$source, self::$dest);
         $this->assertEquals(self::$source, \Tests\Utils\PHPUnitExtension::getVariable($organizer, 'source'));
-        $this->assertEquals($dest, \Tests\Utils\PHPUnitExtension::getVariable($organizer, 'dest'));
+        $this->assertEquals(self::$dest, \Tests\Utils\PHPUnitExtension::getVariable($organizer, 'dest'));
     }
 
     /**
@@ -37,7 +36,7 @@ final class OrganizerTest extends TestCase
                 function()
                 {
                     $source = '';
-                    $dest = sprintf('/tmp/file_content_organization_dest_%d.txt', \Tests\Utils\PHPUnitExtension::sequenceId());
+                    $dest = self::$dest;
                     new \FileContentOrganization\Organizer($source, $dest);
                 },
                 'source not set',
@@ -55,7 +54,7 @@ final class OrganizerTest extends TestCase
                 function()
                 {
                     $source = '/tmp/not_exists.txt';
-                    $dest = sprintf('/tmp/file_content_organization_dest_%d.txt', \Tests\Utils\PHPUnitExtension::sequenceId());
+                    $dest = self::$dest;
                     new \FileContentOrganization\Organizer($source, $dest);
                 },
                 'source not exists',
@@ -81,9 +80,7 @@ final class OrganizerTest extends TestCase
      */
     public function testAddHandler()
     {
-        $dest = sprintf('/tmp/file_content_organization_dest_%d.txt', \Tests\Utils\PHPUnitExtension::sequenceId());
-
-        $organizer = new \FileContentOrganization\Organizer(self::$source, $dest);
+        $organizer = new \FileContentOrganization\Organizer(self::$source, self::$dest);
 
         $sort = \FileContentOrganization\Factory::make(\FileContentOrganization\Type::SORT);
         $unique = \FileContentOrganization\Factory::make(\FileContentOrganization\Type::UNIQUE);
@@ -95,5 +92,37 @@ final class OrganizerTest extends TestCase
         $this->assertSame(2, count($handlers));
         $this->assertEquals('FileContentOrganization\Handler\Sort', get_class($handlers[0]));
         $this->assertEquals('FileContentOrganization\Handler\Unique', get_class($handlers[1]));
+    }
+
+    /**
+     * @covers \FileContentOrganization\Organizer::handle
+     */
+    public function testHandle()
+    {
+        $organizer = new \FileContentOrganization\Organizer(self::$source, self::$dest);
+
+        /** @var \FileContentOrganization\Handler\Sort $sort */
+        $sort = \FileContentOrganization\Factory::make(\FileContentOrganization\Type::SORT);
+        $sort->setOrder('desc');
+        $sort->setSortType(SORT_NUMERIC);
+
+        $unique = \FileContentOrganization\Factory::make(\FileContentOrganization\Type::UNIQUE);
+
+        $organizer->addHandler($sort);
+        $organizer->addHandler($unique);
+
+        $this->assertSame(true, $organizer->handle());
+
+        $expected = implode(PHP_EOL, ['20', '12', '11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '0']);
+        $this->assertEquals($expected, file_get_contents(self::$dest));
+    }
+
+    // 清理测试用例设置
+    protected function tearDown():void
+    {
+        if(file_exists(self::$dest))
+        {
+            unlink(self::$dest);
+        }
     }
 }
