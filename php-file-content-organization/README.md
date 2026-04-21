@@ -46,7 +46,7 @@ $unique_handler = \FileContentOrganization\Factory::make(\FileContentOrganizatio
 
 $sort_handler = \FileContentOrganization\Factory::make(\FileContentOrganization\Type::SORT);
 $sort_handler->setOrder('desc'); // 设置降序
-$sort_handler->setSortFlag(SORT_NUMERIC); // 设置按数字类型排序
+$sort_handler->setSortType(SORT_NUMERIC); // 设置按数字类型排序
 
 // 创建文件内容整理对象
 $organizer = new \FileContentOrganization\Organizer($source, $dest);
@@ -132,4 +132,4 @@ head linux_sort_user_id.txt
 
 ## 总结
 
-使用php或linux sort命令都可以实现文件去重及排序，执行时间上相差不大，但建议对于文件类的操作，直接使用系统命令实现更为简单。
+使用 `php` 或 linux `sort` 命令都可以实现文件去重及排序，执行时间上相差不大，但建议对于文件类的操作，直接使用系统命令实现更为简单。
