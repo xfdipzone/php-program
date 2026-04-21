@@ -29,7 +29,7 @@ class Organizer
     /**
      * 处理器类对象集合
      *
-     * @var IHandler[]
+     * @var array<string, IHandler>
      */
     private $handlers = [];
 
@@ -74,7 +74,7 @@ class Organizer
      */
     public function addHandler(IHandler $handler):void
     {
-        $this->handlers[] = $handler;
+        $this->handlers[get_class($handler)] = $handler;
     }
 
     /**

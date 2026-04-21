@@ -90,6 +90,8 @@ final class OrganizerTest extends TestCase
 
         $handlers = \Tests\Utils\PHPUnitExtension::getVariable($organizer, 'handlers');
         $this->assertSame(2, count($handlers));
+
+        $handlers = array_values($handlers);
         $this->assertEquals('FileContentOrganization\Handler\Sort', get_class($handlers[0]));
         $this->assertEquals('FileContentOrganization\Handler\Unique', get_class($handlers[1]));
     }
