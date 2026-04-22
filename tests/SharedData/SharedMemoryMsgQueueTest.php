@@ -165,7 +165,7 @@ final class SharedMemoryMsgQueueTest extends \Tests\SharedData\AbstractSharedMem
 
         $mock_msg_queue = $this->getMockBuilder('\SharedData\SharedMemoryMsgQueue')
                                ->setConstructorArgs([$queue_name, $max_message_size, true])
-                               ->setMethods(['getQueue'])
+                               ->onlyMethods(['getQueue'])
                                ->getMock();
         $mock_msg_queue->expects($this->any())
                        ->method('getQueue')
@@ -173,6 +173,8 @@ final class SharedMemoryMsgQueueTest extends \Tests\SharedData\AbstractSharedMem
 
         // 发送消息
         $message = 'shared memory msg content';
+
+        /** @var \SharedData\SharedMemoryMsgQueue $mock_msg_queue */
         $mock_msg_queue->send($message);
     }
 
@@ -235,13 +237,14 @@ final class SharedMemoryMsgQueueTest extends \Tests\SharedData\AbstractSharedMem
 
         $mock_msg_queue = $this->getMockBuilder('\SharedData\SharedMemoryMsgQueue')
                                ->setConstructorArgs([$queue_name, $max_message_size, true])
-                               ->setMethods(['getQueue'])
+                               ->onlyMethods(['getQueue'])
                                ->getMock();
         $mock_msg_queue->expects($this->any())
                        ->method('getQueue')
                        ->willReturn(false);
 
         // 接收消息
+        /** @var \SharedData\SharedMemoryMsgQueue $mock_msg_queue */
         $mock_msg_queue->receive();
     }
 
@@ -316,13 +319,14 @@ final class SharedMemoryMsgQueueTest extends \Tests\SharedData\AbstractSharedMem
 
         $mock_msg_queue = $this->getMockBuilder('\SharedData\SharedMemoryMsgQueue')
                                ->setConstructorArgs([$queue_name, $max_message_size, true])
-                               ->setMethods(['getQueue'])
+                               ->onlyMethods(['getQueue'])
                                ->getMock();
         $mock_msg_queue->expects($this->any())
                        ->method('getQueue')
                        ->willReturn(false);
 
         // 关闭消息队列
+        /** @var \SharedData\SharedMemoryMsgQueue $mock_msg_queue */
         $mock_msg_queue->close();
     }
 
