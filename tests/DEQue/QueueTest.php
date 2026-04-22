@@ -144,7 +144,7 @@ final class QueueTest extends TestCase
         // mock mutex lock
         $mock_lock = $this->getMockBuilder('\DEQue\MutexLock')
                           ->setConstructorArgs(['double_queue:1:10'])
-                          ->setMethods(['lock'])
+                          ->onlyMethods(['lock'])
                           ->getMock();
         $mock_lock->expects($this->any())
                   ->method('lock')
@@ -168,7 +168,7 @@ final class QueueTest extends TestCase
         // mock mutex lock
         $mock_lock = $this->getMockBuilder('\DEQue\MutexLock')
                           ->setConstructorArgs(['double_queue:1:10'])
-                          ->setMethods(['lock'])
+                          ->onlyMethods(['lock'])
                           ->getMock();
         $mock_lock->expects($this->any())
                   ->method('lock')
@@ -192,7 +192,7 @@ final class QueueTest extends TestCase
         // mock mutex lock
         $mock_lock = $this->getMockBuilder('\DEQue\MutexLock')
                           ->setConstructorArgs(['double_queue:1:10'])
-                          ->setMethods(['lock'])
+                          ->onlyMethods(['lock'])
                           ->getMock();
         $mock_lock->expects($this->any())
                   ->method('lock')
@@ -216,7 +216,7 @@ final class QueueTest extends TestCase
         // mock mutex lock
         $mock_lock = $this->getMockBuilder('\DEQue\MutexLock')
                           ->setConstructorArgs(['double_queue:1:10'])
-                          ->setMethods(['lock'])
+                          ->onlyMethods(['lock'])
                           ->getMock();
         $mock_lock->expects($this->any())
                   ->method('lock')
@@ -240,7 +240,7 @@ final class QueueTest extends TestCase
         // mock mutex lock
         $mock_lock = $this->getMockBuilder('\DEQue\MutexLock')
                           ->setConstructorArgs(['double_queue:1:10'])
-                          ->setMethods(['lock'])
+                          ->onlyMethods(['lock'])
                           ->getMock();
         $mock_lock->expects($this->any())
                   ->method('lock')
