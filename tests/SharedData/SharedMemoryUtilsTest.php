@@ -65,6 +65,12 @@ final class SharedMemoryUtilsTest extends \Tests\SharedData\AbstractSharedMemory
 
         $sem_id = \SharedData\SharedMemoryUtils::semId($sem_ipc_file, $project_id);
         $this->assertEquals('sysvsem', get_resource_type($sem_id));
+
+        // 删除测试文件
+        if(file_exists($sem_ipc_file))
+        {
+            unlink($sem_ipc_file);
+        }
     }
 
     /**
@@ -94,5 +100,11 @@ final class SharedMemoryUtilsTest extends \Tests\SharedData\AbstractSharedMemory
 
         $shm_key = \SharedData\SharedMemoryUtils::shmKey($shm_ipc_file, $project_id);
         $this->assertTrue($shm_key>0);
+
+        // 删除测试文件
+        if(file_exists($shm_ipc_file))
+        {
+            unlink($shm_ipc_file);
+        }
     }
 }
