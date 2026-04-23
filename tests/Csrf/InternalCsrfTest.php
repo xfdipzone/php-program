@@ -143,12 +143,13 @@ final class InternalCsrfTest extends TestCase
         // mock checkExpire method
         $mock_internal_csrf = $this->getMockBuilder('\Csrf\InternalCsrf')
                                    ->setConstructorArgs([$config])
-                                   ->setMethods(['checkExpire'])
+                                   ->onlyMethods(['checkExpire'])
                                    ->getMock();
         $mock_internal_csrf->expects($this->any())
                            ->method('checkExpire')
                            ->willReturn(false);
 
+        /** @var \Csrf\InternalCsrf $mock_internal_csrf */
         $token = $mock_internal_csrf->generate('login');
 
         $response = $mock_internal_csrf->verify($token, 'login', '192.168.1.1');

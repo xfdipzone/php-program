@@ -64,7 +64,7 @@ final class GoogleRecaptchaV3Test extends TestCase
         // mock google recaptcha v3
         $mock_google_recaptcha_v3 = $this->getMockBuilder('\Csrf\GoogleRecaptchaV3')
                                          ->setConstructorArgs([$config])
-                                         ->setMethods(['googleRecaptchaVerify'])
+                                         ->onlyMethods(['googleRecaptchaVerify'])
                                          ->getMock();
         $mock_google_recaptcha_v3->expects($this->any())
                                  ->method('googleRecaptchaVerify')
@@ -73,6 +73,8 @@ final class GoogleRecaptchaV3Test extends TestCase
         $action = 'login';
         $remote_ip = '192.168.1.1';
         $token = 'google recaptcha v3 token';
+
+        /** @var \Csrf\GoogleRecaptchaV3 $mock_google_recaptcha_v3 */
         $response = $mock_google_recaptcha_v3->verify($token, $action, $remote_ip);
         $this->assertTrue($response->success());
         $this->assertSame(0, count($response->errors()));
@@ -91,7 +93,7 @@ final class GoogleRecaptchaV3Test extends TestCase
         // mock google recaptcha v3
         $mock_google_recaptcha_v3 = $this->getMockBuilder('\Csrf\GoogleRecaptchaV3')
                                          ->setConstructorArgs([$config])
-                                         ->setMethods(['googleRecaptchaVerify'])
+                                         ->onlyMethods(['googleRecaptchaVerify'])
                                          ->getMock();
         $mock_google_recaptcha_v3->expects($this->any())
                                  ->method('googleRecaptchaVerify')
@@ -100,6 +102,8 @@ final class GoogleRecaptchaV3Test extends TestCase
         $action = 'login';
         $remote_ip = '192.168.1.1';
         $token = 'google recaptcha v3 token';
+
+        /** @var \Csrf\GoogleRecaptchaV3 $mock_google_recaptcha_v3 */
         $response = $mock_google_recaptcha_v3->verify($token, $action, $remote_ip);
         $this->assertFalse($response->success());
         $this->assertSame(1, count($response->errors()));
@@ -120,7 +124,7 @@ final class GoogleRecaptchaV3Test extends TestCase
         // mock google recaptcha v3
         $mock_google_recaptcha_v3 = $this->getMockBuilder('\Csrf\GoogleRecaptchaV3')
                                          ->setConstructorArgs([$config])
-                                         ->setMethods(['googleRecaptchaVerify'])
+                                         ->onlyMethods(['googleRecaptchaVerify'])
                                          ->getMock();
         $mock_google_recaptcha_v3->expects($this->any())
                                  ->method('googleRecaptchaVerify')
@@ -129,6 +133,8 @@ final class GoogleRecaptchaV3Test extends TestCase
         $action = 'login';
         $remote_ip = '192.168.1.1';
         $token = 'google recaptcha v3 token';
+
+        /** @var \Csrf\GoogleRecaptchaV3 $mock_google_recaptcha_v3 */
         $mock_google_recaptcha_v3->verify($token, $action, $remote_ip);
     }
 
