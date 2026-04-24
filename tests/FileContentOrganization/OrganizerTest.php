@@ -146,7 +146,7 @@ final class OrganizerTest extends TestCase
         $organizer->handle();
     }
 
-    // 清理测试用例设置
+    // 删除测试文件
     protected function tearDown():void
     {
         if(file_exists(self::$dest))
