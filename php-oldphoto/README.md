@@ -1,10 +1,10 @@
 # php-oldphoto
 
-php 调用imagemagick实现老照片效果
+php 调用 ImageMagick 实现老照片效果生成器
 
 ## 介绍
 
-使用 `imagemagick` 生成老照片效果，需要执行下面几个步骤
+使用 `ImageMagick` 生成老照片效果，需要执行下面几个步骤
 
 1.将输入图像使用 `sepia-tone` 滤镜处理
 
@@ -18,13 +18,13 @@ php 调用imagemagick实现老照片效果
 
 ```php
 // 原图
-$source = dirname(__FILE__).'/source.jpg';
+$source = __DIR__ . '/source.jpg';
 
-// 效果图
-$dest = dirname(__FILE__).'/dest.jpg';
+// 生成效果图
+$dest = __DIR__ . '/dest.jpg';
 
 // 创建效果图
-$is_create = OldPhotoEffect::create($source, $dest);
+$is_generated = \OldPhotoEffect\Generator::generate($source, $dest);
 ```
 
 ---

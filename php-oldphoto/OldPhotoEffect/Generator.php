@@ -1,25 +1,27 @@
 <?php
+namespace OldPhotoEffect;
+
 /**
- * php调用imagemagick实现老照片效果
+ * php 调用 ImageMagick 实现老照片效果生成器
  * 依赖 ImageMagick
  *
  * @author fdipzone
- * @DateTime 2023-03-19 11:30:23
+ * @DateTime 2026-04-24 14:10:04
  *
  */
-class OldPhotoEffect
+class Generator
 {
     /**
      * 生成老照片效果图
      *
      * @author fdipzone
-     * @DateTime 2023-03-19 11:31:30
+     * @DateTime 2026-04-24 14:11:09
      *
      * @param string $source 原图
-     * @param string $dest   老照片效果图
+     * @param string $dest 老照片效果图
      * @return boolean
      */
-    public static function create(string $source, string $dest):bool
+    public static function generate(string $source, string $dest):bool
     {
         // 判断原图是否存在
         if(!file_exists($source))
@@ -27,7 +29,7 @@ class OldPhotoEffect
             throw new \Exception('source file not exists');
         }
 
-        // 检查是否已安装ImageMagick
+        // 检查是否已安装 ImageMagick
         if(strstr(shell_exec('convert -version'),'Version: ImageMagick')=='')
         {
             throw new \Exception('ImageMagick not installed');

@@ -36,6 +36,7 @@
             "ContextCache\\": "php-context-cache/ContextCache",
             "Csrf\\": "php-csrf/Csrf",
             "FileContentOrganization\\": "php-file-content-organization/FileContentOrganization",
+            "OldPhotoEffect\\": "php-oldphoto/OldPhotoEffect",
             "MQ\\": "php-mq/MQ"
         }
     },
