@@ -30,10 +30,7 @@ class Generator
         }
 
         // 检查是否已安装 ImageMagick
-        if(strstr(shell_exec('convert -version'),'Version: ImageMagick')=='')
-        {
-            throw new \Exception('ImageMagick not installed');
-        }
+        if(strstr(shell_exec('convert -version'), 'Version: ImageMagick')=='') throw new \Exception('ImageMagick not installed');
 
         // 命令行
         $cmd = sprintf("convert '%s' -sepia-tone '75%%' \( '%s' -fill '#FFFFFF' -colorize '100%%' +noise Random -colorspace gray -alpha on -channel A -evaluate Set 100 \) -compose overlay -composite '%s'", $source, $source, $dest);
