@@ -10,17 +10,18 @@ use PHPUnit\Framework\TestCase;
  */
 final class GeneratorTest extends TestCase
 {
+    // 定义用例用到的测试文件
+    private static $source = __DIR__ . '/test_data/source.jpg';
+    private static $dest = '/tmp/old_photo_effect_dest.jpg';
+
     /**
      * @covers \OldPhotoEffect\Generator::generate
      */
     public function testGenerate()
     {
-        $source = __DIR__ . '/test_data/source.jpg';
-        $dest = '/tmp/old_photo_effect_dest.jpg';
-
-        $is_generated = \OldPhotoEffect\Generator::generate($source, $dest);
+        $is_generated = \OldPhotoEffect\Generator::generate(self::$source, self::$dest);
         $this->assertTrue($is_generated);
-        $this->assertTrue(file_exists($dest));
+        $this->assertTrue(file_exists(self::$dest));
     }
 
     /**
@@ -32,7 +33,15 @@ final class GeneratorTest extends TestCase
         $this->expectExceptionMessage('source file not exists');
 
         $source = 'not_exists_file';
-        $dest = '/tmp/old_photo_effect_dest.jpg';
-        \OldPhotoEffect\Generator::generate($source, $dest);
+        \OldPhotoEffect\Generator::generate($source, self::$dest);
+    }
+
+    // 删除测试文件
+    protected function tearDown():void
+    {
+        if(file_exists(self::$dest))
+        {
+            unlink(self::$dest);
+        }
     }
 }
