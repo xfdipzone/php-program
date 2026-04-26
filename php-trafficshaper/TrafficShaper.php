@@ -14,8 +14,8 @@
  * public  reset   重设令牌桶
  * private connect 创建redis连接
  */
-class TrafficShaper{
-
+class TrafficShaper
+{
     /**
      * redis连接设定
      *
@@ -54,7 +54,8 @@ class TrafficShaper{
      * @param string $queue 令牌桶名称
      * @param int $max 最大令牌数
      */
-    public function __construct(array $config, string $queue, int $max){
+    public function __construct(array $config, string $queue, int $max)
+    {
         $this->_config = $config;
         $this->_queue = $queue;
         $this->_max = $max;
@@ -70,8 +71,8 @@ class TrafficShaper{
      * @param int $num 加入的令牌数量
      * @return int
      */
-    public function add(int $num=0):int{
-
+    public function add(int $num=0):int
+    {
         // 当前剩余令牌数
         $cur_num = intval($this->_redis->lSize($this->_queue));
 
@@ -82,7 +83,8 @@ class TrafficShaper{
         $num = $max_num>=$cur_num+$num? $num : $max_num-$cur_num;
 
         // 加入令牌
-        if($num>0){
+        if($num>0)
+        {
             $token = array_fill(0, $num, 1);
             $this->_redis->lPush($this->_queue, ...$token);
             return $num;
@@ -100,7 +102,8 @@ class TrafficShaper{
      *
      * @return boolean
      */
-    public function get():bool{
+    public function get():bool
+    {
         return $this->_redis->rPop($this->_queue)? true : false;
     }
 
@@ -112,7 +115,8 @@ class TrafficShaper{
      *
      * @return void
      */
-    public function reset():void{
+    public function reset():void
+    {
         $this->_redis->delete($this->_queue);
         $this->add($this->_max);
     }
@@ -125,19 +129,24 @@ class TrafficShaper{
      *
      * @return \Redis
      */
-    private function connect():\Redis{
-        try{
+    private function connect():\Redis
+    {
+        try
+        {
             $redis = new \Redis();
             $redis->connect($this->_config['host'],$this->_config['port'],$this->_config['timeout'],$this->_config['reserved'],$this->_config['retry_interval']);
-            if(empty($this->_config['auth'])){
+            if(empty($this->_config['auth']))
+            {
                 $redis->auth($this->_config['auth']);
             }
             $redis->select($this->_config['index']);
-        }catch(\Throwable $e){
+        }
+        catch(\Throwable $e)
+        {
             throw new \Exception($e->getMessage());
         }
+
         return $redis;
     }
-
 }
 ?>

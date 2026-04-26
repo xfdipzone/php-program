@@ -28,7 +28,8 @@ $oTrafficShaper = new TrafficShaper($config, $queue, $max);
 $oTrafficShaper->reset();
 
 // 循环获取令牌，令牌桶内只有5个令牌，因此最后3次获取失败
-for($i=0; $i<8; $i++){
+for($i=0; $i<8; $i++)
+{
     var_dump($oTrafficShaper->get());
 }
 
@@ -38,7 +39,8 @@ $add_num = $oTrafficShaper->add(10);
 var_dump($add_num);
 
 // 循环获取令牌，令牌桶内只有5个令牌，因此最后1次获取失败
-for($i=0; $i<6; $i++){
+for($i=0; $i<6; $i++)
+{
     var_dump($oTrafficShaper->get());
 }
 ?>

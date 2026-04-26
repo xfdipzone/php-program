@@ -34,9 +34,11 @@ $oTrafficShaper = new TrafficShaper($config, $queue, $max);
 $oTrafficShaper->reset();
 
 // 执行令牌消耗
-while(true){
+while(true)
+{
     $consume_num = mt_rand($consume_token_range[0], $consume_token_range[1]);
-    for($i=0; $i<$consume_num; $i++){
+    for($i=0; $i<$consume_num; $i++)
+    {
         $status = $oTrafficShaper->get();
         echo '['.date('Y-m-d H:i:s').'] consume token:'.($status? 'true' : 'false').PHP_EOL;
     }

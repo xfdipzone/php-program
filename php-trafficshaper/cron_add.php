@@ -33,7 +33,8 @@ $exec_num = (int)(60/$time_step);
 // 创建TrafficShaper对象
 $oTrafficShaper = new TrafficShaper($config, $queue, $max);
 
-for($i=0; $i<$exec_num; $i++){
+for($i=0; $i<$exec_num; $i++)
+{
     $add_num = $oTrafficShaper->add($token_num);
     echo '['.date('Y-m-d H:i:s').'] add token num:'.$add_num.PHP_EOL;
     sleep($time_step);
