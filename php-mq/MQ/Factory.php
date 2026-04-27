@@ -21,7 +21,7 @@ class Factory
      * @param \MQ\Config\IMessageQueueConfig $config 消息队列组件配置对象
      * @return \MQ\IMessageQueue
      */
-    final static function make(string $type, \MQ\Config\IMessageQueueConfig $config):\MQ\IMessageQueue
+    final public static function make(string $type, \MQ\Config\IMessageQueueConfig $config):\MQ\IMessageQueue
     {
         try
         {
@@ -48,7 +48,7 @@ class Factory
      * @param string $type 组件类型，在 \MQ\Type 中定义
      * @return string
      */
-    final static function getMQClass(string $type):string
+    final public static function getMQClass(string $type):string
     {
         if(isset(\MQ\Type::$map[$type]))
         {
