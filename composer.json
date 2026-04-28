@@ -37,6 +37,7 @@
             "Csrf\\": "php-csrf/Csrf",
             "FileContentOrganization\\": "php-file-content-organization/FileContentOrganization",
             "OldPhotoEffect\\": "php-oldphoto/OldPhotoEffect",
+            "RequestIdGenerator\\": "php-request-id-generator/RequestIdGenerator",
             "MQ\\": "php-mq/MQ"
         }
     },
