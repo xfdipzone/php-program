@@ -12,7 +12,9 @@ PHP 唯一请求 ID 生成类，使用 `session_create_id()` 与 `uniqid()` 方�
 
 每个请求访问服务器时，我们可以给这个访问加入一个唯一标识 (RequestID)
 
-在请求开始，请求过程中，及请求结束时，把这个请求流程关键的数据写入日志（例如访问时的参数，经过那些方法，微服务，结束时返回的数据等）
+在请求开始，请求过程中，及请求结束时，把这个请求流程关键的数据写入日志
+
+例如访问时的参数，经过那些方法，微服务，结束时返回的数据等（链路追踪）
 
 当访问出现问题时用于参考，方便追踪到问题
 
@@ -21,6 +23,26 @@ PHP 唯一请求 ID 生成类，使用 `session_create_id()` 与 `uniqid()` 方�
 请求 -> A -> B -> C -> A -> 输出
 
 如果访问过程没有输出，或输出错误，我们可以根据 `RequestID` 找到 A, B, C 对应的日志，检查是哪个服务出现问题。
+
+---
+
+## 类说明
+
+**IRequestIdGenerator** `RequestIdGenerator/IRequestIdGenerator.php`
+
+请求 ID 生成器接口，定义请求 ID 生成器必须实现的方法
+
+**Factory** `RequestIdGenerator/Factory.php`
+
+请求 ID 生成器工厂类，用于根据类型创建请求 ID 生成器
+
+**Type** `RequestIdGenerator/Type.php`
+
+定义请求 ID 生成器支持的类型
+
+**RandomIdGenerator** `RequestIdGenerator/RandomIdGenerator.php`
+
+随机 ID 生成器，属于请求 ID 生成器的一种
 
 ---
 
