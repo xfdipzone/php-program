@@ -34,7 +34,7 @@ php开发的程序，类库，小工具，不定期更新。
 
 - [php 创建二维码类](./php-qrcode/) (php-qrcode)
 
-- [php 唯一RequestID生成类](./php-requestid/) (php-requestid)
+- [php 唯一请求 ID 生成类](./php-request-id-generator/) (php-request-id-generator)
 
 - [php bucket类](./php-bucket/) (php-bucket)
 
