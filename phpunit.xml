@@ -35,6 +35,7 @@
             <directory>./php-csrf</directory>
             <directory>./php-file-content-organization</directory>
             <directory>./php-oldphoto</directory>
+            <directory>./php-request-id-generator</directory>
             <directory>./php-mq</directory>
             <exclude>
                 <directory>./build</directory>
