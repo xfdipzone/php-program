@@ -68,4 +68,11 @@ final class UtilsTest extends TestCase
         \CssManager\Utils::traversing($path, $result2, true);
         $this->assertTrue(count($result2)>0);
     }
+
+    // 删除测试文件
+    public static function tearDownAfterClass():void
+    {
+        $command = sprintf('rm -rf /tmp/ut-%s-*', md5(__CLASS__));
+        shell_exec($command);
+    }
 }

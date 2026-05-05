@@ -140,4 +140,11 @@ final class CssUpdaterTest extends TestCase
         $this->assertTrue(strstr($css_content, 'images/header.png?'.date('Ymd'))!==false);
         $this->assertTrue(strstr($css_content, 'images/logo.gif?'.date('Ymd'))!==false);
     }
+
+    // 删除测试文件
+    public static function tearDownAfterClass():void
+    {
+        $command = sprintf('rm -rf /tmp/ut-%s-*', md5(__CLASS__));
+        shell_exec($command);
+    }
 }
