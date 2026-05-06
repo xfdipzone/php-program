@@ -33,15 +33,8 @@ final class AbstractBaseEncryptorTest extends TestCase
             unlink(self::$source_file);
         }
 
-        if(file_exists(self::$encrypt_file))
-        {
-            unlink(self::$encrypt_file);
-        }
-
-        if(file_exists(self::$decrypt_file))
-        {
-            unlink(self::$decrypt_file);
-        }
+        $command = sprintf('rm -rf /tmp/ut-%s-*', md5(__CLASS__));
+        shell_exec($command);
     }
 
     /**
