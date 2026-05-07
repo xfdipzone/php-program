@@ -33,6 +33,17 @@ abstract class AbstractSharedMemoryTestCase extends TestCase
     // 生成共享数据标识，用于测试
     protected function generateSharedKey():string
     {
-        return sprintf('ut-%s-sm-key-%s-%d', md5(__CLASS__), date('YmdHis'), \Tests\Utils\PHPUnitExtension::sequenceId());
+        return sprintf('ut-%s-sm-key-%s-%d', md5(static::class), date('YmdHis'), \Tests\Utils\PHPUnitExtension::sequenceId());
+    }
+
+    // 删除测试文件并删除共享队列
+    public static function tearDownAfterClass():void
+    {
+        $command = sprintf('rm -rf /tmp/ut-%s-sm-key-*', md5(static::class));
+        shell_exec($command);
+
+        // 删除共享队列
+        $command = 'ipcs -q | awk \'{print $2}\' | grep -E "^[0-9]+$" | xargs -I {} ipcrm -q {}';
+        shell_exec($command);
     }
 }
