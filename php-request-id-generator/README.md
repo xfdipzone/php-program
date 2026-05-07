@@ -26,6 +26,12 @@ PHP 唯一请求 ID 生成类，使用 `session_create_id()` 与 `uniqid()` 方�
 
 ---
 
+## 功能
+
+生成唯一请求 ID，支持多种生成算法，用户可选择适合的生成算法使用
+
+---
+
 ## 类说明
 
 **IRequestIdGenerator** `RequestIdGenerator/IRequestIdGenerator.php`
