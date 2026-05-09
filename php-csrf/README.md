@@ -38,7 +38,6 @@ php 实现的 CSRF(Cross-Site Request Forgery) 组件类，实现 `CSRF Token` �
 <summary>点击查看 PlantUML 代码</summary>
 <pre>
 <code>
-```plantuml
 @startuml
 title CSRF 组件类关系图
 
@@ -150,7 +149,6 @@ InternalCsrf -up-> ICsrf : "implements"
 InternalCsrf -down-> CryptoUtils : "depend on"
 
 @enduml
-```
 </code>
 </pre>
 </details>
