@@ -1,235 +1,201 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="571px" preserveAspectRatio="none" style="width:1421px;height:571px;background:#FFFFFF;" version="1.1" viewBox="0 0 1421 571" width="1421px" zoomAndPan="magnify"><defs/><g><rect height="26.2969" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="139" x="634.25" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="129" x="639.25" y="22.9951">CSRF 组件类关系图</text><!--MD5=[28baec075e1baacf218bafe12baefe26]
-entity IConfig--><g id="elem_IConfig"><rect fill="#85BBF0" height="68.8906" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="137" x="453" y="190.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="472.5" y="213.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="62" x="490.5" y="231.4453">IConfig</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="117" x="463" y="246.3574">[CSRF 组件配置接口]</text></g><!--MD5=[bae53b35caa0cfd7ce6c0e3e43903e1d]
-entity GoogleRecaptchaV2Config--><g id="elem_GoogleRecaptchaV2Config"><rect fill="#85BBF0" height="82.8594" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="253" x="7" y="336.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="84.5" y="359.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="233" x="17" y="377.4453">GoogleRecaptchaV2Config</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="175" x="44" y="392.3574">[Google Recaptcha V2 CSRF</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="65" x="101" y="406.3262">组件配置类]</text></g><!--MD5=[e3a481c2e78b4c2e6628e904fa1d4213]
-entity GoogleRecaptchaV3Config--><g id="elem_GoogleRecaptchaV3Config"><rect fill="#85BBF0" height="82.8594" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="253" x="295" y="336.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="372.5" y="359.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="233" x="305" y="377.4453">GoogleRecaptchaV3Config</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="175" x="332" y="392.3574">[Google Recaptcha V3 CSRF</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="65" x="389" y="406.3262">组件配置类]</text></g><!--MD5=[0a44b39656e83feafc6473bad8848289]
-entity InternalCsrfConfig--><g id="elem_InternalCsrfConfig"><rect fill="#85BBF0" height="68.8906" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="182" x="583.5" y="343.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="625.5" y="366.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="162" x="593.5" y="384.4453">InternalCsrfConfig</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="133" x="608" y="399.3574">[内部 CSRF 组件配置类]</text></g><!--MD5=[8bf81bafd45baeebeb4c348d8b0a71b5]
-entity Type--><g id="elem_Type"><rect fill="#85BBF0" height="68.8906" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="118" x="675.5" y="190.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="685.5" y="213.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="43" x="713" y="231.4453">Type</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="97" x="686" y="246.3574">[ CSRF 组件类型]</text></g><!--MD5=[8e42deec3542c744fbdd369061951174]
-entity VerifyResponse--><g id="elem_VerifyResponse"><rect fill="#85BBF0" height="68.8906" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="161" x="829" y="190.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="860.5" y="213.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="139" x="840" y="231.4453">VerifyResponse</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="141" x="839" y="246.3574">[CSRF 组件验证返回结构]</text></g><!--MD5=[5812f76c3c18adc193a8dd287d2f2a4e]
-entity GoogleRecaptchaV2--><g id="elem_GoogleRecaptchaV2"><rect fill="#85BBF0" height="82.8594" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="199" x="801" y="336.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="851.5" y="359.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="177" x="812" y="377.4453">GoogleRecaptchaV2</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="175" x="811" y="392.3574">[Google Recaptcha V2 CSRF</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="886" y="406.3262">组件]</text></g><!--MD5=[c1280757f3be74120d4537ddc173af92]
-entity GoogleRecaptchaV3--><g id="elem_GoogleRecaptchaV3"><rect fill="#85BBF0" height="82.8594" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="199" x="1035" y="336.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="1085.5" y="359.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="177" x="1046" y="377.4453">GoogleRecaptchaV3</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="175" x="1045" y="392.3574">[Google Recaptcha V3 CSRF</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="1120" y="406.3262">组件]</text></g><!--MD5=[948321cbf133d94fdba27a753bd7cd02]
-entity InternalCsrf--><g id="elem_InternalCsrf"><rect fill="#85BBF0" height="68.8906" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="126" x="1269.5" y="343.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="1283.5" y="366.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="106" x="1279.5" y="384.4453">InternalCsrf</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="97" x="1284" y="399.3574">[内部 CSRF 组件]</text></g><!--MD5=[4565b091573ad3580733d9333b2e48ea]
-entity CryptoUtils--><g id="elem_CryptoUtils"><rect fill="#85BBF0" height="68.8906" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="118" x="1273.5" y="496.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="1283.5" y="519.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="98" x="1283.5" y="537.4453">CryptoUtils</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="70" x="1297.5" y="552.3574">[加密解密类]</text></g><!--MD5=[9de50cee083c7e532b87d2274d9c66c6]
-entity ICsrf--><g id="elem_ICsrf"><rect fill="#85BBF0" height="68.8906" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="118" x="1050.5" y="190.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="1060.5" y="213.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="43" x="1088" y="231.4453">ICsrf</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="93" x="1063" y="246.3574">[CSRF 组件接口]</text></g><!--MD5=[331e5ab4100280e552d45eaf1040aa7a]
-entity Factory--><g id="elem_Factory"><rect fill="#85BBF0" height="68.8906" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="125" x="759" y="44.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98" x="772.5" y="67.292">«component»</text><text fill="#000000" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="67" x="788" y="85.4453">Factory</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="105" x="769" y="100.3574">[CSRF 组件工厂类]</text></g><!--MD5=[f061f8816657380e15de4336f2a66b4e]
-reverse link IConfig to GoogleRecaptchaV2Config--><g id="link_IConfig_GoogleRecaptchaV2Config"><path d="M447.63,254.5469 C388.28,277.6469 304.18,310.3669 237.94,336.1569 " fill="none" id="IConfig-backto-GoogleRecaptchaV2Config" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="452.58,252.6169,442.7424,252.1465,447.9192,254.427,445.6386,259.6038,452.58,252.6169" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="87" x="352.5" y="302.3638">implements</text></g><!--MD5=[43ac056d685673f97c9f147c930d1e44]
-reverse link IConfig to GoogleRecaptchaV3Config--><g id="link_IConfig_GoogleRecaptchaV3Config"><path d="M496.44,263.6469 C481.81,285.7269 463.37,313.5769 448.44,336.1269 " fill="none" id="IConfig-backto-GoogleRecaptchaV3Config" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="499.31,259.3069,490.9978,264.5897,496.5431,263.4715,497.6613,269.0167,499.31,259.3069" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="87" x="478.5" y="302.3638">implements</text></g><!--MD5=[955b9adc88b5774b7c001ab2edfe82c7]
-reverse link IConfig to InternalCsrfConfig--><g id="link_IConfig_InternalCsrfConfig"><path d="M559.07,262.8769 C583.92,287.4069 616.25,319.3169 640.38,343.1169 " fill="none" id="IConfig-backto-InternalCsrfConfig" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="555.46,259.3069,559.0698,268.4703,559.024,262.8137,564.6807,262.7679,555.46,259.3069" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="87" x="604.5" y="302.3638">implements</text></g><!--MD5=[b369c5892c522befe751d952fac3c1c0]
-reverse link ICsrf to GoogleRecaptchaV2--><g id="link_ICsrf_GoogleRecaptchaV2"><path d="M1059.01,262.2769 C1028.16,284.5569 988.65,313.1069 956.8,336.1269 " fill="none" id="ICsrf-backto-GoogleRecaptchaV2" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="1063.12,259.3069,1053.4814,261.3311,1059.0659,262.2333,1058.1637,267.8177,1063.12,259.3069" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="87" x="1018.5" y="302.3638">implements</text></g><!--MD5=[bc6684bec777bb91b6bd57e0a56fc8b2]
-reverse link ICsrf to GoogleRecaptchaV3--><g id="link_ICsrf_GoogleRecaptchaV3"><path d="M1115.9,264.4769 C1119.54,286.4169 1124.08,313.8569 1127.77,336.1269 " fill="none" id="ICsrf-backto-GoogleRecaptchaV3" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="1115.05,259.3069,1112.5706,268.8385,1115.865,264.24,1120.4636,267.5345,1115.05,259.3069" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="87" x="1123.5" y="302.3638">implements</text></g><!--MD5=[067dc12f1178695cf1006914d2a7a2c1]
-reverse link ICsrf to InternalCsrf--><g id="link_ICsrf_InternalCsrf"><path d="M1172.97,260.4769 C1188.44,269.4669 1204.77,279.4069 1219.5,289.2969 C1244.32,305.9569 1270.81,326.3269 1291.9,343.2169 " fill="none" id="ICsrf-backto-InternalCsrf" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="1168.63,257.9669,1174.423,265.9319,1172.9597,260.4675,1178.4241,259.0043,1168.63,257.9669" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="87" x="1242.5" y="302.3638">implements</text></g><!--MD5=[1bb971b3baffa6fe7230d6f7b5d008bf]
-link InternalCsrf to CryptoUtils--><g id="link_InternalCsrf_CryptoUtils"><path d="M1332.5,412.3069 C1332.5,435.5869 1332.5,466.6769 1332.5,491.0269 " fill="none" id="InternalCsrf-to-CryptoUtils" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="1332.5,496.1169,1336.5,487.1169,1332.5,491.1169,1328.5,487.1169,1332.5,496.1169" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="80" x="1333.5" y="462.3638">depend on</text></g><!--MD5=[779b1ae850b3048ec37c755a245aa7e6]
-link Factory to IConfig--><g id="link_Factory_IConfig"><path d="M758.75,108.7869 C735.67,119.5269 709.36,131.8769 685.5,143.2969 C655.36,157.7269 622.25,173.9169 593.72,187.9769 " fill="none" id="Factory-to-IConfig" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="589.18,190.2069,599.0209,189.8099,593.6635,187.9937,595.4797,182.6363,589.18,190.2069" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="80" x="686.5" y="156.3638">depend on</text></g><!--MD5=[529d2c543853ef20341aa5810f901f53]
-link Factory to ICsrf--><g id="link_Factory_ICsrf"><path d="M884.16,104.7769 C910.8,115.8869 941.99,129.5469 969.5,143.2969 C996.41,156.7469 1025.37,173.0769 1049.92,187.4969 " fill="none" id="Factory-to-ICsrf" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="1054.45,190.1569,1048.7393,182.1327,1050.1462,187.6118,1044.6671,189.0187,1054.45,190.1569" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="80" x="1001.5" y="156.3638">depend on</text></g><!--MD5=[6da2b25df408550153ac661e1e973cce]
-link Factory to Type--><g id="link_Factory_Type"><path d="M801.1,113.5569 C788.01,135.2269 770.99,163.3969 757.43,185.8369 " fill="none" id="Factory-to-Type" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="754.77,190.2469,762.8526,184.6191,757.3593,185.9695,756.0089,180.4762,754.77,190.2469" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="80" x="781.5" y="156.3638">depend on</text></g><!--MD5=[bf62e3ee0abc56841207d9f338ca844e]
-link Factory to VerifyResponse--><g id="link_Factory_VerifyResponse"><path d="M849.54,113.4769 C856.78,122.8469 864.27,133.2369 870.5,143.2969 C878.72,156.5869 886.51,171.8669 892.93,185.5169 " fill="none" id="Factory-to-VerifyResponse" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="895.05,190.0769,894.8789,180.2295,892.9403,185.5438,887.626,183.6051,895.05,190.0769" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="80" x="880.5" y="156.3638">depend on</text></g><!--MD5=[ea5c29c55aef173f7089059abf4fc46a]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="596px" preserveAspectRatio="none" style="width:1541px;height:596px;background:#FFFFFF;" version="1.1" viewBox="0 0 1541 596" width="1541px" zoomAndPan="magnify"><defs/><g><rect height="26.2969" rx="2.5" ry="2.5" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="139" x="694" y="5"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="129" x="699" y="22.9951">CSRF 组件类关系图</text><!--MD5=[dcda66dabdb739ec36f1175150e3c9d5]
+class Factory--><g id="elem_Factory"><rect codeLine="27" fill="#85BBF0" height="76.5938" id="Factory" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="133" x="1076" y="44.2969"/><ellipse cx="1113.95" cy="60.2969" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1116.9188,65.9375 Q1116.3406,66.2344 1115.7,66.375 Q1115.0594,66.5313 1114.3563,66.5313 Q1111.8563,66.5313 1110.5281,64.8906 Q1109.2156,63.2344 1109.2156,60.1094 Q1109.2156,56.9844 1110.5281,55.3281 Q1111.8563,53.6719 1114.3563,53.6719 Q1115.0594,53.6719 1115.7,53.8281 Q1116.3563,53.9844 1116.9188,54.2813 L1116.9188,57 Q1116.2938,56.4219 1115.7,56.1563 Q1115.1063,55.875 1114.4813,55.875 Q1113.1375,55.875 1112.45,56.9531 Q1111.7625,58.0156 1111.7625,60.1094 Q1111.7625,62.2031 1112.45,63.2813 Q1113.1375,64.3438 1114.4813,64.3438 Q1115.1063,64.3438 1115.7,64.0781 Q1116.2938,63.7969 1116.9188,63.2188 L1116.9188,65.9375 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="50" x="1133.05" y="65.1436">Factory</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="1077" x2="1208" y1="76.2969" y2="76.2969"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="121" x="1082" y="113.5889">[CSRF 组件工厂类]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="1077" x2="1113" y1="92.4453" y2="92.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="59" x="1113" y="96.792">Factory</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="1172" x2="1208" y1="92.4453" y2="92.4453"/></g><!--MD5=[4296a1ab0576a383a1a509d52c22ebf0]
+class Type--><g id="elem_Type"><rect codeLine="31" fill="#85BBF0" height="76.5938" id="Type" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="119" x="1138" y="196.2969"/><ellipse cx="1176.85" cy="212.2969" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1179.8188,217.9375 Q1179.2406,218.2344 1178.6,218.375 Q1177.9594,218.5313 1177.2563,218.5313 Q1174.7563,218.5313 1173.4281,216.8906 Q1172.1156,215.2344 1172.1156,212.1094 Q1172.1156,208.9844 1173.4281,207.3281 Q1174.7563,205.6719 1177.2563,205.6719 Q1177.9594,205.6719 1178.6,205.8281 Q1179.2563,205.9844 1179.8188,206.2813 L1179.8188,209 Q1179.1938,208.4219 1178.6,208.1563 Q1178.0063,207.875 1177.3813,207.875 Q1176.0375,207.875 1175.35,208.9531 Q1174.6625,210.0156 1174.6625,212.1094 Q1174.6625,214.2031 1175.35,215.2813 Q1176.0375,216.3438 1177.3813,216.3438 Q1178.0063,216.3438 1178.6,216.0781 Q1179.1938,215.7969 1179.8188,215.2188 L1179.8188,217.9375 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="34" x="1196.15" y="217.1436">Type</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="1139" x2="1256" y1="228.2969" y2="228.2969"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="107" x="1144" y="265.5889">[CSRF 组件类型]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="1139" x2="1178" y1="244.4453" y2="244.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="39" x="1178" y="248.792">Type</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="1217" x2="1256" y1="244.4453" y2="244.4453"/></g><!--MD5=[5eea25c66340537cd3e2fe72afffdeaa]
+class VerifyResponse--><g id="elem_VerifyResponse"><rect codeLine="35" fill="#85BBF0" height="76.5938" id="VerifyResponse" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="175" x="1292" y="196.2969"/><ellipse cx="1322.75" cy="212.2969" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1325.7188,217.9375 Q1325.1406,218.2344 1324.5,218.375 Q1323.8594,218.5313 1323.1563,218.5313 Q1320.6563,218.5313 1319.3281,216.8906 Q1318.0156,215.2344 1318.0156,212.1094 Q1318.0156,208.9844 1319.3281,207.3281 Q1320.6563,205.6719 1323.1563,205.6719 Q1323.8594,205.6719 1324.5,205.8281 Q1325.1563,205.9844 1325.7188,206.2813 L1325.7188,209 Q1325.0938,208.4219 1324.5,208.1563 Q1323.9063,207.875 1323.2813,207.875 Q1321.9375,207.875 1321.25,208.9531 Q1320.5625,210.0156 1320.5625,212.1094 Q1320.5625,214.2031 1321.25,215.2813 Q1321.9375,216.3438 1323.2813,216.3438 Q1323.9063,216.3438 1324.5,216.0781 Q1325.0938,215.7969 1325.7188,215.2188 L1325.7188,217.9375 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="108" x="1340.25" y="217.1436">VerifyResponse</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="1293" x2="1466" y1="228.2969" y2="228.2969"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="163" x="1298" y="265.5889">[CSRF 组件验证返回结构]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="1293" x2="1317" y1="244.4453" y2="244.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="125" x="1317" y="248.792">VerifyResponse</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="1442" x2="1466" y1="244.4453" y2="244.4453"/></g><!--MD5=[5c0eb67a6a4b471579a32057e208c544]
+class IConfig--><g id="elem_IConfig"><rect codeLine="40" fill="#20B2AA" height="76.5938" id="IConfig" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="147" x="956" y="196.2969"/><ellipse cx="1001.75" cy="212.2969" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M997.6719,208.0625 L997.6719,205.9063 L1005.0625,205.9063 L1005.0625,208.0625 L1002.5938,208.0625 L1002.5938,216.1406 L1005.0625,216.1406 L1005.0625,218.2969 L997.6719,218.2969 L997.6719,216.1406 L1000.1406,216.1406 L1000.1406,208.0625 L997.6719,208.0625 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="47" x="1022.25" y="217.1436">IConfig</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="957" x2="1102" y1="228.2969" y2="228.2969"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="135" x="962" y="265.5889">[CSRF 组件配置接口]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="957" x2="1002" y1="244.4453" y2="244.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="55" x="1002" y="248.792">IConfig</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="1057" x2="1102" y1="244.4453" y2="244.4453"/></g><!--MD5=[894a1e867781a1e76979c62c70e74046]
+class GoogleRecaptchaV2Config--><g id="elem_GoogleRecaptchaV2Config"><rect codeLine="44" fill="#85BBF0" height="76.5938" id="GoogleRecaptchaV2Config" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="287" x="725" y="348.2969"/><ellipse cx="771.25" cy="364.2969" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M774.2188,369.9375 Q773.6406,370.2344 773,370.375 Q772.3594,370.5313 771.6563,370.5313 Q769.1563,370.5313 767.8281,368.8906 Q766.5156,367.2344 766.5156,364.1094 Q766.5156,360.9844 767.8281,359.3281 Q769.1563,357.6719 771.6563,357.6719 Q772.3594,357.6719 773,357.8281 Q773.6563,357.9844 774.2188,358.2813 L774.2188,361 Q773.5938,360.4219 773,360.1563 Q772.4063,359.875 771.7813,359.875 Q770.4375,359.875 769.75,360.9531 Q769.0625,362.0156 769.0625,364.1094 Q769.0625,366.2031 769.75,367.2813 Q770.4375,368.3438 771.7813,368.3438 Q772.4063,368.3438 773,368.0781 Q773.5938,367.7969 774.2188,367.2188 L774.2188,369.9375 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="186" x="791.75" y="369.1436">GoogleRecaptchaV2Config</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="726" x2="1011" y1="380.2969" y2="380.2969"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="275" x="731" y="417.5889">[Google Recaptcha V2 CSRF 组件配置类]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="726" x2="763.5" y1="396.4453" y2="396.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="210" x="763.5" y="400.792">GoogleRecaptchaV2Config</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="973.5" x2="1011" y1="396.4453" y2="396.4453"/></g><!--MD5=[13cb53be48f79bebcd85796f1d545ef1]
+class GoogleRecaptchaV3Config--><g id="elem_GoogleRecaptchaV3Config"><rect codeLine="48" fill="#85BBF0" height="76.5938" id="GoogleRecaptchaV3Config" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="287" x="1047" y="348.2969"/><ellipse cx="1093.25" cy="364.2969" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1096.2188,369.9375 Q1095.6406,370.2344 1095,370.375 Q1094.3594,370.5313 1093.6563,370.5313 Q1091.1563,370.5313 1089.8281,368.8906 Q1088.5156,367.2344 1088.5156,364.1094 Q1088.5156,360.9844 1089.8281,359.3281 Q1091.1563,357.6719 1093.6563,357.6719 Q1094.3594,357.6719 1095,357.8281 Q1095.6563,357.9844 1096.2188,358.2813 L1096.2188,361 Q1095.5938,360.4219 1095,360.1563 Q1094.4063,359.875 1093.7813,359.875 Q1092.4375,359.875 1091.75,360.9531 Q1091.0625,362.0156 1091.0625,364.1094 Q1091.0625,366.2031 1091.75,367.2813 Q1092.4375,368.3438 1093.7813,368.3438 Q1094.4063,368.3438 1095,368.0781 Q1095.5938,367.7969 1096.2188,367.2188 L1096.2188,369.9375 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="186" x="1113.75" y="369.1436">GoogleRecaptchaV3Config</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="1048" x2="1333" y1="380.2969" y2="380.2969"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="275" x="1053" y="417.5889">[Google Recaptcha V3 CSRF 组件配置类]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="1048" x2="1085.5" y1="396.4453" y2="396.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="210" x="1085.5" y="400.792">GoogleRecaptchaV3Config</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="1295.5" x2="1333" y1="396.4453" y2="396.4453"/></g><!--MD5=[dca9d3a44d4f8f05232163d58d25433a]
+class InternalCsrfConfig--><g id="elem_InternalCsrfConfig"><rect codeLine="52" fill="#85BBF0" height="76.5938" id="InternalCsrfConfig" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="165" x="1369" y="348.2969"/><ellipse cx="1388.95" cy="364.2969" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1391.9188,369.9375 Q1391.3406,370.2344 1390.7,370.375 Q1390.0594,370.5313 1389.3563,370.5313 Q1386.8563,370.5313 1385.5281,368.8906 Q1384.2156,367.2344 1384.2156,364.1094 Q1384.2156,360.9844 1385.5281,359.3281 Q1386.8563,357.6719 1389.3563,357.6719 Q1390.0594,357.6719 1390.7,357.8281 Q1391.3563,357.9844 1391.9188,358.2813 L1391.9188,361 Q1391.2938,360.4219 1390.7,360.1563 Q1390.1063,359.875 1389.4813,359.875 Q1388.1375,359.875 1387.45,360.9531 Q1386.7625,362.0156 1386.7625,364.1094 Q1386.7625,366.2031 1387.45,367.2813 Q1388.1375,368.3438 1389.4813,368.3438 Q1390.1063,368.3438 1390.7,368.0781 Q1391.2938,367.7969 1391.9188,367.2188 L1391.9188,369.9375 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="122" x="1404.05" y="369.1436">InternalCsrfConfig</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="1370" x2="1533" y1="380.2969" y2="380.2969"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="153" x="1375" y="417.5889">[内部 CSRF 组件配置类]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="1370" x2="1379.5" y1="396.4453" y2="396.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="144" x="1379.5" y="400.792">InternalCsrfConfig</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="1523.5" x2="1533" y1="396.4453" y2="396.4453"/></g><!--MD5=[fe1e30943095b11b81d8e07b0ccadac3]
+class ICsrf--><g id="elem_ICsrf"><rect codeLine="57" fill="#20B2AA" height="76.5938" id="ICsrf" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="119" x="434" y="196.2969"/><ellipse cx="474.65" cy="212.2969" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M470.5719,208.0625 L470.5719,205.9063 L477.9625,205.9063 L477.9625,208.0625 L475.4938,208.0625 L475.4938,216.1406 L477.9625,216.1406 L477.9625,218.2969 L470.5719,218.2969 L470.5719,216.1406 L473.0406,216.1406 L473.0406,208.0625 L470.5719,208.0625 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="30" x="494.35" y="217.1436">ICsrf</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="435" x2="552" y1="228.2969" y2="228.2969"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="107" x="440" y="265.5889">[CSRF 组件接口]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="435" x2="475" y1="244.4453" y2="244.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="37" x="475" y="248.792">ICsrf</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="512" x2="552" y1="244.4453" y2="244.4453"/></g><!--MD5=[b4cd6003ee808f6f87094c20412e3f39]
+class GoogleRecaptchaV2--><g id="elem_GoogleRecaptchaV2"><rect codeLine="61" fill="#85BBF0" height="76.5938" id="GoogleRecaptchaV2" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="245" x="7" y="348.2969"/><ellipse cx="54.25" cy="364.2969" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M57.2188,369.9375 Q56.6406,370.2344 56,370.375 Q55.3594,370.5313 54.6563,370.5313 Q52.1563,370.5313 50.8281,368.8906 Q49.5156,367.2344 49.5156,364.1094 Q49.5156,360.9844 50.8281,359.3281 Q52.1563,357.6719 54.6563,357.6719 Q55.3594,357.6719 56,357.8281 Q56.6563,357.9844 57.2188,358.2813 L57.2188,361 Q56.5938,360.4219 56,360.1563 Q55.4063,359.875 54.7813,359.875 Q53.4375,359.875 52.75,360.9531 Q52.0625,362.0156 52.0625,364.1094 Q52.0625,366.2031 52.75,367.2813 Q53.4375,368.3438 54.7813,368.3438 Q55.4063,368.3438 56,368.0781 Q56.5938,367.7969 57.2188,367.2188 L57.2188,369.9375 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="142" x="74.75" y="369.1436">GoogleRecaptchaV2</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="8" x2="251" y1="380.2969" y2="380.2969"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="233" x="13" y="417.5889">[Google Recaptcha V2 CSRF 组件]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="8" x2="50" y1="396.4453" y2="396.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="159" x="50" y="400.792">GoogleRecaptchaV2</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="209" x2="251" y1="396.4453" y2="396.4453"/></g><!--MD5=[d60cd25b938479453142ebeda057f67f]
+class GoogleRecaptchaV3--><g id="elem_GoogleRecaptchaV3"><rect codeLine="65" fill="#85BBF0" height="76.5938" id="GoogleRecaptchaV3" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="245" x="287" y="348.2969"/><ellipse cx="334.25" cy="364.2969" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M337.2188,369.9375 Q336.6406,370.2344 336,370.375 Q335.3594,370.5313 334.6563,370.5313 Q332.1563,370.5313 330.8281,368.8906 Q329.5156,367.2344 329.5156,364.1094 Q329.5156,360.9844 330.8281,359.3281 Q332.1563,357.6719 334.6563,357.6719 Q335.3594,357.6719 336,357.8281 Q336.6563,357.9844 337.2188,358.2813 L337.2188,361 Q336.5938,360.4219 336,360.1563 Q335.4063,359.875 334.7813,359.875 Q333.4375,359.875 332.75,360.9531 Q332.0625,362.0156 332.0625,364.1094 Q332.0625,366.2031 332.75,367.2813 Q333.4375,368.3438 334.7813,368.3438 Q335.4063,368.3438 336,368.0781 Q336.5938,367.7969 337.2188,367.2188 L337.2188,369.9375 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="142" x="354.75" y="369.1436">GoogleRecaptchaV3</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="288" x2="531" y1="380.2969" y2="380.2969"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="233" x="293" y="417.5889">[Google Recaptcha V3 CSRF 组件]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="288" x2="330" y1="396.4453" y2="396.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="159" x="330" y="400.792">GoogleRecaptchaV3</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="489" x2="531" y1="396.4453" y2="396.4453"/></g><!--MD5=[03e9e703167706730582c645c9fa987b]
+class InternalCsrf--><g id="elem_InternalCsrf"><rect codeLine="69" fill="#85BBF0" height="76.5938" id="InternalCsrf" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="123" x="567" y="348.2969"/><ellipse cx="587.85" cy="364.2969" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M590.8188,369.9375 Q590.2406,370.2344 589.6,370.375 Q588.9594,370.5313 588.2563,370.5313 Q585.7563,370.5313 584.4281,368.8906 Q583.1156,367.2344 583.1156,364.1094 Q583.1156,360.9844 584.4281,359.3281 Q585.7563,357.6719 588.2563,357.6719 Q588.9594,357.6719 589.6,357.8281 Q590.2563,357.9844 590.8188,358.2813 L590.8188,361 Q590.1938,360.4219 589.6,360.1563 Q589.0063,359.875 588.3813,359.875 Q587.0375,359.875 586.35,360.9531 Q585.6625,362.0156 585.6625,364.1094 Q585.6625,366.2031 586.35,367.2813 Q587.0375,368.3438 588.3813,368.3438 Q589.0063,368.3438 589.6,368.0781 Q590.1938,367.7969 590.8188,367.2188 L590.8188,369.9375 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="78" x="603.15" y="369.1436">InternalCsrf</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="568" x2="689" y1="380.2969" y2="380.2969"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="111" x="573" y="417.5889">[内部 CSRF 组件]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="568" x2="582" y1="396.4453" y2="396.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="93" x="582" y="400.792">InternalCsrf</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="675" x2="689" y1="396.4453" y2="396.4453"/></g><!--MD5=[52f92d978cd8618719cbddd2663a1164]
+class CryptoUtils--><g id="elem_CryptoUtils"><rect codeLine="73" fill="#85BBF0" height="88.8906" id="CryptoUtils" rx="2.5" ry="2.5" style="stroke:#78A8D8;stroke-width:0.5;" width="106" x="575.5" y="500.2969"/><ellipse cx="590.5" cy="516.2969" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M593.4688,521.9375 Q592.8906,522.2344 592.25,522.375 Q591.6094,522.5313 590.9063,522.5313 Q588.4063,522.5313 587.0781,520.8906 Q585.7656,519.2344 585.7656,516.1094 Q585.7656,512.9844 587.0781,511.3281 Q588.4063,509.6719 590.9063,509.6719 Q591.6094,509.6719 592.25,509.8281 Q592.9063,509.9844 593.4688,510.2813 L593.4688,513 Q592.8438,512.4219 592.25,512.1563 Q591.6563,511.875 591.0313,511.875 Q589.6875,511.875 589,512.9531 Q588.3125,514.0156 588.3125,516.1094 Q588.3125,518.2031 589,519.2813 Q589.6875,520.3438 591.0313,520.3438 Q591.6563,520.3438 592.25,520.0781 Q592.8438,519.7969 593.4688,519.2188 L593.4688,521.9375 Z " fill="#000000"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="74" x="604.5" y="521.1436">CryptoUtils</text><line style="stroke:#78A8D8;stroke-width:0.5;" x1="576.5" x2="680.5" y1="532.2969" y2="532.2969"/><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="576.5" x2="585" y1="548.4453" y2="548.4453"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="87" x="585" y="552.792">CryptoUtils</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="672" x2="680.5" y1="548.4453" y2="548.4453"/><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="576.5" x2="588.5" y1="572.8906" y2="572.8906"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="14" lengthAdjust="spacing" textLength="80" x="588.5" y="577.2373">[加密解密类]</text><line style="stroke:#78A8D8;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="668.5" x2="680.5" y1="572.8906" y2="572.8906"/></g><!--MD5=[779b1ae850b3048ec37c755a245aa7e6]
+link Factory to IConfig--><g id="link_Factory_IConfig"><path codeLine="78" d="M1113.22,121.5369 C1105.77,131.2069 1097.81,141.6169 1090.5,151.2969 C1080.67,164.3269 1070.06,178.5969 1060.49,191.5569 " fill="none" id="Factory-to-IConfig" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="1057.28,195.8969,1065.8301,191.0086,1060.2387,191.8662,1059.3811,186.2747,1057.28,195.8969" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="12" lengthAdjust="spacing" textLength="68" x="1091.5" y="163.4355">depend on</text></g><!--MD5=[6da2b25df408550153ac661e1e973cce]
+link Factory to Type--><g id="link_Factory_Type"><path codeLine="79" d="M1156.38,121.6469 C1164.16,142.8669 1173.89,169.3969 1181.93,191.3269 " fill="none" id="Factory-to-Type" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="1183.72,196.2169,1184.3579,186.3887,1181.9895,191.5259,1176.8523,189.1575,1183.72,196.2169" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="12" lengthAdjust="spacing" textLength="68" x="1173.5" y="163.4355">depend on</text></g><!--MD5=[bf62e3ee0abc56841207d9f338ca844e]
+link Factory to VerifyResponse--><g id="link_Factory_VerifyResponse"><path codeLine="80" d="M1202.83,121.3469 C1218.38,131.0769 1235.08,141.5469 1250.5,151.2969 C1272.11,164.9569 1295.68,179.9969 1316.7,193.4469 " fill="none" id="Factory-to-VerifyResponse" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="1321.14,196.2969,1315.7197,188.0737,1316.9299,193.5996,1311.4041,194.8098,1321.14,196.2969" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="12" lengthAdjust="spacing" textLength="68" x="1273.5" y="163.4355">depend on</text></g><!--MD5=[529d2c543853ef20341aa5810f901f53]
+link Factory to ICsrf--><g id="link_Factory_ICsrf"><path codeLine="81" d="M1075.79,99.2169 C950.57,128.1569 681.81,190.2769 558.16,218.8469 " fill="none" id="Factory-to-ICsrf" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="553.11,220.0169,562.7806,221.8824,557.981,218.8884,560.975,214.0888,553.11,220.0169" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="12" lengthAdjust="spacing" textLength="68" x="838.5" y="163.4355">depend on</text></g><!--MD5=[f061f8816657380e15de4336f2a66b4e]
+reverse link IConfig to GoogleRecaptchaV2Config--><g id="link_IConfig_GoogleRecaptchaV2Config"><path codeLine="82" d="M985.09,277.1669 C961.23,299.3969 932.04,326.5969 908.83,348.2169 " fill="none" id="IConfig-backto-GoogleRecaptchaV2Config" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="988.87,273.6469,979.5617,276.8648,985.2152,277.059,985.021,282.7125,988.87,273.6469" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="12" lengthAdjust="spacing" textLength="72" x="955.5" y="315.4355">implements</text></g><!--MD5=[43ac056d685673f97c9f147c930d1e44]
+reverse link IConfig to GoogleRecaptchaV3Config--><g id="link_IConfig_GoogleRecaptchaV3Config"><path codeLine="83" d="M1073.91,277.1669 C1097.77,299.3969 1126.96,326.5969 1150.17,348.2169 " fill="none" id="IConfig-backto-GoogleRecaptchaV3Config" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="1070.13,273.6469,1073.979,282.7125,1073.7848,277.059,1079.4383,276.8648,1070.13,273.6469" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="12" lengthAdjust="spacing" textLength="72" x="1116.5" y="315.4355">implements</text></g><!--MD5=[955b9adc88b5774b7c001ab2edfe82c7]
+reverse link IConfig to InternalCsrfConfig--><g id="link_IConfig_InternalCsrfConfig"><path codeLine="84" d="M1108.2,268.6669 C1112.35,270.2569 1116.47,271.8169 1120.5,273.2969 C1221.81,310.5569 1249.61,312.6669 1351.5,348.2969 C1357.19,350.2869 1363.04,352.3769 1368.93,354.5069 " fill="none" id="IConfig-backto-InternalCsrfConfig" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="1103.31,266.7669,1110.2441,273.761,1107.9689,268.5819,1113.1481,266.3067,1103.31,266.7669" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="12" lengthAdjust="spacing" textLength="72" x="1256.5" y="315.4355">implements</text></g><!--MD5=[b369c5892c522befe751d952fac3c1c0]
+reverse link ICsrf to GoogleRecaptchaV2--><g id="link_ICsrf_GoogleRecaptchaV2"><path codeLine="85" d="M428.98,262.3869 C371.09,286.2469 285.49,321.5169 220.61,348.2469 " fill="none" id="ICsrf-backto-GoogleRecaptchaV2" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="433.8,260.3969,423.9549,260.1249,429.1766,262.3006,427.0009,267.5223,433.8,260.3969" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="12" lengthAdjust="spacing" textLength="72" x="323.5" y="315.4355">implements</text></g><!--MD5=[bc6684bec777bb91b6bd57e0a56fc8b2]
+reverse link ICsrf to GoogleRecaptchaV3--><g id="link_ICsrf_GoogleRecaptchaV3"><path codeLine="86" d="M469.71,278.2769 C457.38,300.2969 442.45,326.9569 430.54,348.2169 " fill="none" id="ICsrf-backto-GoogleRecaptchaV3" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="472.3,273.6469,464.4178,279.5521,469.8609,278.0116,471.4014,283.4547,472.3,273.6469" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="12" lengthAdjust="spacing" textLength="72" x="455.5" y="315.4355">implements</text></g><!--MD5=[067dc12f1178695cf1006914d2a7a2c1]
+reverse link ICsrf to InternalCsrf--><g id="link_ICsrf_InternalCsrf"><path codeLine="87" d="M530.98,277.4469 C550.94,299.6269 575.3,326.6869 594.68,348.2169 " fill="none" id="ICsrf-backto-InternalCsrf" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="527.57,273.6469,530.6175,283.0124,530.9148,277.3633,536.5639,277.6607,527.57,273.6469" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="12" lengthAdjust="spacing" textLength="72" x="566.5" y="315.4355">implements</text></g><!--MD5=[1bb971b3baffa6fe7230d6f7b5d008bf]
+link InternalCsrf to CryptoUtils--><g id="link_InternalCsrf_CryptoUtils"><path codeLine="88" d="M628.5,425.5569 C628.5,446.4369 628.5,472.6069 628.5,495.0069 " fill="none" id="InternalCsrf-to-CryptoUtils" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="628.5,500.0269,632.5,491.0269,628.5,495.0269,624.5,491.0269,628.5,500.0269" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="&quot;Microsoft YaHei&quot;" font-size="12" lengthAdjust="spacing" textLength="68" x="629.5" y="467.4355">depend on</text></g><!--MD5=[f97a7fb2f5017ce34143c81b90ba35e3]
 @startuml
-!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Component.puml
-title "CSRF 组件类关系图"
-Component(IConfig, "IConfig", "CSRF 组件配置接口")
-Component(GoogleRecaptchaV2Config, "GoogleRecaptchaV2Config", "Google Recaptcha V2 CSRF 组件配置类")
-Component(GoogleRecaptchaV3Config, "GoogleRecaptchaV3Config", "Google Recaptcha V3 CSRF 组件配置类")
-Component(InternalCsrfConfig, "InternalCsrfConfig", "内部 CSRF 组件配置类")
-Component(Type, "Type", " CSRF 组件类型")
-Component(VerifyResponse, "VerifyResponse", "CSRF 组件验证返回结构")
-Component(GoogleRecaptchaV2, "GoogleRecaptchaV2", "Google Recaptcha V2 CSRF 组件")
-Component(GoogleRecaptchaV3, "GoogleRecaptchaV3", "Google Recaptcha V3 CSRF 组件")
-Component(InternalCsrf, "InternalCsrf", "内部 CSRF 组件")
-Component(CryptoUtils, "CryptoUtils", "加密解密类")
-Component(ICsrf, "ICsrf", "CSRF 组件接口")
-Component(Factory, "Factory", "CSRF 组件工厂类")
-Rel_Back(IConfig, GoogleRecaptchaV2Config, "implements")
-Rel_Back(IConfig, GoogleRecaptchaV3Config, "implements")
-Rel_Back(IConfig, InternalCsrfConfig, "implements")
-Rel_Back(ICsrf, GoogleRecaptchaV2, "implements")
-Rel_Back(ICsrf, GoogleRecaptchaV3, "implements")
-Rel_Back(ICsrf, InternalCsrf, "implements")
-Rel(InternalCsrf, CryptoUtils, "depend on")
-Rel(Factory, IConfig, "depend on")
-Rel(Factory, ICsrf, "depend on")
-Rel(Factory, Type, "depend on")
-Rel(Factory, VerifyResponse, "depend on")
+title CSRF 组件类关系图
+' 设置全局样式
+skinparam componentStyle rectangle
+skinparam roundcorner 5
+skinparam shadowing false
+skinparam DefaultFontName "Microsoft YaHei"
+skinparam DefaultTextAlignment center ' 强制全局文本居中
+' 颜色定义
+skinparam class {
+    BackgroundColor #85BBF0
+    BorderColor #78A8D8
+    FontColor black
+    FontSize 14
+}
+skinparam interface {
+    BackgroundColor #20B2AA
+    BorderColor #78A8D8
+    FontColor black
+    FontSize 14
+}
+skinparam arrow {
+    Color #000000
+    FontColor #000000
+    FontSize 12
+}
+' 定义组件
+class Factory {
+    ..**Factory**..
+    [CSRF 组件工厂类]
+}
+class Type {
+    ..**Type**..
+    [CSRF 组件类型]
+}
+class VerifyResponse {
+    ..**VerifyResponse**..
+    [CSRF 组件验证返回结构]
+}
+' 配置接口与实现类
+interface IConfig #20B2AA {
+    ..**IConfig**..
+    [CSRF 组件配置接口]
+}
+class GoogleRecaptchaV2Config {
+    ..**GoogleRecaptchaV2Config**..
+    [Google Recaptcha V2 CSRF 组件配置类]
+}
+class GoogleRecaptchaV3Config {
+    ..**GoogleRecaptchaV3Config**..
+    [Google Recaptcha V3 CSRF 组件配置类]
+}
+class InternalCsrfConfig {
+    ..**InternalCsrfConfig**..
+    [内部 CSRF 组件配置类]
+}
+' CSRF 接口与实现类
+interface ICsrf #20B2AA {
+    ..**ICsrf**..
+    [CSRF 组件接口]
+}
+class GoogleRecaptchaV2 {
+    ..**GoogleRecaptchaV2**..
+    [Google Recaptcha V2 CSRF 组件]
+}
+class GoogleRecaptchaV3 {
+    ..**GoogleRecaptchaV3**..
+    [Google Recaptcha V3 CSRF 组件]
+}
+class InternalCsrf {
+    ..**InternalCsrf**..
+    [内部 CSRF 组件]
+}
+class CryptoUtils {
+    ..**CryptoUtils**..
+    ..[加密解密类]..
+}
+' 建立关系
+Factory -down-> IConfig : "depend on"
+Factory -down-> Type : "depend on"
+Factory -down-> VerifyResponse : "depend on"
+Factory -down-> ICsrf : "depend on"
+GoogleRecaptchaV2Config -up-> IConfig : "implements"
+GoogleRecaptchaV3Config -up-> IConfig : "implements"
+InternalCsrfConfig -up-> IConfig : "implements"
+GoogleRecaptchaV2 -up-> ICsrf : "implements"
+GoogleRecaptchaV3 -up-> ICsrf : "implements"
+InternalCsrf -up-> ICsrf : "implements"
+InternalCsrf -down-> CryptoUtils : "depend on"
 @enduml
 
 @startuml
-
-
-
-
-
-skinparam defaultTextAlignment center
-
-skinparam wrapWidth 200
-skinparam maxMessageSize 150
-
-skinparam rectangle {
-    StereotypeFontSize 12
-    shadowing false
+title CSRF 组件类关系图
+skinparam componentStyle rectangle
+skinparam roundcorner 5
+skinparam shadowing false
+skinparam DefaultFontName "Microsoft YaHei"
+skinparam DefaultTextAlignment center ' 强制全局文本居中
+skinparam class {
+    BackgroundColor #85BBF0
+    BorderColor #78A8D8
+    FontColor black
+    FontSize 14
 }
-
-skinparam database {
-    StereotypeFontSize 12
-    shadowing false
+skinparam interface {
+    BackgroundColor #20B2AA
+    BorderColor #78A8D8
+    FontColor black
+    FontSize 14
 }
-
-skinparam Arrow {
-    Color #666666
-    FontColor #666666
+skinparam arrow {
+    Color #000000
+    FontColor #000000
     FontSize 12
 }
-
-skinparam rectangle<<boundary>> {
-    Shadowing false
-    StereotypeFontSize 0
-    FontColor #444444
-    BorderColor #444444
-    BorderStyle dashed
+class Factory {
+    ..**Factory**..
+    [CSRF 组件工厂类]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-skinparam rectangle<<person>> {
-    StereotypeFontColor #FFFFFF
-    FontColor #FFFFFF
-    BackgroundColor #08427B
-    BorderColor #073B6F
+class Type {
+    ..**Type**..
+    [CSRF 组件类型]
 }
-
-skinparam rectangle<<external_person>> {
-    StereotypeFontColor #FFFFFF
-    FontColor #FFFFFF
-    BackgroundColor #686868
-    BorderColor #8A8A8A
+class VerifyResponse {
+    ..**VerifyResponse**..
+    [CSRF 组件验证返回结构]
 }
-
-skinparam rectangle<<system>> {
-    StereotypeFontColor #FFFFFF
-    FontColor #FFFFFF
-    BackgroundColor #1168BD
-    BorderColor #3C7FC0
+interface IConfig #20B2AA {
+    ..**IConfig**..
+    [CSRF 组件配置接口]
 }
-
-skinparam rectangle<<external_system>> {
-    StereotypeFontColor #FFFFFF
-    FontColor #FFFFFF
-    BackgroundColor #999999
-    BorderColor #8A8A8A
+class GoogleRecaptchaV2Config {
+    ..**GoogleRecaptchaV2Config**..
+    [Google Recaptcha V2 CSRF 组件配置类]
 }
-
-skinparam database<<system>> {
-    StereotypeFontColor #FFFFFF
-    FontColor #FFFFFF
-    BackgroundColor #1168BD
-    BorderColor #3C7FC0
+class GoogleRecaptchaV3Config {
+    ..**GoogleRecaptchaV3Config**..
+    [Google Recaptcha V3 CSRF 组件配置类]
 }
-
-skinparam database<<external_system>> {
-    StereotypeFontColor #FFFFFF
-    FontColor #FFFFFF
-    BackgroundColor #999999
-    BorderColor #8A8A8A
+class InternalCsrfConfig {
+    ..**InternalCsrfConfig**..
+    [内部 CSRF 组件配置类]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-skinparam rectangle<<container>> {
-    StereotypeFontColor #FFFFFF
-    FontColor #FFFFFF
-    BackgroundColor #438DD5
-    BorderColor #3C7FC0
+interface ICsrf #20B2AA {
+    ..**ICsrf**..
+    [CSRF 组件接口]
 }
-
-skinparam database<<container>> {
-    StereotypeFontColor #FFFFFF
-    FontColor #FFFFFF
-    BackgroundColor #438DD5
-    BorderColor #3C7FC0
+class GoogleRecaptchaV2 {
+    ..**GoogleRecaptchaV2**..
+    [Google Recaptcha V2 CSRF 组件]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-skinparam rectangle<<component>> {
-    StereotypeFontColor #FFFFFF
-    FontColor #000000
-    BackgroundColor #85BBF0
-    BorderColor #78A8D8
+class GoogleRecaptchaV3 {
+    ..**GoogleRecaptchaV3**..
+    [Google Recaptcha V3 CSRF 组件]
 }
-
-skinparam database<<component>> {
-    StereotypeFontColor #FFFFFF
-    FontColor #000000
-    BackgroundColor #85BBF0
-    BorderColor #78A8D8
+class InternalCsrf {
+    ..**InternalCsrf**..
+    [内部 CSRF 组件]
 }
-
-
-
-
-
-title "CSRF 组件类关系图"
-rectangle "==IConfig\n//<size:12>[CSRF 组件配置接口]</size>//" <<component>> as IConfig
-rectangle "==GoogleRecaptchaV2Config\n//<size:12>[Google Recaptcha V2 CSRF 组件配置类]</size>//" <<component>> as GoogleRecaptchaV2Config
-rectangle "==GoogleRecaptchaV3Config\n//<size:12>[Google Recaptcha V3 CSRF 组件配置类]</size>//" <<component>> as GoogleRecaptchaV3Config
-rectangle "==InternalCsrfConfig\n//<size:12>[内部 CSRF 组件配置类]</size>//" <<component>> as InternalCsrfConfig
-rectangle "==Type\n//<size:12>[ CSRF 组件类型]</size>//" <<component>> as Type
-rectangle "==VerifyResponse\n//<size:12>[CSRF 组件验证返回结构]</size>//" <<component>> as VerifyResponse
-rectangle "==GoogleRecaptchaV2\n//<size:12>[Google Recaptcha V2 CSRF 组件]</size>//" <<component>> as GoogleRecaptchaV2
-rectangle "==GoogleRecaptchaV3\n//<size:12>[Google Recaptcha V3 CSRF 组件]</size>//" <<component>> as GoogleRecaptchaV3
-rectangle "==InternalCsrf\n//<size:12>[内部 CSRF 组件]</size>//" <<component>> as InternalCsrf
-rectangle "==CryptoUtils\n//<size:12>[加密解密类]</size>//" <<component>> as CryptoUtils
-rectangle "==ICsrf\n//<size:12>[CSRF 组件接口]</size>//" <<component>> as ICsrf
-rectangle "==Factory\n//<size:12>[CSRF 组件工厂类]</size>//" <<component>> as Factory
-IConfig <- - GoogleRecaptchaV2Config : "===implements"
-IConfig <- - GoogleRecaptchaV3Config : "===implements"
-IConfig <- - InternalCsrfConfig : "===implements"
-ICsrf <- - GoogleRecaptchaV2 : "===implements"
-ICsrf <- - GoogleRecaptchaV3 : "===implements"
-ICsrf <- - InternalCsrf : "===implements"
-InternalCsrf - -> CryptoUtils : "===depend on"
-Factory - -> IConfig : "===depend on"
-Factory - -> ICsrf : "===depend on"
-Factory - -> Type : "===depend on"
-Factory - -> VerifyResponse : "===depend on"
+class CryptoUtils {
+    ..**CryptoUtils**..
+    ..[加密解密类]..
+}
+Factory -down-> IConfig : "depend on"
+Factory -down-> Type : "depend on"
+Factory -down-> VerifyResponse : "depend on"
+Factory -down-> ICsrf : "depend on"
+GoogleRecaptchaV2Config -up-> IConfig : "implements"
+GoogleRecaptchaV3Config -up-> IConfig : "implements"
+InternalCsrfConfig -up-> IConfig : "implements"
+GoogleRecaptchaV2 -up-> ICsrf : "implements"
+GoogleRecaptchaV3 -up-> ICsrf : "implements"
+InternalCsrf -up-> ICsrf : "implements"
+InternalCsrf -down-> CryptoUtils : "depend on"
 @enduml
 
 PlantUML version 1.2022.4(Sat Apr 09 13:29:17 UTC 2022)

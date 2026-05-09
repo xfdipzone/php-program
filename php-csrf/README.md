@@ -39,32 +39,116 @@ php 实现的 CSRF(Cross-Site Request Forgery) 组件类，实现 `CSRF Token` �
 <pre>
 <code>
 ```plantuml
-@startuml component-diagram
-!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Component.puml
-title "CSRF 组件类关系图"
-Component(IConfig, "IConfig", "CSRF 组件配置接口")
-Component(GoogleRecaptchaV2Config, "GoogleRecaptchaV2Config", "Google Recaptcha V2 CSRF 组件配置类")
-Component(GoogleRecaptchaV3Config, "GoogleRecaptchaV3Config", "Google Recaptcha V3 CSRF 组件配置类")
-Component(InternalCsrfConfig, "InternalCsrfConfig", "内部 CSRF 组件配置类")
-Component(Type, "Type", " CSRF 组件类型")
-Component(VerifyResponse, "VerifyResponse", "CSRF 组件验证返回结构")
-Component(GoogleRecaptchaV2, "GoogleRecaptchaV2", "Google Recaptcha V2 CSRF 组件")
-Component(GoogleRecaptchaV3, "GoogleRecaptchaV3", "Google Recaptcha V3 CSRF 组件")
-Component(InternalCsrf, "InternalCsrf", "内部 CSRF 组件")
-Component(CryptoUtils, "CryptoUtils", "加密解密类")
-Component(ICsrf, "ICsrf", "CSRF 组件接口")
-Component(Factory, "Factory", "CSRF 组件工厂类")
-Rel_Back(IConfig, GoogleRecaptchaV2Config, "implements")
-Rel_Back(IConfig, GoogleRecaptchaV3Config, "implements")
-Rel_Back(IConfig, InternalCsrfConfig, "implements")
-Rel_Back(ICsrf, GoogleRecaptchaV2, "implements")
-Rel_Back(ICsrf, GoogleRecaptchaV3, "implements")
-Rel_Back(ICsrf, InternalCsrf, "implements")
-Rel(InternalCsrf, CryptoUtils, "depend on")
-Rel(Factory, IConfig, "depend on")
-Rel(Factory, ICsrf, "depend on")
-Rel(Factory, Type, "depend on")
-Rel(Factory, VerifyResponse, "depend on")
+@startuml
+title CSRF 组件类关系图
+
+' 设置全局样式
+skinparam componentStyle rectangle
+skinparam roundcorner 5
+skinparam shadowing false
+skinparam DefaultFontName "Microsoft YaHei"
+skinparam DefaultTextAlignment center ' 强制全局文本居中
+
+' 颜色定义
+skinparam class {
+    BackgroundColor #85BBF0
+    BorderColor #78A8D8
+    FontColor black
+    FontSize 14
+}
+
+skinparam interface {
+    BackgroundColor #20B2AA
+    BorderColor #78A8D8
+    FontColor black
+    FontSize 14
+}
+
+skinparam arrow {
+    Color #000000
+    FontColor #000000
+    FontSize 12
+}
+
+' 定义组件
+class Factory {
+    ..**Factory**..
+    [CSRF 组件工厂类]
+}
+
+class Type {
+    ..**Type**..
+    [CSRF 组件类型]
+}
+
+class VerifyResponse {
+    ..**VerifyResponse**..
+    [CSRF 组件验证返回结构]
+}
+
+' 配置接口与实现类
+interface IConfig #20B2AA {
+    ..**IConfig**..
+    [CSRF 组件配置接口]
+}
+
+class GoogleRecaptchaV2Config {
+    ..**GoogleRecaptchaV2Config**..
+    [Google Recaptcha V2 CSRF 组件配置类]
+}
+
+class GoogleRecaptchaV3Config {
+    ..**GoogleRecaptchaV3Config**..
+    [Google Recaptcha V3 CSRF 组件配置类]
+}
+
+class InternalCsrfConfig {
+    ..**InternalCsrfConfig**..
+    [内部 CSRF 组件配置类]
+}
+
+' CSRF 接口与实现类
+interface ICsrf #20B2AA {
+    ..**ICsrf**..
+    [CSRF 组件接口]
+}
+
+class GoogleRecaptchaV2 {
+    ..**GoogleRecaptchaV2**..
+    [Google Recaptcha V2 CSRF 组件]
+}
+
+class GoogleRecaptchaV3 {
+    ..**GoogleRecaptchaV3**..
+    [Google Recaptcha V3 CSRF 组件]
+}
+
+class InternalCsrf {
+    ..**InternalCsrf**..
+    [内部 CSRF 组件]
+}
+
+class CryptoUtils {
+    ..**CryptoUtils**..
+    ..[加密解密类]..
+}
+
+' 建立关系
+Factory -down-> IConfig : "depend on"
+Factory -down-> Type : "depend on"
+Factory -down-> VerifyResponse : "depend on"
+Factory -down-> ICsrf : "depend on"
+
+GoogleRecaptchaV2Config -up-> IConfig : "implements"
+GoogleRecaptchaV3Config -up-> IConfig : "implements"
+InternalCsrfConfig -up-> IConfig : "implements"
+
+GoogleRecaptchaV2 -up-> ICsrf : "implements"
+GoogleRecaptchaV3 -up-> ICsrf : "implements"
+InternalCsrf -up-> ICsrf : "implements"
+
+InternalCsrf -down-> CryptoUtils : "depend on"
+
 @enduml
 ```
 </code>
