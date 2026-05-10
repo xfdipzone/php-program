@@ -74,59 +74,59 @@ skinparam arrow {
 ' 定义组件
 class Factory {
     ..**Factory**..
-    [CSRF 组件工厂类]
+    ..[CSRF 组件工厂类]..
 }
 
 class Type {
     ..**Type**..
-    [CSRF 组件类型]
+    ..[CSRF 组件类型]..
 }
 
 class VerifyResponse {
     ..**VerifyResponse**..
-    [CSRF 组件验证返回结构]
+    ..[CSRF 组件验证返回结构]..
 }
 
 ' 配置接口与实现类
 interface IConfig #20B2AA {
     ..**IConfig**..
-    [CSRF 组件配置接口]
+    ..[CSRF 组件配置接口]..
 }
 
 class GoogleRecaptchaV2Config {
     ..**GoogleRecaptchaV2Config**..
-    [Google Recaptcha V2 CSRF 组件配置类]
+    ..[Google Recaptcha V2 CSRF 组件配置类]..
 }
 
 class GoogleRecaptchaV3Config {
     ..**GoogleRecaptchaV3Config**..
-    [Google Recaptcha V3 CSRF 组件配置类]
+    ..[Google Recaptcha V3 CSRF 组件配置类]..
 }
 
 class InternalCsrfConfig {
     ..**InternalCsrfConfig**..
-    [内部 CSRF 组件配置类]
+    ..[内部 CSRF 组件配置类]..
 }
 
 ' CSRF 接口与实现类
 interface ICsrf #20B2AA {
     ..**ICsrf**..
-    [CSRF 组件接口]
+    ..[CSRF 组件接口]..
 }
 
 class GoogleRecaptchaV2 {
     ..**GoogleRecaptchaV2**..
-    [Google Recaptcha V2 CSRF 组件]
+    ..[Google Recaptcha V2 CSRF 组件]..
 }
 
 class GoogleRecaptchaV3 {
     ..**GoogleRecaptchaV3**..
-    [Google Recaptcha V3 CSRF 组件]
+    ..[Google Recaptcha V3 CSRF 组件]..
 }
 
 class InternalCsrf {
     ..**InternalCsrf**..
-    [内部 CSRF 组件]
+    ..[内部 CSRF 组件]..
 }
 
 class CryptoUtils {
