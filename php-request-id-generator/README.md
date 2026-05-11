@@ -32,6 +32,84 @@ PHP 唯一请求 ID 生成类，使用 `session_create_id()` 与 `uniqid()` 方�
 
 ---
 
+## 类关系图
+
+![唯一请求 ID 生成器类关系图](<./class_diagram.svg>)
+
+<details>
+<summary>点击查看 PlantUML 代码</summary>
+<pre>
+<code>
+
+```plantuml
+@startuml
+title 唯一请求 ID 生成器类关系图
+
+' 设置全局样式
+skinparam componentStyle rectangle
+skinparam roundcorner 5
+skinparam shadowing false
+skinparam DefaultFontName "Microsoft YaHei"
+skinparam DefaultTextAlignment center ' 强制全局文本居中
+
+' 颜色定义
+skinparam class {
+    BackgroundColor #85BBF0
+    BorderColor #78A8D8
+    FontColor black
+    FontSize 14
+}
+
+skinparam interface {
+    BackgroundColor #20B2AA
+    BorderColor #78A8D8
+    FontColor black
+    FontSize 14
+}
+
+skinparam arrow {
+    Color #000000
+    FontColor #000000
+    FontSize 12
+}
+
+' 定义组件
+class Factory {
+    ..**Factory**..
+    ..[唯一请求 ID 生成器工厂类]..
+}
+
+class Type {
+    ..**Type**..
+    ..[唯一请求 ID 生成器类型]..
+}
+
+' 唯一请求 ID 生成器接口与实现类
+interface IRequestIdGenerator #20B2AA {
+    ..**IRequestIdGenerator**..
+    ..[唯一请求 ID 生成器接口]..
+}
+
+class RandomIdGenerator {
+    ..**RandomIdGenerator**..
+    ..[随机 ID 生成器]..
+}
+
+' 建立关系
+Factory -down-> Type : "depend on"
+Factory -down-> IRequestIdGenerator : "depend on"
+
+RandomIdGenerator -up-> IRequestIdGenerator : "implements"
+
+@enduml
+```
+
+</code>
+</pre>
+</details>
+
+---
+
 ## 类说明
 
 **IRequestIdGenerator** `RequestIdGenerator/IRequestIdGenerator.php`
