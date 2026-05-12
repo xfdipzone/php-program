@@ -18,9 +18,10 @@ class Factory
      * @DateTime 2026-04-27 12:19:55
      *
      * @param string $type 类型，在 \RequestIdGenerator\Type 中定义
+     * @param \RequestIdGenerator\Config\IRequestIdGeneratorConfig|null $config 配置
      * @return \RequestIdGenerator\IRequestIdGenerator
      */
-    final public static function make(string $type):\RequestIdGenerator\IRequestIdGenerator
+    final public static function make(string $type, \RequestIdGenerator\Config\IRequestIdGeneratorConfig $config=null):\RequestIdGenerator\IRequestIdGenerator
     {
         try
         {
@@ -28,7 +29,7 @@ class Factory
             $generator_class = self::getGeneratorClass($type);
 
             // 创建请求 ID 生成器
-            $generator = new $generator_class;
+            $generator = new $generator_class($config);
 
             return $generator;
         }

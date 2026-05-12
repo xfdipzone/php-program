@@ -13,8 +13,12 @@ class Type
     // 随机 ID 生成器
     const RANDOM = 'random';
 
+    // 雪花算法 ID 生成器
+    const SNOW_FLAKE = 'snow_flake';
+
     // 类型与实现类对应关系
     public static $map = [
         self::RANDOM => '\RequestIdGenerator\RandomIdGenerator',
+        self::SNOW_FLAKE => '\RequestIdGenerator\SnowFlakeIdGenerator',
     ];
 }

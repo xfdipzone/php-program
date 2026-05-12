@@ -15,9 +15,15 @@ final class FactoryTest extends TestCase
      */
     public function testGetGeneratorClass()
     {
+        // RandomIdGenerator class
         $type = \RequestIdGenerator\Type::RANDOM;
         $generator_class = \RequestIdGenerator\Factory::getGeneratorClass($type);
         $this->assertEquals('\RequestIdGenerator\RandomIdGenerator', $generator_class);
+
+        // SnowFlakeIdGenerator class
+        $type = \RequestIdGenerator\Type::SNOW_FLAKE;
+        $generator_class = \RequestIdGenerator\Factory::getGeneratorClass($type);
+        $this->assertEquals('\RequestIdGenerator\SnowFlakeIdGenerator', $generator_class);
     }
 
     /**
