@@ -290,10 +290,10 @@ class SharedMemory implements \SharedData\ISharedData
      */
     public function close():bool
     {
+        $deleted = false;
+
         try
         {
-            $deleted = false;
-
             // 获取信号量锁标识
             $sem_id = \SharedData\SharedMemoryUtils::semId($this->sem_ipc_file, 's');
 

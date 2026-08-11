@@ -114,7 +114,11 @@ ipcs -q
 ipcrm -q [message-id]
 
 # 批量删除所有共享消息队列
+# mac
 ipcs -q | awk '{print $2}' | grep -E "^[0-9]+$" | xargs -I {} ipcrm -q {}
+
+# linux
+ipcs -m | awk '$1 ~ /^0x/ {print $2}' | xargs -r -n1 ipcrm -m
 ```
 
 ---
