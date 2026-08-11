@@ -14,6 +14,8 @@ final class XorEncryptorTest extends TestCase
     private static $source_file = '/tmp/source_file.txt';
     private static $encrypt_file = '/tmp/encrypt_file.txt';
     private static $decrypt_file = '/tmp/decrypt_file.txt';
+    private static $xor_encrypt_file = '/tmp/xor/encrypt_file.txt';
+    private static $xor_decrypt_file = '/tmp/xor/decrypt_file.txt';
 
     // 初始化测试文件
     public static function setUpBeforeClass():void
@@ -37,6 +39,21 @@ final class XorEncryptorTest extends TestCase
         if(file_exists(self::$decrypt_file))
         {
             unlink(self::$decrypt_file);
+        }
+
+        if(file_exists(self::$xor_encrypt_file))
+        {
+            unlink(self::$xor_encrypt_file);
+        }
+
+        if(file_exists(self::$xor_decrypt_file))
+        {
+            unlink(self::$xor_decrypt_file);
+        }
+
+        if(is_dir(dirname(self::$xor_encrypt_file)))
+        {
+            rmdir(dirname(self::$xor_encrypt_file));
         }
     }
 
@@ -142,18 +159,18 @@ final class XorEncryptorTest extends TestCase
         $xor_encryptor = new \FileEncryptor\XorEncryptor($encrypt_key);
 
         // encrypt
-        $ret = \Tests\Utils\PHPUnitExtension::callMethod($xor_encryptor, 'xorEncrypt', [self::$source_file, self::$encrypt_file]);
+        $ret = \Tests\Utils\PHPUnitExtension::callMethod($xor_encryptor, 'xorEncrypt', [self::$source_file, self::$xor_encrypt_file]);
         $this->assertTrue($ret);
-        $this->assertSame(strlen(file_get_contents(self::$source_file)), strlen(file_get_contents(self::$encrypt_file)));
+        $this->assertSame(strlen(file_get_contents(self::$source_file)), strlen(file_get_contents(self::$xor_encrypt_file)));
 
         // decrypt
-        $ret = \Tests\Utils\PHPUnitExtension::callMethod($xor_encryptor, 'xorEncrypt', [self::$encrypt_file, self::$decrypt_file]);
+        $ret = \Tests\Utils\PHPUnitExtension::callMethod($xor_encryptor, 'xorEncrypt', [self::$xor_encrypt_file, self::$xor_decrypt_file]);
         $this->assertTrue($ret);
-        $this->assertSame(strlen(file_get_contents(self::$encrypt_file)), strlen(file_get_contents(self::$decrypt_file)));
-        $this->assertEquals(file_get_contents(self::$source_file), file_get_contents(self::$decrypt_file));
+        $this->assertSame(strlen(file_get_contents(self::$xor_encrypt_file)), strlen(file_get_contents(self::$xor_decrypt_file)));
+        $this->assertEquals(file_get_contents(self::$source_file), file_get_contents(self::$xor_decrypt_file));
 
         // exception
-        $ret = \Tests\Utils\PHPUnitExtension::callMethod($xor_encryptor, 'xorEncrypt', ['/tmp/not_exists_file.txt', self::$decrypt_file]);
+        $ret = \Tests\Utils\PHPUnitExtension::callMethod($xor_encryptor, 'xorEncrypt', ['/tmp/not_exists_file.txt', self::$xor_decrypt_file]);
         $this->assertFalse($ret);
     }
 }
