@@ -73,6 +73,6 @@ class LanguageValidator
      */
     public static function isVietnamese(string $val):bool
     {
-        return preg_match('/^[A-Za-zÀ-ÿ\s]+$/u', $val) === 1;
+        return preg_match('/^[A-Za-zÀ-ÿ\s]+$/u', $val);
     }
 }
