@@ -1,6 +1,9 @@
 <?php declare(strict_types=1);
 namespace Tests\SharedData;
 
+// 引入 SharedMemory mock
+require_once __DIR__ . '/functions.php';
+
 /**
  * 测试 php-shared-data\SharedData\SharedMemory
  *
@@ -166,16 +169,27 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
      */
     public function testStoreException()
     {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('shared memory: shm_id create fail');
+        try
+        {
+            // 模拟 shmop_open 异常
+            \SharedData\SharedMemoryMock::$enable_open_exception = true;
 
-        $shared_key = $this->generateSharedKey();
-        $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
-        $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
+            $this->expectException(\Exception::class);
+            $this->expectExceptionMessage('shared memory: shm_id create fail');
 
-        // 写入数据
-        $data = 'shared memory content';
-        $shared_memory->store($data);
+            $shared_key = $this->generateSharedKey();
+            $shared_size = 128;
+            $shared_memory = new \SharedData\SharedMemory($shared_key, $shared_size, true);
+
+            // 写入数据
+            $data = 'shared memory content';
+            $shared_memory->store($data);
+        }
+        finally
+        {
+            // 复原
+            \SharedData\SharedMemoryMock::reset();
+        }
     }
 
     /**

@@ -1,6 +1,9 @@
 <?php declare(strict_types=1);
 namespace Tests\SharedData;
 
+// 引入 SharedMemory mock
+require_once __DIR__ . '/functions.php';
+
 /**
  * 测试 php-shared-data\SharedData\KVSharedMemory
  *
@@ -177,17 +180,28 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
      */
     public function testStoreException()
     {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('kv shared memory: shm_id create fail');
+        try
+        {
+            // 模拟 shm_attach 异常
+            \SharedData\SharedMemoryMock::$enable_attach_exception = true;
 
-        $shared_key = $this->generateSharedKey();
-        $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
+            $this->expectException(\Exception::class);
+            $this->expectExceptionMessage('kv shared memory: shm_id create fail');
 
-        // 写入数据
-        $key = 'test';
-        $data = 'kv shared memory content';
-        $kv_shared_memory->store($key, $data);
+            $shared_key = $this->generateSharedKey();
+            $shared_size = 128;
+            $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
+
+            // 写入数据
+            $key = 'test';
+            $data = 'kv shared memory content';
+            $kv_shared_memory->store($key, $data);
+        }
+        finally
+        {
+            // 复原
+            \SharedData\SharedMemoryMock::reset();
+        }
     }
 
     /**
@@ -354,16 +368,27 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
      */
     public function testLoadException()
     {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('kv shared memory: shm_id get fail');
+        try
+        {
+            // 模拟 shm_attach 异常
+            \SharedData\SharedMemoryMock::$enable_attach_exception = true;
 
-        $shared_key = $this->generateSharedKey();
-        $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
+            $this->expectException(\Exception::class);
+            $this->expectExceptionMessage('kv shared memory: shm_id get fail');
 
-        // 读取数据
-        $key = 'test';
-        $kv_shared_memory->load($key);
+            $shared_key = $this->generateSharedKey();
+            $shared_size = 128;
+            $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
+
+            // 读取数据
+            $key = 'test';
+            $kv_shared_memory->load($key);
+        }
+        finally
+        {
+            // 复原
+            \SharedData\SharedMemoryMock::reset();
+        }
     }
 
     /**
@@ -468,16 +493,26 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
      */
     public function testRemoveException()
     {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('kv shared memory: shm_id get fail');
+        try
+        {
+            // 模拟 shm_attach 异常
+            \SharedData\SharedMemoryMock::$enable_attach_exception = true;
+            $this->expectException(\Exception::class);
+            $this->expectExceptionMessage('kv shared memory: shm_id get fail');
 
-        $shared_key = $this->generateSharedKey();
-        $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
+            $shared_key = $this->generateSharedKey();
+            $shared_size = 128;
+            $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
 
-        // 移除数据
-        $key = 'test';
-        $kv_shared_memory->remove($key);
+            // 移除数据
+            $key = 'test';
+            $kv_shared_memory->remove($key);
+        }
+        finally
+        {
+            // 复原
+            \SharedData\SharedMemoryMock::reset();
+        }
     }
 
     /**
@@ -557,15 +592,26 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
      */
     public function testCloseException()
     {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('kv shared memory: shm_id get fail');
+        try
+        {
+            // 模拟 shm_attach 异常
+            \SharedData\SharedMemoryMock::$enable_attach_exception = true;
 
-        $shared_key = $this->generateSharedKey();
-        $shared_size = 1024 * 1024 * 128; // 128M 设置超大的共享内存块
-        $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
+            $this->expectException(\Exception::class);
+            $this->expectExceptionMessage('kv shared memory: shm_id get fail');
 
-        // 关闭共享内存
-        $kv_shared_memory->close();
+            $shared_key = $this->generateSharedKey();
+            $shared_size = 128;
+            $kv_shared_memory = new \SharedData\KVSharedMemory($shared_key, $shared_size, true);
+
+            // 关闭共享内存
+            $kv_shared_memory->close();
+        }
+        finally
+        {
+            // 复原
+            \SharedData\SharedMemoryMock::reset();
+        }
     }
 
     /**
