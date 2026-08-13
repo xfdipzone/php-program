@@ -84,6 +84,8 @@ class CommonValidator
      */
     public static function number($val, bool $allow_float=false, bool $allow_signed=false):bool
     {
+        if($val===null) return false;
+
         if($allow_signed)
         {
             return $allow_float? is_numeric($val) : preg_match('/^-?([0-9])+$/', $val);
