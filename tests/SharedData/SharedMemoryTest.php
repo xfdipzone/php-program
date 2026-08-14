@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 namespace Tests\SharedData;
 
-// 引入 SharedMemory mock
-require_once __DIR__ . '/functions.php';
+// 引入 SharedData mock functions
+require_once __DIR__ . '/Mock/functions.php';
 
 /**
  * 测试 php-shared-data\SharedData\SharedMemory
@@ -11,6 +11,8 @@ require_once __DIR__ . '/functions.php';
  */
 final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestCase
 {
+    use SharedMemoryMockTrait;
+
     /**
      * @covers \SharedData\SharedMemory::__construct
      */
@@ -172,7 +174,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
         try
         {
             // 模拟 shmop_open 异常
-            \SharedData\SharedMemoryMock::$enable_open_exception = true;
+            $this->mockShmopOpenException();
 
             $this->expectException(\Exception::class);
             $this->expectExceptionMessage('shared memory: shm_id create fail');
@@ -188,7 +190,7 @@ final class SharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestC
         finally
         {
             // 复原
-            \SharedData\SharedMemoryMock::reset();
+            $this->resetSharedMemoryMock();
         }
     }
 

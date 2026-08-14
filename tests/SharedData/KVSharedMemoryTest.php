@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 namespace Tests\SharedData;
 
-// 引入 SharedMemory mock
-require_once __DIR__ . '/functions.php';
+// 引入 SharedData mock functions
+require_once __DIR__ . '/Mock/functions.php';
 
 /**
  * 测试 php-shared-data\SharedData\KVSharedMemory
@@ -11,6 +11,8 @@ require_once __DIR__ . '/functions.php';
  */
 final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTestCase
 {
+    use SharedMemoryMockTrait;
+
     /**
      * @covers \SharedData\KVSharedMemory::__construct
      */
@@ -183,7 +185,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
         try
         {
             // 模拟 shm_attach 异常
-            \SharedData\SharedMemoryMock::$enable_attach_exception = true;
+            $this->mockShmAttachException();
 
             $this->expectException(\Exception::class);
             $this->expectExceptionMessage('kv shared memory: shm_id create fail');
@@ -200,7 +202,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
         finally
         {
             // 复原
-            \SharedData\SharedMemoryMock::reset();
+            $this->resetSharedMemoryMock();
         }
     }
 
@@ -371,7 +373,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
         try
         {
             // 模拟 shm_attach 异常
-            \SharedData\SharedMemoryMock::$enable_attach_exception = true;
+            $this->mockShmAttachException();
 
             $this->expectException(\Exception::class);
             $this->expectExceptionMessage('kv shared memory: shm_id get fail');
@@ -387,7 +389,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
         finally
         {
             // 复原
-            \SharedData\SharedMemoryMock::reset();
+            $this->resetSharedMemoryMock();
         }
     }
 
@@ -496,7 +498,8 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
         try
         {
             // 模拟 shm_attach 异常
-            \SharedData\SharedMemoryMock::$enable_attach_exception = true;
+            $this->mockShmAttachException();
+
             $this->expectException(\Exception::class);
             $this->expectExceptionMessage('kv shared memory: shm_id get fail');
 
@@ -511,7 +514,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
         finally
         {
             // 复原
-            \SharedData\SharedMemoryMock::reset();
+            $this->resetSharedMemoryMock();
         }
     }
 
@@ -595,7 +598,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
         try
         {
             // 模拟 shm_attach 异常
-            \SharedData\SharedMemoryMock::$enable_attach_exception = true;
+            $this->mockShmAttachException();
 
             $this->expectException(\Exception::class);
             $this->expectExceptionMessage('kv shared memory: shm_id get fail');
@@ -610,7 +613,7 @@ final class KVSharedMemoryTest extends \Tests\SharedData\AbstractSharedMemoryTes
         finally
         {
             // 复原
-            \SharedData\SharedMemoryMock::reset();
+            $this->resetSharedMemoryMock();
         }
     }
 
