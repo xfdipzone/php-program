@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace Tests\OldPhoto;
+namespace Tests\OldPhotoEffect;
 
 use PHPUnit\Framework\TestCase;
 
