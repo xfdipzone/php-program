@@ -21,7 +21,7 @@ class Factory
      * @param \RequestIdGenerator\Config\IRequestIdGeneratorConfig|null $config 配置
      * @return \RequestIdGenerator\IRequestIdGenerator
      */
-    final public static function make(string $type, \RequestIdGenerator\Config\IRequestIdGeneratorConfig $config=null):\RequestIdGenerator\IRequestIdGenerator
+    final public static function make(string $type, ?\RequestIdGenerator\Config\IRequestIdGeneratorConfig $config=null):\RequestIdGenerator\IRequestIdGenerator
     {
         try
         {
