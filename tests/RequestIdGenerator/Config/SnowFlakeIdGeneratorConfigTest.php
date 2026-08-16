@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace Tests\RequestIdGenerator;
+namespace Tests\RequestIdGenerator\Config;
 
 use PHPUnit\Framework\TestCase;
 
