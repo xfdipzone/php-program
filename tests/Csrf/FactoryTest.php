@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @author fdipzone
  */
-final class FactoryResponseTest extends TestCase
+final class FactoryTest extends TestCase
 {
     /**
      * @covers \Csrf\Factory::getTokenClass
