@@ -2,20 +2,26 @@ version: "3.8"
 
 services:
 
+  # 单元测试服务
   php-program-unittest:
 
+    # 用于生成镜像的配置
     build:
       context: ..
       dockerfile: Docker/Dockerfile
 
+    # 生成的镜像
     image: php-program-php74:test
 
+    # 容器名称
     container_name: php-program-php74-test
 
+    # 磁盘挂载
     volumes:
       # 项目代码
       - ..:/app
 
+    # 环境变脸
     environment:
       XDEBUG_MODE: coverage
 
