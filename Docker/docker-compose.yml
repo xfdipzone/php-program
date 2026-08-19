@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+
+  php-program-unittest:
+
+    build:
+      context: ..
+      dockerfile: Docker/Dockerfile
+
+    image: php-program-php74:test
+
+    container_name: php-program-php74-test
+
+    volumes:
+      # 项目代码
+      - ..:/app
+
+    environment:
+      XDEBUG_MODE: coverage
+
+    stdin_open: true
+    tty: true
