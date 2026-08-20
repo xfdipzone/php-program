@@ -12,8 +12,8 @@
  * public static getProperties  读取类属性
  * public static getMethods     读取类方法
  */
-class Ref{
-
+class Ref
+{
     /**
      * 反射类对象
      *
@@ -30,7 +30,8 @@ class Ref{
      * @param string $class_name 类名称
      * @return void
      */
-    public static function setClass(string $class_name):void{
+    public static function setClass(string $class_name):void
+    {
         self::$refClass = new ReflectionClass($class_name);
     }
 
@@ -42,7 +43,8 @@ class Ref{
      *
      * @return array
      */
-    public static function getBase():array{
+    public static function getBase():array
+    {
         return array(
             'className' => self::$refClass->getName(),
             'classPath' => dirname(self::$refClass->getFileName()),
@@ -58,14 +60,19 @@ class Ref{
      *
      * @return array
      */
-    public static function getInterfaces():array{
+    public static function getInterfaces():array
+    {
         $ret = [];
         $interfaces = self::$refClass->getInterfaces();
-        if($interfaces){
-            foreach($interfaces as $interface){
+
+        if($interfaces)
+        {
+            foreach($interfaces as $interface)
+            {
                 $ret[] = $interface->getName();
             }
         }
+
         return $ret;
     }
 
@@ -77,11 +84,15 @@ class Ref{
      *
      * @return array
      */
-    public static function getProperties():array{
+    public static function getProperties():array
+    {
         $ret = [];
         $properties = self::$refClass->getProperties();
-        if($properties){
-            foreach($properties as $property){
+
+        if($properties)
+        {
+            foreach($properties as $property)
+            {
                 $tmp = array(
                     'propertyName' => $property->getName(),
                     'propertyModifier' => self::getModifier($property),
@@ -90,6 +101,7 @@ class Ref{
                 $ret[] = $tmp;
             }
         }
+
         return $ret;
     }
 
@@ -101,11 +113,15 @@ class Ref{
      *
      * @return array
      */
-    public static function getMethods():array{
+    public static function getMethods():array
+    {
         $ret = [];
         $methods = self::$refClass->getMethods();
-        if($methods){
-            foreach($methods as $method){
+
+        if($methods)
+        {
+            foreach($methods as $method)
+            {
                 $tmp = array(
                     'methodName' => $method->getName(),
                     'methodModifier' => self::getModifier($method),
@@ -113,15 +129,21 @@ class Ref{
                     'methodParams' => [],
                     'methodComments' => self::formatComment($method->getDocComment()),
                 );
+
                 $params = $method->getParameters();
-                if($params){
-                    foreach($params as $param){
+
+                if($params)
+                {
+                    foreach($params as $param)
+                    {
                         $tmp['methodParams'][] = $param->getName();
                     }
                 }
+
                 $ret[] = $tmp;
             }
         }
+
         return $ret;
     }
 
@@ -134,19 +156,23 @@ class Ref{
      * @param ReflectionMethod|ReflectionProperty|Reflector $o 反射类对象
      * @return string
      */
-    private static function getModifier($o):string{
+    private static function getModifier($o):string
+    {
         // public
-        if($o->isPublic()){
+        if($o->isPublic())
+        {
             return 'public';
         }
 
         // protected
-        if($o->isProtected()){
+        if($o->isProtected())
+        {
             return 'protected';
         }
 
         // private
-        if($o->isPrivate()){
+        if($o->isPrivate())
+        {
             return 'private';
         }
 
@@ -162,10 +188,10 @@ class Ref{
      * @param string $comment 注释内容
      * @return string
      */
-    private static function formatComment(string $comment):string{
+    private static function formatComment(string $comment):string
+    {
         $doc = explode(PHP_EOL, $comment);
         return isset($doc[1])? trim(str_replace('*','',$doc[1])) : '';
     }
-
 }
 ?>

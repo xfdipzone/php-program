@@ -6,8 +6,8 @@
  * @DateTime 2023-03-30 17:01:31
  *
  */
-interface IUser{
-
+interface IUser
+{
     /**
      * 新增用户
      *
@@ -29,7 +29,6 @@ interface IUser{
      * @return array
      */
     public function get(int $id):array;
-
 }
 
 /**
@@ -39,8 +38,8 @@ interface IUser{
  * @DateTime 2023-03-30 17:03:26
  *
  */
-class User implements IUser{
-
+class User implements IUser
+{
     /**
      * 用户数据
      *
@@ -57,7 +56,8 @@ class User implements IUser{
      * @param array $data 用户数据
      * @return int
      */
-    public function add(array $data):int{
+    public function add(array $data):int
+    {
         $this->user[] = $data;
         $keys = array_keys($this->user);
         return end($keys);
@@ -72,14 +72,17 @@ class User implements IUser{
      * @param int $id 用户id
      * @return array
      */
-    public function get(int $id):array{
-        if(isset($this->user[$id])){
+    public function get(int $id):array
+    {
+        if(isset($this->user[$id]))
+        {
             return $this->user[$id];
-        }else{
+        }
+        else
+        {
             return array();
         }
     }
-
 }
 
 /**
@@ -89,8 +92,8 @@ class User implements IUser{
  * @DateTime 2023-03-30 17:28:13
  *
  */
-class Vip extends User{
-
+class Vip extends User
+{
     /**
      * 读取vip用户数据
      *
@@ -100,9 +103,11 @@ class Vip extends User{
      * @param int $id 用户id
      * @return array
      */
-    public function getVip(int $id):array{
+    public function getVip(int $id):array
+    {
         $data = $this->get($id);
-        if($data){
+        if($data)
+        {
             return $this->format($data);
         }
         return $data;
@@ -117,10 +122,10 @@ class Vip extends User{
      * @param array $data 用户数据
      * @return array
      */
-    private function format(array $data):array{
+    private function format(array $data):array
+    {
         $data['is_vip'] = 1;
         return $data;
     }
-
 }
 ?>

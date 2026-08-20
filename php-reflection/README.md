@@ -25,7 +25,8 @@ echo $ref->getFileName();
 ```php
 $ref = new ReflectionClass($class_name);
 $properties = $ref->getProperties();
-foreach($properties as $property){
+foreach($properties as $property)
+{
     echo $property->getName();
 }
 ```
@@ -35,7 +36,8 @@ foreach($properties as $property){
 ```php
 $ref = new ReflectionClass($class_name);
 $methods = $ref->getMethods();
-foreach($methods as $method){
+foreach($methods as $method)
+{
     echo $method->getName();
 }
 ```
@@ -45,7 +47,8 @@ foreach($methods as $method){
 ```php
 $ref = new ReflectionClass($class_name);
 $interfaces = $ref->getInterfaces();
-foreach($interfaces as $interface){
+foreach($interfaces as $interface)
+{
     echo $interface->getName();
 }
 ```
