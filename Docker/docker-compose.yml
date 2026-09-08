@@ -21,7 +21,7 @@ services:
       # 项目代码
       - ..:/app
 
-    # 环境变脸
+    # 环境变量
     environment:
       XDEBUG_MODE: coverage
 
