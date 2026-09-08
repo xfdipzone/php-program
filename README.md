@@ -135,3 +135,30 @@ composer install
 # 运行单元测试
 ./vendor/bin/phpunit -c phpunit.xml
 ```
+
+### Docker 环境单元测试
+
+在本项目根目录中，使用以下命令执行单元测试
+
+```shell
+# 启动容器
+docker-compose -f Docker/docker-compose.yml up -d
+
+# 进入容器
+docker exec -it php-program-php74-test bash
+
+# 如果第一次运行，需要先执行依赖包安装
+composer install
+
+# 如果已经运行过，但是更新了类（新增/修改名称），需要更新类映射
+composer dump-autoload
+
+# 执行单元测试
+./vendor/bin/phpunit -c phpunit.xml
+
+# 退出容器
+exit
+
+# 关闭容器
+docker-compose -f Docker/docker-compose.yml down
+```
